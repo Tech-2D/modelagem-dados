@@ -20,4 +20,4 @@ A Agenda e o Cadê o professor usam **PostgreSQL no Aiven** como banco de aplica
 
 O catálogo atual atende consultas públicas de atividades, horários e atualizações. A API usa projeções do banco para retornar os campos permitidos. Gravações passam pela validação de permissões e pelas transações do PostgreSQL. O Worker de compatibilidade também encaminha os catálogos ao SQL na configuração atual.
 
-[Código da API SQL](https://github.com/Tech-2D/professores/tree/main/agenda-sql-api) · [Repositório de modelagem](https://github.com/Tech-2D/modelagem-dados)
+[Código da API SQL](https://github.com/Tech-2D/api) · [Repositório de modelagem](https://github.com/Tech-2D/modelagem-dados)
