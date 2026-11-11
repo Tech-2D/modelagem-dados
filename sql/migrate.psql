@@ -4,3 +4,5 @@
 \ir migrations/004_agenda_access.sql
 \ir migrations/005_agenda_moderation.sql
 \ir migrations/006_site_access.sql
+\ir migrations/007_normalize_schedules.sql
+\ir migrations/008_compact_schedule_catalog.sql

@@ -10,7 +10,10 @@ O esquema `tech2d` combina **documentos JSONB** com **tabelas de consulta**. Os 
 | --- | --- | --- |
 | `app_documents` | `path` | Documentos ativos da aplicação. Guarda coleção, ID, JSONB e versão |
 | `activities` | `id` | Projeção de atividades, turma, data, horário e referências aos anexos |
-| `catalog_documents` | `collection, id` | Projeções de horários, turmas, atualizações, aviso principal, quadro de avisos e enquetes |
+| `catalog_documents` | `collection, id` | Dados complementares dos horários e projeções de turmas, atualizações, avisos e enquetes |
+| `school_teachers`, `school_subjects`, `school_classes` | `id` | Nomes únicos por catálogo de horários |
+| `school_time_slots` | `id` | Pares únicos de hora de início e fim, armazenados como `time` |
+| `school_schedules` | `id` | Horários com dia, estado ativo e chaves estrangeiras para professor, disciplina, turma e faixa de horário |
 | `admin_profiles` | `uid` | Projeção do papel administrativo e da turma associada |
 | `app_commits` | `id` | Recibos que permitem repetir uma gravação sem aplicá-la duas vezes |
 | `app_audit` | `sequence` | Histórico de operações sobre os documentos da aplicação |
@@ -27,11 +30,11 @@ O esquema `tech2d` combina **documentos JSONB** com **tabelas de consulta**. Os 
 ## Como os registros se ligam
 
 - **Atividades.** O caminho `activities/{id}` origina a linha com o mesmo `id` em `activities`. Uma atividade geral usa `turma_id` nulo.
-- **Horários.** `schedules/{id}` entra em `catalog_documents` com `collection = 'schedules'`. O JSON guarda campos como `className`, `dayOfWeek` e `startTime`.
+- **Horários.** `schedules/{id}` mantém a compatibilidade com a edição existente. Uma função do banco separa as referências em tabelas relacionais. A view `school_schedule_catalog` recompõe a resposta da API com os dados complementares, como andar e sala.
 - **Permissões.** A conta no Firebase fornece o UID. O documento `admins/{uid}` e sua projeção em `admin_profiles` registram papel e turma. A API aplica as regras de acesso.
 - **Consultas.** As atividades têm índices de data e de turma com data. Os catálogos e documentos têm índices por coleção e por campos do JSONB usados em filtros.
 
-Essas relações usam IDs e caminhos mantidos pela API. O esquema atual não declara chaves estrangeiras para elas. Datas e horários em `activities` ficam em texto no formato ISO usado pela aplicação. Os timestamps de auditoria e de último acesso usam `timestamptz`.
+Os horários usam chaves estrangeiras para as quatro tabelas de referência. As relações entre documentos da Agenda usam IDs e caminhos mantidos pela API. Datas e horários em `activities` ficam em texto no formato ISO usado pela aplicação. Os timestamps de auditoria e de último acesso usam `timestamptz`.
 
 ## Acesso ao banco
 
@@ -49,5 +52,9 @@ Os catálogos públicos passam por projeções que selecionam os campos da respo
 | 004 | Registro de visitas da Agenda |
 | 005 | Últimos acessos autenticados e bloqueios da Agenda |
 | 006 | Separação das visitas por site e últimos acessos do Cadê o professor |
+| 007 | Tabelas relacionais de horários, chaves estrangeiras, migração dos registros existentes e view de leitura |
+| 008 | Remoção dos campos já normalizados da projeção JSONB de horários, após a troca de leitura na API |
+
+Em um ambiente em uso, aplique a versão 007, publique a API que lê `school_schedule_catalog` e confira o catálogo. Aplique a versão 008 após confirmar que os consumidores já leem pela nova view. Em um banco local vazio, rode as duas pelo script de instalação.
 
 [Ver arquivos SQL](https://github.com/Tech-2D/modelagem-dados/tree/main/sql/migrations) · [Rodar em um banco local](https://github.com/Tech-2D/modelagem-dados#rodar-o-sql-localmente) · [Consultas de exemplo](https://github.com/Tech-2D/modelagem-dados/blob/main/sql/examples/consultas.sql)
