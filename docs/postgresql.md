@@ -4,28 +4,57 @@ title: PostgreSQL
 
 O esquema `tech2d` combina **documentos JSONB** com **tabelas de consulta**. Os documentos preservam caminhos e IDs usados pela aplicação. As projeções facilitam filtros de agenda, horários e permissões. A API atualiza o documento e suas projeções na mesma transação.
 
-## Tabelas e responsabilidades
+## Visão geral das tabelas
 
-| Tabela | Chave | Uso |
-| --- | --- | --- |
-| `app_documents` | `path` | Documentos ativos da aplicação. Guarda coleção, ID, JSONB e versão |
-| `activities` | `id` | Projeção de atividades, turma, data, horário e referências aos anexos |
-| `catalog_documents` | `collection, id` | Dados complementares dos horários e projeções de turmas, atualizações, avisos e enquetes |
-| `school_teachers`, `school_subjects`, `school_classes` | `id` | Nomes únicos por catálogo de horários |
-| `school_time_slots` | `id` | Pares únicos de hora de início e fim, armazenados como `time` |
-| `school_schedules` | `id` | Horários com dia, estado ativo e chaves estrangeiras para professor, disciplina, turma e faixa de horário |
-| `admin_profiles` | `uid` | Projeção do papel administrativo e da turma associada |
-| `app_commits` | `id` | Recibos que permitem repetir uma gravação sem aplicá-la duas vezes |
-| `app_audit` | `sequence` | Histórico de operações sobre os documentos da aplicação |
-| `activity_audit` | `sequence` | Auditoria da rota específica de atividades |
-| `agenda_access` | `site, day, half_hour, kind, visitor_key` | Visitas da Agenda e do Cadê o professor, deduplicadas por intervalo de 30 minutos |
-| `agenda_recent_users` | `uid` | Último acesso autenticado à Agenda e referência de rede para moderação |
-| `professor_recent_users` | `uid` | Último acesso autenticado ao Cadê o professor |
-| `agenda_blocks` | `id` | Bloqueios da Agenda por e-mail ou rede, com alvo único por tipo |
-| `firestore_documents` | `project_id, path` | Arquivo da migração, com os campos tipados da origem |
-| `source_revisions` | `sequence` | Versões da origem preservadas durante a reconciliação |
-| `migration_state` | `id` | Estado de preparação e ativação da base |
-| `schema_migrations` | `version` | Versões de esquema já aplicadas |
+O esquema tem **20 tabelas** e uma view de horários. A maior parte sustenta os sites ou a operação do banco. As tabelas de migração têm uma função separada, e há dois pontos em que vale simplificar o modelo.
+
+### Agenda e dados da aplicação
+
+| Tabela | Para que serve |
+| --- | --- |
+| `app_documents` | Fonte dos documentos ativos, com ID, caminho e versão. Inclui atividades, avisos, enquetes e seus votos. |
+| `activities` | Projeção para consultar atividades por data e turma e executar recorrências e expurgo. |
+| `catalog_documents` | Projeções de catálogo e campos complementares de horários, como andar e sala. |
+| `admin_profiles` | Projeção de papel e turma para consultas da API. |
+| `app_commits` | Recibos que impedem que uma tentativa repetida aplique a mesma gravação duas vezes. |
+| `app_audit` | Histórico das alterações do fluxo atual de gravação. |
+
+### Horários dos professores
+
+| Tabela | Para que serve |
+| --- | --- |
+| `school_schedules` | Liga professor, disciplina, turma e faixa de horário a um dia da semana. |
+| `school_teachers`, `school_subjects`, `school_classes` | Referências reutilizadas por várias aulas. Permitem manter nomes consistentes por entidade. |
+| `school_time_slots` | Reutiliza pares de início e fim. Os horários têm tipo SQL `time`. |
+
+A view `school_schedule_catalog` reúne esses dados para a API de horários. Ela é uma consulta salva, sem uma cópia própria dos registros.
+
+### Acessos e moderação
+
+| Tabela | Para que serve |
+| --- | --- |
+| `agenda_access` | Registra visitas dos **dois sites**. A chave inclui site, dia, intervalo de 30 minutos, tipo e identificador da visita. |
+| `agenda_recent_users` | Guarda o último acesso autenticado à Agenda e a referência de rede para moderação. |
+| `professor_recent_users` | Guarda o último acesso autenticado ao Cadê o professor. |
+| `agenda_blocks` | Mantém os bloqueios por e-mail ou rede aplicados à Agenda. |
+
+### Auditoria legada e operação do banco
+
+| Tabela | Para que serve |
+| --- | --- |
+| `activity_audit` | Histórico de um endpoint antigo de gravação de atividades. As gravações desse endpoint estão desativadas em produção. |
+| `firestore_documents` | Arquivo da migração com os documentos tipados da origem. |
+| `source_revisions` | Histórico das versões preservadas durante a reconciliação com a origem. |
+| `migration_state` | Guarda os indicadores de preparação e ativação do SQL que a API e os jobs consultam em produção. |
+| `schema_migrations` | Registra quais versões do esquema já foram aplicadas. |
+
+## Simplificações propostas
+
+1. **Unificar últimos acessos.** Consolidar `agenda_recent_users` e `professor_recent_users` em `site_recent_users` com chave `(site, uid)`. A referência de rede fica restrita às linhas da Agenda. A troca deve preservar o último acesso por site, os prazos de retenção e as permissões de cada painel.
+2. **Alinhar os nomes ao escopo.** Usar `site_visits` para a tabela hoje chamada `agenda_access`, que já atende os dois sites. Para novas tabelas, manter nomes em inglês, no plural e em `snake_case`. Usar prefixos como `school_` e `site_` quando indicarem a responsabilidade da tabela. `agenda_blocks` já segue esse critério porque o bloqueio é específico da Agenda.
+3. **Separar a auditoria antiga.** Depois de retirar a rota antiga e conferir a retenção necessária, arquivar `activity_audit` com acesso restrito. A auditoria das gravações atuais continua em `app_audit`.
+
+As projeções são usadas pela API, os recibos evitam gravações duplicadas e as tabelas de referência preservam a integridade dos horários. A separação entre o arquivo do Firestore e os dados ativos também preserva as permissões de acesso. Essas simplificações são propostas para uma migração posterior. Os nomes das tabelas acima descrevem o esquema atual.
 
 ## Como os registros se ligam
 
