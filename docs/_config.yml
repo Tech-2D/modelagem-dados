@@ -1,0 +1,9 @@
+title: Modelagem de dados
+description: PostgreSQL e Redis na Tech-2D
+lang: pt-BR
+markdown: kramdown
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: default

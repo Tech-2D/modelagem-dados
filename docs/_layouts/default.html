@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="{{ site.description | escape }}">
+  <title>{{ page.title | escape }} · Tech-2D</title>
+  <link rel="stylesheet" href="{{ '/assets/docs.css' | relative_url }}">
+</head>
+<body>
+  <header class="top">
+    <div class="shell">
+      <a class="brand" href="{{ '/' | relative_url }}">Tech-2D</a>
+      <nav aria-label="Documentação">
+        <a href="{{ '/' | relative_url }}"{% if page.url == '/' %} aria-current="page"{% endif %}>Visão geral</a>
+        <a href="{{ '/postgresql.html' | relative_url }}"{% if page.url == '/postgresql.html' %} aria-current="page"{% endif %}>PostgreSQL</a>
+        <a href="{{ '/redis.html' | relative_url }}"{% if page.url == '/redis.html' %} aria-current="page"{% endif %}>Redis</a>
+        <a href="https://github.com/Tech-2D/modelagem-dados">GitHub</a>
+      </nav>
+    </div>
+  </header>
+  <main class="shell">
+    <h1>{{ page.title | escape }}</h1>
+    {{ content }}
+  </main>
+</body>
+</html>

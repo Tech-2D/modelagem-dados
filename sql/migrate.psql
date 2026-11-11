@@ -1,0 +1,6 @@
+\ir migrations/001_initial.sql
+\ir migrations/002_application.sql
+\ir migrations/003_source_revisions.sql
+\ir migrations/004_agenda_access.sql
+\ir migrations/005_agenda_moderation.sql
+\ir migrations/006_site_access.sql
