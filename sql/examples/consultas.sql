@@ -28,10 +28,10 @@ WHERE class.name = 'TURMA-EXEMPLO' AND schedule.active
 ORDER BY schedule.day_of_week, slot.start_time, schedule.id;
 
 -- Total agregado por site e dia, sem identificadores individuais.
-SELECT site, day,
-  count(*) FILTER (WHERE kind = 'account') AS com_login,
-  count(*) FILTER (WHERE kind = 'anonymous') AS anonimos
-FROM tech2d.site_visits
-WHERE day >= (now() AT TIME ZONE 'America/Sao_Paulo')::date - 6
-GROUP BY site, day
-ORDER BY day DESC, site;
+SELECT site, dia,
+  count(*) FILTER (WHERE tipo_visitante = 'account') AS com_login,
+  count(*) FILTER (WHERE tipo_visitante = 'anonymous') AS anonimos
+FROM tech2d.visitas_aos_sites
+WHERE dia >= (now() AT TIME ZONE 'America/Sao_Paulo')::date - 6
+GROUP BY site, dia
+ORDER BY dia DESC, site;

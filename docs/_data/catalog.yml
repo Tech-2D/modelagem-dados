@@ -31,7 +31,7 @@
 - id: acessos
   name: Acessos e moderação
   objects:
-    - name: site_visits
+    - name: visitas_aos_sites
       title: Visitas aos sites
     - name: agenda_recent_users
       title: Acessos recentes à Agenda

@@ -38,13 +38,13 @@ ORDER BY day_of_week, data->>'startTime', id;
 Esta consulta reúne os registros dos últimos sete dias por site e tipo de visita.
 
 ```sql
-SELECT site, day,
-  count(*) FILTER (WHERE kind = 'account') AS com_login,
-  count(*) FILTER (WHERE kind = 'anonymous') AS anonimos
-FROM tech2d.site_visits
-WHERE day >= (now() AT TIME ZONE 'America/Sao_Paulo')::date - 6
-GROUP BY site, day
-ORDER BY day DESC, site;
+SELECT site, dia,
+  count(*) FILTER (WHERE tipo_visitante = 'account') AS com_login,
+  count(*) FILTER (WHERE tipo_visitante = 'anonymous') AS anonimos
+FROM tech2d.visitas_aos_sites
+WHERE dia >= (now() AT TIME ZONE 'America/Sao_Paulo')::date - 6
+GROUP BY site, dia
+ORDER BY dia DESC, site;
 ```
 
 [Arquivo com as consultas completas, incluindo atividades da semana](https://github.com/Tech-2D/modelagem-dados/blob/main/sql/examples/consultas.sql)

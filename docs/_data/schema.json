@@ -671,46 +671,6 @@
   },
   {
     "kind": "table",
-    "name": "site_visits",
-    "columns": [
-      {
-        "name": "day",
-        "type": "date",
-        "nullable": false
-      },
-      {
-        "name": "half_hour",
-        "type": "bigint",
-        "nullable": false
-      },
-      {
-        "name": "kind",
-        "type": "text",
-        "nullable": false
-      },
-      {
-        "name": "visitor_key",
-        "type": "text",
-        "nullable": false
-      },
-      {
-        "name": "site",
-        "type": "text",
-        "nullable": false
-      }
-    ],
-    "comment": "Visitas da Agenda e do Cadê o professor, agrupadas por visitante e intervalo de 30 minutos.",
-    "references": [],
-    "primary_key": [
-      "site",
-      "day",
-      "half_hour",
-      "kind",
-      "visitor_key"
-    ]
-  },
-  {
-    "kind": "table",
     "name": "source_revisions",
     "columns": [
       {
@@ -753,6 +713,46 @@
     "references": [],
     "primary_key": [
       "sequence"
+    ]
+  },
+  {
+    "kind": "table",
+    "name": "visitas_aos_sites",
+    "columns": [
+      {
+        "name": "dia",
+        "type": "date",
+        "nullable": false
+      },
+      {
+        "name": "intervalo_meia_hora",
+        "type": "bigint",
+        "nullable": false
+      },
+      {
+        "name": "tipo_visitante",
+        "type": "text",
+        "nullable": false
+      },
+      {
+        "name": "chave_visitante",
+        "type": "text",
+        "nullable": false
+      },
+      {
+        "name": "site",
+        "type": "text",
+        "nullable": false
+      }
+    ],
+    "comment": "Visitas da Agenda e do Cadê o professor, agrupadas por visitante e intervalo de 30 minutos.",
+    "references": [],
+    "primary_key": [
+      "site",
+      "dia",
+      "intervalo_meia_hora",
+      "tipo_visitante",
+      "chave_visitante"
     ]
   }
 ]

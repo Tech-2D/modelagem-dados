@@ -12,4 +12,8 @@ SELECT NOT EXISTS (SELECT FROM tech2d.schema_migrations WHERE version = '009_ren
 \ir migrations/007_normalize_schedules.sql
 \ir migrations/008_compact_schedule_catalog.sql
 \ir migrations/009_rename_site_visits.sql
+SELECT NOT EXISTS (SELECT FROM tech2d.schema_migrations WHERE version = '010_comment_schema_objects') AS needs_object_comments \gset
+\if :needs_object_comments
 \ir migrations/010_comment_schema_objects.sql
+\endif
+\ir migrations/011_portuguese_site_visits.sql
