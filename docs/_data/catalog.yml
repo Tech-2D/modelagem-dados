@@ -1,32 +1,32 @@
 - id: agenda
   name: Agenda e aplicação
   objects:
-    - name: app_documents
+    - name: documentos_aplicacao
       title: Documentos da aplicação
-    - name: activities
+    - name: atividades
       title: Atividades da Agenda
-    - name: catalog_documents
+    - name: documentos_catalogo
       title: Catálogos e dados complementares
-    - name: admin_profiles
+    - name: perfis_administrativos
       title: Perfis de acesso administrativo
-    - name: app_commits
+    - name: recibos_gravacao
       title: Recibos de gravação
-    - name: app_audit
+    - name: auditoria_aplicacao
       title: Auditoria da aplicação
 - id: horarios
   name: Horários dos professores
   objects:
-    - name: school_schedules
+    - name: horarios_aula
       title: Horários de aula
-    - name: school_teachers
+    - name: professores
       title: Professores
-    - name: school_subjects
+    - name: disciplinas
       title: Disciplinas
-    - name: school_classes
+    - name: turmas
       title: Turmas
-    - name: school_time_slots
+    - name: faixas_horario
       title: Faixas de horário
-    - name: school_schedule_catalog
+    - name: catalogo_horarios
       title: Catálogo de horários
 - id: acessos
   name: Acessos e moderação
@@ -35,20 +35,20 @@
       title: Visitas aos sites
     - name: acessos_recentes_agenda
       title: Acessos recentes à Agenda
-    - name: professor_recent_users
+    - name: acessos_recentes_professores
       title: Acessos recentes ao Cadê o professor
-    - name: agenda_blocks
+    - name: bloqueios_agenda
       title: Bloqueios de acesso à Agenda
 - id: operacao
   name: Operação e histórico
   objects:
-    - name: activity_audit
+    - name: auditoria_atividades_legada
       title: Auditoria legada de atividades
-    - name: firestore_documents
+    - name: documentos_firestore
       title: Documentos arquivados do Firestore
-    - name: source_revisions
+    - name: revisoes_origem
       title: Revisões dos dados de origem
-    - name: migration_state
+    - name: estado_migracao
       title: Estado da migração para PostgreSQL
-    - name: schema_migrations
+    - name: migracoes_esquema
       title: Histórico de migrações do esquema

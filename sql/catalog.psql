@@ -5,6 +5,7 @@ WITH relations AS (
   FROM pg_class c
   JOIN pg_namespace n ON n.oid = c.relnamespace
   WHERE n.nspname = 'tech2d' AND c.relkind IN ('r', 'p', 'v')
+    AND NOT (c.relkind = 'v' AND COALESCE(obj_description(c.oid, 'pg_class'), '') LIKE 'Interface SQL de compatibilidade para %')
 ),
 catalog AS (
   SELECT r.name, r.kind, obj_description(r.oid, 'pg_class') AS comment,

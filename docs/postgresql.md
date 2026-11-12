@@ -8,7 +8,7 @@ O esquema `tech2d` combina **documentos JSONB** com **tabelas de consulta**. Os 
 ## Visão geral das tabelas
 
 <div class="catalog-controls" data-catalog-controls hidden>
-  <label for="catalog-search">Buscar no catálogo<input id="catalog-search" type="search" placeholder="Ex.: visitas, turma_id ou jsonb" autocomplete="off"></label>
+  <label for="catalog-search">Buscar no catálogo<input id="catalog-search" type="search" placeholder="Ex.: visitas, id_turma ou jsonb" autocomplete="off"></label>
   <label for="catalog-group">Área<select id="catalog-group"><option value="">Todas as áreas</option>{% for group in site.data.catalog %}<option value="{{ group.id }}">{{ group.name }}</option>{% endfor %}</select></label>
   <p class="catalog-status" data-catalog-status role="status"></p>
 </div>
@@ -36,9 +36,9 @@ O esquema `tech2d` combina **documentos JSONB** com **tabelas de consulta**. Os 
 
 ## Simplificações propostas
 
-1. **Unificar últimos acessos.** Consolidar `acessos_recentes_agenda` e `professor_recent_users` em `acessos_recentes_sites` com chave `(site, id_usuario)`. A referência de rede fica restrita às linhas da Agenda. A troca deve preservar o último acesso por site, os prazos de retenção e as permissões de cada painel.
-2. **Alinhar os nomes ao escopo.** A padronização usa português e `snake_case` nos nomes de tabelas e colunas. A migração 011 começa pelas visitas dos dois sites, na tabela `visitas_aos_sites`.
-3. **Separar a auditoria antiga.** Depois de retirar a rota antiga e conferir a retenção necessária, arquivar `activity_audit` com acesso restrito. A auditoria das gravações atuais continua em `app_audit`.
+1. **Unificar últimos acessos.** Consolidar `acessos_recentes_agenda` e `acessos_recentes_professores` em `acessos_recentes_sites` com chave `(site, id_usuario)`. A referência de rede fica restrita às linhas da Agenda. A troca deve preservar o último acesso por site, os prazos de retenção e as permissões de cada painel.
+2. **Alinhar os nomes ao escopo.** A padronização usa português e `snake_case` nos nomes de tabelas e colunas. As migrações 011 a 013 aplicam o padrão no esquema `tech2d`. A migração 013 mantém visões de compatibilidade com o contrato SQL anterior da API.
+3. **Separar a auditoria antiga.** Depois de retirar a rota antiga e conferir a retenção necessária, arquivar `auditoria_atividades_legada` com acesso restrito. A auditoria das gravações atuais continua em `auditoria_aplicacao`.
 
 As projeções são usadas pela API, os recibos evitam gravações duplicadas e as tabelas de referência preservam a integridade dos horários. A separação entre o arquivo do Firestore e os dados ativos também preserva as permissões de acesso. A unificação dos últimos acessos e o arquivamento da auditoria antiga ficam para migrações posteriores.
 
@@ -46,7 +46,7 @@ As projeções são usadas pela API, os recibos evitam gravações duplicadas e 
 
 Abra a [modelagem]({{ '/modelagem.html' | relative_url }}) para seguir os vínculos de horários, atividades e contas. No catálogo, as chaves estrangeiras levam diretamente à tabela relacionada.
 
-Datas e horários em `activities` ficam em texto no formato ISO usado pela aplicação. Horários de aula em `school_time_slots` usam `time`, e timestamps de auditoria e último acesso usam `timestamptz`.
+As colunas `data` e `hora` em `atividades` ficam em texto no formato ISO usado pela aplicação. Horários de aula em `faixas_horario` usam `time`, e timestamps de auditoria e último acesso usam `timestamptz`.
 
 ## Acesso ao banco
 
@@ -70,6 +70,7 @@ Os catálogos públicos passam por projeções que selecionam os campos da respo
 | 010 | Documenta em português a função de cada tabela e da visão de horários |
 | 011 | Renomeia `site_visits` e suas colunas para português |
 | 012 | Renomeia `agenda_recent_users` e suas colunas para português |
+| 013 | Renomeia as tabelas e colunas restantes e a visão de horários. Mantém as visões de compatibilidade da API |
 
 Em um banco local vazio, siga os passos em [Consultas SQL]({{ '/consultas.html' | relative_url }}). O script de instalação aplica as migrações na ordem acima.
 

@@ -1,31 +1,30 @@
 -- Versões registradas no banco.
-SELECT version, applied_at
-FROM tech2d.schema_migrations
-ORDER BY version;
+SELECT versao, aplicada_em
+FROM tech2d.migracoes_esquema
+ORDER BY versao;
 
--- Atividades da turma de exemplo e atividades gerais nos próximos sete dias.
--- A coluna date guarda texto ISO no esquema atual.
-WITH period AS (
-  SELECT (now() AT TIME ZONE 'America/Sao_Paulo')::date AS start_date
+-- Atividades gerais e da turma de exemplo nos próximos sete dias.
+WITH periodo AS (
+  SELECT (now() AT TIME ZONE 'America/Sao_Paulo')::date AS data_inicio
 )
-SELECT a.date, a.time, a.title, a.type, a.turma_id
-FROM tech2d.activities AS a
-CROSS JOIN period AS p
-WHERE (a.turma_id = 'TURMA-EXEMPLO' OR a.turma_id IS NULL)
-  AND a.date >= to_char(p.start_date, 'YYYY-MM-DD')
-  AND a.date < to_char(p.start_date + 7, 'YYYY-MM-DD')
-ORDER BY a.date, a.time NULLS LAST, a.id;
+SELECT a.data, a.hora, a.titulo, a.tipo, a.id_turma
+FROM tech2d.atividades AS a
+CROSS JOIN periodo AS p
+WHERE (a.id_turma = 'TURMA-EXEMPLO' OR a.id_turma IS NULL)
+  AND a.data >= to_char(p.data_inicio, 'YYYY-MM-DD')
+  AND a.data < to_char(p.data_inicio + 7, 'YYYY-MM-DD')
+ORDER BY a.data, a.hora NULLS LAST, a.id;
 
--- Horários ativos da turma de exemplo, ligados às referências do catálogo.
-SELECT schedule.id, class.name AS turma, teacher.name AS professor,
-  subject.name AS disciplina, schedule.day_of_week, slot.start_time, slot.end_time
-FROM tech2d.school_schedules AS schedule
-JOIN tech2d.school_classes AS class ON class.id = schedule.class_id
-JOIN tech2d.school_teachers AS teacher ON teacher.id = schedule.teacher_id
-JOIN tech2d.school_subjects AS subject ON subject.id = schedule.subject_id
-JOIN tech2d.school_time_slots AS slot ON slot.id = schedule.time_slot_id
-WHERE class.name = 'TURMA-EXEMPLO' AND schedule.active
-ORDER BY schedule.day_of_week, slot.start_time, schedule.id;
+-- Horários ativos da turma de exemplo e suas referências.
+SELECT h.id, turma.nome AS turma, professor.nome AS professor,
+  disciplina.nome AS disciplina, h.dia_semana, faixa.hora_inicio, faixa.hora_fim
+FROM tech2d.horarios_aula AS h
+JOIN tech2d.turmas AS turma ON turma.id = h.id_turma
+JOIN tech2d.professores AS professor ON professor.id = h.id_professor
+JOIN tech2d.disciplinas AS disciplina ON disciplina.id = h.id_disciplina
+JOIN tech2d.faixas_horario AS faixa ON faixa.id = h.id_faixa_horario
+WHERE turma.nome = 'TURMA-EXEMPLO' AND h.ativo
+ORDER BY h.dia_semana, faixa.hora_inicio, h.id;
 
 -- Total agregado por site e dia, sem identificadores individuais.
 SELECT site, dia,

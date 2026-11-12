@@ -17,20 +17,20 @@ O banco começa vazio. Para consultar atividades e horários, insira dados de te
 ## Conferir as migrações
 
 ```sql
-SELECT version, applied_at
-FROM tech2d.schema_migrations
-ORDER BY version;
+SELECT versao, aplicada_em
+FROM tech2d.migracoes_esquema
+ORDER BY versao;
 ```
 
 ## Buscar horários por turma
 
-A view [`school_schedule_catalog`]({{ '/postgresql.html#obj-school_schedule_catalog' | relative_url }}) já reúne as referências dos horários. Filtre pela turma e pelo estado da aula.
+A view [`catalogo_horarios`]({{ '/postgresql.html#obj-catalogo_horarios' | relative_url }}) já reúne as referências dos horários. Filtre pela turma e pelo estado da aula.
 
 ```sql
-SELECT id, day_of_week, data
-FROM tech2d.school_schedule_catalog
-WHERE class_name = 'TURMA-EXEMPLO' AND active
-ORDER BY day_of_week, data->>'startTime', id;
+SELECT id, dia_semana, dados
+FROM tech2d.catalogo_horarios
+WHERE nome_turma = 'TURMA-EXEMPLO' AND ativo
+ORDER BY dia_semana, dados->>'startTime', id;
 ```
 
 ## Comparar visitas por site

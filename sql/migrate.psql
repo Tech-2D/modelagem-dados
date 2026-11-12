@@ -1,3 +1,5 @@
+SELECT to_regclass('tech2d.migracoes_esquema') IS NULL AS needs_portuguese_schema \gset
+\if :needs_portuguese_schema
 \ir migrations/001_initial.sql
 \ir migrations/002_application.sql
 \ir migrations/003_source_revisions.sql
@@ -21,3 +23,5 @@ SELECT NOT EXISTS (SELECT FROM tech2d.schema_migrations WHERE version = '010_com
 \endif
 \ir migrations/011_portuguese_site_visits.sql
 \ir migrations/012_portuguese_agenda_recent_users.sql
+\endif
+\ir migrations/013_portuguese_schema.sql

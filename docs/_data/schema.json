@@ -32,7 +32,33 @@
   },
   {
     "kind": "table",
-    "name": "activities",
+    "name": "acessos_recentes_professores",
+    "columns": [
+      {
+        "name": "id_usuario",
+        "type": "text",
+        "nullable": false
+      },
+      {
+        "name": "email",
+        "type": "text",
+        "nullable": true
+      },
+      {
+        "name": "ultimo_acesso_em",
+        "type": "timestamp with time zone",
+        "nullable": false
+      }
+    ],
+    "comment": "Último acesso autenticado ao Cadê o professor.",
+    "references": [],
+    "primary_key": [
+      "id_usuario"
+    ]
+  },
+  {
+    "kind": "table",
+    "name": "atividades",
     "columns": [
       {
         "name": "id",
@@ -40,72 +66,72 @@
         "nullable": false
       },
       {
-        "name": "turma_id",
+        "name": "id_turma",
         "type": "text",
         "nullable": true
       },
       {
-        "name": "title",
+        "name": "titulo",
         "type": "text",
         "nullable": false
       },
       {
-        "name": "description",
+        "name": "descricao",
         "type": "text",
         "nullable": false
       },
       {
-        "name": "type",
+        "name": "tipo",
         "type": "text",
         "nullable": false
       },
       {
-        "name": "subject",
+        "name": "disciplina",
         "type": "text",
         "nullable": true
       },
       {
-        "name": "date",
+        "name": "data",
         "type": "text",
         "nullable": false
       },
       {
-        "name": "time",
+        "name": "hora",
         "type": "text",
         "nullable": true
       },
       {
-        "name": "created_by",
+        "name": "criado_por",
         "type": "text",
         "nullable": true
       },
       {
-        "name": "created_by_email",
+        "name": "email_criador",
         "type": "text",
         "nullable": true
       },
       {
-        "name": "recurring_id",
+        "name": "id_recorrencia",
         "type": "text",
         "nullable": true
       },
       {
-        "name": "attachments",
+        "name": "anexos",
         "type": "jsonb",
         "nullable": false
       },
       {
-        "name": "created_at",
+        "name": "criado_em",
         "type": "timestamp with time zone",
         "nullable": true
       },
       {
-        "name": "updated_at",
+        "name": "atualizado_em",
         "type": "timestamp with time zone",
         "nullable": true
       },
       {
-        "name": "version",
+        "name": "versao",
         "type": "bigint",
         "nullable": false
       }
@@ -118,35 +144,76 @@
   },
   {
     "kind": "table",
-    "name": "activity_audit",
+    "name": "auditoria_aplicacao",
     "columns": [
       {
-        "name": "sequence",
+        "name": "sequencia",
         "type": "bigint",
         "nullable": false
       },
       {
-        "name": "activity_id",
+        "name": "autor",
         "type": "text",
         "nullable": false
       },
       {
-        "name": "actor_uid",
+        "name": "caminho",
         "type": "text",
         "nullable": false
       },
       {
-        "name": "action",
+        "name": "operacao",
         "type": "text",
         "nullable": false
       },
       {
-        "name": "previous_data",
+        "name": "dados_anteriores",
         "type": "jsonb",
         "nullable": true
       },
       {
-        "name": "changed_at",
+        "name": "alterado_em",
+        "type": "timestamp with time zone",
+        "nullable": false
+      }
+    ],
+    "comment": "Histórico das alterações do fluxo atual de gravação.",
+    "references": [],
+    "primary_key": [
+      "sequencia"
+    ]
+  },
+  {
+    "kind": "table",
+    "name": "auditoria_atividades_legada",
+    "columns": [
+      {
+        "name": "sequencia",
+        "type": "bigint",
+        "nullable": false
+      },
+      {
+        "name": "id_atividade",
+        "type": "text",
+        "nullable": false
+      },
+      {
+        "name": "id_usuario",
+        "type": "text",
+        "nullable": false
+      },
+      {
+        "name": "acao",
+        "type": "text",
+        "nullable": false
+      },
+      {
+        "name": "dados_anteriores",
+        "type": "jsonb",
+        "nullable": true
+      },
+      {
+        "name": "alterado_em",
         "type": "timestamp with time zone",
         "nullable": false
       }
@@ -154,43 +221,12 @@
     "comment": "Histórico da rota legada de gravação de atividades, cujas escritas estão desativadas.",
     "references": [],
     "primary_key": [
-      "sequence"
+      "sequencia"
     ]
   },
   {
     "kind": "table",
-    "name": "admin_profiles",
-    "columns": [
-      {
-        "name": "uid",
-        "type": "text",
-        "nullable": false
-      },
-      {
-        "name": "role",
-        "type": "text",
-        "nullable": false
-      },
-      {
-        "name": "turma_id",
-        "type": "text",
-        "nullable": true
-      },
-      {
-        "name": "data",
-        "type": "jsonb",
-        "nullable": false
-      }
-    ],
-    "comment": "Projeção de papel e turma da conta para consultas da API.",
-    "references": [],
-    "primary_key": [
-      "uid"
-    ]
-  },
-  {
-    "kind": "table",
-    "name": "agenda_blocks",
+    "name": "bloqueios_agenda",
     "columns": [
       {
         "name": "id",
@@ -198,22 +234,22 @@
         "nullable": false
       },
       {
-        "name": "kind",
+        "name": "tipo",
         "type": "text",
         "nullable": false
       },
       {
-        "name": "target",
+        "name": "alvo",
         "type": "text",
         "nullable": false
       },
       {
-        "name": "created_at",
+        "name": "criado_em",
         "type": "timestamp with time zone",
         "nullable": false
       },
       {
-        "name": "created_by",
+        "name": "criado_por",
         "type": "text",
         "nullable": false
       }
@@ -225,284 +261,8 @@
     ]
   },
   {
-    "kind": "table",
-    "name": "app_audit",
-    "columns": [
-      {
-        "name": "sequence",
-        "type": "bigint",
-        "nullable": false
-      },
-      {
-        "name": "actor",
-        "type": "text",
-        "nullable": false
-      },
-      {
-        "name": "path",
-        "type": "text",
-        "nullable": false
-      },
-      {
-        "name": "operation",
-        "type": "text",
-        "nullable": false
-      },
-      {
-        "name": "previous_data",
-        "type": "jsonb",
-        "nullable": true
-      },
-      {
-        "name": "changed_at",
-        "type": "timestamp with time zone",
-        "nullable": false
-      }
-    ],
-    "comment": "Histórico das alterações do fluxo atual de gravação.",
-    "references": [],
-    "primary_key": [
-      "sequence"
-    ]
-  },
-  {
-    "kind": "table",
-    "name": "app_commits",
-    "columns": [
-      {
-        "name": "id",
-        "type": "text",
-        "nullable": false
-      },
-      {
-        "name": "actor",
-        "type": "text",
-        "nullable": false
-      },
-      {
-        "name": "digest",
-        "type": "text",
-        "nullable": false
-      },
-      {
-        "name": "committed_at",
-        "type": "timestamp with time zone",
-        "nullable": false
-      }
-    ],
-    "comment": "Recibos que impedem uma gravação repetida de ser aplicada duas vezes.",
-    "references": [],
-    "primary_key": [
-      "id"
-    ]
-  },
-  {
-    "kind": "table",
-    "name": "app_documents",
-    "columns": [
-      {
-        "name": "path",
-        "type": "text",
-        "nullable": false
-      },
-      {
-        "name": "collection",
-        "type": "text",
-        "nullable": false
-      },
-      {
-        "name": "id",
-        "type": "text",
-        "nullable": false
-      },
-      {
-        "name": "data",
-        "type": "jsonb",
-        "nullable": false
-      },
-      {
-        "name": "version",
-        "type": "bigint",
-        "nullable": false
-      },
-      {
-        "name": "updated_at",
-        "type": "timestamp with time zone",
-        "nullable": false
-      }
-    ],
-    "comment": "Fonte dos documentos ativos, como atividades, avisos, enquetes, votos e cartões do Kanban.",
-    "references": [],
-    "primary_key": [
-      "path"
-    ]
-  },
-  {
-    "kind": "table",
-    "name": "catalog_documents",
-    "columns": [
-      {
-        "name": "collection",
-        "type": "text",
-        "nullable": false
-      },
-      {
-        "name": "id",
-        "type": "text",
-        "nullable": false
-      },
-      {
-        "name": "data",
-        "type": "jsonb",
-        "nullable": false
-      }
-    ],
-    "comment": "Projeções de catálogo e dados complementares dos horários, como andar e sala.",
-    "references": [],
-    "primary_key": [
-      "collection",
-      "id"
-    ]
-  },
-  {
-    "kind": "table",
-    "name": "firestore_documents",
-    "columns": [
-      {
-        "name": "project_id",
-        "type": "text",
-        "nullable": false
-      },
-      {
-        "name": "path",
-        "type": "text",
-        "nullable": false
-      },
-      {
-        "name": "fields",
-        "type": "jsonb",
-        "nullable": false
-      },
-      {
-        "name": "source_updated_at",
-        "type": "text",
-        "nullable": true
-      },
-      {
-        "name": "imported_at",
-        "type": "timestamp with time zone",
-        "nullable": false
-      }
-    ],
-    "comment": "Arquivo da migração com os documentos tipados do Firestore.",
-    "references": [],
-    "primary_key": [
-      "project_id",
-      "path"
-    ]
-  },
-  {
-    "kind": "table",
-    "name": "migration_state",
-    "columns": [
-      {
-        "name": "id",
-        "type": "boolean",
-        "nullable": false
-      },
-      {
-        "name": "application_seeded",
-        "type": "boolean",
-        "nullable": false
-      },
-      {
-        "name": "production_enabled",
-        "type": "boolean",
-        "nullable": false
-      },
-      {
-        "name": "source_exported_at",
-        "type": "timestamp with time zone",
-        "nullable": true
-      }
-    ],
-    "comment": "Indicadores de preparação e ativação do SQL que a API e os jobs consultam.",
-    "references": [],
-    "primary_key": [
-      "id"
-    ]
-  },
-  {
-    "kind": "table",
-    "name": "professor_recent_users",
-    "columns": [
-      {
-        "name": "uid",
-        "type": "text",
-        "nullable": false
-      },
-      {
-        "name": "email",
-        "type": "text",
-        "nullable": true
-      },
-      {
-        "name": "last_seen_at",
-        "type": "timestamp with time zone",
-        "nullable": false
-      }
-    ],
-    "comment": "Último acesso autenticado ao Cadê o professor.",
-    "references": [],
-    "primary_key": [
-      "uid"
-    ]
-  },
-  {
-    "kind": "table",
-    "name": "schema_migrations",
-    "columns": [
-      {
-        "name": "version",
-        "type": "text",
-        "nullable": false
-      },
-      {
-        "name": "applied_at",
-        "type": "timestamp with time zone",
-        "nullable": false
-      }
-    ],
-    "comment": "Versões do esquema já aplicadas.",
-    "references": [],
-    "primary_key": [
-      "version"
-    ]
-  },
-  {
-    "kind": "table",
-    "name": "school_classes",
-    "columns": [
-      {
-        "name": "id",
-        "type": "bigint",
-        "nullable": false
-      },
-      {
-        "name": "name",
-        "type": "text",
-        "nullable": false
-      }
-    ],
-    "comment": "Nomes das turmas do catálogo de horários.",
-    "references": [],
-    "primary_key": [
-      "id"
-    ]
-  },
-  {
     "kind": "view",
-    "name": "school_schedule_catalog",
+    "name": "catalogo_horarios",
     "columns": [
       {
         "name": "id",
@@ -510,22 +270,22 @@
         "nullable": true
       },
       {
-        "name": "day_of_week",
+        "name": "dia_semana",
         "type": "smallint",
         "nullable": true
       },
       {
-        "name": "active",
+        "name": "ativo",
         "type": "boolean",
         "nullable": true
       },
       {
-        "name": "class_name",
+        "name": "nome_turma",
         "type": "text",
         "nullable": true
       },
       {
-        "name": "data",
+        "name": "dados",
         "type": "jsonb",
         "nullable": true
       }
@@ -536,74 +296,7 @@
   },
   {
     "kind": "table",
-    "name": "school_schedules",
-    "columns": [
-      {
-        "name": "id",
-        "type": "text",
-        "nullable": false
-      },
-      {
-        "name": "teacher_id",
-        "type": "bigint",
-        "nullable": false
-      },
-      {
-        "name": "subject_id",
-        "type": "bigint",
-        "nullable": false
-      },
-      {
-        "name": "class_id",
-        "type": "bigint",
-        "nullable": false
-      },
-      {
-        "name": "time_slot_id",
-        "type": "bigint",
-        "nullable": false
-      },
-      {
-        "name": "day_of_week",
-        "type": "smallint",
-        "nullable": false
-      },
-      {
-        "name": "active",
-        "type": "boolean",
-        "nullable": false
-      }
-    ],
-    "comment": "Liga professor, disciplina, turma e faixa de horário a um dia da semana.",
-    "references": [
-      {
-        "table": "school_classes",
-        "column": "class_id",
-        "target": "id"
-      },
-      {
-        "table": "school_subjects",
-        "column": "subject_id",
-        "target": "id"
-      },
-      {
-        "table": "school_teachers",
-        "column": "teacher_id",
-        "target": "id"
-      },
-      {
-        "table": "school_time_slots",
-        "column": "time_slot_id",
-        "target": "id"
-      }
-    ],
-    "primary_key": [
-      "id"
-    ]
-  },
-  {
-    "kind": "table",
-    "name": "school_subjects",
+    "name": "disciplinas",
     "columns": [
       {
         "name": "id",
@@ -611,7 +304,7 @@
         "nullable": false
       },
       {
-        "name": "name",
+        "name": "nome",
         "type": "text",
         "nullable": false
       }
@@ -624,20 +317,135 @@
   },
   {
     "kind": "table",
-    "name": "school_teachers",
+    "name": "documentos_aplicacao",
     "columns": [
       {
+        "name": "caminho",
+        "type": "text",
+        "nullable": false
+      },
+      {
+        "name": "colecao",
+        "type": "text",
+        "nullable": false
+      },
+      {
         "name": "id",
+        "type": "text",
+        "nullable": false
+      },
+      {
+        "name": "dados",
+        "type": "jsonb",
+        "nullable": false
+      },
+      {
+        "name": "versao",
         "type": "bigint",
         "nullable": false
       },
       {
-        "name": "name",
-        "type": "text",
+        "name": "atualizado_em",
+        "type": "timestamp with time zone",
         "nullable": false
       }
     ],
-    "comment": "Nomes de professores reutilizados pelos horários.",
+    "comment": "Fonte dos documentos ativos, como atividades, avisos, enquetes, votos e cartões do Kanban.",
+    "references": [],
+    "primary_key": [
+      "caminho"
+    ]
+  },
+  {
+    "kind": "table",
+    "name": "documentos_catalogo",
+    "columns": [
+      {
+        "name": "colecao",
+        "type": "text",
+        "nullable": false
+      },
+      {
+        "name": "id",
+        "type": "text",
+        "nullable": false
+      },
+      {
+        "name": "dados",
+        "type": "jsonb",
+        "nullable": false
+      }
+    ],
+    "comment": "Projeções de catálogo e dados complementares dos horários, como andar e sala.",
+    "references": [],
+    "primary_key": [
+      "colecao",
+      "id"
+    ]
+  },
+  {
+    "kind": "table",
+    "name": "documentos_firestore",
+    "columns": [
+      {
+        "name": "id_projeto",
+        "type": "text",
+        "nullable": false
+      },
+      {
+        "name": "caminho",
+        "type": "text",
+        "nullable": false
+      },
+      {
+        "name": "campos",
+        "type": "jsonb",
+        "nullable": false
+      },
+      {
+        "name": "atualizado_na_origem_em",
+        "type": "text",
+        "nullable": true
+      },
+      {
+        "name": "importado_em",
+        "type": "timestamp with time zone",
+        "nullable": false
+      }
+    ],
+    "comment": "Arquivo da migração com os documentos tipados do Firestore.",
+    "references": [],
+    "primary_key": [
+      "id_projeto",
+      "caminho"
+    ]
+  },
+  {
+    "kind": "table",
+    "name": "estado_migracao",
+    "columns": [
+      {
+        "name": "id",
+        "type": "boolean",
+        "nullable": false
+      },
+      {
+        "name": "aplicacao_preparada",
+        "type": "boolean",
+        "nullable": false
+      },
+      {
+        "name": "producao_ativa",
+        "type": "boolean",
+        "nullable": false
+      },
+      {
+        "name": "origem_exportada_em",
+        "type": "timestamp with time zone",
+        "nullable": true
+      }
+    ],
+    "comment": "Indicadores de preparação e ativação do SQL que a API e os jobs consultam.",
     "references": [],
     "primary_key": [
       "id"
@@ -645,7 +453,7 @@
   },
   {
     "kind": "table",
-    "name": "school_time_slots",
+    "name": "faixas_horario",
     "columns": [
       {
         "name": "id",
@@ -653,12 +461,12 @@
         "nullable": false
       },
       {
-        "name": "start_time",
+        "name": "hora_inicio",
         "type": "time(0) without time zone",
         "nullable": false
       },
       {
-        "name": "end_time",
+        "name": "hora_fim",
         "type": "time(0) without time zone",
         "nullable": false
       }
@@ -671,40 +479,211 @@
   },
   {
     "kind": "table",
-    "name": "source_revisions",
+    "name": "horarios_aula",
     "columns": [
       {
-        "name": "sequence",
+        "name": "id",
+        "type": "text",
+        "nullable": false
+      },
+      {
+        "name": "id_professor",
         "type": "bigint",
         "nullable": false
       },
       {
-        "name": "project_id",
+        "name": "id_disciplina",
+        "type": "bigint",
+        "nullable": false
+      },
+      {
+        "name": "id_turma",
+        "type": "bigint",
+        "nullable": false
+      },
+      {
+        "name": "id_faixa_horario",
+        "type": "bigint",
+        "nullable": false
+      },
+      {
+        "name": "dia_semana",
+        "type": "smallint",
+        "nullable": false
+      },
+      {
+        "name": "ativo",
+        "type": "boolean",
+        "nullable": false
+      }
+    ],
+    "comment": "Liga professor, disciplina, turma e faixa de horário a um dia da semana.",
+    "references": [
+      {
+        "table": "disciplinas",
+        "column": "id_disciplina",
+        "target": "id"
+      },
+      {
+        "table": "faixas_horario",
+        "column": "id_faixa_horario",
+        "target": "id"
+      },
+      {
+        "table": "professores",
+        "column": "id_professor",
+        "target": "id"
+      },
+      {
+        "table": "turmas",
+        "column": "id_turma",
+        "target": "id"
+      }
+    ],
+    "primary_key": [
+      "id"
+    ]
+  },
+  {
+    "kind": "table",
+    "name": "migracoes_esquema",
+    "columns": [
+      {
+        "name": "versao",
         "type": "text",
         "nullable": false
       },
       {
-        "name": "path",
+        "name": "aplicada_em",
+        "type": "timestamp with time zone",
+        "nullable": false
+      }
+    ],
+    "comment": "Versões do esquema já aplicadas.",
+    "references": [],
+    "primary_key": [
+      "versao"
+    ]
+  },
+  {
+    "kind": "table",
+    "name": "perfis_administrativos",
+    "columns": [
+      {
+        "name": "id_usuario",
         "type": "text",
         "nullable": false
       },
       {
-        "name": "fields",
-        "type": "jsonb",
+        "name": "papel",
+        "type": "text",
         "nullable": false
       },
       {
-        "name": "source_updated_at",
+        "name": "id_turma",
         "type": "text",
         "nullable": true
       },
       {
-        "name": "reason",
+        "name": "dados",
+        "type": "jsonb",
+        "nullable": false
+      }
+    ],
+    "comment": "Projeção de papel e turma da conta para consultas da API.",
+    "references": [],
+    "primary_key": [
+      "id_usuario"
+    ]
+  },
+  {
+    "kind": "table",
+    "name": "professores",
+    "columns": [
+      {
+        "name": "id",
+        "type": "bigint",
+        "nullable": false
+      },
+      {
+        "name": "nome",
+        "type": "text",
+        "nullable": false
+      }
+    ],
+    "comment": "Nomes de professores reutilizados pelos horários.",
+    "references": [],
+    "primary_key": [
+      "id"
+    ]
+  },
+  {
+    "kind": "table",
+    "name": "recibos_gravacao",
+    "columns": [
+      {
+        "name": "id",
         "type": "text",
         "nullable": false
       },
       {
-        "name": "saved_at",
+        "name": "autor",
+        "type": "text",
+        "nullable": false
+      },
+      {
+        "name": "hash_requisicao",
+        "type": "text",
+        "nullable": false
+      },
+      {
+        "name": "confirmado_em",
+        "type": "timestamp with time zone",
+        "nullable": false
+      }
+    ],
+    "comment": "Recibos que impedem uma gravação repetida de ser aplicada duas vezes.",
+    "references": [],
+    "primary_key": [
+      "id"
+    ]
+  },
+  {
+    "kind": "table",
+    "name": "revisoes_origem",
+    "columns": [
+      {
+        "name": "sequencia",
+        "type": "bigint",
+        "nullable": false
+      },
+      {
+        "name": "id_projeto",
+        "type": "text",
+        "nullable": false
+      },
+      {
+        "name": "caminho",
+        "type": "text",
+        "nullable": false
+      },
+      {
+        "name": "campos",
+        "type": "jsonb",
+        "nullable": false
+      },
+      {
+        "name": "atualizado_na_origem_em",
+        "type": "text",
+        "nullable": true
+      },
+      {
+        "name": "motivo",
+        "type": "text",
+        "nullable": false
+      },
+      {
+        "name": "salvo_em",
         "type": "timestamp with time zone",
         "nullable": false
       }
@@ -712,7 +691,28 @@
     "comment": "Versões preservadas durante a reconciliação com o Firestore.",
     "references": [],
     "primary_key": [
-      "sequence"
+      "sequencia"
+    ]
+  },
+  {
+    "kind": "table",
+    "name": "turmas",
+    "columns": [
+      {
+        "name": "id",
+        "type": "bigint",
+        "nullable": false
+      },
+      {
+        "name": "nome",
+        "type": "text",
+        "nullable": false
+      }
+    ],
+    "comment": "Nomes das turmas do catálogo de horários.",
+    "references": [],
+    "primary_key": [
+      "id"
     ]
   },
   {
