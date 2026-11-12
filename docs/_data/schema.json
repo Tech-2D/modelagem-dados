@@ -1,0 +1,737 @@
+[
+  {
+    "kind": "table",
+    "name": "activities",
+    "columns": [
+      {
+        "name": "id",
+        "type": "text",
+        "nullable": false
+      },
+      {
+        "name": "turma_id",
+        "type": "text",
+        "nullable": true
+      },
+      {
+        "name": "title",
+        "type": "text",
+        "nullable": false
+      },
+      {
+        "name": "description",
+        "type": "text",
+        "nullable": false
+      },
+      {
+        "name": "type",
+        "type": "text",
+        "nullable": false
+      },
+      {
+        "name": "subject",
+        "type": "text",
+        "nullable": true
+      },
+      {
+        "name": "date",
+        "type": "text",
+        "nullable": false
+      },
+      {
+        "name": "time",
+        "type": "text",
+        "nullable": true
+      },
+      {
+        "name": "created_by",
+        "type": "text",
+        "nullable": true
+      },
+      {
+        "name": "created_by_email",
+        "type": "text",
+        "nullable": true
+      },
+      {
+        "name": "recurring_id",
+        "type": "text",
+        "nullable": true
+      },
+      {
+        "name": "attachments",
+        "type": "jsonb",
+        "nullable": false
+      },
+      {
+        "name": "created_at",
+        "type": "timestamp with time zone",
+        "nullable": true
+      },
+      {
+        "name": "updated_at",
+        "type": "timestamp with time zone",
+        "nullable": true
+      },
+      {
+        "name": "version",
+        "type": "bigint",
+        "nullable": false
+      }
+    ],
+    "references": [],
+    "primary_key": [
+      "id"
+    ]
+  },
+  {
+    "kind": "table",
+    "name": "activity_audit",
+    "columns": [
+      {
+        "name": "sequence",
+        "type": "bigint",
+        "nullable": false
+      },
+      {
+        "name": "activity_id",
+        "type": "text",
+        "nullable": false
+      },
+      {
+        "name": "actor_uid",
+        "type": "text",
+        "nullable": false
+      },
+      {
+        "name": "action",
+        "type": "text",
+        "nullable": false
+      },
+      {
+        "name": "previous_data",
+        "type": "jsonb",
+        "nullable": true
+      },
+      {
+        "name": "changed_at",
+        "type": "timestamp with time zone",
+        "nullable": false
+      }
+    ],
+    "references": [],
+    "primary_key": [
+      "sequence"
+    ]
+  },
+  {
+    "kind": "table",
+    "name": "admin_profiles",
+    "columns": [
+      {
+        "name": "uid",
+        "type": "text",
+        "nullable": false
+      },
+      {
+        "name": "role",
+        "type": "text",
+        "nullable": false
+      },
+      {
+        "name": "turma_id",
+        "type": "text",
+        "nullable": true
+      },
+      {
+        "name": "data",
+        "type": "jsonb",
+        "nullable": false
+      }
+    ],
+    "references": [],
+    "primary_key": [
+      "uid"
+    ]
+  },
+  {
+    "kind": "table",
+    "name": "agenda_blocks",
+    "columns": [
+      {
+        "name": "id",
+        "type": "uuid",
+        "nullable": false
+      },
+      {
+        "name": "kind",
+        "type": "text",
+        "nullable": false
+      },
+      {
+        "name": "target",
+        "type": "text",
+        "nullable": false
+      },
+      {
+        "name": "created_at",
+        "type": "timestamp with time zone",
+        "nullable": false
+      },
+      {
+        "name": "created_by",
+        "type": "text",
+        "nullable": false
+      }
+    ],
+    "references": [],
+    "primary_key": [
+      "id"
+    ]
+  },
+  {
+    "kind": "table",
+    "name": "agenda_recent_users",
+    "columns": [
+      {
+        "name": "uid",
+        "type": "text",
+        "nullable": false
+      },
+      {
+        "name": "email",
+        "type": "text",
+        "nullable": true
+      },
+      {
+        "name": "last_seen_at",
+        "type": "timestamp with time zone",
+        "nullable": false
+      },
+      {
+        "name": "network_key",
+        "type": "text",
+        "nullable": true
+      }
+    ],
+    "references": [],
+    "primary_key": [
+      "uid"
+    ]
+  },
+  {
+    "kind": "table",
+    "name": "app_audit",
+    "columns": [
+      {
+        "name": "sequence",
+        "type": "bigint",
+        "nullable": false
+      },
+      {
+        "name": "actor",
+        "type": "text",
+        "nullable": false
+      },
+      {
+        "name": "path",
+        "type": "text",
+        "nullable": false
+      },
+      {
+        "name": "operation",
+        "type": "text",
+        "nullable": false
+      },
+      {
+        "name": "previous_data",
+        "type": "jsonb",
+        "nullable": true
+      },
+      {
+        "name": "changed_at",
+        "type": "timestamp with time zone",
+        "nullable": false
+      }
+    ],
+    "references": [],
+    "primary_key": [
+      "sequence"
+    ]
+  },
+  {
+    "kind": "table",
+    "name": "app_commits",
+    "columns": [
+      {
+        "name": "id",
+        "type": "text",
+        "nullable": false
+      },
+      {
+        "name": "actor",
+        "type": "text",
+        "nullable": false
+      },
+      {
+        "name": "digest",
+        "type": "text",
+        "nullable": false
+      },
+      {
+        "name": "committed_at",
+        "type": "timestamp with time zone",
+        "nullable": false
+      }
+    ],
+    "references": [],
+    "primary_key": [
+      "id"
+    ]
+  },
+  {
+    "kind": "table",
+    "name": "app_documents",
+    "columns": [
+      {
+        "name": "path",
+        "type": "text",
+        "nullable": false
+      },
+      {
+        "name": "collection",
+        "type": "text",
+        "nullable": false
+      },
+      {
+        "name": "id",
+        "type": "text",
+        "nullable": false
+      },
+      {
+        "name": "data",
+        "type": "jsonb",
+        "nullable": false
+      },
+      {
+        "name": "version",
+        "type": "bigint",
+        "nullable": false
+      },
+      {
+        "name": "updated_at",
+        "type": "timestamp with time zone",
+        "nullable": false
+      }
+    ],
+    "references": [],
+    "primary_key": [
+      "path"
+    ]
+  },
+  {
+    "kind": "table",
+    "name": "catalog_documents",
+    "columns": [
+      {
+        "name": "collection",
+        "type": "text",
+        "nullable": false
+      },
+      {
+        "name": "id",
+        "type": "text",
+        "nullable": false
+      },
+      {
+        "name": "data",
+        "type": "jsonb",
+        "nullable": false
+      }
+    ],
+    "references": [],
+    "primary_key": [
+      "collection",
+      "id"
+    ]
+  },
+  {
+    "kind": "table",
+    "name": "firestore_documents",
+    "columns": [
+      {
+        "name": "project_id",
+        "type": "text",
+        "nullable": false
+      },
+      {
+        "name": "path",
+        "type": "text",
+        "nullable": false
+      },
+      {
+        "name": "fields",
+        "type": "jsonb",
+        "nullable": false
+      },
+      {
+        "name": "source_updated_at",
+        "type": "text",
+        "nullable": true
+      },
+      {
+        "name": "imported_at",
+        "type": "timestamp with time zone",
+        "nullable": false
+      }
+    ],
+    "references": [],
+    "primary_key": [
+      "project_id",
+      "path"
+    ]
+  },
+  {
+    "kind": "table",
+    "name": "migration_state",
+    "columns": [
+      {
+        "name": "id",
+        "type": "boolean",
+        "nullable": false
+      },
+      {
+        "name": "application_seeded",
+        "type": "boolean",
+        "nullable": false
+      },
+      {
+        "name": "production_enabled",
+        "type": "boolean",
+        "nullable": false
+      },
+      {
+        "name": "source_exported_at",
+        "type": "timestamp with time zone",
+        "nullable": true
+      }
+    ],
+    "references": [],
+    "primary_key": [
+      "id"
+    ]
+  },
+  {
+    "kind": "table",
+    "name": "professor_recent_users",
+    "columns": [
+      {
+        "name": "uid",
+        "type": "text",
+        "nullable": false
+      },
+      {
+        "name": "email",
+        "type": "text",
+        "nullable": true
+      },
+      {
+        "name": "last_seen_at",
+        "type": "timestamp with time zone",
+        "nullable": false
+      }
+    ],
+    "references": [],
+    "primary_key": [
+      "uid"
+    ]
+  },
+  {
+    "kind": "table",
+    "name": "schema_migrations",
+    "columns": [
+      {
+        "name": "version",
+        "type": "text",
+        "nullable": false
+      },
+      {
+        "name": "applied_at",
+        "type": "timestamp with time zone",
+        "nullable": false
+      }
+    ],
+    "references": [],
+    "primary_key": [
+      "version"
+    ]
+  },
+  {
+    "kind": "table",
+    "name": "school_classes",
+    "columns": [
+      {
+        "name": "id",
+        "type": "bigint",
+        "nullable": false
+      },
+      {
+        "name": "name",
+        "type": "text",
+        "nullable": false
+      }
+    ],
+    "references": [],
+    "primary_key": [
+      "id"
+    ]
+  },
+  {
+    "kind": "view",
+    "name": "school_schedule_catalog",
+    "columns": [
+      {
+        "name": "id",
+        "type": "text",
+        "nullable": true
+      },
+      {
+        "name": "day_of_week",
+        "type": "smallint",
+        "nullable": true
+      },
+      {
+        "name": "active",
+        "type": "boolean",
+        "nullable": true
+      },
+      {
+        "name": "class_name",
+        "type": "text",
+        "nullable": true
+      },
+      {
+        "name": "data",
+        "type": "jsonb",
+        "nullable": true
+      }
+    ],
+    "references": [],
+    "primary_key": []
+  },
+  {
+    "kind": "table",
+    "name": "school_schedules",
+    "columns": [
+      {
+        "name": "id",
+        "type": "text",
+        "nullable": false
+      },
+      {
+        "name": "teacher_id",
+        "type": "bigint",
+        "nullable": false
+      },
+      {
+        "name": "subject_id",
+        "type": "bigint",
+        "nullable": false
+      },
+      {
+        "name": "class_id",
+        "type": "bigint",
+        "nullable": false
+      },
+      {
+        "name": "time_slot_id",
+        "type": "bigint",
+        "nullable": false
+      },
+      {
+        "name": "day_of_week",
+        "type": "smallint",
+        "nullable": false
+      },
+      {
+        "name": "active",
+        "type": "boolean",
+        "nullable": false
+      }
+    ],
+    "references": [
+      {
+        "table": "school_classes",
+        "column": "class_id",
+        "target": "id"
+      },
+      {
+        "table": "school_subjects",
+        "column": "subject_id",
+        "target": "id"
+      },
+      {
+        "table": "school_teachers",
+        "column": "teacher_id",
+        "target": "id"
+      },
+      {
+        "table": "school_time_slots",
+        "column": "time_slot_id",
+        "target": "id"
+      }
+    ],
+    "primary_key": [
+      "id"
+    ]
+  },
+  {
+    "kind": "table",
+    "name": "school_subjects",
+    "columns": [
+      {
+        "name": "id",
+        "type": "bigint",
+        "nullable": false
+      },
+      {
+        "name": "name",
+        "type": "text",
+        "nullable": false
+      }
+    ],
+    "references": [],
+    "primary_key": [
+      "id"
+    ]
+  },
+  {
+    "kind": "table",
+    "name": "school_teachers",
+    "columns": [
+      {
+        "name": "id",
+        "type": "bigint",
+        "nullable": false
+      },
+      {
+        "name": "name",
+        "type": "text",
+        "nullable": false
+      }
+    ],
+    "references": [],
+    "primary_key": [
+      "id"
+    ]
+  },
+  {
+    "kind": "table",
+    "name": "school_time_slots",
+    "columns": [
+      {
+        "name": "id",
+        "type": "bigint",
+        "nullable": false
+      },
+      {
+        "name": "start_time",
+        "type": "time(0) without time zone",
+        "nullable": false
+      },
+      {
+        "name": "end_time",
+        "type": "time(0) without time zone",
+        "nullable": false
+      }
+    ],
+    "references": [],
+    "primary_key": [
+      "id"
+    ]
+  },
+  {
+    "kind": "table",
+    "name": "site_visits",
+    "columns": [
+      {
+        "name": "day",
+        "type": "date",
+        "nullable": false
+      },
+      {
+        "name": "half_hour",
+        "type": "bigint",
+        "nullable": false
+      },
+      {
+        "name": "kind",
+        "type": "text",
+        "nullable": false
+      },
+      {
+        "name": "visitor_key",
+        "type": "text",
+        "nullable": false
+      },
+      {
+        "name": "site",
+        "type": "text",
+        "nullable": false
+      }
+    ],
+    "references": [],
+    "primary_key": [
+      "site",
+      "day",
+      "half_hour",
+      "kind",
+      "visitor_key"
+    ]
+  },
+  {
+    "kind": "table",
+    "name": "source_revisions",
+    "columns": [
+      {
+        "name": "sequence",
+        "type": "bigint",
+        "nullable": false
+      },
+      {
+        "name": "project_id",
+        "type": "text",
+        "nullable": false
+      },
+      {
+        "name": "path",
+        "type": "text",
+        "nullable": false
+      },
+      {
+        "name": "fields",
+        "type": "jsonb",
+        "nullable": false
+      },
+      {
+        "name": "source_updated_at",
+        "type": "text",
+        "nullable": true
+      },
+      {
+        "name": "reason",
+        "type": "text",
+        "nullable": false
+      },
+      {
+        "name": "saved_at",
+        "type": "timestamp with time zone",
+        "nullable": false
+      }
+    ],
+    "references": [],
+    "primary_key": [
+      "sequence"
+    ]
+  }
+]

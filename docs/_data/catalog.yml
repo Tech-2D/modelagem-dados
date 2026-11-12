@@ -1,0 +1,54 @@
+- id: agenda
+  name: Agenda e aplicação
+  objects:
+    - name: app_documents
+      description: Fonte dos documentos ativos, como atividades, avisos, enquetes, votos e cartões do Kanban.
+    - name: activities
+      description: Projeção para consultas por data e turma, recorrências e expurgo.
+    - name: catalog_documents
+      description: Projeções de catálogo e dados complementares dos horários, como andar e sala.
+    - name: admin_profiles
+      description: Projeção de papel e turma da conta para consultas da API.
+    - name: app_commits
+      description: Recibos que impedem uma gravação repetida de ser aplicada duas vezes.
+    - name: app_audit
+      description: Histórico das alterações do fluxo atual de gravação.
+- id: horarios
+  name: Horários dos professores
+  objects:
+    - name: school_schedules
+      description: Liga professor, disciplina, turma e faixa de horário a um dia da semana.
+    - name: school_teachers
+      description: Nomes de professores reutilizados pelos horários.
+    - name: school_subjects
+      description: Nomes das disciplinas reutilizadas pelos horários.
+    - name: school_classes
+      description: Nomes das turmas do catálogo de horários.
+    - name: school_time_slots
+      description: Pares de horário de início e fim reutilizados pelas aulas.
+    - name: school_schedule_catalog
+      description: View que recompõe o horário com as referências relacionais, o andar e a sala.
+- id: acessos
+  name: Acessos e moderação
+  objects:
+    - name: site_visits
+      description: Visitas da Agenda e do Cadê o professor, agrupadas por visitante e intervalo de 30 minutos.
+    - name: agenda_recent_users
+      description: Último acesso autenticado à Agenda e referência de rede usada para moderação.
+    - name: professor_recent_users
+      description: Último acesso autenticado ao Cadê o professor.
+    - name: agenda_blocks
+      description: Bloqueios por e-mail ou rede aplicados à Agenda.
+- id: operacao
+  name: Operação e histórico
+  objects:
+    - name: activity_audit
+      description: Histórico da rota legada de gravação de atividades, cujas escritas estão desativadas.
+    - name: firestore_documents
+      description: Arquivo da migração com os documentos tipados do Firestore.
+    - name: source_revisions
+      description: Versões preservadas durante a reconciliação com o Firestore.
+    - name: migration_state
+      description: Indicadores de preparação e ativação do SQL que a API e os jobs consultam.
+    - name: schema_migrations
+      description: Versões do esquema já aplicadas.

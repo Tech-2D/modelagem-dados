@@ -1,0 +1,33 @@
+-- Execute after applying the migrations to a local database.
+WITH relations AS (
+  SELECT c.oid, c.relname AS name,
+    CASE c.relkind WHEN 'v' THEN 'view' ELSE 'table' END AS kind
+  FROM pg_class c
+  JOIN pg_namespace n ON n.oid = c.relnamespace
+  WHERE n.nspname = 'tech2d' AND c.relkind IN ('r', 'p', 'v')
+),
+catalog AS (
+  SELECT r.name, r.kind,
+    (SELECT jsonb_agg(jsonb_build_object(
+      'name', a.attname,
+      'type', format_type(a.atttypid, a.atttypmod),
+      'nullable', NOT a.attnotnull
+    ) ORDER BY a.attnum)
+    FROM pg_attribute a WHERE a.attrelid = r.oid AND a.attnum > 0 AND NOT a.attisdropped) AS columns,
+    COALESCE((SELECT jsonb_agg(a.attname ORDER BY k.position)
+      FROM pg_constraint c
+      CROSS JOIN LATERAL unnest(c.conkey) WITH ORDINALITY AS k(column_number, position)
+      JOIN pg_attribute a ON a.attrelid = c.conrelid AND a.attnum = k.column_number
+      WHERE c.conrelid = r.oid AND c.contype = 'p'), '[]'::jsonb) AS primary_key,
+    COALESCE((SELECT jsonb_agg(jsonb_build_object(
+      'column', source.attname, 'table', target.name, 'target', destination.attname
+    ) ORDER BY source.attname, target.name)
+      FROM pg_constraint c
+      JOIN relations target ON target.oid = c.confrelid
+      CROSS JOIN LATERAL unnest(c.conkey, c.confkey) AS k(source_number, target_number)
+      JOIN pg_attribute source ON source.attrelid = c.conrelid AND source.attnum = k.source_number
+      JOIN pg_attribute destination ON destination.attrelid = c.confrelid AND destination.attnum = k.target_number
+      WHERE c.conrelid = r.oid AND c.contype = 'f'), '[]'::jsonb) AS references
+  FROM relations r
+)
+SELECT jsonb_pretty(jsonb_agg(to_jsonb(catalog) ORDER BY name)) FROM catalog;

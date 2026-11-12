@@ -1,52 +1,38 @@
 ---
-title: PostgreSQL
+title: Catálogo PostgreSQL
+description: Consulte tabelas, colunas, chaves e relações do esquema tech2d.
 ---
 
 O esquema `tech2d` combina **documentos JSONB** com **tabelas de consulta**. Os documentos preservam caminhos e IDs usados pela aplicação. As projeções facilitam filtros de agenda, horários e permissões. A API atualiza o documento e suas projeções na mesma transação.
 
 ## Visão geral das tabelas
 
-O esquema tem **20 tabelas** e uma view de horários. A maior parte sustenta os sites ou a operação do banco. As tabelas de migração têm uma função separada, e há dois pontos em que vale simplificar o modelo.
+<div class="catalog-controls" data-catalog-controls hidden>
+  <label for="catalog-search">Buscar no catálogo<input id="catalog-search" type="search" placeholder="Ex.: site_visits, turma_id ou jsonb" autocomplete="off"></label>
+  <label for="catalog-group">Área<select id="catalog-group"><option value="">Todas as áreas</option>{% for group in site.data.catalog %}<option value="{{ group.id }}">{{ group.name }}</option>{% endfor %}</select></label>
+  <p class="catalog-status" data-catalog-status role="status"></p>
+</div>
 
-### Agenda e dados da aplicação
-
-| Tabela | Para que serve |
-| --- | --- |
-| `app_documents` | Fonte dos documentos ativos, com ID, caminho e versão. Inclui atividades, avisos, enquetes e seus votos. |
-| `activities` | Projeção para consultar atividades por data e turma e executar recorrências e expurgo. |
-| `catalog_documents` | Projeções de catálogo e campos complementares de horários, como andar e sala. |
-| `admin_profiles` | Projeção de papel e turma para consultas da API. |
-| `app_commits` | Recibos que impedem que uma tentativa repetida aplique a mesma gravação duas vezes. |
-| `app_audit` | Histórico das alterações do fluxo atual de gravação. |
-
-### Horários dos professores
-
-| Tabela | Para que serve |
-| --- | --- |
-| `school_schedules` | Liga professor, disciplina, turma e faixa de horário a um dia da semana. |
-| `school_teachers`, `school_subjects`, `school_classes` | Referências reutilizadas por várias aulas. Permitem manter nomes consistentes por entidade. |
-| `school_time_slots` | Reutiliza pares de início e fim. Os horários têm tipo SQL `time`. |
-
-A view `school_schedule_catalog` reúne esses dados para a API de horários. Ela é uma consulta salva, sem uma cópia própria dos registros.
-
-### Acessos e moderação
-
-| Tabela | Para que serve |
-| --- | --- |
-| `site_visits` | Registra visitas dos **dois sites**. A chave inclui site, dia, intervalo de 30 minutos, tipo e identificador da visita. |
-| `agenda_recent_users` | Guarda o último acesso autenticado à Agenda e a referência de rede para moderação. |
-| `professor_recent_users` | Guarda o último acesso autenticado ao Cadê o professor. |
-| `agenda_blocks` | Mantém os bloqueios por e-mail ou rede aplicados à Agenda. |
-
-### Auditoria legada e operação do banco
-
-| Tabela | Para que serve |
-| --- | --- |
-| `activity_audit` | Histórico de um endpoint antigo de gravação de atividades. As gravações desse endpoint estão desativadas em produção. |
-| `firestore_documents` | Arquivo da migração com os documentos tipados da origem. |
-| `source_revisions` | Histórico das versões preservadas durante a reconciliação com a origem. |
-| `migration_state` | Guarda os indicadores de preparação e ativação do SQL que a API e os jobs consultam em produção. |
-| `schema_migrations` | Registra quais versões do esquema já foram aplicadas. |
+{% for group in site.data.catalog %}
+<section class="catalog-group" data-catalog-group="{{ group.id }}" aria-labelledby="{{ group.id }}">
+  <h3 id="{{ group.id }}">{{ group.name }}</h3>
+  {% for item in group.objects %}
+  {% assign object = site.data.schema | where: "name", item.name | first %}
+  <details class="catalog-object" id="obj-{{ item.name }}" data-catalog-object>
+    <summary><span><code>{{ item.name }}</code><span class="object-description">{{ item.description }}</span></span><span class="object-kind">{% if object.kind == "view" %}View{% else %}Tabela{% endif %}</span></summary>
+    <div class="object-body">
+      {% if object.primary_key.size > 0 %}<p><strong>Chave primária</strong> <code>{{ object.primary_key | join: ", " }}</code></p>{% endif %}
+      {% if object.references.size > 0 %}<ul class="object-relations" aria-label="Chaves estrangeiras">{% for relation in object.references %}<li><code>{{ relation.column }}</code> <span aria-hidden="true">→</span> <a href="#obj-{{ relation.table }}"><code>{{ relation.table }}.{{ relation.target }}</code></a></li>{% endfor %}</ul>{% endif %}
+      <table>
+        <caption class="visually-hidden">Colunas de {{ item.name }}</caption>
+        <thead><tr><th scope="col">Coluna</th><th scope="col">Tipo</th><th scope="col">Aceita nulo</th></tr></thead>
+        <tbody>{% for column in object.columns %}<tr><th scope="row"><code>{{ column.name }}</code></th><td><code>{{ column.type | escape }}</code></td><td>{% if column.nullable %}Sim{% else %}Não{% endif %}</td></tr>{% endfor %}</tbody>
+      </table>
+    </div>
+  </details>
+  {% endfor %}
+</section>
+{% endfor %}
 
 ## Simplificações propostas
 
@@ -58,12 +44,9 @@ As projeções são usadas pela API, os recibos evitam gravações duplicadas e 
 
 ## Como os registros se ligam
 
-- **Atividades.** O caminho `activities/{id}` origina a linha com o mesmo `id` em `activities`. Uma atividade geral usa `turma_id` nulo.
-- **Horários.** `schedules/{id}` mantém a compatibilidade com a edição existente. Uma função do banco separa as referências em tabelas relacionais. A view `school_schedule_catalog` recompõe a resposta da API com os dados complementares, como andar e sala.
-- **Permissões.** A conta no Firebase fornece o UID. O documento `admins/{uid}` e sua projeção em `admin_profiles` registram papel e turma. A API aplica as regras de acesso.
-- **Consultas.** As atividades têm índices de data e de turma com data. Os catálogos e documentos têm índices por coleção e por campos do JSONB usados em filtros.
+Abra a [modelagem]({{ '/modelagem.html' | relative_url }}) para seguir os vínculos de horários, atividades e contas. No catálogo, as chaves estrangeiras levam diretamente à tabela relacionada.
 
-Os horários usam chaves estrangeiras para as quatro tabelas de referência. As relações entre documentos da Agenda usam IDs e caminhos mantidos pela API. Datas e horários em `activities` ficam em texto no formato ISO usado pela aplicação. Os timestamps de auditoria e de último acesso usam `timestamptz`.
+Datas e horários em `activities` ficam em texto no formato ISO usado pela aplicação. Horários de aula em `school_time_slots` usam `time`, e timestamps de auditoria e último acesso usam `timestamptz`.
 
 ## Acesso ao banco
 
@@ -85,6 +68,6 @@ Os catálogos públicos passam por projeções que selecionam os campos da respo
 | 008 | Remoção dos campos já normalizados da projeção JSONB de horários, após a troca de leitura na API |
 | 009 | Renomeia `agenda_access` para `site_visits` e padroniza o nome da chave primária |
 
-Em um ambiente em uso, aplique a versão 007, publique a API que lê `school_schedule_catalog` e confira o catálogo. Aplique a versão 008 após confirmar que os consumidores já leem pela nova view. Em um banco local vazio, rode as duas pelo script de instalação.
+Em um banco local vazio, siga os passos em [Consultas SQL]({{ '/consultas.html' | relative_url }}). O script de instalação aplica as migrações na ordem acima.
 
 [Ver arquivos SQL](https://github.com/Tech-2D/modelagem-dados/tree/main/sql/migrations) · [Rodar em um banco local](https://github.com/Tech-2D/modelagem-dados#rodar-o-sql-localmente) · [Consultas de exemplo](https://github.com/Tech-2D/modelagem-dados/blob/main/sql/examples/consultas.sql)
