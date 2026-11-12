@@ -29,6 +29,39 @@ O histórico tem 3.684 documentos distribuídos em 20 tabelas por coleção de o
 
 Os nomes das tabelas e das colunas estão em português. Datas, horas, contadores e valores booleanos usam tipos PostgreSQL. O caminho de cada documento é a chave primária nas tabelas de origem. A API utiliza o esquema operacional `tech2d` e seu usuário de banco não tem acesso ao histórico. O Firebase Authentication continua responsável pelo login.
 
+## Limites de caracteres
+
+As 113 colunas de texto agora usam `varchar(n)`. Nas 20 tabelas que correspondem a coleções, `caminho` é `varchar(512)` e `id` é `varchar(320)`. Os campos de vínculo por caminho também aceitam até 512 caracteres.
+
+| Tabela | Limites além dos campos comuns |
+| --- | --- |
+| `acessos_enquetes` | `varchar(100)` — `id_turma`<br>`varchar(32)` — `situacao`<br>`varchar(320)` — `email`<br>`varchar(128)` — `revisado_por` |
+| `anexos_atividades` | `varchar(512)` — `caminho_atividade`<br>`varchar(320)` — `id`<br>`varchar(180)` — `nome`<br>`varchar(1024)` — `caminho_storage`<br>`varchar(127)` — `tipo_conteudo` |
+| `atividades` | `varchar(128)` — `id_criador`<br>`varchar(32)` — `tipo`<br>`varchar(120)` — `titulo`, `disciplina`<br>`varchar(100)` — `id_turma`<br>`varchar(2000)` — `descricao`<br>`varchar(320)` — `email_criador`, `id_recorrencia` |
+| `atualizacoes_agenda` | `varchar(2000)` — `descricao`, `mensagem_sugerida`<br>`varchar(128)` — `id_criador`<br>`varchar(120)` — `titulo`<br>`varchar(320)` — `id_feedback`<br>`varchar(60)` — `nome_autor_sugestao` |
+| `bloqueios_whatsapp` | `varchar(64)` — `proprietario` |
+| `comunicados` | `varchar(500)` — `mensagem` |
+| `convites_representantes` | `varchar(320)` — `id_solicitacao`, `email`<br>`varchar(100)` — `id_turma` |
+| `dias_recorrencias` | `varchar(512)` — `caminho_recorrencia` |
+| `envios_resumo` | `varchar(32)` — `situacao` |
+| `horarios_aula` | `varchar(150)` — `disciplina`, `nome_professor`, `nome_turma`<br>`varchar(80)` — `andar`<br>`varchar(500)` — `descricao_sala` |
+| `limites_envio_arquivos` | Campos comuns |
+| `limites_redefinicao_senha` | Campos comuns |
+| `mensagens_representantes` | `varchar(100)` — `id_turma_remetente`<br>`varchar(2000)` — `mensagem`<br>`varchar(128)` — `id_remetente`<br>`varchar(32)` — `papel_remetente`<br>`varchar(320)` — `email_remetente` |
+| `mensagens_sugestoes` | `varchar(2000)` — `mensagem`<br>`varchar(128)` — `id_remetente`<br>`varchar(512)` — `caminho_sugestao` |
+| `perfis_administrativos` | `varchar(32)` — `papel`<br>`varchar(100)` — `id_turma` |
+| `preferencias_resumo` | `varchar(100)` — `id_turma` |
+| `recorrencias` | `varchar(128)` — `id_criador`<br>`varchar(120)` — `titulo`, `disciplina`<br>`varchar(100)` — `id_turma`<br>`varchar(2000)` — `descricao`<br>`varchar(320)` — `email_criador`<br>`varchar(32)` — `tipo` |
+| `sessoes_whatsapp` | `varchar(64)` — `vetor_inicializacao`, `etiqueta_autenticacao`<br>`varchar(8192)` — `conteudo_cifrado` |
+| `solicitacoes_representantes` | `varchar(320)` — `email`<br>`varchar(32)` — `situacao`<br>`varchar(100)` — `id_turma` |
+| `sugestoes_atividades` | `varchar(2000)` — `descricao`<br>`varchar(32)` — `situacao`, `tipo`<br>`varchar(120)` — `titulo`, `disciplina`<br>`varchar(100)` — `id_turma` |
+| `sugestoes_melhoria` | `varchar(100)` — `id_turma`<br>`varchar(2000)` — `mensagem`<br>`varchar(128)` — `concluido_por`, `id_criador`<br>`varchar(32)` — `situacao`<br>`varchar(60)` — `nome_credito_publico`<br>`varchar(320)` — `email_criador` |
+| `testes_whatsapp` | `varchar(32)` — `situacao` |
+
+A conversão verifica o tamanho de cada valor antes de alterar a coluna. Se encontrar um valor acima do limite, a transação é revertida.
+
+[Script SQL dos limites de varchar](https://github.com/Tech-2D/modelagem-dados/blob/main/sql/varchar_legado_firestore.sql)
+
 ## Conferência da migração
 
 Depois da conferência, foram excluídos 3.684 documentos da origem. A listagem final do Firestore confirmou zero coleções.
