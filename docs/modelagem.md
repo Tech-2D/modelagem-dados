@@ -38,4 +38,4 @@ Os vínculos de horários usam chaves estrangeiras no PostgreSQL. Os vínculos e
 
 ## Histórico do Firestore
 
-A cópia original do Firestore fica em `tech2d.documentos_firestore`. O esquema relacional separado foi removido do Aiven. A estrutura dele está registrada no [Histórico do Firestore]({{ '/firestore-legado.html' | relative_url }}).
+A exportação privada guarda a cópia original do Firestore. A tabela de arquivo e o esquema relacional foram retirados do Aiven. O processo está registrado no [Histórico do Firestore]({{ '/firestore-legado.html' | relative_url }}).

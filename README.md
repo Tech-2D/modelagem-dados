@@ -32,6 +32,6 @@ O repositório [Tech-2D/api](https://github.com/Tech-2D/api) é a fonte das migr
 psql -d tech2d_local -v ON_ERROR_STOP=1 -At -f sql/catalog.psql > docs/_data/schema.json
 ```
 
-Inclua o título em português em `docs/_data/catalog.yml` e descreva a função do objeto com `COMMENT ON` na migração. O catálogo extrai a descrição dos comentários do PostgreSQL. A cópia atual corresponde ao commit [`2222882`](https://github.com/Tech-2D/api/tree/22228823ba379e8fd624b7d61dc40465f840af6a/migrations).
+Inclua o título em português em `docs/_data/catalog.yml` e descreva a função do objeto com `COMMENT ON` na migração. O catálogo extrai a descrição dos comentários do PostgreSQL. A cópia atual corresponde ao commit [`4537a5a`](https://github.com/Tech-2D/api/tree/4537a5aee757f5ce03c2ce579646f16bfe84dc22/migrations).
 
 O site é gerado pelo GitHub Pages a partir de `docs/`. A organização das páginas foi inspirada no [Astro Database Workspace](https://github.com/Astro-Inter/astro-database).

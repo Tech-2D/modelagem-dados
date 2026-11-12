@@ -5,7 +5,7 @@ description: Como os documentos do antigo Firestore foram preservados e organiza
 
 ## Onde estão os dados
 
-O esquema `legado_firestore` guardou uma cópia relacional dos documentos do Firestore de 12/11/2026. Suas 22 tabelas foram removidas do Aiven a pedido do projeto. A página registra como o esquema foi organizado. A cópia original fica em `tech2d.documentos_firestore`, com os tipos e os caminhos da origem, para conferência e recuperação.
+O esquema `legado_firestore` guardou uma cópia relacional dos documentos do Firestore de 12/11/2026. Suas 22 tabelas foram removidas do Aiven a pedido do projeto. A página registra como o esquema foi organizado. A tabela `tech2d.documentos_firestore` também foi removida. A exportação privada conferida preserva os tipos e os caminhos da origem.
 
 O esquema tinha 3.684 documentos distribuídos em 20 tabelas por coleção de origem, incluindo uma subcoleção. As duas tabelas auxiliares separavam 14 metadados de anexos e 6 dias de recorrência dos seus registros principais.
 
@@ -68,4 +68,4 @@ Depois da conferência, foram excluídos 3.684 documentos da origem. A listagem 
 
 A assinatura SHA-256 da cópia original no Aiven coincidiu com a exportação final, incluindo caminhos, campos e versões dos documentos. A transação verificou a cobertura de todos os documentos e as contagens dos registros auxiliares.
 
-O [SQL da migração histórica](https://github.com/Tech-2D/modelagem-dados/blob/main/sql/legado_firestore_2026_11_12.sql) exige essa mesma cópia original. Ele serve de referência para a migração de 12/11/2026 e fica separado das migrações que montam um banco operacional vazio.
+O [SQL da migração histórica](https://github.com/Tech-2D/modelagem-dados/blob/main/sql/legado_firestore_2026_11_12.sql) foi usado com a cópia original ainda no Aiven. Ele registra a migração de 12/11/2026 e só se aplica a um banco temporário que tenha recuperado a cópia bruta.

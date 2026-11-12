@@ -44,8 +44,6 @@
   objects:
     - name: auditoria_atividades_legada
       title: Auditoria legada de atividades
-    - name: documentos_firestore
-      title: Documentos arquivados do Firestore
     - name: revisoes_origem
       title: Revisões dos dados de origem
     - name: estado_migracao
