@@ -31,7 +31,7 @@ ORDER BY schedule.day_of_week, slot.start_time, schedule.id;
 SELECT site, day,
   count(*) FILTER (WHERE kind = 'account') AS com_login,
   count(*) FILTER (WHERE kind = 'anonymous') AS anonimos
-FROM tech2d.agenda_access
+FROM tech2d.site_visits
 WHERE day >= (now() AT TIME ZONE 'America/Sao_Paulo')::date - 6
 GROUP BY site, day
 ORDER BY day DESC, site;

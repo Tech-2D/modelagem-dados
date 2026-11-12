@@ -24,6 +24,6 @@ As migrações criam o esquema vazio. As consultas de negócio podem retornar ze
 
 ## Atualizar o espelho
 
-O repositório [Tech-2D/api](https://github.com/Tech-2D/api) é a fonte das migrações. Atualize primeiro o repositório da API, depois copie os scripts para `sql/migrations/`, inclua as novas versões em `sql/migrate.psql` na ordem numérica e atualize a documentação. A cópia atual corresponde ao commit [`e8d62f0`](https://github.com/Tech-2D/api/tree/e8d62f06362538215046380a412765a23d5f6419/migrations).
+O repositório [Tech-2D/api](https://github.com/Tech-2D/api) é a fonte das migrações. Atualize primeiro o repositório da API, depois copie os scripts para `sql/migrations/`, inclua as novas versões em `sql/migrate.psql` na ordem numérica e atualize a documentação. A cópia atual corresponde ao commit [`0988406`](https://github.com/Tech-2D/api/tree/09884068b73ef9641138a712d4da7c1f7fc0023c/migrations).
 
 O site é gerado pelo GitHub Pages a partir de `docs/`. A organização das páginas foi inspirada no [Astro Database Workspace](https://github.com/Astro-Inter/astro-database).

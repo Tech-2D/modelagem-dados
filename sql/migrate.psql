@@ -1,8 +1,14 @@
 \ir migrations/001_initial.sql
 \ir migrations/002_application.sql
 \ir migrations/003_source_revisions.sql
+SELECT NOT EXISTS (SELECT FROM tech2d.schema_migrations WHERE version = '009_rename_site_visits') AS needs_legacy_visits \gset
+\if :needs_legacy_visits
 \ir migrations/004_agenda_access.sql
+\endif
 \ir migrations/005_agenda_moderation.sql
+\if :needs_legacy_visits
 \ir migrations/006_site_access.sql
+\endif
 \ir migrations/007_normalize_schedules.sql
 \ir migrations/008_compact_schedule_catalog.sql
+\ir migrations/009_rename_site_visits.sql

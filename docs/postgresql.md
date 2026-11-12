@@ -33,7 +33,7 @@ A view `school_schedule_catalog` reúne esses dados para a API de horários. Ela
 
 | Tabela | Para que serve |
 | --- | --- |
-| `agenda_access` | Registra visitas dos **dois sites**. A chave inclui site, dia, intervalo de 30 minutos, tipo e identificador da visita. |
+| `site_visits` | Registra visitas dos **dois sites**. A chave inclui site, dia, intervalo de 30 minutos, tipo e identificador da visita. |
 | `agenda_recent_users` | Guarda o último acesso autenticado à Agenda e a referência de rede para moderação. |
 | `professor_recent_users` | Guarda o último acesso autenticado ao Cadê o professor. |
 | `agenda_blocks` | Mantém os bloqueios por e-mail ou rede aplicados à Agenda. |
@@ -51,10 +51,10 @@ A view `school_schedule_catalog` reúne esses dados para a API de horários. Ela
 ## Simplificações propostas
 
 1. **Unificar últimos acessos.** Consolidar `agenda_recent_users` e `professor_recent_users` em `site_recent_users` com chave `(site, uid)`. A referência de rede fica restrita às linhas da Agenda. A troca deve preservar o último acesso por site, os prazos de retenção e as permissões de cada painel.
-2. **Alinhar os nomes ao escopo.** Usar `site_visits` para a tabela hoje chamada `agenda_access`, que já atende os dois sites. Para novas tabelas, manter nomes em inglês, no plural e em `snake_case`. Usar prefixos como `school_` e `site_` quando indicarem a responsabilidade da tabela. `agenda_blocks` já segue esse critério porque o bloqueio é específico da Agenda.
+2. **Alinhar os nomes ao escopo.** A tabela `site_visits` registra as visitas dos dois sites. Para novas tabelas, manter nomes em inglês, no plural e em `snake_case`. Usar prefixos como `school_` e `site_` quando indicarem a responsabilidade da tabela. `agenda_blocks` já segue esse critério porque o bloqueio é específico da Agenda.
 3. **Separar a auditoria antiga.** Depois de retirar a rota antiga e conferir a retenção necessária, arquivar `activity_audit` com acesso restrito. A auditoria das gravações atuais continua em `app_audit`.
 
-As projeções são usadas pela API, os recibos evitam gravações duplicadas e as tabelas de referência preservam a integridade dos horários. A separação entre o arquivo do Firestore e os dados ativos também preserva as permissões de acesso. Essas simplificações são propostas para uma migração posterior. Os nomes das tabelas acima descrevem o esquema atual.
+As projeções são usadas pela API, os recibos evitam gravações duplicadas e as tabelas de referência preservam a integridade dos horários. A separação entre o arquivo do Firestore e os dados ativos também preserva as permissões de acesso. A unificação dos últimos acessos e o arquivamento da auditoria antiga ficam para migrações posteriores.
 
 ## Como os registros se ligam
 
@@ -83,6 +83,7 @@ Os catálogos públicos passam por projeções que selecionam os campos da respo
 | 006 | Separação das visitas por site e últimos acessos do Cadê o professor |
 | 007 | Tabelas relacionais de horários, chaves estrangeiras, migração dos registros existentes e view de leitura |
 | 008 | Remoção dos campos já normalizados da projeção JSONB de horários, após a troca de leitura na API |
+| 009 | Renomeia `agenda_access` para `site_visits` e padroniza o nome da chave primária |
 
 Em um ambiente em uso, aplique a versão 007, publique a API que lê `school_schedule_catalog` e confira o catálogo. Aplique a versão 008 após confirmar que os consumidores já leem pela nova view. Em um banco local vazio, rode as duas pelo script de instalação.
 
