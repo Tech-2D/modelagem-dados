@@ -35,3 +35,7 @@ Enquetes e votos ficam em Documentos da aplicação, nos caminhos `polls/{id}` e
 - [Bloqueios de acesso à Agenda]({{ '/postgresql.html#obj-bloqueios_agenda' | relative_url }}) guarda os bloqueios por e-mail ou rede aplicados à Agenda.
 
 Os vínculos de horários usam chaves estrangeiras no PostgreSQL. Os vínculos entre documentos, contas e atividades usam identificadores que a API valida.
+
+## Histórico do Firestore
+
+Os documentos da migração também estão em um esquema privado no Aiven. Consulte as tabelas e seus vínculos no [Histórico do Firestore]({{ '/firestore-legado.html' | relative_url }}).

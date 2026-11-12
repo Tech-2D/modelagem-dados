@@ -1,0 +1,38 @@
+---
+title: Histórico do Firestore
+description: Como os documentos do antigo Firestore foram preservados e organizados no PostgreSQL.
+---
+
+## Onde estão os dados
+
+O esquema privado `legado_firestore` no banco `defaultdb` preserva a versão final dos documentos do Firestore do projeto `d-tech-8555e`, de 12/11/2026. A cópia original fica em `tech2d.documentos_firestore`, com os tipos e os caminhos da origem, para conferência e recuperação.
+
+O histórico tem 3.684 documentos distribuídos em 20 tabelas por coleção de origem, incluindo uma subcoleção. As duas tabelas auxiliares separam 14 metadados de anexos e 6 dias de recorrência dos seus registros principais.
+
+## Tabelas por assunto
+
+| Assunto | Tabelas no esquema `legado_firestore` |
+| --- | --- |
+| Agenda | `atividades`, `anexos_atividades`, `recorrencias`, `dias_recorrencias`, `sugestoes_atividades` |
+| Horários | `horarios_aula` |
+| Comunicação | `comunicados`, `atualizacoes_agenda`, `sugestoes_melhoria`, `mensagens_sugestoes`, `mensagens_representantes` |
+| Permissões | `perfis_administrativos`, `convites_representantes`, `solicitacoes_representantes`, `acessos_enquetes` |
+| Resumo semanal | `preferencias_resumo`, `envios_resumo` |
+| Limites de uso | `limites_redefinicao_senha`, `limites_envio_arquivos` |
+| Integração descontinuada do WhatsApp | `bloqueios_whatsapp`, `sessoes_whatsapp`, `testes_whatsapp` |
+
+## Relacionamentos
+
+- `anexos_atividades.caminho_atividade` aponta para `atividades.caminho`. A coluna `ordem` preserva a posição de cada anexo na lista original.
+- `dias_recorrencias.caminho_recorrencia` aponta para `recorrencias.caminho`. A coluna `dia_semana` aceita valores de 0 a 6.
+- `mensagens_sugestoes.caminho_sugestao` aponta para `sugestoes_melhoria.caminho`. Cada mensagem mantém o próprio caminho, inclusive o ID da sugestão.
+
+Os nomes das tabelas e das colunas estão em português. Datas, horas, contadores e valores booleanos usam tipos PostgreSQL. O caminho de cada documento é a chave primária nas tabelas de origem. A API utiliza o esquema operacional `tech2d` e seu usuário de banco não tem acesso ao histórico. O Firebase Authentication continua responsável pelo login.
+
+## Conferência da migração
+
+Depois da conferência, foram excluídos 3.684 documentos da origem. A listagem final do Firestore confirmou zero coleções.
+
+A assinatura SHA-256 da cópia original no Aiven coincidiu com a exportação final, incluindo caminhos, campos e versões dos documentos. A transação verificou a cobertura de todos os documentos e as contagens dos registros auxiliares.
+
+O [SQL da migração histórica](https://github.com/Tech-2D/modelagem-dados/blob/main/sql/legado_firestore_2026_11_12.sql) exige essa mesma cópia original. Ele serve de referência para a migração de 12/11/2026 e fica separado das migrações que montam um banco operacional vazio.
