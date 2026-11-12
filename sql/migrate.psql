@@ -12,3 +12,4 @@ SELECT NOT EXISTS (SELECT FROM tech2d.schema_migrations WHERE version = '009_ren
 \ir migrations/007_normalize_schedules.sql
 \ir migrations/008_compact_schedule_catalog.sql
 \ir migrations/009_rename_site_visits.sql
+\ir migrations/010_comment_schema_objects.sql

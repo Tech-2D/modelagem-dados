@@ -7,7 +7,7 @@ WITH relations AS (
   WHERE n.nspname = 'tech2d' AND c.relkind IN ('r', 'p', 'v')
 ),
 catalog AS (
-  SELECT r.name, r.kind,
+  SELECT r.name, r.kind, obj_description(r.oid, 'pg_class') AS comment,
     (SELECT jsonb_agg(jsonb_build_object(
       'name', a.attname,
       'type', format_type(a.atttypid, a.atttypmod),

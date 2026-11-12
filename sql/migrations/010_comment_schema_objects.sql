@@ -1,0 +1,23 @@
+COMMENT ON TABLE tech2d.app_documents IS 'Fonte dos documentos ativos, como atividades, avisos, enquetes, votos e cartões do Kanban.';
+COMMENT ON TABLE tech2d.activities IS 'Projeção para consultas por data e turma, recorrências e expurgo.';
+COMMENT ON TABLE tech2d.catalog_documents IS 'Projeções de catálogo e dados complementares dos horários, como andar e sala.';
+COMMENT ON TABLE tech2d.admin_profiles IS 'Projeção de papel e turma da conta para consultas da API.';
+COMMENT ON TABLE tech2d.app_commits IS 'Recibos que impedem uma gravação repetida de ser aplicada duas vezes.';
+COMMENT ON TABLE tech2d.app_audit IS 'Histórico das alterações do fluxo atual de gravação.';
+COMMENT ON TABLE tech2d.school_schedules IS 'Liga professor, disciplina, turma e faixa de horário a um dia da semana.';
+COMMENT ON TABLE tech2d.school_teachers IS 'Nomes de professores reutilizados pelos horários.';
+COMMENT ON TABLE tech2d.school_subjects IS 'Nomes das disciplinas reutilizadas pelos horários.';
+COMMENT ON TABLE tech2d.school_classes IS 'Nomes das turmas do catálogo de horários.';
+COMMENT ON TABLE tech2d.school_time_slots IS 'Pares de horário de início e fim reutilizados pelas aulas.';
+COMMENT ON VIEW tech2d.school_schedule_catalog IS 'View que recompõe o horário com as referências relacionais, o andar e a sala.';
+COMMENT ON TABLE tech2d.site_visits IS 'Visitas da Agenda e do Cadê o professor, agrupadas por visitante e intervalo de 30 minutos.';
+COMMENT ON TABLE tech2d.agenda_recent_users IS 'Último acesso autenticado à Agenda e referência de rede usada para moderação.';
+COMMENT ON TABLE tech2d.professor_recent_users IS 'Último acesso autenticado ao Cadê o professor.';
+COMMENT ON TABLE tech2d.agenda_blocks IS 'Bloqueios por e-mail ou rede aplicados à Agenda.';
+COMMENT ON TABLE tech2d.activity_audit IS 'Histórico da rota legada de gravação de atividades, cujas escritas estão desativadas.';
+COMMENT ON TABLE tech2d.firestore_documents IS 'Arquivo da migração com os documentos tipados do Firestore.';
+COMMENT ON TABLE tech2d.source_revisions IS 'Versões preservadas durante a reconciliação com o Firestore.';
+COMMENT ON TABLE tech2d.migration_state IS 'Indicadores de preparação e ativação do SQL que a API e os jobs consultam.';
+COMMENT ON TABLE tech2d.schema_migrations IS 'Versões do esquema já aplicadas.';
+
+INSERT INTO tech2d.schema_migrations(version) VALUES ('010_comment_schema_objects') ON CONFLICT DO NOTHING;

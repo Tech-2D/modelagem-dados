@@ -8,7 +8,7 @@ O esquema `tech2d` combina **documentos JSONB** com **tabelas de consulta**. Os 
 ## Visão geral das tabelas
 
 <div class="catalog-controls" data-catalog-controls hidden>
-  <label for="catalog-search">Buscar no catálogo<input id="catalog-search" type="search" placeholder="Ex.: site_visits, turma_id ou jsonb" autocomplete="off"></label>
+  <label for="catalog-search">Buscar no catálogo<input id="catalog-search" type="search" placeholder="Ex.: visitas, turma_id ou jsonb" autocomplete="off"></label>
   <label for="catalog-group">Área<select id="catalog-group"><option value="">Todas as áreas</option>{% for group in site.data.catalog %}<option value="{{ group.id }}">{{ group.name }}</option>{% endfor %}</select></label>
   <p class="catalog-status" data-catalog-status role="status"></p>
 </div>
@@ -19,7 +19,7 @@ O esquema `tech2d` combina **documentos JSONB** com **tabelas de consulta**. Os 
   {% for item in group.objects %}
   {% assign object = site.data.schema | where: "name", item.name | first %}
   <details class="catalog-object" id="obj-{{ item.name }}" data-catalog-object>
-    <summary><span><code>{{ item.name }}</code><span class="object-description">{{ item.description }}</span></span><span class="object-kind">{% if object.kind == "view" %}View{% else %}Tabela{% endif %}</span></summary>
+    <summary><span><strong>{{ item.title }}</strong> <code class="object-identifier">{{ item.name }}</code><span class="object-description">{{ object.comment | escape }}</span></span><span class="object-kind">{% if object.kind == "view" %}Visão{% else %}Tabela{% endif %}</span></summary>
     <div class="object-body">
       {% if object.primary_key.size > 0 %}<p><strong>Chave primária</strong> <code>{{ object.primary_key | join: ", " }}</code></p>{% endif %}
       {% if object.references.size > 0 %}<ul class="object-relations" aria-label="Chaves estrangeiras">{% for relation in object.references %}<li><code>{{ relation.column }}</code> <span aria-hidden="true">→</span> <a href="#obj-{{ relation.table }}"><code>{{ relation.table }}.{{ relation.target }}</code></a></li>{% endfor %}</ul>{% endif %}
@@ -67,6 +67,7 @@ Os catálogos públicos passam por projeções que selecionam os campos da respo
 | 007 | Tabelas relacionais de horários, chaves estrangeiras, migração dos registros existentes e view de leitura |
 | 008 | Remoção dos campos já normalizados da projeção JSONB de horários, após a troca de leitura na API |
 | 009 | Renomeia `agenda_access` para `site_visits` e padroniza o nome da chave primária |
+| 010 | Documenta em português a função de cada tabela e da visão de horários |
 
 Em um banco local vazio, siga os passos em [Consultas SQL]({{ '/consultas.html' | relative_url }}). O script de instalação aplica as migrações na ordem acima.
 

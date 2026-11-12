@@ -79,7 +79,7 @@ button, input, select { font: inherit; }
 .catalog-object[open] summary::before { content: '−'; }
 .catalog-object summary:hover { background: var(--tint); }
 .catalog-object summary > span:first-of-type { flex: 1; min-width: 0; }
-.catalog-object summary code { font-weight: 700; }
+.object-identifier { display: block; color: var(--muted); }
 .object-description { display: block; color: var(--muted); font-size: .82rem; margin-top: .15rem; }
 .object-kind { border: 1px solid var(--line); border-radius: .35rem; padding: .08rem .35rem; color: var(--muted); font-size: .72rem; }
 .object-body { border-top: 1px solid var(--line); padding: .75rem; }
@@ -91,7 +91,8 @@ button, input, select { font: inherit; }
 .relation-core code { color: #fff; font-weight: 700; }
 .relation-branches { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: .5rem; }
 .relation-branches a { display: grid; gap: .2rem; min-width: 0; border: 1px solid var(--line); border-radius: .4rem; background: var(--paper); padding: .6rem; text-decoration: none; }
-.relation-branches strong { font: .88rem 'IBM Plex Mono', Consolas, monospace; overflow-wrap: anywhere; }
+.relation-branches strong { color: var(--ink); font-size: .88rem; }
+.relation-branches small { color: var(--muted); }
 .visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 @media (max-width: 1100px) {
   .workspace { grid-template-columns: minmax(0,1fr); }
