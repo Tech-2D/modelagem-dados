@@ -30,7 +30,7 @@ Enquetes e votos ficam em Documentos da aplicação, nos caminhos `polls/{id}` e
 ## Visitas e permissões
 
 - [Visitas aos sites]({{ '/postgresql.html#obj-visitas_aos_sites' | relative_url }}) separa as visitas por site e deduplica acessos dentro de intervalos de 30 minutos.
-- [Acessos recentes à Agenda]({{ '/postgresql.html#obj-agenda_recent_users' | relative_url }}) e [Acessos recentes ao Cadê o professor]({{ '/postgresql.html#obj-professor_recent_users' | relative_url }}) guardam o último acesso autenticado em cada site.
+- [Acessos recentes à Agenda]({{ '/postgresql.html#obj-acessos_recentes_agenda' | relative_url }}) e [Acessos recentes ao Cadê o professor]({{ '/postgresql.html#obj-professor_recent_users' | relative_url }}) guardam o último acesso autenticado em cada site.
 - [Perfis de acesso administrativo]({{ '/postgresql.html#obj-admin_profiles' | relative_url }}) guarda uma projeção do papel e da turma. A identidade da conta vem do Firebase Authentication.
 - [Bloqueios de acesso à Agenda]({{ '/postgresql.html#obj-agenda_blocks' | relative_url }}) guarda os bloqueios por e-mail ou rede aplicados à Agenda.
 

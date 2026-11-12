@@ -5,7 +5,10 @@ SELECT NOT EXISTS (SELECT FROM tech2d.schema_migrations WHERE version = '009_ren
 \if :needs_legacy_visits
 \ir migrations/004_agenda_access.sql
 \endif
+SELECT NOT EXISTS (SELECT FROM tech2d.schema_migrations WHERE version = '005_agenda_moderation') AS needs_moderation \gset
+\if :needs_moderation
 \ir migrations/005_agenda_moderation.sql
+\endif
 \if :needs_legacy_visits
 \ir migrations/006_site_access.sql
 \endif
@@ -17,3 +20,4 @@ SELECT NOT EXISTS (SELECT FROM tech2d.schema_migrations WHERE version = '010_com
 \ir migrations/010_comment_schema_objects.sql
 \endif
 \ir migrations/011_portuguese_site_visits.sql
+\ir migrations/012_portuguese_agenda_recent_users.sql

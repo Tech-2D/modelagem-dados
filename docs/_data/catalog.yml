@@ -33,7 +33,7 @@
   objects:
     - name: visitas_aos_sites
       title: Visitas aos sites
-    - name: agenda_recent_users
+    - name: acessos_recentes_agenda
       title: Acessos recentes à Agenda
     - name: professor_recent_users
       title: Acessos recentes ao Cadê o professor

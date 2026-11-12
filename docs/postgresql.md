@@ -36,7 +36,7 @@ O esquema `tech2d` combina **documentos JSONB** com **tabelas de consulta**. Os 
 
 ## Simplificações propostas
 
-1. **Unificar últimos acessos.** Consolidar `agenda_recent_users` e `professor_recent_users` em `site_recent_users` com chave `(site, uid)`. A referência de rede fica restrita às linhas da Agenda. A troca deve preservar o último acesso por site, os prazos de retenção e as permissões de cada painel.
+1. **Unificar últimos acessos.** Consolidar `acessos_recentes_agenda` e `professor_recent_users` em `acessos_recentes_sites` com chave `(site, id_usuario)`. A referência de rede fica restrita às linhas da Agenda. A troca deve preservar o último acesso por site, os prazos de retenção e as permissões de cada painel.
 2. **Alinhar os nomes ao escopo.** A padronização usa português e `snake_case` nos nomes de tabelas e colunas. A migração 011 começa pelas visitas dos dois sites, na tabela `visitas_aos_sites`.
 3. **Separar a auditoria antiga.** Depois de retirar a rota antiga e conferir a retenção necessária, arquivar `activity_audit` com acesso restrito. A auditoria das gravações atuais continua em `app_audit`.
 
@@ -69,6 +69,7 @@ Os catálogos públicos passam por projeções que selecionam os campos da respo
 | 009 | Renomeia `agenda_access` para `site_visits` e padroniza o nome da chave primária |
 | 010 | Documenta em português a função de cada tabela e da visão de horários |
 | 011 | Renomeia `site_visits` e suas colunas para português |
+| 012 | Renomeia `agenda_recent_users` e suas colunas para português |
 
 Em um banco local vazio, siga os passos em [Consultas SQL]({{ '/consultas.html' | relative_url }}). O script de instalação aplica as migrações na ordem acima.
 

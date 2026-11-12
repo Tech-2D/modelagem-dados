@@ -1,6 +1,37 @@
 [
   {
     "kind": "table",
+    "name": "acessos_recentes_agenda",
+    "columns": [
+      {
+        "name": "id_usuario",
+        "type": "text",
+        "nullable": false
+      },
+      {
+        "name": "email",
+        "type": "text",
+        "nullable": true
+      },
+      {
+        "name": "ultimo_acesso_em",
+        "type": "timestamp with time zone",
+        "nullable": false
+      },
+      {
+        "name": "chave_rede",
+        "type": "text",
+        "nullable": true
+      }
+    ],
+    "comment": "Último acesso autenticado à Agenda e referência de rede usada para moderação.",
+    "references": [],
+    "primary_key": [
+      "id_usuario"
+    ]
+  },
+  {
+    "kind": "table",
     "name": "activities",
     "columns": [
       {
@@ -191,37 +222,6 @@
     "references": [],
     "primary_key": [
       "id"
-    ]
-  },
-  {
-    "kind": "table",
-    "name": "agenda_recent_users",
-    "columns": [
-      {
-        "name": "uid",
-        "type": "text",
-        "nullable": false
-      },
-      {
-        "name": "email",
-        "type": "text",
-        "nullable": true
-      },
-      {
-        "name": "last_seen_at",
-        "type": "timestamp with time zone",
-        "nullable": false
-      },
-      {
-        "name": "network_key",
-        "type": "text",
-        "nullable": true
-      }
-    ],
-    "comment": "Último acesso autenticado à Agenda e referência de rede usada para moderação.",
-    "references": [],
-    "primary_key": [
-      "uid"
     ]
   },
   {
