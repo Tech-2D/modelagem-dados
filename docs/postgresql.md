@@ -71,6 +71,9 @@ Os catálogos públicos passam por projeções que selecionam os campos da respo
 | 011 | Renomeia `site_visits` e suas colunas para português |
 | 012 | Renomeia `agenda_recent_users` e suas colunas para português |
 | 013 | Renomeia as tabelas e colunas restantes e a visão de horários. Mantém as visões de compatibilidade da API |
+| 014 | Define tamanhos de `varchar` nas 51 colunas de texto das tabelas operacionais |
+| 015 | Cria as views de compatibilidade com prefixo `visao_` |
+| 016 | Retira os nomes em inglês após a atualização dos serviços |
 
 Em um banco local vazio, siga os passos em [Consultas SQL]({{ '/consultas.html' | relative_url }}). O script de instalação aplica as migrações na ordem acima.
 

@@ -25,3 +25,6 @@ SELECT NOT EXISTS (SELECT FROM tech2d.schema_migrations WHERE version = '010_com
 \ir migrations/012_portuguese_agenda_recent_users.sql
 \endif
 \ir migrations/013_portuguese_schema.sql
+\ir migrations/014_varchar_operacional.sql
+\ir migrations/015_views_em_portugues.sql
+\ir migrations/016_remover_views_em_ingles.sql

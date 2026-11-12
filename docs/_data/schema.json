@@ -5,12 +5,12 @@
     "columns": [
       {
         "name": "id_usuario",
-        "type": "text",
+        "type": "character varying(128)",
         "nullable": false
       },
       {
         "name": "email",
-        "type": "text",
+        "type": "character varying(320)",
         "nullable": true
       },
       {
@@ -20,7 +20,7 @@
       },
       {
         "name": "chave_rede",
-        "type": "text",
+        "type": "character varying(64)",
         "nullable": true
       }
     ],
@@ -36,12 +36,12 @@
     "columns": [
       {
         "name": "id_usuario",
-        "type": "text",
+        "type": "character varying(128)",
         "nullable": false
       },
       {
         "name": "email",
-        "type": "text",
+        "type": "character varying(320)",
         "nullable": true
       },
       {
@@ -62,57 +62,57 @@
     "columns": [
       {
         "name": "id",
-        "type": "text",
+        "type": "character varying(320)",
         "nullable": false
       },
       {
         "name": "id_turma",
-        "type": "text",
+        "type": "character varying(100)",
         "nullable": true
       },
       {
         "name": "titulo",
-        "type": "text",
+        "type": "character varying(120)",
         "nullable": false
       },
       {
         "name": "descricao",
-        "type": "text",
+        "type": "character varying(2000)",
         "nullable": false
       },
       {
         "name": "tipo",
-        "type": "text",
+        "type": "character varying(32)",
         "nullable": false
       },
       {
         "name": "disciplina",
-        "type": "text",
+        "type": "character varying(120)",
         "nullable": true
       },
       {
         "name": "data",
-        "type": "text",
+        "type": "character varying(10)",
         "nullable": false
       },
       {
         "name": "hora",
-        "type": "text",
+        "type": "character varying(5)",
         "nullable": true
       },
       {
         "name": "criado_por",
-        "type": "text",
+        "type": "character varying(128)",
         "nullable": true
       },
       {
         "name": "email_criador",
-        "type": "text",
+        "type": "character varying(320)",
         "nullable": true
       },
       {
         "name": "id_recorrencia",
-        "type": "text",
+        "type": "character varying(320)",
         "nullable": true
       },
       {
@@ -153,17 +153,17 @@
       },
       {
         "name": "autor",
-        "type": "text",
+        "type": "character varying(256)",
         "nullable": false
       },
       {
         "name": "caminho",
-        "type": "text",
+        "type": "character varying(512)",
         "nullable": false
       },
       {
         "name": "operacao",
-        "type": "text",
+        "type": "character varying(32)",
         "nullable": false
       },
       {
@@ -194,17 +194,17 @@
       },
       {
         "name": "id_atividade",
-        "type": "text",
+        "type": "character varying(320)",
         "nullable": false
       },
       {
         "name": "id_usuario",
-        "type": "text",
+        "type": "character varying(128)",
         "nullable": false
       },
       {
         "name": "acao",
-        "type": "text",
+        "type": "character varying(32)",
         "nullable": false
       },
       {
@@ -235,12 +235,12 @@
       },
       {
         "name": "tipo",
-        "type": "text",
+        "type": "character varying(32)",
         "nullable": false
       },
       {
         "name": "alvo",
-        "type": "text",
+        "type": "character varying(320)",
         "nullable": false
       },
       {
@@ -250,7 +250,7 @@
       },
       {
         "name": "criado_por",
-        "type": "text",
+        "type": "character varying(128)",
         "nullable": false
       }
     ],
@@ -266,7 +266,7 @@
     "columns": [
       {
         "name": "id",
-        "type": "text",
+        "type": "character varying(320)",
         "nullable": true
       },
       {
@@ -281,7 +281,7 @@
       },
       {
         "name": "nome_turma",
-        "type": "text",
+        "type": "character varying(150)",
         "nullable": true
       },
       {
@@ -305,7 +305,7 @@
       },
       {
         "name": "nome",
-        "type": "text",
+        "type": "character varying(150)",
         "nullable": false
       }
     ],
@@ -321,17 +321,17 @@
     "columns": [
       {
         "name": "caminho",
-        "type": "text",
+        "type": "character varying(512)",
         "nullable": false
       },
       {
         "name": "colecao",
-        "type": "text",
+        "type": "character varying(256)",
         "nullable": false
       },
       {
         "name": "id",
-        "type": "text",
+        "type": "character varying(320)",
         "nullable": false
       },
       {
@@ -362,12 +362,12 @@
     "columns": [
       {
         "name": "colecao",
-        "type": "text",
+        "type": "character varying(128)",
         "nullable": false
       },
       {
         "name": "id",
-        "type": "text",
+        "type": "character varying(320)",
         "nullable": false
       },
       {
@@ -389,12 +389,12 @@
     "columns": [
       {
         "name": "id_projeto",
-        "type": "text",
+        "type": "character varying(128)",
         "nullable": false
       },
       {
         "name": "caminho",
-        "type": "text",
+        "type": "character varying(1024)",
         "nullable": false
       },
       {
@@ -404,7 +404,7 @@
       },
       {
         "name": "atualizado_na_origem_em",
-        "type": "text",
+        "type": "character varying(64)",
         "nullable": true
       },
       {
@@ -483,7 +483,7 @@
     "columns": [
       {
         "name": "id",
-        "type": "text",
+        "type": "character varying(320)",
         "nullable": false
       },
       {
@@ -550,7 +550,7 @@
     "columns": [
       {
         "name": "versao",
-        "type": "text",
+        "type": "character varying(128)",
         "nullable": false
       },
       {
@@ -571,17 +571,17 @@
     "columns": [
       {
         "name": "id_usuario",
-        "type": "text",
+        "type": "character varying(128)",
         "nullable": false
       },
       {
         "name": "papel",
-        "type": "text",
+        "type": "character varying(32)",
         "nullable": false
       },
       {
         "name": "id_turma",
-        "type": "text",
+        "type": "character varying(100)",
         "nullable": true
       },
       {
@@ -607,7 +607,7 @@
       },
       {
         "name": "nome",
-        "type": "text",
+        "type": "character varying(150)",
         "nullable": false
       }
     ],
@@ -623,17 +623,17 @@
     "columns": [
       {
         "name": "id",
-        "type": "text",
+        "type": "character varying(128)",
         "nullable": false
       },
       {
         "name": "autor",
-        "type": "text",
+        "type": "character varying(256)",
         "nullable": false
       },
       {
         "name": "hash_requisicao",
-        "type": "text",
+        "type": "character varying(64)",
         "nullable": false
       },
       {
@@ -659,12 +659,12 @@
       },
       {
         "name": "id_projeto",
-        "type": "text",
+        "type": "character varying(128)",
         "nullable": false
       },
       {
         "name": "caminho",
-        "type": "text",
+        "type": "character varying(1024)",
         "nullable": false
       },
       {
@@ -674,12 +674,12 @@
       },
       {
         "name": "atualizado_na_origem_em",
-        "type": "text",
+        "type": "character varying(64)",
         "nullable": true
       },
       {
         "name": "motivo",
-        "type": "text",
+        "type": "character varying(128)",
         "nullable": false
       },
       {
@@ -705,7 +705,7 @@
       },
       {
         "name": "nome",
-        "type": "text",
+        "type": "character varying(150)",
         "nullable": false
       }
     ],
@@ -731,17 +731,17 @@
       },
       {
         "name": "tipo_visitante",
-        "type": "text",
+        "type": "character varying(32)",
         "nullable": false
       },
       {
         "name": "chave_visitante",
-        "type": "text",
+        "type": "character varying(128)",
         "nullable": false
       },
       {
         "name": "site",
-        "type": "text",
+        "type": "character varying(32)",
         "nullable": false
       }
     ],

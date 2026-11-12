@@ -5,9 +5,9 @@ description: Como os documentos do antigo Firestore foram preservados e organiza
 
 ## Onde estão os dados
 
-O esquema privado `legado_firestore` no banco `defaultdb` preserva a versão final dos documentos do Firestore do projeto `d-tech-8555e`, de 12/11/2026. A cópia original fica em `tech2d.documentos_firestore`, com os tipos e os caminhos da origem, para conferência e recuperação.
+O esquema `legado_firestore` guardou uma cópia relacional dos documentos do Firestore de 12/11/2026. Suas 22 tabelas foram removidas do Aiven a pedido do projeto. A página registra como o esquema foi organizado. A cópia original fica em `tech2d.documentos_firestore`, com os tipos e os caminhos da origem, para conferência e recuperação.
 
-O histórico tem 3.684 documentos distribuídos em 20 tabelas por coleção de origem, incluindo uma subcoleção. As duas tabelas auxiliares separam 14 metadados de anexos e 6 dias de recorrência dos seus registros principais.
+O esquema tinha 3.684 documentos distribuídos em 20 tabelas por coleção de origem, incluindo uma subcoleção. As duas tabelas auxiliares separavam 14 metadados de anexos e 6 dias de recorrência dos seus registros principais.
 
 ## Tabelas por assunto
 
@@ -27,11 +27,11 @@ O histórico tem 3.684 documentos distribuídos em 20 tabelas por coleção de o
 - `dias_recorrencias.caminho_recorrencia` aponta para `recorrencias.caminho`. A coluna `dia_semana` aceita valores de 0 a 6.
 - `mensagens_sugestoes.caminho_sugestao` aponta para `sugestoes_melhoria.caminho`. Cada mensagem mantém o próprio caminho, inclusive o ID da sugestão.
 
-Os nomes das tabelas e das colunas estão em português. Datas, horas, contadores e valores booleanos usam tipos PostgreSQL. O caminho de cada documento é a chave primária nas tabelas de origem. A API utiliza o esquema operacional `tech2d` e seu usuário de banco não tem acesso ao histórico. O Firebase Authentication continua responsável pelo login.
+Os nomes das tabelas e das colunas estão em português. Datas, horas, contadores e valores booleanos usam tipos PostgreSQL. O caminho de cada documento é a chave primária nas tabelas de origem. A API utiliza o esquema operacional `tech2d` para as operações atuais. O Firebase Authentication continua responsável pelo login.
 
 ## Limites de caracteres
 
-As 113 colunas de texto agora usam `varchar(n)`. Nas 20 tabelas que correspondem a coleções, `caminho` é `varchar(512)` e `id` é `varchar(320)`. Os campos de vínculo por caminho também aceitam até 512 caracteres.
+As 113 colunas de texto passaram a usar `varchar(n)`. Nas 20 tabelas que correspondem a coleções, `caminho` é `varchar(512)` e `id` é `varchar(320)`. Os campos de vínculo por caminho também aceitam até 512 caracteres.
 
 | Tabela | Limites além dos campos comuns |
 | --- | --- |
