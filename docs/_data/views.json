@@ -1,0 +1,670 @@
+[
+  {
+    "name": "catalogo_horarios",
+    "comment": "View que recompõe o horário com as referências relacionais, o andar e a sala.",
+    "dependencies": [
+      "disciplinas",
+      "documentos_catalogo",
+      "faixas_horario",
+      "horarios_aula",
+      "professores",
+      "turmas"
+    ],
+    "columns": [
+      {
+        "name": "id",
+        "source": "id",
+        "type": "character varying(320)",
+        "note": "ID da aula vindo de horarios_aula."
+      },
+      {
+        "name": "dia_semana",
+        "source": "dia_semana",
+        "type": "smallint",
+        "note": "Dia da semana, de 0 (domingo) a 6 (sábado)."
+      },
+      {
+        "name": "ativo",
+        "source": "ativo",
+        "type": "boolean",
+        "note": "Indica se a aula está ativa."
+      },
+      {
+        "name": "nome_turma",
+        "source": "nome_turma",
+        "type": "character varying(150)",
+        "note": "Nome da turma associada ao horário."
+      },
+      {
+        "name": "dados",
+        "source": "dados",
+        "type": "jsonb",
+        "note": "Objeto com professor, disciplina, turma, horários, sala e andar."
+      }
+    ]
+  },
+  {
+    "name": "visao_acessos_recentes_professores",
+    "comment": "Último acesso autenticado ao Cadê o professor.",
+    "dependencies": [
+      "acessos_recentes_professores"
+    ],
+    "columns": [
+      {
+        "name": "uid",
+        "source": "id_usuario",
+        "type": "character varying(128)",
+        "note": "UID da conta no Firebase Authentication."
+      },
+      {
+        "name": "email",
+        "source": "email",
+        "type": "character varying(320)",
+        "note": "E-mail da conta, quando disponível."
+      },
+      {
+        "name": "last_seen_at",
+        "source": "ultimo_acesso_em",
+        "type": "timestamp with time zone",
+        "note": "Data e hora do último acesso autenticado ao Cadê o professor."
+      }
+    ]
+  },
+  {
+    "name": "visao_atividades",
+    "comment": "Projeção para consultas por data e turma, recorrências e expurgo.",
+    "dependencies": [
+      "atividades"
+    ],
+    "columns": [
+      {
+        "name": "id",
+        "source": "id",
+        "type": "character varying(320)",
+        "note": "ID da atividade, usado no caminho do documento e no link direto."
+      },
+      {
+        "name": "turma_id",
+        "source": "id_turma",
+        "type": "character varying(100)",
+        "note": "Chave da turma na Agenda. Nulo indica atividade geral."
+      },
+      {
+        "name": "title",
+        "source": "titulo",
+        "type": "character varying(120)",
+        "note": "Título exibido no calendário."
+      },
+      {
+        "name": "description",
+        "source": "descricao",
+        "type": "character varying(2000)",
+        "note": "Instruções e detalhes da atividade."
+      },
+      {
+        "name": "type",
+        "source": "tipo",
+        "type": "character varying(32)",
+        "note": "Categoria da atividade, como tarefa, trabalho, prova ou evento."
+      },
+      {
+        "name": "subject",
+        "source": "disciplina",
+        "type": "character varying(120)",
+        "note": "Nome da disciplina, quando informado."
+      },
+      {
+        "name": "date",
+        "source": "data",
+        "type": "character varying(10)",
+        "note": "Data no formato AAAA-MM-DD."
+      },
+      {
+        "name": "time",
+        "source": "hora",
+        "type": "character varying(5)",
+        "note": "Hora local no formato HH:MM, quando definida."
+      },
+      {
+        "name": "created_by",
+        "source": "criado_por",
+        "type": "character varying(128)",
+        "note": "UID de quem criou a atividade, quando disponível."
+      },
+      {
+        "name": "created_by_email",
+        "source": "email_criador",
+        "type": "character varying(320)",
+        "note": "E-mail de quem criou a atividade, usado internamente."
+      },
+      {
+        "name": "recurring_id",
+        "source": "id_recorrencia",
+        "type": "character varying(320)",
+        "note": "ID da regra que gerou uma ocorrência recorrente."
+      },
+      {
+        "name": "attachments",
+        "source": "anexos",
+        "type": "jsonb",
+        "note": "Metadados dos arquivos anexados, que ficam no R2."
+      },
+      {
+        "name": "created_at",
+        "source": "criado_em",
+        "type": "timestamp with time zone",
+        "note": "Data e hora da criação."
+      },
+      {
+        "name": "updated_at",
+        "source": "atualizado_em",
+        "type": "timestamp with time zone",
+        "note": "Data e hora da última alteração."
+      },
+      {
+        "name": "version",
+        "source": "versao",
+        "type": "bigint",
+        "note": "Versão usada para detectar edição concorrente."
+      }
+    ]
+  },
+  {
+    "name": "visao_auditoria_aplicacao",
+    "comment": "Histórico das alterações do fluxo atual de gravação.",
+    "dependencies": [
+      "auditoria_aplicacao"
+    ],
+    "columns": [
+      {
+        "name": "sequence",
+        "source": "sequencia",
+        "type": "bigint",
+        "note": "Identificador sequencial da entrada."
+      },
+      {
+        "name": "actor",
+        "source": "autor",
+        "type": "character varying(256)",
+        "note": "Conta ou serviço que realizou a operação."
+      },
+      {
+        "name": "path",
+        "source": "caminho",
+        "type": "character varying(512)",
+        "note": "Caminho do documento afetado."
+      },
+      {
+        "name": "operation",
+        "source": "operacao",
+        "type": "character varying(32)",
+        "note": "Operação realizada, como criação, alteração ou exclusão."
+      },
+      {
+        "name": "previous_data",
+        "source": "dados_anteriores",
+        "type": "jsonb",
+        "note": "Conteúdo anterior, quando havia documento."
+      },
+      {
+        "name": "changed_at",
+        "source": "alterado_em",
+        "type": "timestamp with time zone",
+        "note": "Data e hora da alteração."
+      }
+    ]
+  },
+  {
+    "name": "visao_auditoria_atividades_legada",
+    "comment": "Histórico da rota legada de gravação de atividades, cujas escritas estão desativadas.",
+    "dependencies": [
+      "auditoria_atividades_legada"
+    ],
+    "columns": [
+      {
+        "name": "sequence",
+        "source": "sequencia",
+        "type": "bigint",
+        "note": "Identificador sequencial da entrada histórica."
+      },
+      {
+        "name": "activity_id",
+        "source": "id_atividade",
+        "type": "character varying(320)",
+        "note": "ID da atividade afetada pela rota antiga."
+      },
+      {
+        "name": "actor_uid",
+        "source": "id_usuario",
+        "type": "character varying(128)",
+        "note": "UID da conta responsável pela alteração."
+      },
+      {
+        "name": "action",
+        "source": "acao",
+        "type": "character varying(32)",
+        "note": "Ação executada na atividade."
+      },
+      {
+        "name": "previous_data",
+        "source": "dados_anteriores",
+        "type": "jsonb",
+        "note": "Dados que existiam antes da alteração, quando disponíveis."
+      },
+      {
+        "name": "changed_at",
+        "source": "alterado_em",
+        "type": "timestamp with time zone",
+        "note": "Data e hora da alteração histórica."
+      }
+    ]
+  },
+  {
+    "name": "visao_bloqueios_agenda",
+    "comment": "Bloqueios por e-mail ou rede aplicados à Agenda.",
+    "dependencies": [
+      "bloqueios_agenda"
+    ],
+    "columns": [
+      {
+        "name": "id",
+        "source": "id",
+        "type": "uuid",
+        "note": "Identificador único da regra de bloqueio."
+      },
+      {
+        "name": "kind",
+        "source": "tipo",
+        "type": "character varying(32)",
+        "note": "Tipo de bloqueio, por e-mail ou rede."
+      },
+      {
+        "name": "target",
+        "source": "alvo",
+        "type": "character varying(320)",
+        "note": "E-mail normalizado ou código de rede derivado do IP."
+      },
+      {
+        "name": "created_at",
+        "source": "criado_em",
+        "type": "timestamp with time zone",
+        "note": "Data e hora da criação da regra."
+      },
+      {
+        "name": "created_by",
+        "source": "criado_por",
+        "type": "character varying(128)",
+        "note": "UID da conta administrativa que criou a regra."
+      }
+    ]
+  },
+  {
+    "name": "visao_catalogo_horarios",
+    "comment": "View que recompõe o horário com as referências relacionais, o andar e a sala.",
+    "dependencies": [
+      "catalogo_horarios"
+    ],
+    "columns": [
+      {
+        "name": "id",
+        "source": "id",
+        "type": "character varying(320)",
+        "note": "ID da aula vindo de horarios_aula."
+      },
+      {
+        "name": "day_of_week",
+        "source": "dia_semana",
+        "type": "smallint",
+        "note": "Dia da semana, de 0 (domingo) a 6 (sábado)."
+      },
+      {
+        "name": "active",
+        "source": "ativo",
+        "type": "boolean",
+        "note": "Indica se a aula está ativa."
+      },
+      {
+        "name": "class_name",
+        "source": "nome_turma",
+        "type": "character varying(150)",
+        "note": "Nome da turma associada ao horário."
+      },
+      {
+        "name": "data",
+        "source": "dados",
+        "type": "jsonb",
+        "note": "Objeto com professor, disciplina, turma, horários, sala e andar."
+      }
+    ]
+  },
+  {
+    "name": "visao_disciplinas",
+    "comment": "Nomes das disciplinas reutilizadas pelos horários.",
+    "dependencies": [
+      "disciplinas"
+    ],
+    "columns": [
+      {
+        "name": "id",
+        "source": "id",
+        "type": "bigint",
+        "note": "ID numérico da disciplina."
+      },
+      {
+        "name": "name",
+        "source": "nome",
+        "type": "character varying(150)",
+        "note": "Nome da disciplina no catálogo de horários."
+      }
+    ]
+  },
+  {
+    "name": "visao_documentos_aplicacao",
+    "comment": "Fonte dos documentos ativos, como atividades, avisos, enquetes, votos e cartões do Kanban.",
+    "dependencies": [
+      "documentos_aplicacao"
+    ],
+    "columns": [
+      {
+        "name": "path",
+        "source": "caminho",
+        "type": "character varying(512)",
+        "note": "Caminho único, como activities/{id} ou polls/{id}/votes/{uid}."
+      },
+      {
+        "name": "collection",
+        "source": "colecao",
+        "type": "character varying(256)",
+        "note": "Caminho da coleção que contém o documento."
+      },
+      {
+        "name": "id",
+        "source": "id",
+        "type": "character varying(320)",
+        "note": "Último segmento do caminho, usado como ID dentro da coleção."
+      },
+      {
+        "name": "data",
+        "source": "dados",
+        "type": "jsonb",
+        "note": "Conteúdo em JSONB. A API aplica regras próprias a cada coleção."
+      },
+      {
+        "name": "version",
+        "source": "versao",
+        "type": "bigint",
+        "note": "Versão usada para detectar conflitos de edição."
+      },
+      {
+        "name": "updated_at",
+        "source": "atualizado_em",
+        "type": "timestamp with time zone",
+        "note": "Data e hora da última atualização."
+      }
+    ]
+  },
+  {
+    "name": "visao_documentos_catalogo",
+    "comment": "Projeções de catálogo e dados complementares dos horários, como andar e sala.",
+    "dependencies": [
+      "documentos_catalogo"
+    ],
+    "columns": [
+      {
+        "name": "collection",
+        "source": "colecao",
+        "type": "character varying(128)",
+        "note": "Coleção da entrada de catálogo."
+      },
+      {
+        "name": "id",
+        "source": "id",
+        "type": "character varying(320)",
+        "note": "ID da entrada dentro da coleção."
+      },
+      {
+        "name": "data",
+        "source": "dados",
+        "type": "jsonb",
+        "note": "Conteúdo da entrada. Nos horários, inclui complementos como sala e andar."
+      }
+    ]
+  },
+  {
+    "name": "visao_faixas_horario",
+    "comment": "Pares de horário de início e fim reutilizados pelas aulas.",
+    "dependencies": [
+      "faixas_horario"
+    ],
+    "columns": [
+      {
+        "name": "id",
+        "source": "id",
+        "type": "bigint",
+        "note": "ID numérico da faixa."
+      },
+      {
+        "name": "start_time",
+        "source": "hora_inicio",
+        "type": "time(0) without time zone",
+        "note": "Hora local de início da aula."
+      },
+      {
+        "name": "end_time",
+        "source": "hora_fim",
+        "type": "time(0) without time zone",
+        "note": "Hora local de término da aula."
+      }
+    ]
+  },
+  {
+    "name": "visao_horarios_aula",
+    "comment": "Liga professor, disciplina, turma e faixa de horário a um dia da semana.",
+    "dependencies": [
+      "horarios_aula"
+    ],
+    "columns": [
+      {
+        "name": "id",
+        "source": "id",
+        "type": "character varying(320)",
+        "note": "ID da aula, também usado na entrada complementar do catálogo."
+      },
+      {
+        "name": "teacher_id",
+        "source": "id_professor",
+        "type": "bigint",
+        "note": "Professor que ministra a aula."
+      },
+      {
+        "name": "subject_id",
+        "source": "id_disciplina",
+        "type": "bigint",
+        "note": "Disciplina da aula."
+      },
+      {
+        "name": "class_id",
+        "source": "id_turma",
+        "type": "bigint",
+        "note": "Turma no catálogo de horários."
+      },
+      {
+        "name": "time_slot_id",
+        "source": "id_faixa_horario",
+        "type": "bigint",
+        "note": "Par de horas de início e fim."
+      },
+      {
+        "name": "day_of_week",
+        "source": "dia_semana",
+        "type": "smallint",
+        "note": "Dia da semana, de 0 (domingo) a 6 (sábado)."
+      },
+      {
+        "name": "active",
+        "source": "ativo",
+        "type": "boolean",
+        "note": "Indica se o horário está ativo no catálogo."
+      }
+    ]
+  },
+  {
+    "name": "visao_perfis_administrativos",
+    "comment": "Projeção de papel e turma da conta para consultas da API.",
+    "dependencies": [
+      "perfis_administrativos"
+    ],
+    "columns": [
+      {
+        "name": "uid",
+        "source": "id_usuario",
+        "type": "character varying(128)",
+        "note": "UID da conta no Firebase Authentication."
+      },
+      {
+        "name": "role",
+        "source": "papel",
+        "type": "character varying(32)",
+        "note": "Papel usado nas verificações de acesso."
+      },
+      {
+        "name": "turma_id",
+        "source": "id_turma",
+        "type": "character varying(100)",
+        "note": "Chave da turma associada ao papel, quando aplicável."
+      },
+      {
+        "name": "data",
+        "source": "dados",
+        "type": "jsonb",
+        "note": "Dados complementares do perfil projetado para a API."
+      }
+    ]
+  },
+  {
+    "name": "visao_professores",
+    "comment": "Nomes de professores reutilizados pelos horários.",
+    "dependencies": [
+      "professores"
+    ],
+    "columns": [
+      {
+        "name": "id",
+        "source": "id",
+        "type": "bigint",
+        "note": "ID numérico do professor."
+      },
+      {
+        "name": "name",
+        "source": "nome",
+        "type": "character varying(150)",
+        "note": "Nome do professor no catálogo de horários."
+      }
+    ]
+  },
+  {
+    "name": "visao_recibos_gravacao",
+    "comment": "Recibos que impedem uma gravação repetida de ser aplicada duas vezes.",
+    "dependencies": [
+      "recibos_gravacao"
+    ],
+    "columns": [
+      {
+        "name": "id",
+        "source": "id",
+        "type": "character varying(128)",
+        "note": "ID de uma solicitação de gravação."
+      },
+      {
+        "name": "actor",
+        "source": "autor",
+        "type": "character varying(256)",
+        "note": "Conta ou serviço que enviou a solicitação."
+      },
+      {
+        "name": "digest",
+        "source": "hash_requisicao",
+        "type": "character varying(64)",
+        "note": "Hash do conteúdo, usado para detectar reuso do ID com dados diferentes."
+      },
+      {
+        "name": "committed_at",
+        "source": "confirmado_em",
+        "type": "timestamp with time zone",
+        "note": "Data e hora em que o lote de gravações foi confirmado."
+      }
+    ]
+  },
+  {
+    "name": "visao_revisoes_origem",
+    "comment": "Versões preservadas durante a reconciliação com o Firestore.",
+    "dependencies": [
+      "revisoes_origem"
+    ],
+    "columns": [
+      {
+        "name": "sequence",
+        "source": "sequencia",
+        "type": "bigint",
+        "note": "Identificador sequencial da revisão arquivada."
+      },
+      {
+        "name": "project_id",
+        "source": "id_projeto",
+        "type": "character varying(128)",
+        "note": "Projeto de origem do documento histórico."
+      },
+      {
+        "name": "path",
+        "source": "caminho",
+        "type": "character varying(1024)",
+        "note": "Caminho do documento na origem."
+      },
+      {
+        "name": "fields",
+        "source": "campos",
+        "type": "jsonb",
+        "note": "Campos tipados da versão anterior."
+      },
+      {
+        "name": "source_updated_at",
+        "source": "atualizado_na_origem_em",
+        "type": "character varying(64)",
+        "note": "Data e hora de atualização informada na origem, quando disponível."
+      },
+      {
+        "name": "reason",
+        "source": "motivo",
+        "type": "character varying(128)",
+        "note": "Motivo da preservação, como alteração ou exclusão na origem."
+      },
+      {
+        "name": "saved_at",
+        "source": "salvo_em",
+        "type": "timestamp with time zone",
+        "note": "Data e hora em que a revisão foi salva no PostgreSQL."
+      }
+    ]
+  },
+  {
+    "name": "visao_turmas",
+    "comment": "Nomes das turmas do catálogo de horários.",
+    "dependencies": [
+      "turmas"
+    ],
+    "columns": [
+      {
+        "name": "id",
+        "source": "id",
+        "type": "bigint",
+        "note": "ID numérico da turma no catálogo de horários."
+      },
+      {
+        "name": "name",
+        "source": "nome",
+        "type": "character varying(150)",
+        "note": "Nome da turma exibido nos horários de aula."
+      }
+    ]
+  }
+]

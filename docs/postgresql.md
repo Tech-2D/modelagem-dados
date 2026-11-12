@@ -1,16 +1,24 @@
 ---
-title: Catálogo PostgreSQL
+title: Tabelas e colunas
 description: Consulte tabelas, colunas, chaves e relações do esquema tech2d.
 ---
 
 O esquema `tech2d` combina **documentos JSONB** com **tabelas de consulta**. Os documentos preservam caminhos e IDs usados pela aplicação. As projeções facilitam filtros de agenda, horários e permissões. A API atualiza o documento e suas projeções na mesma transação.
 
-## Visão geral das tabelas
+## Tabelas por área
+
+{% assign tables = site.data.schema | where: "kind", "table" %}
+<p class="catalog-overview"><strong>{{ tables.size }} tabelas</strong> no schema <code>tech2d</code> · <a href="{{ '/views.html' | relative_url }}">{{ site.data.views.size }} views</a> · <a href="{{ '/schemas.html' | relative_url }}">Schemas do banco</a></p>
+
+Busque pelo nome da tabela, pela coluna ou pelo tipo. Abra uma tabela para consultar o que cada campo guarda, as chaves e os vínculos.
 
 <div class="catalog-controls" data-catalog-controls hidden>
   <label for="catalog-search">Buscar no catálogo<input id="catalog-search" type="search" placeholder="Ex.: visitas, id_turma ou jsonb" autocomplete="off"></label>
   <label for="catalog-group">Área<select id="catalog-group"><option value="">Todas as áreas</option>{% for group in site.data.catalog %}<option value="{{ group.id }}">{{ group.name }}</option>{% endfor %}</select></label>
-  <p class="catalog-status" data-catalog-status role="status"></p>
+  <div class="catalog-actions">
+    <p class="catalog-status" data-catalog-status role="status"></p>
+    <button type="button" data-catalog-toggle>Abrir resultados</button>
+  </div>
 </div>
 
 {% for group in site.data.catalog %}
@@ -18,15 +26,24 @@ O esquema `tech2d` combina **documentos JSONB** com **tabelas de consulta**. Os 
   <h3 id="{{ group.id }}">{{ group.name }}</h3>
   {% for item in group.objects %}
   {% assign object = site.data.schema | where: "name", item.name | first %}
+  {% assign column_notes = site.data.column_notes[item.name] %}
   <details class="catalog-object" id="obj-{{ item.name }}" data-catalog-object>
-    <summary><span><strong>{{ item.title }}</strong> <code class="object-identifier">{{ item.name }}</code><span class="object-description">{{ object.comment | escape }}</span></span><span class="object-kind">{% if object.kind == "view" %}Visão{% else %}Tabela{% endif %}</span></summary>
+    <summary><span><strong>{{ item.title }}</strong> <code class="object-identifier">{{ item.name }}</code><span class="object-description">{{ object.comment | escape }}</span></span><span class="object-kind">{{ object.columns.size }} colunas</span></summary>
     <div class="object-body">
       {% if object.primary_key.size > 0 %}<p><strong>Chave primária</strong> <code>{{ object.primary_key | join: ", " }}</code></p>{% endif %}
       {% if object.references.size > 0 %}<ul class="object-relations" aria-label="Chaves estrangeiras">{% for relation in object.references %}<li><code>{{ relation.column }}</code> <span aria-hidden="true">→</span> <a href="#obj-{{ relation.table }}"><code>{{ relation.table }}.{{ relation.target }}</code></a></li>{% endfor %}</ul>{% endif %}
-      <table>
+      <table class="dictionary-table">
         <caption class="visually-hidden">Colunas de {{ item.name }}</caption>
-        <thead><tr><th scope="col">Coluna</th><th scope="col">Tipo</th><th scope="col">Aceita nulo</th></tr></thead>
-        <tbody>{% for column in object.columns %}<tr><th scope="row"><code>{{ column.name }}</code></th><td><code>{{ column.type | escape }}</code></td><td>{% if column.nullable %}Sim{% else %}Não{% endif %}</td></tr>{% endfor %}</tbody>
+        <thead><tr><th scope="col">Coluna</th><th scope="col">Tipo</th><th scope="col">Finalidade</th></tr></thead>
+        <tbody>
+          {% for column in object.columns %}
+          <tr>
+            <th scope="row"><code>{{ column.name }}</code><small class="column-null">{% if object.primary_key contains column.name %}Chave primária · {% endif %}{% if column.nullable %}Aceita nulo{% else %}Obrigatória{% endif %}</small></th>
+            <td><code>{{ column.type | replace: "character varying", "varchar" | replace: "timestamp with time zone", "timestamptz" | escape }}</code></td>
+            <td>{{ column_notes[column.name] | escape }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
       </table>
     </div>
   </details>
@@ -34,19 +51,13 @@ O esquema `tech2d` combina **documentos JSONB** com **tabelas de consulta**. Os 
 </section>
 {% endfor %}
 
-## Simplificações propostas
-
-1. **Unificar últimos acessos.** Consolidar `acessos_recentes_agenda` e `acessos_recentes_professores` em `acessos_recentes_sites` com chave `(site, id_usuario)`. A referência de rede fica restrita às linhas da Agenda. A troca deve preservar o último acesso por site, os prazos de retenção e as permissões de cada painel.
-2. **Alinhar os nomes ao escopo.** A padronização usa português e `snake_case` nos nomes de tabelas e colunas. As migrações 011 a 013 aplicam o padrão no esquema `tech2d`. A migração 013 mantém visões de compatibilidade com o contrato SQL anterior da API.
-3. **Separar a auditoria antiga.** Depois de retirar a rota antiga e conferir a retenção necessária, arquivar `auditoria_atividades_legada` com acesso restrito. A auditoria das gravações atuais continua em `auditoria_aplicacao`.
-
-As projeções são usadas pela API, os recibos evitam gravações duplicadas e as tabelas de referência preservam a integridade dos horários. A separação entre o arquivo do Firestore e os dados ativos também preserva as permissões de acesso. A unificação dos últimos acessos e o arquivamento da auditoria antiga ficam para migrações posteriores.
+<p id="obj-catalogo_horarios">A definição de <a href="{{ '/views.html' | relative_url }}#view-catalogo_horarios"><code>catalogo_horarios</code></a> fica na página de views.</p>
 
 ## Como os registros se ligam
 
 Abra a [modelagem]({{ '/modelagem.html' | relative_url }}) para seguir os vínculos de horários, atividades e contas. No catálogo, as chaves estrangeiras levam diretamente à tabela relacionada.
 
-As colunas `data` e `hora` em `atividades` ficam em texto no formato ISO usado pela aplicação. Horários de aula em `faixas_horario` usam `time`, e timestamps de auditoria e último acesso usam `timestamptz`.
+As colunas `data` e `hora` em `atividades` usam `varchar(10)` e `varchar(5)` para preservar o formato usado pela aplicação. Horários de aula em `faixas_horario` usam `time`, e timestamps de auditoria e último acesso usam `timestamptz`.
 
 ## Acesso ao banco
 
@@ -75,6 +86,7 @@ Os catálogos públicos passam por projeções que selecionam os campos da respo
 | 015 | Cria as views de compatibilidade com prefixo `visao_` |
 | 016 | Retira os nomes em inglês após a atualização dos serviços |
 | 017 | Remove a cópia bruta do Firestore e sua view |
+| 018 | Remove os controles de migração e registra a versão no comentário do schema |
 
 Em um banco local vazio, siga os passos em [Consultas SQL]({{ '/consultas.html' | relative_url }}). O script de instalação aplica as migrações na ordem acima.
 

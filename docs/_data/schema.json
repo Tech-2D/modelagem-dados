@@ -385,37 +385,6 @@
   },
   {
     "kind": "table",
-    "name": "estado_migracao",
-    "columns": [
-      {
-        "name": "id",
-        "type": "boolean",
-        "nullable": false
-      },
-      {
-        "name": "aplicacao_preparada",
-        "type": "boolean",
-        "nullable": false
-      },
-      {
-        "name": "producao_ativa",
-        "type": "boolean",
-        "nullable": false
-      },
-      {
-        "name": "origem_exportada_em",
-        "type": "timestamp with time zone",
-        "nullable": true
-      }
-    ],
-    "comment": "Indicadores de preparação e ativação do SQL que a API e os jobs consultam.",
-    "references": [],
-    "primary_key": [
-      "id"
-    ]
-  },
-  {
-    "kind": "table",
     "name": "faixas_horario",
     "columns": [
       {
@@ -505,27 +474,6 @@
     ],
     "primary_key": [
       "id"
-    ]
-  },
-  {
-    "kind": "table",
-    "name": "migracoes_esquema",
-    "columns": [
-      {
-        "name": "versao",
-        "type": "character varying(128)",
-        "nullable": false
-      },
-      {
-        "name": "aplicada_em",
-        "type": "timestamp with time zone",
-        "nullable": false
-      }
-    ],
-    "comment": "Versões do esquema já aplicadas.",
-    "references": [],
-    "primary_key": [
-      "versao"
     ]
   },
   {

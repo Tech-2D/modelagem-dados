@@ -1,0 +1,127 @@
+{
+  "acessos_recentes_agenda": {
+    "id_usuario": "UID da conta no Firebase Authentication.",
+    "email": "E-mail da conta, quando disponível.",
+    "ultimo_acesso_em": "Data e hora do último acesso autenticado à Agenda.",
+    "chave_rede": "Código derivado do IP para aplicar bloqueios de rede."
+  },
+  "acessos_recentes_professores": {
+    "id_usuario": "UID da conta no Firebase Authentication.",
+    "email": "E-mail da conta, quando disponível.",
+    "ultimo_acesso_em": "Data e hora do último acesso autenticado ao Cadê o professor."
+  },
+  "atividades": {
+    "id": "ID da atividade, usado no caminho do documento e no link direto.",
+    "id_turma": "Chave da turma na Agenda. Nulo indica atividade geral.",
+    "titulo": "Título exibido no calendário.",
+    "descricao": "Instruções e detalhes da atividade.",
+    "tipo": "Categoria da atividade, como tarefa, trabalho, prova ou evento.",
+    "disciplina": "Nome da disciplina, quando informado.",
+    "data": "Data no formato AAAA-MM-DD.",
+    "hora": "Hora local no formato HH:MM, quando definida.",
+    "criado_por": "UID de quem criou a atividade, quando disponível.",
+    "email_criador": "E-mail de quem criou a atividade, usado internamente.",
+    "id_recorrencia": "ID da regra que gerou uma ocorrência recorrente.",
+    "anexos": "Metadados dos arquivos anexados, que ficam no R2.",
+    "criado_em": "Data e hora da criação.",
+    "atualizado_em": "Data e hora da última alteração.",
+    "versao": "Versão usada para detectar edição concorrente."
+  },
+  "auditoria_aplicacao": {
+    "sequencia": "Identificador sequencial da entrada.",
+    "autor": "Conta ou serviço que realizou a operação.",
+    "caminho": "Caminho do documento afetado.",
+    "operacao": "Operação realizada, como criação, alteração ou exclusão.",
+    "dados_anteriores": "Conteúdo anterior, quando havia documento.",
+    "alterado_em": "Data e hora da alteração."
+  },
+  "auditoria_atividades_legada": {
+    "sequencia": "Identificador sequencial da entrada histórica.",
+    "id_atividade": "ID da atividade afetada pela rota antiga.",
+    "id_usuario": "UID da conta responsável pela alteração.",
+    "acao": "Ação executada na atividade.",
+    "dados_anteriores": "Dados que existiam antes da alteração, quando disponíveis.",
+    "alterado_em": "Data e hora da alteração histórica."
+  },
+  "bloqueios_agenda": {
+    "id": "Identificador único da regra de bloqueio.",
+    "tipo": "Tipo de bloqueio, por e-mail ou rede.",
+    "alvo": "E-mail normalizado ou código de rede derivado do IP.",
+    "criado_em": "Data e hora da criação da regra.",
+    "criado_por": "UID da conta administrativa que criou a regra."
+  },
+  "catalogo_horarios": {
+    "id": "ID da aula vindo de horarios_aula.",
+    "dia_semana": "Dia da semana, de 0 (domingo) a 6 (sábado).",
+    "ativo": "Indica se a aula está ativa.",
+    "nome_turma": "Nome da turma associada ao horário.",
+    "dados": "Objeto com professor, disciplina, turma, horários, sala e andar."
+  },
+  "disciplinas": {
+    "id": "ID numérico da disciplina.",
+    "nome": "Nome da disciplina no catálogo de horários."
+  },
+  "documentos_aplicacao": {
+    "caminho": "Caminho único, como activities/{id} ou polls/{id}/votes/{uid}.",
+    "colecao": "Caminho da coleção que contém o documento.",
+    "id": "Último segmento do caminho, usado como ID dentro da coleção.",
+    "dados": "Conteúdo em JSONB. A API aplica regras próprias a cada coleção.",
+    "versao": "Versão usada para detectar conflitos de edição.",
+    "atualizado_em": "Data e hora da última atualização."
+  },
+  "documentos_catalogo": {
+    "colecao": "Coleção da entrada de catálogo.",
+    "id": "ID da entrada dentro da coleção.",
+    "dados": "Conteúdo da entrada. Nos horários, inclui complementos como sala e andar."
+  },
+  "faixas_horario": {
+    "id": "ID numérico da faixa.",
+    "hora_inicio": "Hora local de início da aula.",
+    "hora_fim": "Hora local de término da aula."
+  },
+  "horarios_aula": {
+    "id": "ID da aula, também usado na entrada complementar do catálogo.",
+    "id_professor": "Professor que ministra a aula.",
+    "id_disciplina": "Disciplina da aula.",
+    "id_turma": "Turma no catálogo de horários.",
+    "id_faixa_horario": "Par de horas de início e fim.",
+    "dia_semana": "Dia da semana, de 0 (domingo) a 6 (sábado).",
+    "ativo": "Indica se o horário está ativo no catálogo."
+  },
+  "perfis_administrativos": {
+    "id_usuario": "UID da conta no Firebase Authentication.",
+    "papel": "Papel usado nas verificações de acesso.",
+    "id_turma": "Chave da turma associada ao papel, quando aplicável.",
+    "dados": "Dados complementares do perfil projetado para a API."
+  },
+  "professores": {
+    "id": "ID numérico do professor.",
+    "nome": "Nome do professor no catálogo de horários."
+  },
+  "recibos_gravacao": {
+    "id": "ID de uma solicitação de gravação.",
+    "autor": "Conta ou serviço que enviou a solicitação.",
+    "hash_requisicao": "Hash do conteúdo, usado para detectar reuso do ID com dados diferentes.",
+    "confirmado_em": "Data e hora em que o lote de gravações foi confirmado."
+  },
+  "revisoes_origem": {
+    "sequencia": "Identificador sequencial da revisão arquivada.",
+    "id_projeto": "Projeto de origem do documento histórico.",
+    "caminho": "Caminho do documento na origem.",
+    "campos": "Campos tipados da versão anterior.",
+    "atualizado_na_origem_em": "Data e hora de atualização informada na origem, quando disponível.",
+    "motivo": "Motivo da preservação, como alteração ou exclusão na origem.",
+    "salvo_em": "Data e hora em que a revisão foi salva no PostgreSQL."
+  },
+  "turmas": {
+    "id": "ID numérico da turma no catálogo de horários.",
+    "nome": "Nome da turma exibido nos horários de aula."
+  },
+  "visitas_aos_sites": {
+    "dia": "Data da visita no fuso de Brasília.",
+    "intervalo_meia_hora": "Índice do intervalo de 30 minutos calculado a partir do timestamp Unix.",
+    "tipo_visitante": "Tipo de visita, autenticada ou anônima.",
+    "chave_visitante": "UID da conta ou código diário derivado do IP da visita anônima.",
+    "site": "Site visitado, agenda ou professores."
+  }
+}

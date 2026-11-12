@@ -14,7 +14,9 @@
     <a class="brand" href="{{ '/' | relative_url }}"><span class="brand-mark" aria-hidden="true">T2</span><span><strong>Tech-2D</strong><small>Documentação do banco</small></span></a>
     <nav aria-label="Documentação">
       <a href="{{ '/' | relative_url }}"{% if page.url == '/' %} aria-current="page"{% endif %}>Visão geral</a>
-      <a href="{{ '/postgresql.html' | relative_url }}"{% if page.url == '/postgresql.html' %} aria-current="page"{% endif %}>Catálogo PostgreSQL</a>
+      <a href="{{ '/postgresql.html' | relative_url }}"{% if page.url == '/postgresql.html' %} aria-current="page"{% endif %}>Tabelas e colunas</a>
+      <a href="{{ '/schemas.html' | relative_url }}"{% if page.url == '/schemas.html' %} aria-current="page"{% endif %}>Schemas</a>
+      <a href="{{ '/views.html' | relative_url }}"{% if page.url == '/views.html' %} aria-current="page"{% endif %}>Views da API</a>
       <a href="{{ '/modelagem.html' | relative_url }}"{% if page.url == '/modelagem.html' %} aria-current="page"{% endif %}>Modelagem</a>
       <a href="{{ '/consultas.html' | relative_url }}"{% if page.url == '/consultas.html' %} aria-current="page"{% endif %}>Consultas SQL</a>
       <a href="{{ '/redis.html' | relative_url }}"{% if page.url == '/redis.html' %} aria-current="page"{% endif %}>Redis legado</a>

@@ -1,7 +1,5 @@
--- Versões registradas no banco.
-SELECT versao, aplicada_em
-FROM tech2d.migracoes_esquema
-ORDER BY versao;
+-- Versão instalada, registrada no comentário do schema.
+SELECT obj_description('tech2d'::regnamespace, 'pg_namespace') AS versao_do_schema;
 
 -- Atividades gerais e da turma de exemplo nos próximos sete dias.
 WITH periodo AS (

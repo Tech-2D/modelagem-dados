@@ -5,7 +5,9 @@ Documentação do PostgreSQL usado pela Agenda e pelo Cadê o professor, com as 
 | Conteúdo | Onde encontrar |
 | --- | --- |
 | Arquitetura e serviços de dados | [Visão geral](docs/index.md) |
-| Tabelas, projeções, permissões e índices | [PostgreSQL](docs/postgresql.md) |
+| Tabelas, colunas, tipos e chaves | [PostgreSQL](docs/postgresql.md) |
+| Schemas da aplicação e do servidor | [Schemas](docs/schemas.md) |
+| Views, colunas e origem dos dados | [Views da API](docs/views.md) |
 | Relações e fluxos dos dados | [Modelagem](docs/modelagem.md) |
 | Exemplos de leitura SQL | [Consultas](docs/consultas.md) |
 | Catálogos, chaves, TTL e invalidação | [Redis](docs/redis.md) |
@@ -22,7 +24,7 @@ psql -d tech2d_local -v ON_ERROR_STOP=1 --single-transaction -f sql/migrate.psql
 psql -d tech2d_local -v ON_ERROR_STOP=1 -f sql/examples/consultas.sql
 ```
 
-As migrações criam o esquema vazio. As consultas de negócio podem retornar zero linhas até você inserir dados de teste. Use o banco local criado acima para experimentar.
+As migrações criam o esquema vazio. A versão atual fica no comentário do schema. As consultas de negócio podem retornar zero linhas até você inserir dados de teste. Use o banco local criado acima para experimentar.
 
 ## Atualizar o espelho
 
@@ -32,6 +34,6 @@ O repositório [Tech-2D/api](https://github.com/Tech-2D/api) é a fonte das migr
 psql -d tech2d_local -v ON_ERROR_STOP=1 -At -f sql/catalog.psql > docs/_data/schema.json
 ```
 
-Inclua o título em português em `docs/_data/catalog.yml` e descreva a função do objeto com `COMMENT ON` na migração. O catálogo extrai a descrição dos comentários do PostgreSQL. A cópia atual corresponde ao commit [`4537a5a`](https://github.com/Tech-2D/api/tree/4537a5aee757f5ce03c2ce579646f16bfe84dc22/migrations).
+Inclua o título em português em `docs/_data/catalog.yml` e descreva a função do objeto com `COMMENT ON` na migração. O catálogo extrai a descrição das tabelas dos comentários do PostgreSQL. Mantenha a finalidade dos campos em `docs/_data/column_notes.json` e o inventário de views em `docs/_data/views.json`. A cópia atual corresponde ao commit [`a45f0f3`](https://github.com/Tech-2D/api/tree/a45f0f3/migrations).
 
 O site é gerado pelo GitHub Pages a partir de `docs/`. A organização das páginas foi inspirada no [Astro Database Workspace](https://github.com/Astro-Inter/astro-database).

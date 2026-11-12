@@ -26,8 +26,6 @@
       title: Turmas
     - name: faixas_horario
       title: Faixas de horário
-    - name: catalogo_horarios
-      title: Catálogo de horários
 - id: acessos
   name: Acessos e moderação
   objects:
@@ -46,7 +44,3 @@
       title: Auditoria legada de atividades
     - name: revisoes_origem
       title: Revisões dos dados de origem
-    - name: estado_migracao
-      title: Estado da migração para PostgreSQL
-    - name: migracoes_esquema
-      title: Histórico de migrações do esquema

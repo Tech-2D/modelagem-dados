@@ -1,3 +1,7 @@
+SELECT COALESCE(obj_description(to_regnamespace('tech2d'), 'pg_namespace'), '') LIKE '%tech2d-schema-version:018_remover_controles_migracao' AS installed \gset
+\if :installed
+\echo Schema tech2d já está na versão 018.
+\else
 SELECT to_regclass('tech2d.migracoes_esquema') IS NULL AS needs_portuguese_schema \gset
 \if :needs_portuguese_schema
 \ir migrations/001_initial.sql
@@ -29,3 +33,5 @@ SELECT NOT EXISTS (SELECT FROM tech2d.schema_migrations WHERE version = '010_com
 \ir migrations/015_views_em_portugues.sql
 \ir migrations/016_remover_views_em_ingles.sql
 \ir migrations/017_remover_arquivo_firestore.sql
+\ir migrations/018_remover_controles_migracao.sql
+\endif

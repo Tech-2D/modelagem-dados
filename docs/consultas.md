@@ -14,17 +14,15 @@ psql -d tech2d_local -v ON_ERROR_STOP=1 --single-transaction -f sql/migrate.psql
 
 O banco começa vazio. Para consultar atividades e horários, insira dados de teste e troque `TURMA-EXEMPLO` pelo nome da turma que você cadastrou.
 
-## Conferir as migrações
+## Conferir a versão instalada
 
 ```sql
-SELECT versao, aplicada_em
-FROM tech2d.migracoes_esquema
-ORDER BY versao;
+SELECT obj_description('tech2d'::regnamespace, 'pg_namespace') AS versao_do_schema;
 ```
 
 ## Buscar horários por turma
 
-A view [`catalogo_horarios`]({{ '/postgresql.html#obj-catalogo_horarios' | relative_url }}) já reúne as referências dos horários. Filtre pela turma e pelo estado da aula.
+A view [`catalogo_horarios`]({{ '/views.html#view-catalogo_horarios' | relative_url }}) já reúne as referências dos horários. Filtre pela turma e pelo estado da aula.
 
 ```sql
 SELECT id, dia_semana, dados

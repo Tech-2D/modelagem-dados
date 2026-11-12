@@ -19,11 +19,11 @@ A tabela [Horários de aula]({{ '/postgresql.html#obj-horarios_aula' | relative_
   </div>
 </div>
 
-A visão [Catálogo de horários]({{ '/postgresql.html#obj-catalogo_horarios' | relative_url }}) reúne essas referências e os dados complementares de [Catálogos e dados complementares]({{ '/postgresql.html#obj-documentos_catalogo' | relative_url }}). É a leitura usada para montar o catálogo com professor, turma, disciplina, horário, sala e andar.
+A visão [Catálogo de horários]({{ '/views.html#view-catalogo_horarios' | relative_url }}) reúne essas referências e os dados complementares de [Catálogos e dados complementares]({{ '/postgresql.html#obj-documentos_catalogo' | relative_url }}). É a leitura usada para montar o catálogo com professor, turma, disciplina, horário, sala e andar.
 
 ## Atividades e enquetes
 
-O documento `activities/{id}` em [Documentos da aplicação]({{ '/postgresql.html#obj-documentos_aplicacao' | relative_url }}) tem o mesmo ID da linha em [Atividades da Agenda]({{ '/postgresql.html#obj-atividades' | relative_url }}). A API atualiza os dois na mesma transação. A projeção facilita buscar por data e turma. Atividades gerais têm `id_turma` nulo.
+O documento `activities/{id}` em [Documentos da aplicação]({{ '/postgresql.html#obj-documentos_aplicacao' | relative_url }}) tem o mesmo ID da linha em [Atividades da Agenda]({{ '/postgresql.html#obj-atividades' | relative_url }}). A API atualiza os dois na mesma transação. A projeção facilita buscar por data e turma. Atividades gerais têm `id_turma` nulo. O campo usa a chave da turma da Agenda, validada pela API. Já `horarios_aula.id_turma` é uma chave estrangeira numérica para `turmas.id`.
 
 Enquetes e votos ficam em Documentos da aplicação, nos caminhos `polls/{id}` e `polls/{id}/votes/{uid}`. A API controla o acesso e a permissão de votar.
 

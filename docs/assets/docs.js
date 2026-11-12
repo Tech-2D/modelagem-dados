@@ -19,25 +19,36 @@ if (controls) {
   const search = controls.querySelector('input')
   const area = controls.querySelector('select')
   const status = controls.querySelector('[data-catalog-status]')
+  const toggle = controls.querySelector('[data-catalog-toggle]')
   const groups = [...article.querySelectorAll('[data-catalog-group]')]
   const normalize = text => text.normalize('NFD').replace(/\p{Diacritic}/gu, '').toLocaleLowerCase('pt-BR')
   const entries = new Map(groups.flatMap(group => [...group.querySelectorAll('[data-catalog-object]')]
     .map(item => [item, normalize(item.textContent)])))
 
   function filterCatalog() {
-    const terms = normalize(search.value.trim()).split(/\s+/)
+    const terms = normalize(search.value.trim()).split(/\s+/).filter(Boolean)
     let total = 0
     for (const group of groups) {
+      const areaMatches = !area?.value || area.value === group.dataset.catalogGroup
       let groupTotal = 0
       for (const item of group.querySelectorAll('[data-catalog-object]')) {
-        item.hidden = !terms.every(term => entries.get(item).includes(term))
+        item.hidden = !areaMatches || !terms.every(term => entries.get(item).includes(term))
         if (!item.hidden) groupTotal += 1
       }
-      group.hidden = groupTotal === 0 || Boolean(area.value && area.value !== group.dataset.catalogGroup)
+      group.hidden = groupTotal === 0
       if (!group.hidden) total += groupTotal
     }
-    status.textContent = total === 0 ? 'Nenhum objeto encontrado. Tente outro termo ou área.'
-      : total === 1 ? '1 objeto encontrado' : total + ' objetos encontrados'
+    status.textContent = total === 0 ? 'Nenhum resultado. Tente outro termo.'
+      : total === 1 ? '1 resultado' : total + ' resultados'
+    updateToggle()
+  }
+
+  const visibleEntries = () => [...entries.keys()].filter(item => !item.hidden)
+  function updateToggle() {
+    const visible = visibleEntries()
+    toggle.disabled = visible.length === 0
+    toggle.textContent = visible.length && visible.every(item => item.open)
+      ? 'Fechar resultados' : 'Abrir resultados'
   }
 
   function openLinkedObject() {
@@ -45,7 +56,7 @@ if (controls) {
     if (!entries.has(target)) return
     if (target.hidden || target.closest('[data-catalog-group]').hidden) {
       search.value = ''
-      area.value = ''
+      if (area) area.value = ''
       filterCatalog()
     }
     target.open = true
@@ -54,7 +65,14 @@ if (controls) {
 
   controls.hidden = false
   search.addEventListener('input', filterCatalog)
-  area.addEventListener('change', filterCatalog)
+  area?.addEventListener('change', filterCatalog)
+  toggle.addEventListener('click', () => {
+    const visible = visibleEntries()
+    const open = visible.some(item => !item.open)
+    for (const item of visible) item.open = open
+    updateToggle()
+  })
+  for (const item of entries.keys()) item.addEventListener('toggle', updateToggle)
   window.addEventListener('hashchange', openLinkedObject)
   filterCatalog()
   openLinkedObject()
