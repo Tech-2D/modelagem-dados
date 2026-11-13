@@ -316,11 +316,11 @@
     },
     {
         "name": "gravar_valor_historico",
-        "anchor": "rotina-gravar_valor_historico-b88cf40a",
+        "anchor": "rotina-gravar_valor_historico-f99b9425",
         "result": "void",
         "comment": null,
         "language": "plpgsql",
-        "arguments": "auditoria bigint, legado bigint, revisao bigint, pai bigint, campo character varying, posicao integer, objeto jsonb",
+        "arguments": "auditoria bigint, legado bigint, pai bigint, campo character varying, posicao integer, objeto jsonb",
         "procedure": false
     },
     {

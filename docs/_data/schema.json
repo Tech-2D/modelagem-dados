@@ -3234,60 +3234,6 @@
   },
   {
     "kind": "table",
-    "name": "revisoes_origem",
-    "columns": [
-      {
-        "name": "sequencia",
-        "type": "bigint",
-        "comment": null,
-        "nullable": false,
-        "generated": true
-      },
-      {
-        "name": "id_projeto",
-        "type": "character varying(128)",
-        "comment": null,
-        "nullable": false,
-        "generated": false
-      },
-      {
-        "name": "caminho",
-        "type": "character varying(1024)",
-        "comment": null,
-        "nullable": false,
-        "generated": false
-      },
-      {
-        "name": "atualizado_na_origem_em",
-        "type": "character varying(64)",
-        "comment": null,
-        "nullable": true,
-        "generated": false
-      },
-      {
-        "name": "motivo",
-        "type": "character varying(128)",
-        "comment": null,
-        "nullable": false,
-        "generated": false
-      },
-      {
-        "name": "salvo_em",
-        "type": "timestamp with time zone",
-        "comment": null,
-        "nullable": false,
-        "generated": false
-      }
-    ],
-    "comment": "Versões preservadas durante a reconciliação com o Firestore.",
-    "references": [],
-    "primary_key": [
-      "sequencia"
-    ],
-    "foreign_key_count": 0
-  },
-  {
-    "kind": "table",
     "name": "sugestoes_atividade",
     "columns": [
       {
@@ -3606,14 +3552,6 @@
         "check": true
       },
       {
-        "name": "id_revisao",
-        "type": "bigint",
-        "comment": null,
-        "nullable": true,
-        "generated": false,
-        "check": true
-      },
-      {
         "name": "id_pai",
         "type": "bigint",
         "comment": null,
@@ -3668,7 +3606,7 @@
         "check": true
       }
     ],
-    "comment": "Campos tipados das versões históricas, ligados à auditoria ou revisão e preservados após a exclusão do registro original.",
+    "comment": "Campos tipados das auditorias das operações da aplicação, preservados após a exclusão do registro original.",
     "references": [
       {
         "table": "auditoria_aplicacao",
@@ -3684,17 +3622,12 @@
         "table": "valores_historico",
         "column": "id_pai",
         "target": "id"
-      },
-      {
-        "table": "revisoes_origem",
-        "column": "id_revisao",
-        "target": "sequencia"
       }
     ],
     "primary_key": [
       "id"
     ],
-    "foreign_key_count": 4
+    "foreign_key_count": 3
   },
   {
     "kind": "table",

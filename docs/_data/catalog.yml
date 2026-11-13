@@ -116,8 +116,6 @@
       title: Auditoria da aplicação
     - name: auditoria_atividades_legada
       title: Auditoria legada de atividades
-    - name: revisoes_origem
-      title: Revisões históricas da origem
     - name: valores_historico
       title: Campos tipados do histórico
 

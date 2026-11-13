@@ -393,14 +393,6 @@
     "alterado_por": "Campo updatedBy no contrato da API.",
     "alterado_em": "Momento da última alteração, no formato ISO da API."
   },
-  "revisoes_origem": {
-    "sequencia": "Identificador sequencial da revisão arquivada.",
-    "id_projeto": "Projeto de origem do documento histórico.",
-    "caminho": "Caminho do documento na origem.",
-    "atualizado_na_origem_em": "Data e hora de atualização informada na origem, quando disponível.",
-    "motivo": "Motivo da preservação, como alteração ou exclusão na origem.",
-    "salvo_em": "Data e hora em que a revisão foi salva no PostgreSQL."
-  },
   "sugestoes_atividade": {
     "id_registro": "Identificador numérico que liga a linha ao registro principal e à sua versão.",
     "titulo": "Título exibido no site.",
@@ -445,7 +437,6 @@
     "id": "Identificador numérico gerado pelo banco.",
     "id_auditoria": "Entrada da auditoria atual à qual o campo pertence.",
     "id_auditoria_legada": "Entrada da auditoria de atividades da interface anterior.",
-    "id_revisao": "Revisão histórica da origem à qual o campo pertence.",
     "id_pai": "Campo ou lista que contém este valor. Nulo na raiz.",
     "chave": "Nome do campo quando faz parte de um objeto.",
     "ordem": "Posição quando o valor faz parte de uma lista.",

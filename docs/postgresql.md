@@ -96,6 +96,8 @@ Os catálogos públicos passam por projeções que selecionam os campos da respo
 | 021 | Centraliza o catálogo e o arquivamento de atividades em funções e cria a view usada pelos jobs |
 | 022 | Remove `campos_nulos` das tabelas e ajusta a serialização dos registros |
 | 023 | Expõe a revisão restrita dos catálogos públicos para o cache Redis |
+| 024 | Adiciona cadernos privados de notas do Pegaki |
+| 025 | Remove a tabela e a view de revisões da migração para PostgreSQL |
 
 Em um banco local vazio, siga os passos em [Consultas SQL]({{ '/consultas.html' | relative_url }}). O script de instalação aplica as migrações na ordem acima.
 

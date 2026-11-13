@@ -652,58 +652,6 @@
     ]
   },
   {
-    "name": "visao_revisoes_origem",
-    "comment": "Versões preservadas durante a reconciliação com o Firestore.",
-    "dependencies": [
-      "revisoes_origem",
-      "valores_historico"
-    ],
-    "columns": [
-      {
-        "name": "sequence",
-        "source": "sequencia",
-        "type": "bigint",
-        "note": "Identificador sequencial da revisão arquivada."
-      },
-      {
-        "name": "project_id",
-        "source": "id_projeto",
-        "type": "character varying(128)",
-        "note": "Projeto de origem do documento histórico."
-      },
-      {
-        "name": "path",
-        "source": "caminho",
-        "type": "character varying(1024)",
-        "note": "Caminho do documento na origem."
-      },
-      {
-        "name": "fields",
-        "source": "fields",
-        "type": "jsonb",
-        "note": "Campos históricos reconstruídos a partir de valores tipados."
-      },
-      {
-        "name": "source_updated_at",
-        "source": "atualizado_na_origem_em",
-        "type": "character varying(64)",
-        "note": "Data e hora de atualização informada na origem, quando disponível."
-      },
-      {
-        "name": "reason",
-        "source": "motivo",
-        "type": "character varying(128)",
-        "note": "Motivo da preservação, como alteração ou exclusão na origem."
-      },
-      {
-        "name": "saved_at",
-        "source": "salvo_em",
-        "type": "timestamp with time zone",
-        "note": "Data e hora em que a revisão foi salva no PostgreSQL."
-      }
-    ]
-  },
-  {
     "name": "visao_turmas",
     "comment": "Interface SQL de compatibilidade para turmas",
     "dependencies": [
