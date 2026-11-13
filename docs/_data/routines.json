@@ -1,803 +1,812 @@
 [
-  {
-    "name": "adiar_limpeza_kanban",
-    "arguments": "chave text",
-    "result": "void",
-    "language": "sql",
-    "procedure": false,
-    "comment": null,
-    "anchor": "rotina-adiar_limpeza_kanban-03b374bc"
-  },
-  {
-    "name": "arquivar_atividade",
-    "arguments": "p_id text, p_motivo text, p_arquivada_em text, p_dias_retencao integer",
-    "result": "boolean",
-    "language": "plpgsql",
-    "procedure": false,
-    "comment": "Arquiva uma atividade da turma, retira a linha ativa e grava auditoria em uma única operação.",
-    "anchor": "rotina-arquivar_atividade-f69f05bc"
-  },
-  {
-    "name": "consultar_catalogo_agenda",
-    "arguments": "p_turma text, p_incluir_atividades boolean",
-    "result": "TABLE(activities jsonb, documents jsonb)",
-    "language": "sql",
-    "procedure": false,
-    "comment": "Seleciona atividades gerais e da turma e reúne os documentos do catálogo em uma consulta limitada.",
-    "anchor": "rotina-consultar_catalogo_agenda-1ef8c8f7"
-  },
-  {
-    "name": "enfileirar_limpeza_kanban",
-    "arguments": "lote jsonb",
-    "result": "void",
-    "language": "plpgsql",
-    "procedure": false,
-    "comment": null,
-    "anchor": "rotina-enfileirar_limpeza_kanban-d006a42d"
-  },
-  {
-    "name": "gravar_acessos_votacao",
-    "arguments": "alvo bigint, objeto jsonb",
-    "result": "void",
-    "language": "plpgsql",
-    "procedure": false,
-    "comment": null,
-    "anchor": "rotina-gravar_acessos_votacao-65a7a60d"
-  },
-  {
-    "name": "gravar_anotacoes",
-    "arguments": "alvo bigint, objeto jsonb",
-    "result": "void",
-    "language": "plpgsql",
-    "procedure": false,
-    "comment": null,
-    "anchor": "rotina-gravar_anotacoes-65a7a60d"
-  },
-  {
-    "name": "gravar_anuncios",
-    "arguments": "alvo bigint, objeto jsonb",
-    "result": "void",
-    "language": "plpgsql",
-    "procedure": false,
-    "comment": null,
-    "anchor": "rotina-gravar_anuncios-65a7a60d"
-  },
-  {
-    "name": "gravar_atividades",
-    "arguments": "alvo bigint, objeto jsonb",
-    "result": "void",
-    "language": "plpgsql",
-    "procedure": false,
-    "comment": null,
-    "anchor": "rotina-gravar_atividades-65a7a60d"
-  },
-  {
-    "name": "gravar_atividades_arquivadas",
-    "arguments": "alvo bigint, objeto jsonb",
-    "result": "void",
-    "language": "plpgsql",
-    "procedure": false,
-    "comment": null,
-    "anchor": "rotina-gravar_atividades_arquivadas-65a7a60d"
-  },
-  {
-    "name": "gravar_atualizacoes_agenda",
-    "arguments": "alvo bigint, objeto jsonb",
-    "result": "void",
-    "language": "plpgsql",
-    "procedure": false,
-    "comment": null,
-    "anchor": "rotina-gravar_atualizacoes_agenda-65a7a60d"
-  },
-  {
-    "name": "gravar_avisos_turma",
-    "arguments": "alvo bigint, objeto jsonb",
-    "result": "void",
-    "language": "plpgsql",
-    "procedure": false,
-    "comment": null,
-    "anchor": "rotina-gravar_avisos_turma-65a7a60d"
-  },
-  {
-    "name": "gravar_chat_representantes",
-    "arguments": "alvo bigint, objeto jsonb",
-    "result": "void",
-    "language": "plpgsql",
-    "procedure": false,
-    "comment": null,
-    "anchor": "rotina-gravar_chat_representantes-65a7a60d"
-  },
-  {
-    "name": "gravar_conteudo",
-    "arguments": "alvo bigint, tipo character varying, objeto jsonb",
-    "result": "void",
-    "language": "plpgsql",
-    "procedure": false,
-    "comment": null,
-    "anchor": "rotina-gravar_conteudo-40971084"
-  },
-  {
-    "name": "gravar_convites_representacao",
-    "arguments": "alvo bigint, objeto jsonb",
-    "result": "void",
-    "language": "plpgsql",
-    "procedure": false,
-    "comment": null,
-    "anchor": "rotina-gravar_convites_representacao-65a7a60d"
-  },
-  {
-    "name": "gravar_enquetes",
-    "arguments": "alvo bigint, objeto jsonb",
-    "result": "void",
-    "language": "plpgsql",
-    "procedure": false,
-    "comment": null,
-    "anchor": "rotina-gravar_enquetes-65a7a60d"
-  },
-  {
-    "name": "gravar_entregas_resumo",
-    "arguments": "alvo bigint, objeto jsonb",
-    "result": "void",
-    "language": "plpgsql",
-    "procedure": false,
-    "comment": null,
-    "anchor": "rotina-gravar_entregas_resumo-65a7a60d"
-  },
-  {
-    "name": "gravar_envios_anexos",
-    "arguments": "alvo bigint, objeto jsonb",
-    "result": "void",
-    "language": "plpgsql",
-    "procedure": false,
-    "comment": null,
-    "anchor": "rotina-gravar_envios_anexos-65a7a60d"
-  },
-  {
-    "name": "gravar_espacos_kanban",
-    "arguments": "alvo bigint, objeto jsonb",
-    "result": "void",
-    "language": "plpgsql",
-    "procedure": false,
-    "comment": null,
-    "anchor": "rotina-gravar_espacos_kanban-65a7a60d"
-  },
-  {
-    "name": "gravar_horarios_aula",
-    "arguments": "alvo bigint, objeto jsonb",
-    "result": "void",
-    "language": "plpgsql",
-    "procedure": false,
-    "comment": null,
-    "anchor": "rotina-gravar_horarios_aula-65a7a60d"
-  },
-  {
-    "name": "gravar_limites_servico",
-    "arguments": "alvo bigint, objeto jsonb",
-    "result": "void",
-    "language": "plpgsql",
-    "procedure": false,
-    "comment": null,
-    "anchor": "rotina-gravar_limites_servico-65a7a60d"
-  },
-  {
-    "name": "gravar_limpeza_anexos_kanban",
-    "arguments": "alvo bigint, objeto jsonb",
-    "result": "void",
-    "language": "plpgsql",
-    "procedure": false,
-    "comment": null,
-    "anchor": "rotina-gravar_limpeza_anexos_kanban-65a7a60d"
-  },
-  {
-    "name": "gravar_mensagens_sugestao",
-    "arguments": "alvo bigint, objeto jsonb",
-    "result": "void",
-    "language": "plpgsql",
-    "procedure": false,
-    "comment": null,
-    "anchor": "rotina-gravar_mensagens_sugestao-65a7a60d"
-  },
-  {
-    "name": "gravar_participantes_kanban",
-    "arguments": "alvo bigint, objeto jsonb",
-    "result": "void",
-    "language": "plpgsql",
-    "procedure": false,
-    "comment": null,
-    "anchor": "rotina-gravar_participantes_kanban-65a7a60d"
-  },
-  {
-    "name": "gravar_pedidos_agenda",
-    "arguments": "alvo bigint, objeto jsonb",
-    "result": "void",
-    "language": "plpgsql",
-    "procedure": false,
-    "comment": null,
-    "anchor": "rotina-gravar_pedidos_agenda-65a7a60d"
-  },
-  {
-    "name": "gravar_pedidos_kanban",
-    "arguments": "alvo bigint, objeto jsonb",
-    "result": "void",
-    "language": "plpgsql",
-    "procedure": false,
-    "comment": null,
-    "anchor": "rotina-gravar_pedidos_kanban-65a7a60d"
-  },
-  {
-    "name": "gravar_pedidos_representacao",
-    "arguments": "alvo bigint, objeto jsonb",
-    "result": "void",
-    "language": "plpgsql",
-    "procedure": false,
-    "comment": null,
-    "anchor": "rotina-gravar_pedidos_representacao-65a7a60d"
-  },
-  {
-    "name": "gravar_perfis_administrativos",
-    "arguments": "alvo bigint, objeto jsonb",
-    "result": "void",
-    "language": "plpgsql",
-    "procedure": false,
-    "comment": null,
-    "anchor": "rotina-gravar_perfis_administrativos-65a7a60d"
-  },
-  {
-    "name": "gravar_perfis_comunidade",
-    "arguments": "alvo bigint, objeto jsonb",
-    "result": "void",
-    "language": "plpgsql",
-    "procedure": false,
-    "comment": null,
-    "anchor": "rotina-gravar_perfis_comunidade-65a7a60d"
-  },
-  {
-    "name": "gravar_preferencias_resumo",
-    "arguments": "alvo bigint, objeto jsonb",
-    "result": "void",
-    "language": "plpgsql",
-    "procedure": false,
-    "comment": null,
-    "anchor": "rotina-gravar_preferencias_resumo-65a7a60d"
-  },
-  {
-    "name": "gravar_registros",
-    "arguments": "lote jsonb",
-    "result": "void",
-    "language": "plpgsql",
-    "procedure": false,
-    "comment": null,
-    "anchor": "rotina-gravar_registros-d006a42d"
-  },
-  {
-    "name": "gravar_regras_recorrencia",
-    "arguments": "alvo bigint, objeto jsonb",
-    "result": "void",
-    "language": "plpgsql",
-    "procedure": false,
-    "comment": null,
-    "anchor": "rotina-gravar_regras_recorrencia-65a7a60d"
-  },
-  {
-    "name": "gravar_regras_retencao",
-    "arguments": "alvo bigint, objeto jsonb",
-    "result": "void",
-    "language": "plpgsql",
-    "procedure": false,
-    "comment": null,
-    "anchor": "rotina-gravar_regras_retencao-65a7a60d"
-  },
-  {
-    "name": "gravar_sugestoes_atividade",
-    "arguments": "alvo bigint, objeto jsonb",
-    "result": "void",
-    "language": "plpgsql",
-    "procedure": false,
-    "comment": null,
-    "anchor": "rotina-gravar_sugestoes_atividade-65a7a60d"
-  },
-  {
-    "name": "gravar_sugestoes_melhoria",
-    "arguments": "alvo bigint, objeto jsonb",
-    "result": "void",
-    "language": "plpgsql",
-    "procedure": false,
-    "comment": null,
-    "anchor": "rotina-gravar_sugestoes_melhoria-65a7a60d"
-  },
-  {
-    "name": "gravar_turmas_agenda",
-    "arguments": "alvo bigint, objeto jsonb",
-    "result": "void",
-    "language": "plpgsql",
-    "procedure": false,
-    "comment": null,
-    "anchor": "rotina-gravar_turmas_agenda-65a7a60d"
-  },
-  {
-    "name": "gravar_valor_historico",
-    "arguments": "auditoria bigint, legado bigint, revisao bigint, pai bigint, campo character varying, posicao integer, objeto jsonb",
-    "result": "void",
-    "language": "plpgsql",
-    "procedure": false,
-    "comment": null,
-    "anchor": "rotina-gravar_valor_historico-b88cf40a"
-  },
-  {
-    "name": "gravar_votos_enquete",
-    "arguments": "alvo bigint, objeto jsonb",
-    "result": "void",
-    "language": "plpgsql",
-    "procedure": false,
-    "comment": null,
-    "anchor": "rotina-gravar_votos_enquete-65a7a60d"
-  },
-  {
-    "name": "inserir_anexos_atividade",
-    "arguments": "pai bigint, campo character varying, posicao integer, objeto jsonb",
-    "result": "void",
-    "language": "plpgsql",
-    "procedure": false,
-    "comment": null,
-    "anchor": "rotina-inserir_anexos_atividade-9063136c"
-  },
-  {
-    "name": "inserir_anexos_atividade_arquivada",
-    "arguments": "pai bigint, campo character varying, posicao integer, objeto jsonb",
-    "result": "void",
-    "language": "plpgsql",
-    "procedure": false,
-    "comment": null,
-    "anchor": "rotina-inserir_anexos_atividade_arquivada-9063136c"
-  },
-  {
-    "name": "inserir_auditoria",
-    "arguments": "",
-    "result": "trigger",
-    "language": "plpgsql",
-    "procedure": false,
-    "comment": null,
-    "anchor": "rotina-inserir_auditoria-d41d8cd9"
-  },
-  {
-    "name": "inserir_auditoria_legada",
-    "arguments": "",
-    "result": "trigger",
-    "language": "plpgsql",
-    "procedure": false,
-    "comment": null,
-    "anchor": "rotina-inserir_auditoria_legada-d41d8cd9"
-  },
-  {
-    "name": "inserir_cartoes_kanban",
-    "arguments": "pai bigint, campo character varying, posicao integer, objeto jsonb",
-    "result": "void",
-    "language": "plpgsql",
-    "procedure": false,
-    "comment": null,
-    "anchor": "rotina-inserir_cartoes_kanban-9063136c"
-  },
-  {
-    "name": "inserir_colunas_kanban",
-    "arguments": "pai bigint, campo character varying, posicao integer, objeto jsonb",
-    "result": "void",
-    "language": "plpgsql",
-    "procedure": false,
-    "comment": null,
-    "anchor": "rotina-inserir_colunas_kanban-9063136c"
-  },
-  {
-    "name": "inserir_conteudo_atividade_arquivada",
-    "arguments": "pai bigint, campo character varying, posicao integer, objeto jsonb",
-    "result": "void",
-    "language": "plpgsql",
-    "procedure": false,
-    "comment": null,
-    "anchor": "rotina-inserir_conteudo_atividade_arquivada-9063136c"
-  },
-  {
-    "name": "inserir_itens_checklist",
-    "arguments": "pai bigint, campo character varying, posicao integer, objeto jsonb",
-    "result": "void",
-    "language": "plpgsql",
-    "procedure": false,
-    "comment": null,
-    "anchor": "rotina-inserir_itens_checklist-9063136c"
-  },
-  {
-    "name": "inserir_opcoes_enquete",
-    "arguments": "pai bigint, campo character varying, posicao integer, objeto jsonb",
-    "result": "void",
-    "language": "plpgsql",
-    "procedure": false,
-    "comment": null,
-    "anchor": "rotina-inserir_opcoes_enquete-9063136c"
-  },
-  {
-    "name": "inserir_quadros_kanban",
-    "arguments": "pai bigint, campo character varying, posicao integer, objeto jsonb",
-    "result": "void",
-    "language": "plpgsql",
-    "procedure": false,
-    "comment": null,
-    "anchor": "rotina-inserir_quadros_kanban-9063136c"
-  },
-  {
-    "name": "ler_acessos_votacao",
-    "arguments": "alvo bigint",
-    "result": "jsonb",
-    "language": "sql",
-    "procedure": false,
-    "comment": null,
-    "anchor": "rotina-ler_acessos_votacao-c9ce0023"
-  },
-  {
-    "name": "ler_anexos_atividade",
-    "arguments": "alvo bigint",
-    "result": "jsonb",
-    "language": "sql",
-    "procedure": false,
-    "comment": null,
-    "anchor": "rotina-ler_anexos_atividade-c9ce0023"
-  },
-  {
-    "name": "ler_anexos_atividade_arquivada",
-    "arguments": "alvo bigint",
-    "result": "jsonb",
-    "language": "sql",
-    "procedure": false,
-    "comment": null,
-    "anchor": "rotina-ler_anexos_atividade_arquivada-c9ce0023"
-  },
-  {
-    "name": "ler_anotacoes",
-    "arguments": "alvo bigint",
-    "result": "jsonb",
-    "language": "sql",
-    "procedure": false,
-    "comment": null,
-    "anchor": "rotina-ler_anotacoes-c9ce0023"
-  },
-  {
-    "name": "ler_anuncios",
-    "arguments": "alvo bigint",
-    "result": "jsonb",
-    "language": "sql",
-    "procedure": false,
-    "comment": null,
-    "anchor": "rotina-ler_anuncios-c9ce0023"
-  },
-  {
-    "name": "ler_atividades",
-    "arguments": "alvo bigint",
-    "result": "jsonb",
-    "language": "sql",
-    "procedure": false,
-    "comment": null,
-    "anchor": "rotina-ler_atividades-c9ce0023"
-  },
-  {
-    "name": "ler_atividades_arquivadas",
-    "arguments": "alvo bigint",
-    "result": "jsonb",
-    "language": "sql",
-    "procedure": false,
-    "comment": null,
-    "anchor": "rotina-ler_atividades_arquivadas-c9ce0023"
-  },
-  {
-    "name": "ler_atualizacoes_agenda",
-    "arguments": "alvo bigint",
-    "result": "jsonb",
-    "language": "sql",
-    "procedure": false,
-    "comment": null,
-    "anchor": "rotina-ler_atualizacoes_agenda-c9ce0023"
-  },
-  {
-    "name": "ler_avisos_turma",
-    "arguments": "alvo bigint",
-    "result": "jsonb",
-    "language": "sql",
-    "procedure": false,
-    "comment": null,
-    "anchor": "rotina-ler_avisos_turma-c9ce0023"
-  },
-  {
-    "name": "ler_cartoes_kanban",
-    "arguments": "alvo bigint",
-    "result": "jsonb",
-    "language": "sql",
-    "procedure": false,
-    "comment": null,
-    "anchor": "rotina-ler_cartoes_kanban-c9ce0023"
-  },
-  {
-    "name": "ler_chat_representantes",
-    "arguments": "alvo bigint",
-    "result": "jsonb",
-    "language": "sql",
-    "procedure": false,
-    "comment": null,
-    "anchor": "rotina-ler_chat_representantes-c9ce0023"
-  },
-  {
-    "name": "ler_colunas_kanban",
-    "arguments": "alvo bigint",
-    "result": "jsonb",
-    "language": "sql",
-    "procedure": false,
-    "comment": null,
-    "anchor": "rotina-ler_colunas_kanban-c9ce0023"
-  },
-  {
-    "name": "ler_conteudo_atividade_arquivada",
-    "arguments": "alvo bigint",
-    "result": "jsonb",
-    "language": "sql",
-    "procedure": false,
-    "comment": null,
-    "anchor": "rotina-ler_conteudo_atividade_arquivada-c9ce0023"
-  },
-  {
-    "name": "ler_convites_representacao",
-    "arguments": "alvo bigint",
-    "result": "jsonb",
-    "language": "sql",
-    "procedure": false,
-    "comment": null,
-    "anchor": "rotina-ler_convites_representacao-c9ce0023"
-  },
-  {
-    "name": "ler_enquetes",
-    "arguments": "alvo bigint",
-    "result": "jsonb",
-    "language": "sql",
-    "procedure": false,
-    "comment": null,
-    "anchor": "rotina-ler_enquetes-c9ce0023"
-  },
-  {
-    "name": "ler_entregas_resumo",
-    "arguments": "alvo bigint",
-    "result": "jsonb",
-    "language": "sql",
-    "procedure": false,
-    "comment": null,
-    "anchor": "rotina-ler_entregas_resumo-c9ce0023"
-  },
-  {
-    "name": "ler_envios_anexos",
-    "arguments": "alvo bigint",
-    "result": "jsonb",
-    "language": "sql",
-    "procedure": false,
-    "comment": null,
-    "anchor": "rotina-ler_envios_anexos-c9ce0023"
-  },
-  {
-    "name": "ler_espacos_kanban",
-    "arguments": "alvo bigint",
-    "result": "jsonb",
-    "language": "sql",
-    "procedure": false,
-    "comment": null,
-    "anchor": "rotina-ler_espacos_kanban-c9ce0023"
-  },
-  {
-    "name": "ler_horarios_aula",
-    "arguments": "alvo bigint",
-    "result": "jsonb",
-    "language": "sql",
-    "procedure": false,
-    "comment": null,
-    "anchor": "rotina-ler_horarios_aula-c9ce0023"
-  },
-  {
-    "name": "ler_itens_checklist",
-    "arguments": "alvo bigint",
-    "result": "jsonb",
-    "language": "sql",
-    "procedure": false,
-    "comment": null,
-    "anchor": "rotina-ler_itens_checklist-c9ce0023"
-  },
-  {
-    "name": "ler_limites_servico",
-    "arguments": "alvo bigint",
-    "result": "jsonb",
-    "language": "sql",
-    "procedure": false,
-    "comment": null,
-    "anchor": "rotina-ler_limites_servico-c9ce0023"
-  },
-  {
-    "name": "ler_limpeza_anexos_kanban",
-    "arguments": "alvo bigint",
-    "result": "jsonb",
-    "language": "sql",
-    "procedure": false,
-    "comment": null,
-    "anchor": "rotina-ler_limpeza_anexos_kanban-c9ce0023"
-  },
-  {
-    "name": "ler_mensagens_sugestao",
-    "arguments": "alvo bigint",
-    "result": "jsonb",
-    "language": "sql",
-    "procedure": false,
-    "comment": null,
-    "anchor": "rotina-ler_mensagens_sugestao-c9ce0023"
-  },
-  {
-    "name": "ler_participantes_kanban",
-    "arguments": "alvo bigint",
-    "result": "jsonb",
-    "language": "sql",
-    "procedure": false,
-    "comment": null,
-    "anchor": "rotina-ler_participantes_kanban-c9ce0023"
-  },
-  {
-    "name": "ler_pedidos_agenda",
-    "arguments": "alvo bigint",
-    "result": "jsonb",
-    "language": "sql",
-    "procedure": false,
-    "comment": null,
-    "anchor": "rotina-ler_pedidos_agenda-c9ce0023"
-  },
-  {
-    "name": "ler_pedidos_kanban",
-    "arguments": "alvo bigint",
-    "result": "jsonb",
-    "language": "sql",
-    "procedure": false,
-    "comment": null,
-    "anchor": "rotina-ler_pedidos_kanban-c9ce0023"
-  },
-  {
-    "name": "ler_pedidos_representacao",
-    "arguments": "alvo bigint",
-    "result": "jsonb",
-    "language": "sql",
-    "procedure": false,
-    "comment": null,
-    "anchor": "rotina-ler_pedidos_representacao-c9ce0023"
-  },
-  {
-    "name": "ler_perfis_administrativos",
-    "arguments": "alvo bigint",
-    "result": "jsonb",
-    "language": "sql",
-    "procedure": false,
-    "comment": null,
-    "anchor": "rotina-ler_perfis_administrativos-c9ce0023"
-  },
-  {
-    "name": "ler_perfis_comunidade",
-    "arguments": "alvo bigint",
-    "result": "jsonb",
-    "language": "sql",
-    "procedure": false,
-    "comment": null,
-    "anchor": "rotina-ler_perfis_comunidade-c9ce0023"
-  },
-  {
-    "name": "ler_preferencias_resumo",
-    "arguments": "alvo bigint",
-    "result": "jsonb",
-    "language": "sql",
-    "procedure": false,
-    "comment": null,
-    "anchor": "rotina-ler_preferencias_resumo-c9ce0023"
-  },
-  {
-    "name": "ler_quadros_kanban",
-    "arguments": "alvo bigint",
-    "result": "jsonb",
-    "language": "sql",
-    "procedure": false,
-    "comment": null,
-    "anchor": "rotina-ler_quadros_kanban-c9ce0023"
-  },
-  {
-    "name": "ler_registro",
-    "arguments": "alvo bigint, tipo character varying",
-    "result": "jsonb",
-    "language": "sql",
-    "procedure": false,
-    "comment": null,
-    "anchor": "rotina-ler_registro-e6622460"
-  },
-  {
-    "name": "ler_regras_recorrencia",
-    "arguments": "alvo bigint",
-    "result": "jsonb",
-    "language": "sql",
-    "procedure": false,
-    "comment": null,
-    "anchor": "rotina-ler_regras_recorrencia-c9ce0023"
-  },
-  {
-    "name": "ler_regras_retencao",
-    "arguments": "alvo bigint",
-    "result": "jsonb",
-    "language": "sql",
-    "procedure": false,
-    "comment": null,
-    "anchor": "rotina-ler_regras_retencao-c9ce0023"
-  },
-  {
-    "name": "ler_sugestoes_atividade",
-    "arguments": "alvo bigint",
-    "result": "jsonb",
-    "language": "sql",
-    "procedure": false,
-    "comment": null,
-    "anchor": "rotina-ler_sugestoes_atividade-c9ce0023"
-  },
-  {
-    "name": "ler_sugestoes_melhoria",
-    "arguments": "alvo bigint",
-    "result": "jsonb",
-    "language": "sql",
-    "procedure": false,
-    "comment": null,
-    "anchor": "rotina-ler_sugestoes_melhoria-c9ce0023"
-  },
-  {
-    "name": "ler_turmas_agenda",
-    "arguments": "alvo bigint",
-    "result": "jsonb",
-    "language": "sql",
-    "procedure": false,
-    "comment": null,
-    "anchor": "rotina-ler_turmas_agenda-c9ce0023"
-  },
-  {
-    "name": "ler_valor_historico",
-    "arguments": "alvo bigint",
-    "result": "jsonb",
-    "language": "plpgsql",
-    "procedure": false,
-    "comment": null,
-    "anchor": "rotina-ler_valor_historico-c9ce0023"
-  },
-  {
-    "name": "ler_votos_enquete",
-    "arguments": "alvo bigint",
-    "result": "jsonb",
-    "language": "sql",
-    "procedure": false,
-    "comment": null,
-    "anchor": "rotina-ler_votos_enquete-c9ce0023"
-  },
-  {
-    "name": "referencia_api",
-    "arguments": "tipo character varying, pai character varying, referencia character varying",
-    "result": "text",
-    "language": "sql",
-    "procedure": false,
-    "comment": null,
-    "anchor": "rotina-referencia_api-cfbd0832"
-  },
-  {
-    "name": "remover_nulos_raiz",
-    "arguments": "objeto jsonb",
-    "result": "jsonb",
-    "language": "sql",
-    "procedure": false,
-    "comment": null,
-    "anchor": "rotina-remover_nulos_raiz-400403d3"
-  },
-  {
-    "name": "remover_nulos_recursivo",
-    "arguments": "valor jsonb",
-    "result": "jsonb",
-    "language": "plpgsql",
-    "procedure": false,
-    "comment": null,
-    "anchor": "rotina-remover_nulos_recursivo-1c854ef1"
-  }
+    {
+        "name": "adiar_limpeza_kanban",
+        "anchor": "rotina-adiar_limpeza_kanban-03b374bc",
+        "result": "void",
+        "comment": null,
+        "language": "sql",
+        "arguments": "chave text",
+        "procedure": false
+    },
+    {
+        "name": "arquivar_atividade",
+        "anchor": "rotina-arquivar_atividade-f69f05bc",
+        "result": "boolean",
+        "comment": "Arquiva uma atividade da turma, retira a linha ativa e grava auditoria em uma única operação.",
+        "language": "plpgsql",
+        "arguments": "p_id text, p_motivo text, p_arquivada_em text, p_dias_retencao integer",
+        "procedure": false
+    },
+    {
+        "name": "consultar_catalogo_agenda",
+        "anchor": "rotina-consultar_catalogo_agenda-1ef8c8f7",
+        "result": "TABLE(activities jsonb, documents jsonb)",
+        "comment": "Seleciona atividades gerais e da turma e reúne os documentos do catálogo em uma consulta limitada.",
+        "language": "sql",
+        "arguments": "p_turma text, p_incluir_atividades boolean",
+        "procedure": false
+    },
+    {
+        "name": "enfileirar_limpeza_kanban",
+        "anchor": "rotina-enfileirar_limpeza_kanban-d006a42d",
+        "result": "void",
+        "comment": null,
+        "language": "plpgsql",
+        "arguments": "lote jsonb",
+        "procedure": false
+    },
+    {
+        "name": "gravar_acessos_votacao",
+        "anchor": "rotina-gravar_acessos_votacao-65a7a60d",
+        "result": "void",
+        "comment": null,
+        "language": "plpgsql",
+        "arguments": "alvo bigint, objeto jsonb",
+        "procedure": false
+    },
+    {
+        "name": "gravar_anotacoes",
+        "anchor": "rotina-gravar_anotacoes-65a7a60d",
+        "result": "void",
+        "comment": null,
+        "language": "plpgsql",
+        "arguments": "alvo bigint, objeto jsonb",
+        "procedure": false
+    },
+    {
+        "name": "gravar_anuncios",
+        "anchor": "rotina-gravar_anuncios-65a7a60d",
+        "result": "void",
+        "comment": null,
+        "language": "plpgsql",
+        "arguments": "alvo bigint, objeto jsonb",
+        "procedure": false
+    },
+    {
+        "name": "gravar_atividades",
+        "anchor": "rotina-gravar_atividades-65a7a60d",
+        "result": "void",
+        "comment": null,
+        "language": "plpgsql",
+        "arguments": "alvo bigint, objeto jsonb",
+        "procedure": false
+    },
+    {
+        "name": "gravar_atividades_arquivadas",
+        "anchor": "rotina-gravar_atividades_arquivadas-65a7a60d",
+        "result": "void",
+        "comment": null,
+        "language": "plpgsql",
+        "arguments": "alvo bigint, objeto jsonb",
+        "procedure": false
+    },
+    {
+        "name": "gravar_atualizacoes_agenda",
+        "anchor": "rotina-gravar_atualizacoes_agenda-65a7a60d",
+        "result": "void",
+        "comment": null,
+        "language": "plpgsql",
+        "arguments": "alvo bigint, objeto jsonb",
+        "procedure": false
+    },
+    {
+        "name": "gravar_avisos_turma",
+        "anchor": "rotina-gravar_avisos_turma-65a7a60d",
+        "result": "void",
+        "comment": null,
+        "language": "plpgsql",
+        "arguments": "alvo bigint, objeto jsonb",
+        "procedure": false
+    },
+    {
+        "name": "gravar_chat_representantes",
+        "anchor": "rotina-gravar_chat_representantes-65a7a60d",
+        "result": "void",
+        "comment": null,
+        "language": "plpgsql",
+        "arguments": "alvo bigint, objeto jsonb",
+        "procedure": false
+    },
+    {
+        "name": "gravar_conteudo",
+        "anchor": "rotina-gravar_conteudo-40971084",
+        "result": "void",
+        "comment": null,
+        "language": "plpgsql",
+        "arguments": "alvo bigint, tipo character varying, objeto jsonb",
+        "procedure": false
+    },
+    {
+        "name": "gravar_convites_representacao",
+        "anchor": "rotina-gravar_convites_representacao-65a7a60d",
+        "result": "void",
+        "comment": null,
+        "language": "plpgsql",
+        "arguments": "alvo bigint, objeto jsonb",
+        "procedure": false
+    },
+    {
+        "name": "gravar_enquetes",
+        "anchor": "rotina-gravar_enquetes-65a7a60d",
+        "result": "void",
+        "comment": null,
+        "language": "plpgsql",
+        "arguments": "alvo bigint, objeto jsonb",
+        "procedure": false
+    },
+    {
+        "name": "gravar_entregas_resumo",
+        "anchor": "rotina-gravar_entregas_resumo-65a7a60d",
+        "result": "void",
+        "comment": null,
+        "language": "plpgsql",
+        "arguments": "alvo bigint, objeto jsonb",
+        "procedure": false
+    },
+    {
+        "name": "gravar_envios_anexos",
+        "anchor": "rotina-gravar_envios_anexos-65a7a60d",
+        "result": "void",
+        "comment": null,
+        "language": "plpgsql",
+        "arguments": "alvo bigint, objeto jsonb",
+        "procedure": false
+    },
+    {
+        "name": "gravar_espacos_kanban",
+        "anchor": "rotina-gravar_espacos_kanban-65a7a60d",
+        "result": "void",
+        "comment": null,
+        "language": "plpgsql",
+        "arguments": "alvo bigint, objeto jsonb",
+        "procedure": false
+    },
+    {
+        "name": "gravar_horarios_aula",
+        "anchor": "rotina-gravar_horarios_aula-65a7a60d",
+        "result": "void",
+        "comment": null,
+        "language": "plpgsql",
+        "arguments": "alvo bigint, objeto jsonb",
+        "procedure": false
+    },
+    {
+        "name": "gravar_limites_servico",
+        "anchor": "rotina-gravar_limites_servico-65a7a60d",
+        "result": "void",
+        "comment": null,
+        "language": "plpgsql",
+        "arguments": "alvo bigint, objeto jsonb",
+        "procedure": false
+    },
+    {
+        "name": "gravar_limpeza_anexos_kanban",
+        "anchor": "rotina-gravar_limpeza_anexos_kanban-65a7a60d",
+        "result": "void",
+        "comment": null,
+        "language": "plpgsql",
+        "arguments": "alvo bigint, objeto jsonb",
+        "procedure": false
+    },
+    {
+        "name": "gravar_mensagens_sugestao",
+        "anchor": "rotina-gravar_mensagens_sugestao-65a7a60d",
+        "result": "void",
+        "comment": null,
+        "language": "plpgsql",
+        "arguments": "alvo bigint, objeto jsonb",
+        "procedure": false
+    },
+    {
+        "name": "gravar_participantes_kanban",
+        "anchor": "rotina-gravar_participantes_kanban-65a7a60d",
+        "result": "void",
+        "comment": null,
+        "language": "plpgsql",
+        "arguments": "alvo bigint, objeto jsonb",
+        "procedure": false
+    },
+    {
+        "name": "gravar_pedidos_agenda",
+        "anchor": "rotina-gravar_pedidos_agenda-65a7a60d",
+        "result": "void",
+        "comment": null,
+        "language": "plpgsql",
+        "arguments": "alvo bigint, objeto jsonb",
+        "procedure": false
+    },
+    {
+        "name": "gravar_pedidos_kanban",
+        "anchor": "rotina-gravar_pedidos_kanban-65a7a60d",
+        "result": "void",
+        "comment": null,
+        "language": "plpgsql",
+        "arguments": "alvo bigint, objeto jsonb",
+        "procedure": false
+    },
+    {
+        "name": "gravar_pedidos_representacao",
+        "anchor": "rotina-gravar_pedidos_representacao-65a7a60d",
+        "result": "void",
+        "comment": null,
+        "language": "plpgsql",
+        "arguments": "alvo bigint, objeto jsonb",
+        "procedure": false
+    },
+    {
+        "name": "gravar_perfis_administrativos",
+        "anchor": "rotina-gravar_perfis_administrativos-65a7a60d",
+        "result": "void",
+        "comment": null,
+        "language": "plpgsql",
+        "arguments": "alvo bigint, objeto jsonb",
+        "procedure": false
+    },
+    {
+        "name": "gravar_perfis_comunidade",
+        "anchor": "rotina-gravar_perfis_comunidade-65a7a60d",
+        "result": "void",
+        "comment": null,
+        "language": "plpgsql",
+        "arguments": "alvo bigint, objeto jsonb",
+        "procedure": false
+    },
+    {
+        "name": "gravar_preferencias_resumo",
+        "anchor": "rotina-gravar_preferencias_resumo-65a7a60d",
+        "result": "void",
+        "comment": null,
+        "language": "plpgsql",
+        "arguments": "alvo bigint, objeto jsonb",
+        "procedure": false
+    },
+    {
+        "name": "gravar_registros",
+        "anchor": "rotina-gravar_registros-d006a42d",
+        "result": "void",
+        "comment": null,
+        "language": "plpgsql",
+        "arguments": "lote jsonb",
+        "procedure": false
+    },
+    {
+        "name": "gravar_regras_recorrencia",
+        "anchor": "rotina-gravar_regras_recorrencia-65a7a60d",
+        "result": "void",
+        "comment": null,
+        "language": "plpgsql",
+        "arguments": "alvo bigint, objeto jsonb",
+        "procedure": false
+    },
+    {
+        "name": "gravar_regras_retencao",
+        "anchor": "rotina-gravar_regras_retencao-65a7a60d",
+        "result": "void",
+        "comment": null,
+        "language": "plpgsql",
+        "arguments": "alvo bigint, objeto jsonb",
+        "procedure": false
+    },
+    {
+        "name": "gravar_sugestoes_atividade",
+        "anchor": "rotina-gravar_sugestoes_atividade-65a7a60d",
+        "result": "void",
+        "comment": null,
+        "language": "plpgsql",
+        "arguments": "alvo bigint, objeto jsonb",
+        "procedure": false
+    },
+    {
+        "name": "gravar_sugestoes_melhoria",
+        "anchor": "rotina-gravar_sugestoes_melhoria-65a7a60d",
+        "result": "void",
+        "comment": null,
+        "language": "plpgsql",
+        "arguments": "alvo bigint, objeto jsonb",
+        "procedure": false
+    },
+    {
+        "name": "gravar_turmas_agenda",
+        "anchor": "rotina-gravar_turmas_agenda-65a7a60d",
+        "result": "void",
+        "comment": null,
+        "language": "plpgsql",
+        "arguments": "alvo bigint, objeto jsonb",
+        "procedure": false
+    },
+    {
+        "name": "gravar_valor_historico",
+        "anchor": "rotina-gravar_valor_historico-b88cf40a",
+        "result": "void",
+        "comment": null,
+        "language": "plpgsql",
+        "arguments": "auditoria bigint, legado bigint, revisao bigint, pai bigint, campo character varying, posicao integer, objeto jsonb",
+        "procedure": false
+    },
+    {
+        "name": "gravar_votos_enquete",
+        "anchor": "rotina-gravar_votos_enquete-65a7a60d",
+        "result": "void",
+        "comment": null,
+        "language": "plpgsql",
+        "arguments": "alvo bigint, objeto jsonb",
+        "procedure": false
+    },
+    {
+        "name": "inserir_anexos_atividade",
+        "anchor": "rotina-inserir_anexos_atividade-9063136c",
+        "result": "void",
+        "comment": null,
+        "language": "plpgsql",
+        "arguments": "pai bigint, campo character varying, posicao integer, objeto jsonb",
+        "procedure": false
+    },
+    {
+        "name": "inserir_anexos_atividade_arquivada",
+        "anchor": "rotina-inserir_anexos_atividade_arquivada-9063136c",
+        "result": "void",
+        "comment": null,
+        "language": "plpgsql",
+        "arguments": "pai bigint, campo character varying, posicao integer, objeto jsonb",
+        "procedure": false
+    },
+    {
+        "name": "inserir_auditoria",
+        "anchor": "rotina-inserir_auditoria-d41d8cd9",
+        "result": "trigger",
+        "comment": null,
+        "language": "plpgsql",
+        "arguments": "",
+        "procedure": false
+    },
+    {
+        "name": "inserir_auditoria_legada",
+        "anchor": "rotina-inserir_auditoria_legada-d41d8cd9",
+        "result": "trigger",
+        "comment": null,
+        "language": "plpgsql",
+        "arguments": "",
+        "procedure": false
+    },
+    {
+        "name": "inserir_cartoes_kanban",
+        "anchor": "rotina-inserir_cartoes_kanban-9063136c",
+        "result": "void",
+        "comment": null,
+        "language": "plpgsql",
+        "arguments": "pai bigint, campo character varying, posicao integer, objeto jsonb",
+        "procedure": false
+    },
+    {
+        "name": "inserir_colunas_kanban",
+        "anchor": "rotina-inserir_colunas_kanban-9063136c",
+        "result": "void",
+        "comment": null,
+        "language": "plpgsql",
+        "arguments": "pai bigint, campo character varying, posicao integer, objeto jsonb",
+        "procedure": false
+    },
+    {
+        "name": "inserir_conteudo_atividade_arquivada",
+        "anchor": "rotina-inserir_conteudo_atividade_arquivada-9063136c",
+        "result": "void",
+        "comment": null,
+        "language": "plpgsql",
+        "arguments": "pai bigint, campo character varying, posicao integer, objeto jsonb",
+        "procedure": false
+    },
+    {
+        "name": "inserir_itens_checklist",
+        "anchor": "rotina-inserir_itens_checklist-9063136c",
+        "result": "void",
+        "comment": null,
+        "language": "plpgsql",
+        "arguments": "pai bigint, campo character varying, posicao integer, objeto jsonb",
+        "procedure": false
+    },
+    {
+        "name": "inserir_opcoes_enquete",
+        "anchor": "rotina-inserir_opcoes_enquete-9063136c",
+        "result": "void",
+        "comment": null,
+        "language": "plpgsql",
+        "arguments": "pai bigint, campo character varying, posicao integer, objeto jsonb",
+        "procedure": false
+    },
+    {
+        "name": "inserir_quadros_kanban",
+        "anchor": "rotina-inserir_quadros_kanban-9063136c",
+        "result": "void",
+        "comment": null,
+        "language": "plpgsql",
+        "arguments": "pai bigint, campo character varying, posicao integer, objeto jsonb",
+        "procedure": false
+    },
+    {
+        "name": "ler_acessos_votacao",
+        "anchor": "rotina-ler_acessos_votacao-c9ce0023",
+        "result": "jsonb",
+        "comment": null,
+        "language": "sql",
+        "arguments": "alvo bigint",
+        "procedure": false
+    },
+    {
+        "name": "ler_anexos_atividade",
+        "anchor": "rotina-ler_anexos_atividade-c9ce0023",
+        "result": "jsonb",
+        "comment": null,
+        "language": "sql",
+        "arguments": "alvo bigint",
+        "procedure": false
+    },
+    {
+        "name": "ler_anexos_atividade_arquivada",
+        "anchor": "rotina-ler_anexos_atividade_arquivada-c9ce0023",
+        "result": "jsonb",
+        "comment": null,
+        "language": "sql",
+        "arguments": "alvo bigint",
+        "procedure": false
+    },
+    {
+        "name": "ler_anotacoes",
+        "anchor": "rotina-ler_anotacoes-c9ce0023",
+        "result": "jsonb",
+        "comment": null,
+        "language": "sql",
+        "arguments": "alvo bigint",
+        "procedure": false
+    },
+    {
+        "name": "ler_anuncios",
+        "anchor": "rotina-ler_anuncios-c9ce0023",
+        "result": "jsonb",
+        "comment": null,
+        "language": "sql",
+        "arguments": "alvo bigint",
+        "procedure": false
+    },
+    {
+        "name": "ler_atividades",
+        "anchor": "rotina-ler_atividades-c9ce0023",
+        "result": "jsonb",
+        "comment": null,
+        "language": "sql",
+        "arguments": "alvo bigint",
+        "procedure": false
+    },
+    {
+        "name": "ler_atividades_arquivadas",
+        "anchor": "rotina-ler_atividades_arquivadas-c9ce0023",
+        "result": "jsonb",
+        "comment": null,
+        "language": "sql",
+        "arguments": "alvo bigint",
+        "procedure": false
+    },
+    {
+        "name": "ler_atualizacoes_agenda",
+        "anchor": "rotina-ler_atualizacoes_agenda-c9ce0023",
+        "result": "jsonb",
+        "comment": null,
+        "language": "sql",
+        "arguments": "alvo bigint",
+        "procedure": false
+    },
+    {
+        "name": "ler_avisos_turma",
+        "anchor": "rotina-ler_avisos_turma-c9ce0023",
+        "result": "jsonb",
+        "comment": null,
+        "language": "sql",
+        "arguments": "alvo bigint",
+        "procedure": false
+    },
+    {
+        "name": "ler_cartoes_kanban",
+        "anchor": "rotina-ler_cartoes_kanban-c9ce0023",
+        "result": "jsonb",
+        "comment": null,
+        "language": "sql",
+        "arguments": "alvo bigint",
+        "procedure": false
+    },
+    {
+        "name": "ler_chat_representantes",
+        "anchor": "rotina-ler_chat_representantes-c9ce0023",
+        "result": "jsonb",
+        "comment": null,
+        "language": "sql",
+        "arguments": "alvo bigint",
+        "procedure": false
+    },
+    {
+        "name": "ler_colunas_kanban",
+        "anchor": "rotina-ler_colunas_kanban-c9ce0023",
+        "result": "jsonb",
+        "comment": null,
+        "language": "sql",
+        "arguments": "alvo bigint",
+        "procedure": false
+    },
+    {
+        "name": "ler_conteudo_atividade_arquivada",
+        "anchor": "rotina-ler_conteudo_atividade_arquivada-c9ce0023",
+        "result": "jsonb",
+        "comment": null,
+        "language": "sql",
+        "arguments": "alvo bigint",
+        "procedure": false
+    },
+    {
+        "name": "ler_convites_representacao",
+        "anchor": "rotina-ler_convites_representacao-c9ce0023",
+        "result": "jsonb",
+        "comment": null,
+        "language": "sql",
+        "arguments": "alvo bigint",
+        "procedure": false
+    },
+    {
+        "name": "ler_enquetes",
+        "anchor": "rotina-ler_enquetes-c9ce0023",
+        "result": "jsonb",
+        "comment": null,
+        "language": "sql",
+        "arguments": "alvo bigint",
+        "procedure": false
+    },
+    {
+        "name": "ler_entregas_resumo",
+        "anchor": "rotina-ler_entregas_resumo-c9ce0023",
+        "result": "jsonb",
+        "comment": null,
+        "language": "sql",
+        "arguments": "alvo bigint",
+        "procedure": false
+    },
+    {
+        "name": "ler_envios_anexos",
+        "anchor": "rotina-ler_envios_anexos-c9ce0023",
+        "result": "jsonb",
+        "comment": null,
+        "language": "sql",
+        "arguments": "alvo bigint",
+        "procedure": false
+    },
+    {
+        "name": "ler_espacos_kanban",
+        "anchor": "rotina-ler_espacos_kanban-c9ce0023",
+        "result": "jsonb",
+        "comment": null,
+        "language": "sql",
+        "arguments": "alvo bigint",
+        "procedure": false
+    },
+    {
+        "name": "ler_horarios_aula",
+        "anchor": "rotina-ler_horarios_aula-c9ce0023",
+        "result": "jsonb",
+        "comment": null,
+        "language": "sql",
+        "arguments": "alvo bigint",
+        "procedure": false
+    },
+    {
+        "name": "ler_itens_checklist",
+        "anchor": "rotina-ler_itens_checklist-c9ce0023",
+        "result": "jsonb",
+        "comment": null,
+        "language": "sql",
+        "arguments": "alvo bigint",
+        "procedure": false
+    },
+    {
+        "name": "ler_limites_servico",
+        "anchor": "rotina-ler_limites_servico-c9ce0023",
+        "result": "jsonb",
+        "comment": null,
+        "language": "sql",
+        "arguments": "alvo bigint",
+        "procedure": false
+    },
+    {
+        "name": "ler_limpeza_anexos_kanban",
+        "anchor": "rotina-ler_limpeza_anexos_kanban-c9ce0023",
+        "result": "jsonb",
+        "comment": null,
+        "language": "sql",
+        "arguments": "alvo bigint",
+        "procedure": false
+    },
+    {
+        "name": "ler_mensagens_sugestao",
+        "anchor": "rotina-ler_mensagens_sugestao-c9ce0023",
+        "result": "jsonb",
+        "comment": null,
+        "language": "sql",
+        "arguments": "alvo bigint",
+        "procedure": false
+    },
+    {
+        "name": "ler_participantes_kanban",
+        "anchor": "rotina-ler_participantes_kanban-c9ce0023",
+        "result": "jsonb",
+        "comment": null,
+        "language": "sql",
+        "arguments": "alvo bigint",
+        "procedure": false
+    },
+    {
+        "name": "ler_pedidos_agenda",
+        "anchor": "rotina-ler_pedidos_agenda-c9ce0023",
+        "result": "jsonb",
+        "comment": null,
+        "language": "sql",
+        "arguments": "alvo bigint",
+        "procedure": false
+    },
+    {
+        "name": "ler_pedidos_kanban",
+        "anchor": "rotina-ler_pedidos_kanban-c9ce0023",
+        "result": "jsonb",
+        "comment": null,
+        "language": "sql",
+        "arguments": "alvo bigint",
+        "procedure": false
+    },
+    {
+        "name": "ler_pedidos_representacao",
+        "anchor": "rotina-ler_pedidos_representacao-c9ce0023",
+        "result": "jsonb",
+        "comment": null,
+        "language": "sql",
+        "arguments": "alvo bigint",
+        "procedure": false
+    },
+    {
+        "name": "ler_perfis_administrativos",
+        "anchor": "rotina-ler_perfis_administrativos-c9ce0023",
+        "result": "jsonb",
+        "comment": null,
+        "language": "sql",
+        "arguments": "alvo bigint",
+        "procedure": false
+    },
+    {
+        "name": "ler_perfis_comunidade",
+        "anchor": "rotina-ler_perfis_comunidade-c9ce0023",
+        "result": "jsonb",
+        "comment": null,
+        "language": "sql",
+        "arguments": "alvo bigint",
+        "procedure": false
+    },
+    {
+        "name": "ler_preferencias_resumo",
+        "anchor": "rotina-ler_preferencias_resumo-c9ce0023",
+        "result": "jsonb",
+        "comment": null,
+        "language": "sql",
+        "arguments": "alvo bigint",
+        "procedure": false
+    },
+    {
+        "name": "ler_quadros_kanban",
+        "anchor": "rotina-ler_quadros_kanban-c9ce0023",
+        "result": "jsonb",
+        "comment": null,
+        "language": "sql",
+        "arguments": "alvo bigint",
+        "procedure": false
+    },
+    {
+        "name": "ler_registro",
+        "anchor": "rotina-ler_registro-e6622460",
+        "result": "jsonb",
+        "comment": null,
+        "language": "sql",
+        "arguments": "alvo bigint, tipo character varying",
+        "procedure": false
+    },
+    {
+        "name": "ler_regras_recorrencia",
+        "anchor": "rotina-ler_regras_recorrencia-c9ce0023",
+        "result": "jsonb",
+        "comment": null,
+        "language": "sql",
+        "arguments": "alvo bigint",
+        "procedure": false
+    },
+    {
+        "name": "ler_regras_retencao",
+        "anchor": "rotina-ler_regras_retencao-c9ce0023",
+        "result": "jsonb",
+        "comment": null,
+        "language": "sql",
+        "arguments": "alvo bigint",
+        "procedure": false
+    },
+    {
+        "name": "ler_sugestoes_atividade",
+        "anchor": "rotina-ler_sugestoes_atividade-c9ce0023",
+        "result": "jsonb",
+        "comment": null,
+        "language": "sql",
+        "arguments": "alvo bigint",
+        "procedure": false
+    },
+    {
+        "name": "ler_sugestoes_melhoria",
+        "anchor": "rotina-ler_sugestoes_melhoria-c9ce0023",
+        "result": "jsonb",
+        "comment": null,
+        "language": "sql",
+        "arguments": "alvo bigint",
+        "procedure": false
+    },
+    {
+        "name": "ler_turmas_agenda",
+        "anchor": "rotina-ler_turmas_agenda-c9ce0023",
+        "result": "jsonb",
+        "comment": null,
+        "language": "sql",
+        "arguments": "alvo bigint",
+        "procedure": false
+    },
+    {
+        "name": "ler_valor_historico",
+        "anchor": "rotina-ler_valor_historico-c9ce0023",
+        "result": "jsonb",
+        "comment": null,
+        "language": "plpgsql",
+        "arguments": "alvo bigint",
+        "procedure": false
+    },
+    {
+        "name": "ler_votos_enquete",
+        "anchor": "rotina-ler_votos_enquete-c9ce0023",
+        "result": "jsonb",
+        "comment": null,
+        "language": "sql",
+        "arguments": "alvo bigint",
+        "procedure": false
+    },
+    {
+        "name": "referencia_api",
+        "anchor": "rotina-referencia_api-cfbd0832",
+        "result": "text",
+        "comment": null,
+        "language": "sql",
+        "arguments": "tipo character varying, pai character varying, referencia character varying",
+        "procedure": false
+    },
+    {
+        "name": "remover_nulos_raiz",
+        "anchor": "rotina-remover_nulos_raiz-400403d3",
+        "result": "jsonb",
+        "comment": null,
+        "language": "sql",
+        "arguments": "objeto jsonb",
+        "procedure": false
+    },
+    {
+        "name": "remover_nulos_recursivo",
+        "anchor": "rotina-remover_nulos_recursivo-1c854ef1",
+        "result": "jsonb",
+        "comment": null,
+        "language": "plpgsql",
+        "arguments": "valor jsonb",
+        "procedure": false
+    },
+    {
+        "name": "revisao_catalogo_publico",
+        "anchor": "rotina-revisao_catalogo_publico-60391726",
+        "result": "character varying",
+        "comment": "Calcula a revisão dos catálogos públicos para invalidar cópias Redis após inclusões, alterações e exclusões.",
+        "language": "plpgsql",
+        "arguments": "catalogo character varying",
+        "procedure": false
+    }
 ]

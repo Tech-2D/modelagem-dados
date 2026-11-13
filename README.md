@@ -1,6 +1,6 @@
 # Modelagem de dados da Tech-2D
 
-Documentação do PostgreSQL usado pela Agenda e pelo Cadê o professor, com as migrações do esquema `tech2d` e uma referência do cache legado em Redis. [Abrir site da documentação](https://tech-2d.github.io/modelagem-dados/)
+Documentação do PostgreSQL usado pela Agenda e pelo Cadê o professor, com as migrações do esquema `tech2d` e a integração do cache de catálogos públicos em Redis. [Abrir site da documentação](https://tech-2d.github.io/modelagem-dados/)
 
 | Conteúdo | Onde encontrar |
 | --- | --- |
