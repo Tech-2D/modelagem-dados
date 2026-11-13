@@ -11,14 +11,13 @@ O schema `tech2d` separa os dados por assunto. As tabelas usam colunas tipadas e
 {% assign tables = site.data.schema | where: "kind", "table" %}
 <p class="catalog-overview"><strong>{{ tables.size }} tabelas</strong> no schema <code>tech2d</code> · <a href="{{ '/views.html' | relative_url }}">{{ site.data.views.size }} views</a> · <a href="{{ '/schemas.html' | relative_url }}">Schemas do banco</a></p>
 
-Busque por tabela, coluna ou tipo. Abra **Detalhes e relações** para consultar a finalidade de cada coluna e as tabelas vinculadas.
+Busque por tabela, coluna ou tipo, ou filtre por área.
 
 <div class="catalog-controls" data-catalog-controls hidden>
   <label for="catalog-search"><span class="catalog-label-icon">{% include doc-icon.html name="search" %}Buscar no catálogo</span><input id="catalog-search" type="search" placeholder="Ex.: visitas, id_turma ou jsonb" autocomplete="off"></label>
   <label for="catalog-group">Área<select id="catalog-group"><option value="">Todas as áreas</option>{% for group in site.data.catalog %}<option value="{{ group.id }}">{{ group.name }}</option>{% endfor %}</select></label>
   <div class="catalog-actions">
     <p class="catalog-status" data-catalog-status role="status"></p>
-    <button type="button" data-catalog-toggle>Abrir detalhes</button>
   </div>
 </div>
 
@@ -27,7 +26,6 @@ Busque por tabela, coluna ou tipo. Abra **Detalhes e relações** para consultar
   <h3 id="{{ group.id }}">{{ group.name }}</h3>
   {% for item in group.objects %}
   {% assign object = site.data.schema | where: "name", item.name | first %}
-  {% assign column_notes = site.data.column_notes[item.name] %}
   <article class="schema-card" id="obj-{{ item.name }}" data-catalog-object>
     <header class="schema-card-header">
       {% include doc-icon.html name="table" %}
@@ -52,20 +50,6 @@ Busque por tabela, coluna ou tipo. Abra **Detalhes e relações** para consultar
       </li>
       {% endfor %}
     </ul>
-    <details class="schema-card-details" data-catalog-expand>
-      <summary>Detalhes e relações</summary>
-      <div>
-        {% if object.primary_key.size > 0 %}<p><strong>Chave primária</strong> <code>{{ object.primary_key | join: ", " }}</code></p>{% endif %}
-        {% if object.references.size > 0 %}<ul class="object-relations" aria-label="Chaves estrangeiras">{% for relation in object.references %}<li><code>{{ relation.column }}</code> → <a href="#obj-{{ relation.table }}"><code>{{ relation.table }}.{{ relation.target }}</code></a></li>{% endfor %}</ul>{% endif %}
-        <p><a href="{{ '/modelagem.html' | relative_url }}#tabela={{ item.name }}">Explorar relações desta tabela {% include doc-icon.html name="arrow" %}</a></p>
-        <dl class="schema-column-notes">
-          {% for column in object.columns %}
-          <dt><code>{{ column.name }}</code></dt>
-          <dd>{{ column_notes[column.name] | default: column.comment | default: "Sem descrição registrada." | escape }}</dd>
-          {% endfor %}
-        </dl>
-      </div>
-    </details>
   </article>
   {% endfor %}
 </section>
@@ -75,7 +59,7 @@ Busque por tabela, coluna ou tipo. Abra **Detalhes e relações** para consultar
 
 ## Como os registros se ligam
 
-Abra a [modelagem]({{ '/modelagem.html' | relative_url }}) para seguir os vínculos de horários, atividades e contas. No catálogo, as chaves estrangeiras levam diretamente à tabela relacionada.
+Abra a [modelagem]({{ '/modelagem.html' | relative_url }}) para seguir os vínculos de horários, atividades e contas.
 
 `atividades.data` usa `date` e `atividades.hora` usa `time`. O horário é opcional. Cada anexo fica em uma linha de `anexos_atividade`, com posição, nome, tamanho e referência ao arquivo no R2.
 

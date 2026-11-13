@@ -13,10 +13,13 @@ permalink: /
 </div>
 
 {% assign table_count = site.data.schema | where: "kind", "table" | size %}
+{% assign functions = site.data.routines | where: "procedure", false %}
+{% assign procedures = site.data.routines | where: "procedure", true %}
 <div class="workspace-stats" aria-label="Inventário PostgreSQL">
   <a href="{{ '/postgresql.html' | relative_url }}"><strong>{{ table_count }}</strong><span>Tabelas</span></a>
   <a href="{{ '/views.html' | relative_url }}"><strong>{{ site.data.views.size }}</strong><span>Views</span></a>
-  <a href="{{ '/funcoes.html' | relative_url }}"><strong>{{ site.data.routines.size }}</strong><span>Funções e procedures</span></a>
+  <a href="{{ '/funcoes.html' | relative_url }}"><strong>{{ functions.size }}</strong><span>Funções</span></a>
+  <a href="{{ '/procedures.html' | relative_url }}"><strong>{{ procedures.size }}</strong><span>Procedures</span></a>
 </div>
 
 ## Encontre o que você precisa
