@@ -723,5 +723,77 @@
         "note": "Nome da turma exibido nos horários de aula."
       }
     ]
+  },
+  {
+    "name": "visao_pegaki_resultados",
+    "comment": "Médias e situação das notas privadas do Pegaki, com segurança por conta.",
+    "dependencies": [
+      "pegaki_cadernos",
+      "pegaki_disciplinas",
+      "pegaki_notas",
+      "pegaki_recuperacoes"
+    ],
+    "columns": [
+      {
+        "name": "id_usuario",
+        "source": "id_usuario"
+      },
+      {
+        "name": "ano_letivo",
+        "source": "ano_letivo"
+      },
+      {
+        "name": "ano_serie",
+        "source": "ano_serie"
+      },
+      {
+        "name": "regra_calculo",
+        "source": "regra_calculo"
+      },
+      {
+        "name": "versao",
+        "source": "versao"
+      },
+      {
+        "name": "id_disciplina",
+        "source": "id_disciplina"
+      },
+      {
+        "name": "nome",
+        "source": "nome"
+      },
+      {
+        "name": "media_primeiro",
+        "source": "media_primeiro"
+      },
+      {
+        "name": "media_segundo",
+        "source": "media_segundo"
+      },
+      {
+        "name": "recuperacao_final",
+        "source": "recuperacao_final"
+      },
+      {
+        "name": "media_recuperada",
+        "source": "media_recuperada"
+      },
+      {
+        "name": "media_anual",
+        "source": "media_anual"
+      },
+      {
+        "name": "nota_necessaria",
+        "source": "nota_necessaria"
+      },
+      {
+        "name": "media_final",
+        "source": "media_final"
+      },
+      {
+        "name": "situacao",
+        "source": "situacao"
+      }
+    ]
   }
 ]

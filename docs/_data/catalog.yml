@@ -120,3 +120,15 @@
       title: Revisões históricas da origem
     - name: valores_historico
       title: Campos tipados do histórico
+
+- id: pegaki
+  name: Notas e médias do Pegaki
+  objects:
+    - name: pegaki_disciplinas
+      title: Disciplinas por série
+    - name: pegaki_cadernos
+      title: Cadernos por conta e ano letivo
+    - name: pegaki_notas
+      title: Notas e pesos por semestre
+    - name: pegaki_recuperacoes
+      title: Recuperação final
