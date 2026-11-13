@@ -122,13 +122,6 @@
         "comment": "Campo reviewedBy no contrato da API.",
         "nullable": true,
         "generated": false
-      },
-      {
-        "name": "campos_nulos",
-        "type": "character varying(64)[]",
-        "comment": null,
-        "nullable": false,
-        "generated": false
       }
     ],
     "comment": "Autorizações para votar",
@@ -222,13 +215,6 @@
         "type": "character varying(128)",
         "comment": "Campo uploadedBy no contrato da API.",
         "nullable": true,
-        "generated": false
-      },
-      {
-        "name": "campos_nulos",
-        "type": "character varying(64)[]",
-        "comment": null,
-        "nullable": false,
         "generated": false
       }
     ],
@@ -324,13 +310,6 @@
         "comment": "Campo uploadedBy no contrato da API.",
         "nullable": true,
         "generated": false
-      },
-      {
-        "name": "campos_nulos",
-        "type": "character varying(64)[]",
-        "comment": null,
-        "nullable": false,
-        "generated": false
       }
     ],
     "comment": "Metadados dos anexos de atividades arquivadas",
@@ -411,13 +390,6 @@
         "comment": "Campo updatedAt no contrato da API.",
         "nullable": true,
         "generated": false
-      },
-      {
-        "name": "campos_nulos",
-        "type": "character varying(64)[]",
-        "comment": null,
-        "nullable": false,
-        "generated": false
       }
     ],
     "comment": "Anotações de estudo",
@@ -455,13 +427,6 @@
         "type": "character varying(40)",
         "comment": "Campo updatedAt no contrato da API.",
         "nullable": true,
-        "generated": false
-      },
-      {
-        "name": "campos_nulos",
-        "type": "character varying(64)[]",
-        "comment": null,
-        "nullable": false,
         "generated": false
       }
     ],
@@ -573,13 +538,6 @@
         "generated": false
       },
       {
-        "name": "campos_nulos",
-        "type": "character varying(64)[]",
-        "comment": null,
-        "nullable": false,
-        "generated": false
-      },
-      {
         "name": "listas_presentes",
         "type": "character varying(64)[]",
         "comment": null,
@@ -650,13 +608,6 @@
         "type": "character varying(40)",
         "comment": "Campo r2CleanedAt no contrato da API.",
         "nullable": true,
-        "generated": false
-      },
-      {
-        "name": "campos_nulos",
-        "type": "character varying(64)[]",
-        "comment": null,
-        "nullable": false,
         "generated": false
       }
     ],
@@ -730,13 +681,6 @@
         "type": "character varying(2000)",
         "comment": "Campo sourceMessage no contrato da API.",
         "nullable": true,
-        "generated": false
-      },
-      {
-        "name": "campos_nulos",
-        "type": "character varying(64)[]",
-        "comment": null,
-        "nullable": false,
         "generated": false
       }
     ],
@@ -924,13 +868,6 @@
         "comment": "Campo updatedAt no contrato da API.",
         "nullable": true,
         "generated": false
-      },
-      {
-        "name": "campos_nulos",
-        "type": "character varying(64)[]",
-        "comment": null,
-        "nullable": false,
-        "generated": false
       }
     ],
     "comment": "Avisos publicados no quadro da turma",
@@ -1087,13 +1024,6 @@
         "generated": false
       },
       {
-        "name": "campos_nulos",
-        "type": "character varying(64)[]",
-        "comment": null,
-        "nullable": false,
-        "generated": false
-      },
-      {
         "name": "listas_presentes",
         "type": "character varying(64)[]",
         "comment": null,
@@ -1175,13 +1105,6 @@
         "comment": "Campo createdAt no contrato da API.",
         "nullable": true,
         "generated": false
-      },
-      {
-        "name": "campos_nulos",
-        "type": "character varying(64)[]",
-        "comment": null,
-        "nullable": false,
-        "generated": false
       }
     ],
     "comment": "Mensagens do chat dos representantes",
@@ -1254,13 +1177,6 @@
         "type": "boolean",
         "comment": "Campo done no contrato da API.",
         "nullable": true,
-        "generated": false
-      },
-      {
-        "name": "campos_nulos",
-        "type": "character varying(64)[]",
-        "comment": null,
-        "nullable": false,
         "generated": false
       }
     ],
@@ -1393,13 +1309,6 @@
         "generated": false
       },
       {
-        "name": "campos_nulos",
-        "type": "character varying(64)[]",
-        "comment": null,
-        "nullable": false,
-        "generated": false
-      },
-      {
         "name": "listas_presentes",
         "type": "character varying(64)[]",
         "comment": null,
@@ -1456,13 +1365,6 @@
         "type": "character varying(40)",
         "comment": "Campo approvedAt no contrato da API.",
         "nullable": true,
-        "generated": false
-      },
-      {
-        "name": "campos_nulos",
-        "type": "character varying(64)[]",
-        "comment": null,
-        "nullable": false,
         "generated": false
       }
     ],
@@ -1550,13 +1452,6 @@
         "generated": false
       },
       {
-        "name": "campos_nulos",
-        "type": "character varying(64)[]",
-        "comment": null,
-        "nullable": false,
-        "generated": false
-      },
-      {
         "name": "listas_presentes",
         "type": "character varying(64)[]",
         "comment": null,
@@ -1613,13 +1508,6 @@
         "type": "bigint",
         "comment": "Campo completedAt no contrato da API.",
         "nullable": true,
-        "generated": false
-      },
-      {
-        "name": "campos_nulos",
-        "type": "character varying(64)[]",
-        "comment": null,
-        "nullable": false,
         "generated": false
       }
     ],
@@ -1694,13 +1582,6 @@
         "comment": "Campo createdAt no contrato da API.",
         "nullable": true,
         "generated": false
-      },
-      {
-        "name": "campos_nulos",
-        "type": "character varying(64)[]",
-        "comment": null,
-        "nullable": false,
-        "generated": false
       }
     ],
     "comment": "Envios pendentes de anexos",
@@ -1752,13 +1633,6 @@
         "type": "character varying(40)",
         "comment": "Campo updatedAt no contrato da API.",
         "nullable": true,
-        "generated": false
-      },
-      {
-        "name": "campos_nulos",
-        "type": "character varying(64)[]",
-        "comment": null,
-        "nullable": false,
         "generated": false
       },
       {
@@ -1900,13 +1774,6 @@
         "comment": null,
         "nullable": true,
         "generated": false
-      },
-      {
-        "name": "campos_nulos",
-        "type": "character varying(64)[]",
-        "comment": null,
-        "nullable": false,
-        "generated": false
       }
     ],
     "comment": "Liga professor, disciplina, turma e faixa de horário a um dia da semana.",
@@ -1993,13 +1860,6 @@
         "comment": "Campo done no contrato da API.",
         "nullable": true,
         "generated": false
-      },
-      {
-        "name": "campos_nulos",
-        "type": "character varying(64)[]",
-        "comment": null,
-        "nullable": false,
-        "generated": false
       }
     ],
     "comment": "Itens das listas dos cartões",
@@ -2037,13 +1897,6 @@
         "type": "bigint",
         "comment": "Campo resetAt no contrato da API.",
         "nullable": true,
-        "generated": false
-      },
-      {
-        "name": "campos_nulos",
-        "type": "character varying(64)[]",
-        "comment": null,
-        "nullable": false,
         "generated": false
       }
     ],
@@ -2090,13 +1943,6 @@
         "comment": "Campo task no contrato da API.",
         "nullable": true,
         "generated": false
-      },
-      {
-        "name": "campos_nulos",
-        "type": "character varying(64)[]",
-        "comment": null,
-        "nullable": false,
-        "generated": false
       }
     ],
     "comment": "Fila de limpeza dos anexos de cartões removidos",
@@ -2141,13 +1987,6 @@
         "type": "character varying(40)",
         "comment": "Campo createdAt no contrato da API.",
         "nullable": true,
-        "generated": false
-      },
-      {
-        "name": "campos_nulos",
-        "type": "character varying(64)[]",
-        "comment": null,
-        "nullable": false,
         "generated": false
       }
     ],
@@ -2260,13 +2099,6 @@
         "comment": "Campo createdAt no contrato da API.",
         "nullable": true,
         "generated": false
-      },
-      {
-        "name": "campos_nulos",
-        "type": "character varying(64)[]",
-        "comment": null,
-        "nullable": false,
-        "generated": false
       }
     ],
     "comment": "Participantes de quadros compartilhados",
@@ -2325,13 +2157,6 @@
         "type": "character varying(40)",
         "comment": "Campo reviewedAt no contrato da API.",
         "nullable": true,
-        "generated": false
-      },
-      {
-        "name": "campos_nulos",
-        "type": "character varying(64)[]",
-        "comment": null,
-        "nullable": false,
         "generated": false
       }
     ],
@@ -2406,13 +2231,6 @@
         "comment": "Campo updatedAt no contrato da API.",
         "nullable": true,
         "generated": false
-      },
-      {
-        "name": "campos_nulos",
-        "type": "character varying(64)[]",
-        "comment": null,
-        "nullable": false,
-        "generated": false
       }
     ],
     "comment": "Pedidos de acesso a quadros compartilhados",
@@ -2472,13 +2290,6 @@
         "comment": "Campo reviewedAt no contrato da API.",
         "nullable": true,
         "generated": false
-      },
-      {
-        "name": "campos_nulos",
-        "type": "character varying(64)[]",
-        "comment": null,
-        "nullable": false,
-        "generated": false
       }
     ],
     "comment": "Solicitações de representantes",
@@ -2523,13 +2334,6 @@
         "type": "character varying(40)",
         "comment": "Campo createdAt no contrato da API.",
         "nullable": true,
-        "generated": false
-      },
-      {
-        "name": "campos_nulos",
-        "type": "character varying(64)[]",
-        "comment": null,
-        "nullable": false,
         "generated": false
       }
     ],
@@ -2604,13 +2408,6 @@
         "comment": "Campo updatedAt no contrato da API.",
         "nullable": true,
         "generated": false
-      },
-      {
-        "name": "campos_nulos",
-        "type": "character varying(64)[]",
-        "comment": null,
-        "nullable": false,
-        "generated": false
       }
     ],
     "comment": "Perfis públicos da comunidade",
@@ -2655,13 +2452,6 @@
         "type": "bigint",
         "comment": "Campo updatedAt no contrato da API.",
         "nullable": true,
-        "generated": false
-      },
-      {
-        "name": "campos_nulos",
-        "type": "character varying(64)[]",
-        "comment": null,
-        "nullable": false,
         "generated": false
       }
     ],
@@ -2760,13 +2550,6 @@
         "type": "boolean",
         "comment": "Campo compact no contrato da API.",
         "nullable": true,
-        "generated": false
-      },
-      {
-        "name": "campos_nulos",
-        "type": "character varying(64)[]",
-        "comment": null,
-        "nullable": false,
         "generated": false
       },
       {
@@ -3009,13 +2792,6 @@
         "comment": "Campo weekdays no contrato da API.",
         "nullable": true,
         "generated": false
-      },
-      {
-        "name": "campos_nulos",
-        "type": "character varying(64)[]",
-        "comment": null,
-        "nullable": false,
-        "generated": false
       }
     ],
     "comment": "Regras de repetição",
@@ -3074,13 +2850,6 @@
         "type": "character varying(40)",
         "comment": "Campo updatedAt no contrato da API.",
         "nullable": true,
-        "generated": false
-      },
-      {
-        "name": "campos_nulos",
-        "type": "character varying(64)[]",
-        "comment": null,
-        "nullable": false,
         "generated": false
       }
     ],
@@ -3250,13 +3019,6 @@
         "comment": "Campo closedAt no contrato da API.",
         "nullable": true,
         "generated": false
-      },
-      {
-        "name": "campos_nulos",
-        "type": "character varying(64)[]",
-        "comment": null,
-        "nullable": false,
-        "generated": false
       }
     ],
     "comment": "Sugestões de novas atividades",
@@ -3351,13 +3113,6 @@
         "comment": "Campo completedBy no contrato da API.",
         "nullable": true,
         "generated": false
-      },
-      {
-        "name": "campos_nulos",
-        "type": "character varying(64)[]",
-        "comment": null,
-        "nullable": false,
-        "generated": false
       }
     ],
     "comment": "Sugestões de melhoria da Agenda",
@@ -3434,13 +3189,6 @@
         "type": "character varying(40)",
         "comment": "Campo approvedAt no contrato da API.",
         "nullable": true,
-        "generated": false
-      },
-      {
-        "name": "campos_nulos",
-        "type": "character varying(64)[]",
-        "comment": null,
-        "nullable": false,
         "generated": false
       }
     ],
@@ -3638,13 +3386,6 @@
         "type": "character varying(40)",
         "comment": "Campo createdAt no contrato da API.",
         "nullable": true,
-        "generated": false
-      },
-      {
-        "name": "campos_nulos",
-        "type": "character varying(64)[]",
-        "comment": null,
-        "nullable": false,
         "generated": false
       }
     ],

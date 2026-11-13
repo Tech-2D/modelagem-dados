@@ -1,3 +1,11 @@
+SELECT COALESCE(obj_description(to_regnamespace('tech2d'), 'pg_namespace'), '') LIKE '%tech2d-schema-version:022_remover_campos_nulos' AS latest_022 \gset
+\if :latest_022
+\echo Schema tech2d já está na versão 022.
+\else
+SELECT COALESCE(obj_description(to_regnamespace('tech2d'), 'pg_namespace'), '') LIKE '%tech2d-schema-version:021_consultas_e_arquivamento' AS latest_021 \gset
+\if :latest_021
+\ir migrations/022_remover_campos_nulos.sql
+\else
 SELECT COALESCE(obj_description(to_regnamespace('tech2d'), 'pg_namespace'), '') LIKE '%tech2d-schema-version:021_consultas_e_arquivamento' AS latest \gset
 \if :latest
 \echo Schema tech2d já está na versão 021.
@@ -51,4 +59,7 @@ SELECT NOT EXISTS (SELECT FROM tech2d.schema_migrations WHERE version = '010_com
 \endif
 \endif
 \ir migrations/021_consultas_e_arquivamento.sql
+\endif
+\ir migrations/022_remover_campos_nulos.sql
+\endif
 \endif

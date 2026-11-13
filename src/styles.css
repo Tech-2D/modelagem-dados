@@ -1,0 +1,13 @@
+@import "tailwindcss";
+@import "../docs/assets/legacy.css" layer(components);
+@source "../docs";
+
+@theme {
+  --font-sans: Inter, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", Consolas, monospace;
+  --color-ink-950: #13213a;
+  --color-ink-800: #192840;
+  --color-accent-700: #1c4ec6;
+  --color-paper-50: #f5f7fb;
+  --color-paper-100: #eaf1ff;
+}

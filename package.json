@@ -1,0 +1,12 @@
+{
+  "name": "tech-2d-modelagem-dados",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "build:css": "node node_modules/@tailwindcss/cli/dist/index.mjs -i src/styles.css -o docs/assets/docs.css --minify"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "4.3.5",
+    "tailwindcss": "4.3.5"
+  }
+}

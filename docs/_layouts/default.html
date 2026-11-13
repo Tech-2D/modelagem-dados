@@ -8,11 +8,11 @@
   <link rel="stylesheet" href="{{ '/assets/docs.css' | relative_url }}">
   <script src="{{ '/assets/docs.js' | relative_url }}" defer></script>
 </head>
-<body>
+<body class="grid min-h-screen grid-cols-1 bg-paper-50 font-sans text-ink-800 antialiased lg:grid-cols-[15rem_minmax(0,1fr)]">
   <a class="skip-link" href="#conteudo">Ir para o conteúdo</a>
-  <aside class="sidebar">
+  <aside class="sidebar sticky top-0 z-20 flex h-auto flex-col gap-3 px-3 py-3 sm:px-4 lg:h-screen lg:gap-6 lg:px-4 lg:py-6">
     <a class="brand" href="{{ '/' | relative_url }}"><span class="brand-mark" aria-hidden="true">T2</span><span><strong>Tech-2D</strong><small>Documentação do banco</small></span></a>
-    <nav aria-label="Documentação">
+    <nav class="flex flex-wrap items-center gap-1 lg:grid lg:grid-flow-row" aria-label="Documentação">
       <a href="{{ '/' | relative_url }}"{% if page.url == '/' %} aria-current="page"{% endif %}>Visão geral</a>
       <a href="{{ '/postgresql.html' | relative_url }}"{% if page.url == '/postgresql.html' %} aria-current="page"{% endif %}>Tabelas e colunas</a>
       <a href="{{ '/schemas.html' | relative_url }}"{% if page.url == '/schemas.html' %} aria-current="page"{% endif %}>Schemas</a>
@@ -21,10 +21,10 @@
       <a href="{{ '/consultas.html' | relative_url }}"{% if page.url == '/consultas.html' %} aria-current="page"{% endif %}>Consultas SQL</a>
       <a href="{{ '/redis.html' | relative_url }}"{% if page.url == '/redis.html' %} aria-current="page"{% endif %}>Redis legado</a>
     </nav>
-    <a class="repo-link" href="https://github.com/Tech-2D/modelagem-dados">Repositório no GitHub <span aria-hidden="true">↗</span></a>
+    <a class="repo-link mt-2 self-start lg:mt-auto" href="https://github.com/Tech-2D/modelagem-dados">Repositório no GitHub <span aria-hidden="true">↗</span></a>
   </aside>
-  <div class="workspace">
-    <main id="conteudo" class="article">
+  <div class="workspace mx-auto grid w-full min-w-0 max-w-[85rem] grid-cols-1 items-start gap-6 px-4 py-5 sm:px-8 sm:py-8 xl:grid-cols-[minmax(0,54rem)_11rem] xl:gap-12 xl:px-12 xl:py-14">
+    <main id="conteudo" class="article min-w-0">
       <header class="page-heading">
         <h1>{{ page.title | escape }}</h1>
         {% if page.description %}<p>{{ page.description | escape }}</p>{% endif %}

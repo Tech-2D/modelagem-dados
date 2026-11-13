@@ -17,8 +17,7 @@
     "situacao": "Estado atual do registro.",
     "solicitado_em": "Momento do pedido de acesso.",
     "revisado_em": "Momento da avaliação do pedido.",
-    "revisado_por": "Campo reviewedBy no contrato da API.",
-    "campos_nulos": "Nomes dos campos enviados como nulos. Preserva a diferença entre nulo e campo ausente no contrato da API."
+    "revisado_por": "Campo reviewedBy no contrato da API."
   },
   "anexos_atividade": {
     "id": "Identificador numérico gerado pelo banco.",
@@ -31,8 +30,7 @@
     "tamanho_bytes": "Tamanho do arquivo, em bytes.",
     "chave_arquivo": "Chave do objeto correspondente no Cloudflare R2.",
     "enviado_em": "Momento do envio, no formato ISO da API.",
-    "enviado_por": "Campo uploadedBy no contrato da API.",
-    "campos_nulos": "Nomes dos campos enviados como nulos. Preserva a diferença entre nulo e campo ausente no contrato da API."
+    "enviado_por": "Campo uploadedBy no contrato da API."
   },
   "anexos_atividade_arquivada": {
     "id": "Identificador numérico gerado pelo banco.",
@@ -45,8 +43,7 @@
     "tamanho_bytes": "Tamanho do arquivo, em bytes.",
     "chave_arquivo": "Chave do objeto correspondente no Cloudflare R2.",
     "enviado_em": "Momento do envio, no formato ISO da API.",
-    "enviado_por": "Campo uploadedBy no contrato da API.",
-    "campos_nulos": "Nomes dos campos enviados como nulos. Preserva a diferença entre nulo e campo ausente no contrato da API."
+    "enviado_por": "Campo uploadedBy no contrato da API."
   },
   "anotacoes": {
     "id_registro": "Identificador numérico que liga a linha ao registro principal e à sua versão.",
@@ -57,14 +54,12 @@
     "id_autor": "Campo authorUid no contrato da API.",
     "email_autor": "Campo authorEmail no contrato da API.",
     "criado_em": "Momento de criação, no formato ISO da API.",
-    "alterado_em": "Momento da última alteração, no formato ISO da API.",
-    "campos_nulos": "Nomes dos campos enviados como nulos. Preserva a diferença entre nulo e campo ausente no contrato da API."
+    "alterado_em": "Momento da última alteração, no formato ISO da API."
   },
   "anuncios": {
     "id_registro": "Identificador numérico que liga a linha ao registro principal e à sua versão.",
     "mensagem": "Texto da mensagem.",
-    "alterado_em": "Momento da última alteração, no formato ISO da API.",
-    "campos_nulos": "Nomes dos campos enviados como nulos. Preserva a diferença entre nulo e campo ausente no contrato da API."
+    "alterado_em": "Momento da última alteração, no formato ISO da API."
   },
   "atividades": {
     "id_registro": "Identificador numérico que liga a linha ao registro principal e à sua versão.",
@@ -80,7 +75,6 @@
     "referencia_recorrencia": "Identificador da regra que gerou esta ocorrência.",
     "criado_em": "Data e hora da criação.",
     "alterado_em": "Momento da última alteração, no formato ISO da API.",
-    "campos_nulos": "Nomes dos campos enviados como nulos. Preserva a diferença entre nulo e campo ausente no contrato da API.",
     "listas_presentes": "Listas presentes no registro. Permite reconstruir uma lista vazia na resposta."
   },
   "atividades_arquivadas": {
@@ -90,8 +84,7 @@
     "motivo": "Campo reason no contrato da API.",
     "arquivada_em": "Momento em que a atividade foi arquivada.",
     "dias_retencao": "Prazo de retenção que estava ativo no momento do expurgo.",
-    "anexos_removidos_em": "Momento em que a limpeza do R2 foi concluída.",
-    "campos_nulos": "Nomes dos campos enviados como nulos. Preserva a diferença entre nulo e campo ausente no contrato da API."
+    "anexos_removidos_em": "Momento em que a limpeza do R2 foi concluída."
   },
   "atualizacoes_agenda": {
     "id_registro": "Identificador numérico que liga a linha ao registro principal e à sua versão.",
@@ -101,8 +94,7 @@
     "publicado_em": "Momento da publicação da atualização.",
     "referencia_sugestao": "Identificador da sugestão associada à publicação.",
     "nome_credito": "Nome escolhido pela pessoa para aparecer no crédito público.",
-    "mensagem_sugestao": "Campo sourceMessage no contrato da API.",
-    "campos_nulos": "Nomes dos campos enviados como nulos. Preserva a diferença entre nulo e campo ausente no contrato da API."
+    "mensagem_sugestao": "Campo sourceMessage no contrato da API."
   },
   "auditoria_aplicacao": {
     "sequencia": "Identificador sequencial da entrada.",
@@ -129,8 +121,7 @@
     "criado_por": "UID da conta que criou o registro.",
     "email_autor": "Campo authorEmail no contrato da API.",
     "criado_em": "Momento de criação, no formato ISO da API.",
-    "alterado_em": "Momento da última alteração, no formato ISO da API.",
-    "campos_nulos": "Nomes dos campos enviados como nulos. Preserva a diferença entre nulo e campo ausente no contrato da API."
+    "alterado_em": "Momento da última alteração, no formato ISO da API."
   },
   "bloqueios_agenda": {
     "id": "Identificador único da regra de bloqueio.",
@@ -153,7 +144,6 @@
     "id_responsavel": "Campo assigneeId no contrato da API.",
     "etiquetas": "Etiquetas do cartão na ordem escolhida.",
     "referencias_atividades": "Identificadores externos das atividades vinculadas ao cartão.",
-    "campos_nulos": "Nomes dos campos enviados como nulos. Preserva a diferença entre nulo e campo ausente no contrato da API.",
     "listas_presentes": "Listas presentes no registro. Permite reconstruir uma lista vazia na resposta."
   },
   "chat_representantes": {
@@ -163,8 +153,7 @@
     "email_remetente": "Campo senderEmail no contrato da API.",
     "papel_remetente": "Campo senderRole no contrato da API.",
     "turma_remetente": "Campo senderTurma no contrato da API.",
-    "criado_em": "Momento de criação, no formato ISO da API.",
-    "campos_nulos": "Nomes dos campos enviados como nulos. Preserva a diferença entre nulo e campo ausente no contrato da API."
+    "criado_em": "Momento de criação, no formato ISO da API."
   },
   "colunas_kanban": {
     "id": "Identificador numérico gerado pelo banco.",
@@ -174,8 +163,7 @@
     "referencia": "Identificador externo usado pela API.",
     "nome": "Nome exibido no site.",
     "cor": "Cor de apresentação escolhida no Kanban.",
-    "concluida": "Campo done no contrato da API.",
-    "campos_nulos": "Nomes dos campos enviados como nulos. Preserva a diferença entre nulo e campo ausente no contrato da API."
+    "concluida": "Campo done no contrato da API."
   },
   "conteudo_atividade_arquivada": {
     "id": "Identificador numérico gerado pelo banco.",
@@ -194,7 +182,6 @@
     "referencia_recorrencia": "Identificador da regra que gerou esta ocorrência.",
     "criado_em": "Momento de criação, no formato ISO da API.",
     "alterado_em": "Momento da última alteração, no formato ISO da API.",
-    "campos_nulos": "Nomes dos campos enviados como nulos. Preserva a diferença entre nulo e campo ausente no contrato da API.",
     "listas_presentes": "Listas presentes no registro. Permite reconstruir uma lista vazia na resposta."
   },
   "convites_representacao": {
@@ -202,8 +189,7 @@
     "email": "E-mail associado ao registro.",
     "turma": "Turma associada ao registro.",
     "referencia_pedido": "Identificador da solicitação associada.",
-    "aprovado_em": "Momento da aprovação do convite.",
-    "campos_nulos": "Nomes dos campos enviados como nulos. Preserva a diferença entre nulo e campo ausente no contrato da API."
+    "aprovado_em": "Momento da aprovação do convite."
   },
   "disciplinas": {
     "id": "ID numérico da disciplina.",
@@ -216,7 +202,6 @@
     "situacao": "Estado atual do registro.",
     "criado_por": "UID da conta que criou o registro.",
     "criado_em": "Momento de criação, no formato ISO da API.",
-    "campos_nulos": "Nomes dos campos enviados como nulos. Preserva a diferença entre nulo e campo ausente no contrato da API.",
     "listas_presentes": "Listas presentes no registro. Permite reconstruir uma lista vazia na resposta."
   },
   "entregas_resumo": {
@@ -224,8 +209,7 @@
     "situacao": "Estado atual do registro.",
     "inicio_semana": "Data da segunda-feira da semana do resumo.",
     "criada_em_ms": "Momento da reserva em milissegundos desde o Unix epoch.",
-    "concluida_em_ms": "Momento da conclusão em milissegundos desde o Unix epoch.",
-    "campos_nulos": "Nomes dos campos enviados como nulos. Preserva a diferença entre nulo e campo ausente no contrato da API."
+    "concluida_em_ms": "Momento da conclusão em milissegundos desde o Unix epoch."
   },
   "envios_anexos": {
     "id_registro": "Identificador numérico que liga a linha ao registro principal e à sua versão.",
@@ -235,8 +219,7 @@
     "tamanho_bytes": "Tamanho do arquivo, em bytes.",
     "chave_arquivo": "Chave do objeto correspondente no Cloudflare R2.",
     "id_usuario": "UID da conta no Firebase Authentication.",
-    "criado_em_ms": "Momento de criação em milissegundos desde o Unix epoch.",
-    "campos_nulos": "Nomes dos campos enviados como nulos. Preserva a diferença entre nulo e campo ausente no contrato da API."
+    "criado_em_ms": "Momento de criação em milissegundos desde o Unix epoch."
   },
   "espacos_kanban": {
     "id_registro": "Identificador numérico que liga a linha ao registro principal e à sua versão.",
@@ -244,7 +227,6 @@
     "versao_formato": "Campo schemaVersion no contrato da API.",
     "criado_em": "Momento de criação, no formato ISO da API.",
     "alterado_em": "Momento da última alteração, no formato ISO da API.",
-    "campos_nulos": "Nomes dos campos enviados como nulos. Preserva a diferença entre nulo e campo ausente no contrato da API.",
     "listas_presentes": "Listas presentes no registro. Permite reconstruir uma lista vazia na resposta."
   },
   "faixas_horario": {
@@ -264,8 +246,7 @@
     "andar": "Andar informado para a aula.",
     "sala": "Descrição da sala ou localização.",
     "criado_em": "Momento de criação, no formato ISO da API.",
-    "alterado_em": "Momento da última alteração, no formato ISO da API.",
-    "campos_nulos": "Nomes dos campos enviados como nulos. Preserva a diferença entre nulo e campo ausente no contrato da API."
+    "alterado_em": "Momento da última alteração, no formato ISO da API."
   },
   "itens_checklist": {
     "id": "Identificador numérico gerado pelo banco.",
@@ -274,28 +255,24 @@
     "ordem": "Posição da linha na lista, começando em zero.",
     "referencia": "Identificador externo usado pela API.",
     "descricao": "Descrição do item.",
-    "concluido": "Campo done no contrato da API.",
-    "campos_nulos": "Nomes dos campos enviados como nulos. Preserva a diferença entre nulo e campo ausente no contrato da API."
+    "concluido": "Campo done no contrato da API."
   },
   "limites_servico": {
     "id_registro": "Identificador numérico que liga a linha ao registro principal e à sua versão.",
     "quantidade": "Campo count no contrato da API.",
-    "expira_em_ms": "Fim da janela do contador, em milissegundos desde o Unix epoch.",
-    "campos_nulos": "Nomes dos campos enviados como nulos. Preserva a diferença entre nulo e campo ausente no contrato da API."
+    "expira_em_ms": "Fim da janela do contador, em milissegundos desde o Unix epoch."
   },
   "limpeza_anexos_kanban": {
     "id_registro": "Identificador numérico que liga a linha ao registro principal e à sua versão.",
     "referencia_espaco": "Referência do espaço do Kanban usada para localizar arquivos no R2.",
     "referencia_quadro": "Identificador externo do quadro compartilhado ou removido.",
-    "referencia_cartao": "Identificador do cartão removido.",
-    "campos_nulos": "Nomes dos campos enviados como nulos. Preserva a diferença entre nulo e campo ausente no contrato da API."
+    "referencia_cartao": "Identificador do cartão removido."
   },
   "mensagens_sugestao": {
     "id_registro": "Identificador numérico que liga a linha ao registro principal e à sua versão.",
     "mensagem": "Texto da mensagem.",
     "remetente": "Campo senderId no contrato da API.",
-    "criado_em": "Momento de criação, no formato ISO da API.",
-    "campos_nulos": "Nomes dos campos enviados como nulos. Preserva a diferença entre nulo e campo ausente no contrato da API."
+    "criado_em": "Momento de criação, no formato ISO da API."
   },
   "opcoes_enquete": {
     "id": "Identificador numérico gerado pelo banco.",
@@ -310,8 +287,7 @@
     "id_usuario": "UID da conta no Firebase Authentication.",
     "email": "E-mail associado ao registro.",
     "nome": "Nome exibido no site.",
-    "criado_em": "Momento de criação, no formato ISO da API.",
-    "campos_nulos": "Nomes dos campos enviados como nulos. Preserva a diferença entre nulo e campo ausente no contrato da API."
+    "criado_em": "Momento de criação, no formato ISO da API."
   },
   "pedidos_agenda": {
     "id_registro": "Identificador numérico que liga a linha ao registro principal e à sua versão.",
@@ -319,8 +295,7 @@
     "email": "E-mail associado ao registro.",
     "situacao": "Estado atual do registro.",
     "criado_em": "Momento de criação, no formato ISO da API.",
-    "revisado_em": "Momento da avaliação do pedido.",
-    "campos_nulos": "Nomes dos campos enviados como nulos. Preserva a diferença entre nulo e campo ausente no contrato da API."
+    "revisado_em": "Momento da avaliação do pedido."
   },
   "pedidos_kanban": {
     "id_registro": "Identificador numérico que liga a linha ao registro principal e à sua versão.",
@@ -330,8 +305,7 @@
     "nome": "Nome exibido no site.",
     "criado_em": "Momento de criação, no formato ISO da API.",
     "situacao": "Estado atual do registro.",
-    "alterado_em": "Momento da última alteração, no formato ISO da API.",
-    "campos_nulos": "Nomes dos campos enviados como nulos. Preserva a diferença entre nulo e campo ausente no contrato da API."
+    "alterado_em": "Momento da última alteração, no formato ISO da API."
   },
   "pedidos_representacao": {
     "id_registro": "Identificador numérico que liga a linha ao registro principal e à sua versão.",
@@ -339,15 +313,13 @@
     "email": "E-mail associado ao registro.",
     "situacao": "Estado atual do registro.",
     "criado_em": "Momento de criação, no formato ISO da API.",
-    "revisado_em": "Momento da avaliação do pedido.",
-    "campos_nulos": "Nomes dos campos enviados como nulos. Preserva a diferença entre nulo e campo ausente no contrato da API."
+    "revisado_em": "Momento da avaliação do pedido."
   },
   "perfis_administrativos": {
     "id_registro": "Identificador numérico que liga a linha ao registro principal e à sua versão.",
     "papel": "Papel usado nas verificações de acesso.",
     "turma": "Turma associada ao registro.",
-    "criado_em": "Momento de criação, no formato ISO da API.",
-    "campos_nulos": "Nomes dos campos enviados como nulos. Preserva a diferença entre nulo e campo ausente no contrato da API."
+    "criado_em": "Momento de criação, no formato ISO da API."
   },
   "perfis_comunidade": {
     "id_registro": "Identificador numérico que liga a linha ao registro principal e à sua versão.",
@@ -357,15 +329,13 @@
     "sala": "Descrição da sala ou localização.",
     "andar": "Andar informado para a aula.",
     "url_foto": "Campo photoUrl no contrato da API.",
-    "alterado_em": "Momento da última alteração, no formato ISO da API.",
-    "campos_nulos": "Nomes dos campos enviados como nulos. Preserva a diferença entre nulo e campo ausente no contrato da API."
+    "alterado_em": "Momento da última alteração, no formato ISO da API."
   },
   "preferencias_resumo": {
     "id_registro": "Identificador numérico que liga a linha ao registro principal e à sua versão.",
     "ativo": "Indica se o item está ativo.",
     "turma": "Turma associada ao registro.",
-    "alterada_em_ms": "Momento da atualização em milissegundos desde o Unix epoch.",
-    "campos_nulos": "Nomes dos campos enviados como nulos. Preserva a diferença entre nulo e campo ausente no contrato da API."
+    "alterada_em_ms": "Momento da atualização em milissegundos desde o Unix epoch."
   },
   "professores": {
     "id": "ID numérico do professor.",
@@ -380,7 +350,6 @@
     "nome": "Nome exibido no site.",
     "cor": "Cor de apresentação escolhida no Kanban.",
     "compacto": "Campo compact no contrato da API.",
-    "campos_nulos": "Nomes dos campos enviados como nulos. Preserva a diferença entre nulo e campo ausente no contrato da API.",
     "listas_presentes": "Listas presentes no registro. Permite reconstruir uma lista vazia na resposta."
   },
   "recibos_gravacao": {
@@ -414,8 +383,7 @@
     "ativa": "Indica se a regra ou configuração está ativa.",
     "excluida": "Campo deleted no contrato da API.",
     "intervalo_semanas": "Quantidade de semanas entre repetições.",
-    "dias_semana": "Dias da semana da recorrência, de 0 (domingo) a 6 (sábado).",
-    "campos_nulos": "Nomes dos campos enviados como nulos. Preserva a diferença entre nulo e campo ausente no contrato da API."
+    "dias_semana": "Dias da semana da recorrência, de 0 (domingo) a 6 (sábado)."
   },
   "regras_retencao": {
     "id_registro": "Identificador numérico que liga a linha ao registro principal e à sua versão.",
@@ -423,8 +391,7 @@
     "dias": "Campo days no contrato da API.",
     "ativa": "Indica se a regra ou configuração está ativa.",
     "alterado_por": "Campo updatedBy no contrato da API.",
-    "alterado_em": "Momento da última alteração, no formato ISO da API.",
-    "campos_nulos": "Nomes dos campos enviados como nulos. Preserva a diferença entre nulo e campo ausente no contrato da API."
+    "alterado_em": "Momento da última alteração, no formato ISO da API."
   },
   "revisoes_origem": {
     "sequencia": "Identificador sequencial da revisão arquivada.",
@@ -448,8 +415,7 @@
     "situacao": "Estado atual do registro.",
     "resolucao": "Campo resolution no contrato da API.",
     "comentario_revisao": "Campo reviewComment no contrato da API.",
-    "encerrada_em": "Momento em que a sugestão foi encerrada.",
-    "campos_nulos": "Nomes dos campos enviados como nulos. Preserva a diferença entre nulo e campo ausente no contrato da API."
+    "encerrada_em": "Momento em que a sugestão foi encerrada."
   },
   "sugestoes_melhoria": {
     "id_registro": "Identificador numérico que liga a linha ao registro principal e à sua versão.",
@@ -462,8 +428,7 @@
     "nome_credito": "Nome escolhido pela pessoa para aparecer no crédito público.",
     "situacao": "Estado atual do registro.",
     "concluida_em": "Momento em que a sugestão foi concluída.",
-    "concluida_por": "Campo completedBy no contrato da API.",
-    "campos_nulos": "Nomes dos campos enviados como nulos. Preserva a diferença entre nulo e campo ausente no contrato da API."
+    "concluida_por": "Campo completedBy no contrato da API."
   },
   "turmas": {
     "id": "ID numérico da turma no catálogo de horários.",
@@ -474,8 +439,7 @@
     "nome": "Nome exibido no site.",
     "ativa": "Indica se a regra ou configuração está ativa.",
     "referencia_pedido": "Identificador da solicitação associada.",
-    "aprovada_em": "Momento de aprovação da turma.",
-    "campos_nulos": "Nomes dos campos enviados como nulos. Preserva a diferença entre nulo e campo ausente no contrato da API."
+    "aprovada_em": "Momento de aprovação da turma."
   },
   "valores_historico": {
     "id": "Identificador numérico gerado pelo banco.",
@@ -500,7 +464,6 @@
   "votos_enquete": {
     "id_registro": "Identificador numérico que liga a linha ao registro principal e à sua versão.",
     "indice_opcao": "Posição da opção selecionada, começando em zero.",
-    "criado_em": "Momento de criação, no formato ISO da API.",
-    "campos_nulos": "Nomes dos campos enviados como nulos. Preserva a diferença entre nulo e campo ausente no contrato da API."
+    "criado_em": "Momento de criação, no formato ISO da API."
   }
 }

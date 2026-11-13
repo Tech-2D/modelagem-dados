@@ -34,6 +34,16 @@ O repositório [Tech-2D/api](https://github.com/Tech-2D/api) é a fonte das migr
 psql -d tech2d_local -v ON_ERROR_STOP=1 -At -f sql/catalog.psql > docs/_data/schema.json
 ```
 
-Inclua o título em português em `docs/_data/catalog.yml` e descreva a função do objeto com `COMMENT ON` na migração. O catálogo extrai a descrição das tabelas dos comentários do PostgreSQL. Mantenha a finalidade dos campos em `docs/_data/column_notes.json` e o inventário de views em `docs/_data/views.json`. A cópia atual corresponde ao commit [`8716887`](https://github.com/Tech-2D/api/tree/871688788fd259b62dd036989e946f129d025c6a/migrations).
+Inclua o título em português em `docs/_data/catalog.yml` e descreva a função do objeto com `COMMENT ON` na migração. O catálogo extrai a descrição das tabelas dos comentários do PostgreSQL. Mantenha a finalidade dos campos em `docs/_data/column_notes.json` e o inventário de views em `docs/_data/views.json`. O catálogo corresponde ao esquema PostgreSQL após a migration 022; as migrations anteriores ficam preservadas como histórico.
 
 O site é gerado pelo GitHub Pages a partir de `docs/`. A organização das páginas foi inspirada no [Astro Database Workspace](https://github.com/Astro-Inter/astro-database).
+
+
+## Atualizar o estilo do site
+
+A documentação usa Tailwind CSS 4.3.5 para o layout responsivo. A folha pronta fica em `docs/assets/docs.css`, servida estaticamente pelo GitHub Pages. Depois de alterar `src/styles.css` ou as classes dos templates, gere o arquivo compilado e inclua-o no commit:
+
+```sh
+npm ci
+npm run build:css
+```
