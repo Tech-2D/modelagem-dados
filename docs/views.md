@@ -5,6 +5,15 @@ description: Consulte as colunas usadas pela API e as tabelas que fornecem os da
 
 O schema `tech2d` tem {{ site.data.views.size }} views. `catalogo_horarios` reúne professor, disciplina, turma, horário e localização. As views com prefixo `visao_` mantêm os nomes de colunas esperados pela API, incluindo nomes em inglês. O catálogo de tabelas apresenta os nomes físicos em português. As colunas JSONB das views são calculadas na consulta para montar as respostas da API. Os valores persistidos nas tabelas são tipados.
 
+## Funções usadas pela API
+
+| Função | Responsabilidade |
+| --- | --- |
+| `consultar_catalogo_agenda(turma, incluir_atividades)` | Seleciona as atividades gerais e da turma, reúne turmas, atualizações e anúncios e devolve o catálogo em uma consulta. |
+| `arquivar_atividade(id, motivo, arquivada_em, dias_retencao)` | Cria a cópia de uma atividade da turma, remove o registro ativo e grava a auditoria na mesma operação. |
+
+O Worker autentica a conta, verifica as permissões das rotas e seleciona os campos das respostas públicas. Os jobs calculam as datas das recorrências e decidem quais políticas de retenção estão vigentes. Eles consultam `visao_atividades_automacao` para filtrar pelas colunas de turma, data e regra de recorrência. O Worker cuida da limpeza dos arquivos no R2.
+
 ## Colunas e origem
 
 <div class="catalog-controls" data-catalog-controls hidden>

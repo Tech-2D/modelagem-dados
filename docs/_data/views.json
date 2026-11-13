@@ -171,6 +171,52 @@
     ]
   },
   {
+    "name": "visao_atividades_automacao",
+    "comment": "Atividades com turma, data e recorrência tipadas para os jobs. O conteúdo é reconstruído apenas para uso no arquivamento.",
+    "dependencies": [
+      "atividades",
+      "registros_aplicacao"
+    ],
+    "columns": [
+      {
+        "name": "id",
+        "source": "referencia",
+        "type": "character varying(320)",
+        "note": "Identificador externo da atividade."
+      },
+      {
+        "name": "caminho",
+        "source": "caminho",
+        "type": "text",
+        "note": "Referência da atividade montada para a interface de gravação."
+      },
+      {
+        "name": "turma",
+        "source": "turma",
+        "type": "character varying(150)",
+        "note": "Turma usada na seleção de atividades pelo job."
+      },
+      {
+        "name": "data",
+        "source": "data",
+        "type": "date",
+        "note": "Dia da atividade, usado para selecionar ocorrências futuras ou antigas."
+      },
+      {
+        "name": "referencia_recorrencia",
+        "source": "referencia_recorrencia",
+        "type": "character varying(320)",
+        "note": "Identificador da regra que criou a ocorrência."
+      },
+      {
+        "name": "conteudo",
+        "source": "conteudo",
+        "type": "jsonb",
+        "note": "Conteúdo reconstruído para arquivar a atividade e preservar a auditoria."
+      }
+    ]
+  },
+  {
     "name": "visao_auditoria_aplicacao",
     "comment": "Histórico das alterações do fluxo atual de gravação.",
     "dependencies": [

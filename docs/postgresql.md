@@ -89,6 +89,7 @@ Os catálogos públicos passam por projeções que selecionam os campos da respo
 | 018 | Remove os controles de migração e registra a versão no comentário do schema |
 | 019 | Instala a interface de gravação usada pela API durante a troca |
 | 020 | Usa chaves numéricas e colunas tipadas. Separa anexos, votos, Kanban e dados históricos |
+| 021 | Centraliza o catálogo e o arquivamento de atividades em funções e cria a view usada pelos jobs |
 
 Em um banco local vazio, siga os passos em [Consultas SQL]({{ '/consultas.html' | relative_url }}). O script de instalação aplica as migrações na ordem acima.
 
