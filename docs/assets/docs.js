@@ -1,7 +1,7 @@
 const article = document.querySelector('.article')
 const toc = document.querySelector('[data-toc]')
 const headings = [...article.querySelectorAll('h2[id]')]
-if (headings.length > 1) {
+if (toc && headings.length > 1) {
   const list = toc.querySelector('ul')
   for (const heading of headings) {
     const item = document.createElement('li')

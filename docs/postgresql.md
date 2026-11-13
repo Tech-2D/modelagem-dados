@@ -32,6 +32,7 @@ Busque pelo nome da tabela, pela coluna ou pelo tipo. Abra uma tabela para consu
     <div class="object-body">
       {% if object.primary_key.size > 0 %}<p><strong>Chave primária</strong> <code>{{ object.primary_key | join: ", " }}</code></p>{% endif %}
       {% if object.references.size > 0 %}<ul class="object-relations" aria-label="Chaves estrangeiras">{% for relation in object.references %}<li><code>{{ relation.column }}</code> <span aria-hidden="true">→</span> <a href="#obj-{{ relation.table }}"><code>{{ relation.table }}.{{ relation.target }}</code></a></li>{% endfor %}</ul>{% endif %}
+      <p><a href="{{ '/modelagem.html' | relative_url }}#tabela={{ item.name }}">Explorar relações desta tabela</a></p>
       <table class="dictionary-table">
         <caption class="visually-hidden">Colunas de {{ item.name }}</caption>
         <thead><tr><th scope="col">Coluna</th><th scope="col">Tipo</th><th scope="col">Finalidade</th></tr></thead>
@@ -40,7 +41,7 @@ Busque pelo nome da tabela, pela coluna ou pelo tipo. Abra uma tabela para consu
           <tr>
             <th scope="row"><code>{{ column.name }}</code><small class="column-null">{% if object.primary_key contains column.name %}Chave primária · {% endif %}{% if column.generated %}Gerada pelo banco · {% endif %}{% if column.nullable %}Aceita nulo{% else %}Obrigatória{% endif %}</small></th>
             <td><code>{{ column.type | replace: "character varying", "varchar" | replace: "timestamp with time zone", "timestamptz" | escape }}</code></td>
-            <td>{{ column_notes[column.name] | escape }}</td>
+            <td>{{ column_notes[column.name] | default: column.comment | default: "Sem descrição registrada." | escape }}</td>
           </tr>
           {% endfor %}
         </tbody>

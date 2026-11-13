@@ -43,7 +43,7 @@
     </div>
     <footer class="sidebar-footer"><span class="read-only-badge"><span aria-hidden="true"></span>Somente leitura</span><a class="repo-link" href="https://github.com/Tech-2D/modelagem-dados">Repositório no GitHub ↗</a></footer>
   </aside>
-  <div class="workspace mx-auto grid w-full min-w-0 max-w-[85rem] grid-cols-1 items-start gap-6 px-4 py-5 sm:px-8 sm:py-8 xl:grid-cols-[minmax(0,54rem)_11rem] xl:gap-12 xl:px-12 xl:py-14">
+  <div class="workspace mx-auto grid w-full min-w-0 max-w-[85rem] grid-cols-1 items-start gap-6 px-4 py-5 sm:px-8 sm:py-8 {% if page.wide %}xl:grid-cols-1{% else %}xl:grid-cols-[minmax(0,54rem)_11rem]{% endif %} xl:gap-12 xl:px-12 xl:py-14">
     <main id="conteudo" class="article min-w-0">
       <header class="page-heading">
         <h1>{{ page.title | escape }}</h1>
@@ -51,7 +51,7 @@
       </header>
       {{ content }}
     </main>
-    <nav class="on-this-page" aria-label="Nesta página" data-toc hidden><strong>Nesta página</strong><ul></ul></nav>
+    {% unless page.wide %}<nav class="on-this-page" aria-label="Nesta página" data-toc hidden><strong>Nesta página</strong><ul></ul></nav>{% endunless %}
   </div>
 </body>
 </html>

@@ -1,7 +1,44 @@
 ---
-title: Modelagem
-description: Acompanhe o caminho dos dados da aplicação até as tabelas de consulta.
+title: Modelagem e relações
+description: Explore as tabelas do PostgreSQL, suas chaves e as views que usam cada objeto.
+wide: true
 ---
+
+<link rel="preload" href="{{ '/assets/model-explorer.js' | relative_url }}?v={{ site.github.build_revision }}" as="script">
+<script type="module" src="{{ '/assets/model-explorer.js' | relative_url }}?v={{ site.github.build_revision }}"></script>
+
+<section class="model-explorer" data-model-explorer aria-label="Explorador da modelagem física" hidden>
+  <div class="model-toolbar">
+    <div class="model-controls">
+      <label>Área<select data-model-area><option value="">Todas as áreas</option>{% for group in site.data.catalog %}<option value="{{ group.id }}">{{ group.name | escape }}</option>{% endfor %}</select></label>
+      <label>Buscar tabela ou coluna<input type="search" data-model-search placeholder="Ex.: horários, turma ou id_professor"></label>
+    </div>
+    <fieldset class="model-path-controls">
+      <legend>Percorrer relações</legend>
+      <label for="model-destination" class="visually-hidden">Tabela de destino</label>
+      <select id="model-destination" data-model-destination></select>
+      <button type="button" data-model-route>Mostrar caminho</button>
+      <button type="button" data-model-clear hidden>Limpar caminho</button>
+    </fieldset>
+    <div data-model-path aria-live="polite"></div>
+  </div>
+  <div class="model-grid">
+    <aside class="model-picker" aria-label="Tabelas disponíveis">
+      <p data-model-result role="status"></p>
+      <div class="model-table-list" data-model-list></div>
+    </aside>
+    <div data-model-details></div>
+  </div>
+</section>
+
+<script type="application/json" id="model-schema">{{ site.data.schema | jsonify | replace: '<', '\u003c' }}</script>
+<script type="application/json" id="model-groups">{{ site.data.catalog | jsonify | replace: '<', '\u003c' }}</script>
+<script type="application/json" id="model-views">{{ site.data.views | jsonify | replace: '<', '\u003c' }}</script>
+<script type="application/json" id="model-notes">{{ site.data.column_notes | jsonify | replace: '<', '\u003c' }}</script>
+
+## Relações por área
+
+Os vínculos do explorador vêm das chaves estrangeiras declaradas no PostgreSQL. Algumas regras da aplicação, descritas abaixo, usam identificadores validados pela API.
 
 ## Horários dos professores
 
