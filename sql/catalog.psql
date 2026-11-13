@@ -11,6 +11,10 @@ WITH relations AS (
       'type', format_type(a.atttypid, a.atttypmod),
       'nullable', NOT a.attnotnull,
       'generated', a.attidentity <> '',
+      'unique', EXISTS (SELECT FROM pg_constraint u WHERE u.conrelid = r.oid
+        AND u.contype = 'u' AND u.conkey = ARRAY[a.attnum]),
+      'check', EXISTS (SELECT FROM pg_constraint ck WHERE ck.conrelid = r.oid
+        AND ck.contype = 'c' AND a.attnum = ANY(ck.conkey)),
       'comment', col_description(r.oid, a.attnum)
     ) ORDER BY a.attnum)
     FROM pg_attribute a WHERE a.attrelid = r.oid AND a.attnum > 0 AND NOT a.attisdropped) AS columns,
@@ -27,7 +31,8 @@ WITH relations AS (
       CROSS JOIN LATERAL unnest(c.conkey, c.confkey) WITH ORDINALITY AS k(source_number, target_number, position)
       JOIN pg_attribute source ON source.attrelid = c.conrelid AND source.attnum = k.source_number
       JOIN pg_attribute destination ON destination.attrelid = c.confrelid AND destination.attnum = k.target_number
-      WHERE c.conrelid = r.oid AND c.contype = 'f'), '[]'::jsonb) AS references
+      WHERE c.conrelid = r.oid AND c.contype = 'f'), '[]'::jsonb) AS references,
+    (SELECT count(*)::int FROM pg_constraint f WHERE f.conrelid = r.oid AND f.contype = 'f') AS foreign_key_count
   FROM relations r WHERE r.kind='table'
 )
 SELECT jsonb_pretty(jsonb_agg(to_jsonb(catalog) ORDER BY name)) FROM catalog;

@@ -11,7 +11,7 @@ wide: true
   <div class="model-toolbar">
     <div class="model-controls">
       <label>Área<select data-model-area><option value="">Todas as áreas</option>{% for group in site.data.catalog %}<option value="{{ group.id }}">{{ group.name | escape }}</option>{% endfor %}</select></label>
-      <label>Buscar tabela ou coluna<input type="search" data-model-search placeholder="Ex.: horários, turma ou id_professor"></label>
+      <label><span class="catalog-label-icon">{% include doc-icon.html name="search" %}Buscar tabela ou coluna</span><input type="search" data-model-search placeholder="Ex.: horários, turma ou id_professor"></label>
     </div>
     <fieldset class="model-path-controls">
       <legend>Percorrer relações</legend>

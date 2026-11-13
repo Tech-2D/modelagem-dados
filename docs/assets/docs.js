@@ -43,12 +43,15 @@ if (controls) {
     updateToggle()
   }
 
-  const visibleEntries = () => [...entries.keys()].filter(item => !item.hidden)
+  const expandable = item => item.querySelector('[data-catalog-expand]') || item
+  const visibleEntries = () => [...entries.keys()].filter(item => !item.hidden).map(expandable)
+  const cardLayout = [...entries.keys()].some(item => expandable(item) !== item)
   function updateToggle() {
     const visible = visibleEntries()
     toggle.disabled = visible.length === 0
     toggle.textContent = visible.length && visible.every(item => item.open)
-      ? 'Fechar resultados' : 'Abrir resultados'
+      ? (cardLayout ? 'Fechar detalhes' : 'Fechar resultados')
+      : (cardLayout ? 'Abrir detalhes' : 'Abrir resultados')
   }
 
   function openLinkedObject() {
@@ -59,7 +62,7 @@ if (controls) {
       if (area) area.value = ''
       filterCatalog()
     }
-    target.open = true
+    expandable(target).open = true
     target.scrollIntoView({ block: 'start' })
   }
 
@@ -72,7 +75,7 @@ if (controls) {
     for (const item of visible) item.open = open
     updateToggle()
   })
-  for (const item of entries.keys()) item.addEventListener('toggle', updateToggle)
+  for (const item of entries.keys()) expandable(item).addEventListener('toggle', updateToggle)
   window.addEventListener('hashchange', openLinkedObject)
   filterCatalog()
   openLinkedObject()

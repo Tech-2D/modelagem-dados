@@ -29,14 +29,16 @@
         "type": "character varying(64)",
         "comment": null,
         "nullable": true,
-        "generated": false
+        "generated": false,
+        "check": true
       }
     ],
     "comment": "Último acesso autenticado à Agenda e referência de rede usada para moderação.",
     "references": [],
     "primary_key": [
       "id_usuario"
-    ]
+    ],
+    "foreign_key_count": 0
   },
   {
     "kind": "table",
@@ -68,7 +70,8 @@
     "references": [],
     "primary_key": [
       "id_usuario"
-    ]
+    ],
+    "foreign_key_count": 0
   },
   {
     "kind": "table",
@@ -134,7 +137,8 @@
     ],
     "primary_key": [
       "id_registro"
-    ]
+    ],
+    "foreign_key_count": 1
   },
   {
     "kind": "table",
@@ -166,7 +170,8 @@
         "type": "integer",
         "comment": null,
         "nullable": false,
-        "generated": false
+        "generated": false,
+        "check": true
       },
       {
         "name": "referencia",
@@ -228,7 +233,8 @@
     ],
     "primary_key": [
       "id"
-    ]
+    ],
+    "foreign_key_count": 1
   },
   {
     "kind": "table",
@@ -260,7 +266,8 @@
         "type": "integer",
         "comment": null,
         "nullable": false,
-        "generated": false
+        "generated": false,
+        "check": true
       },
       {
         "name": "referencia",
@@ -322,7 +329,8 @@
     ],
     "primary_key": [
       "id"
-    ]
+    ],
+    "foreign_key_count": 1
   },
   {
     "kind": "table",
@@ -402,7 +410,8 @@
     ],
     "primary_key": [
       "id_registro"
-    ]
+    ],
+    "foreign_key_count": 1
   },
   {
     "kind": "table",
@@ -440,7 +449,8 @@
     ],
     "primary_key": [
       "id_registro"
-    ]
+    ],
+    "foreign_key_count": 1
   },
   {
     "kind": "table",
@@ -555,7 +565,8 @@
     ],
     "primary_key": [
       "id_registro"
-    ]
+    ],
+    "foreign_key_count": 1
   },
   {
     "kind": "table",
@@ -621,7 +632,8 @@
     ],
     "primary_key": [
       "id_registro"
-    ]
+    ],
+    "foreign_key_count": 1
   },
   {
     "kind": "table",
@@ -694,7 +706,8 @@
     ],
     "primary_key": [
       "id_registro"
-    ]
+    ],
+    "foreign_key_count": 1
   },
   {
     "kind": "table",
@@ -740,7 +753,8 @@
     "references": [],
     "primary_key": [
       "sequencia"
-    ]
+    ],
+    "foreign_key_count": 0
   },
   {
     "kind": "table",
@@ -772,7 +786,8 @@
         "type": "character varying(32)",
         "comment": null,
         "nullable": false,
-        "generated": false
+        "generated": false,
+        "check": true
       },
       {
         "name": "alterado_em",
@@ -786,7 +801,8 @@
     "references": [],
     "primary_key": [
       "sequencia"
-    ]
+    ],
+    "foreign_key_count": 0
   },
   {
     "kind": "table",
@@ -880,7 +896,8 @@
     ],
     "primary_key": [
       "id_registro"
-    ]
+    ],
+    "foreign_key_count": 1
   },
   {
     "kind": "table",
@@ -898,14 +915,16 @@
         "type": "character varying(32)",
         "comment": null,
         "nullable": false,
-        "generated": false
+        "generated": false,
+        "check": true
       },
       {
         "name": "alvo",
         "type": "character varying(320)",
         "comment": null,
         "nullable": false,
-        "generated": false
+        "generated": false,
+        "check": true
       },
       {
         "name": "criado_em",
@@ -926,7 +945,8 @@
     "references": [],
     "primary_key": [
       "id"
-    ]
+    ],
+    "foreign_key_count": 0
   },
   {
     "kind": "table",
@@ -958,7 +978,8 @@
         "type": "integer",
         "comment": null,
         "nullable": false,
-        "generated": false
+        "generated": false,
+        "check": true
       },
       {
         "name": "referencia",
@@ -1051,7 +1072,8 @@
     ],
     "primary_key": [
       "id"
-    ]
+    ],
+    "foreign_key_count": 2
   },
   {
     "kind": "table",
@@ -1117,7 +1139,8 @@
     ],
     "primary_key": [
       "id_registro"
-    ]
+    ],
+    "foreign_key_count": 1
   },
   {
     "kind": "table",
@@ -1149,7 +1172,8 @@
         "type": "integer",
         "comment": null,
         "nullable": false,
-        "generated": false
+        "generated": false,
+        "check": true
       },
       {
         "name": "referencia",
@@ -1190,7 +1214,8 @@
     ],
     "primary_key": [
       "id"
-    ]
+    ],
+    "foreign_key_count": 1
   },
   {
     "kind": "table",
@@ -1222,7 +1247,8 @@
         "type": "integer",
         "comment": null,
         "nullable": false,
-        "generated": false
+        "generated": false,
+        "check": true
       },
       {
         "name": "titulo",
@@ -1326,7 +1352,8 @@
     ],
     "primary_key": [
       "id"
-    ]
+    ],
+    "foreign_key_count": 1
   },
   {
     "kind": "table",
@@ -1378,7 +1405,8 @@
     ],
     "primary_key": [
       "id_registro"
-    ]
+    ],
+    "foreign_key_count": 1
   },
   {
     "kind": "table",
@@ -1396,14 +1424,17 @@
         "type": "character varying(150)",
         "comment": null,
         "nullable": false,
-        "generated": false
+        "generated": false,
+        "unique": true,
+        "check": true
       }
     ],
     "comment": "Nomes das disciplinas reutilizadas pelos horários.",
     "references": [],
     "primary_key": [
       "id"
-    ]
+    ],
+    "foreign_key_count": 0
   },
   {
     "kind": "table",
@@ -1469,7 +1500,8 @@
     ],
     "primary_key": [
       "id_registro"
-    ]
+    ],
+    "foreign_key_count": 1
   },
   {
     "kind": "table",
@@ -1521,7 +1553,8 @@
     ],
     "primary_key": [
       "id_registro"
-    ]
+    ],
+    "foreign_key_count": 1
   },
   {
     "kind": "table",
@@ -1594,7 +1627,8 @@
     ],
     "primary_key": [
       "id_registro"
-    ]
+    ],
+    "foreign_key_count": 1
   },
   {
     "kind": "table",
@@ -1653,7 +1687,8 @@
     ],
     "primary_key": [
       "id_registro"
-    ]
+    ],
+    "foreign_key_count": 1
   },
   {
     "kind": "table",
@@ -1671,21 +1706,24 @@
         "type": "time(0) without time zone",
         "comment": null,
         "nullable": false,
-        "generated": false
+        "generated": false,
+        "check": true
       },
       {
         "name": "hora_fim",
         "type": "time(0) without time zone",
         "comment": null,
         "nullable": false,
-        "generated": false
+        "generated": false,
+        "check": true
       }
     ],
     "comment": "Pares de horário de início e fim reutilizados pelas aulas.",
     "references": [],
     "primary_key": [
       "id"
-    ]
+    ],
+    "foreign_key_count": 0
   },
   {
     "kind": "table",
@@ -1731,7 +1769,8 @@
         "type": "smallint",
         "comment": null,
         "nullable": false,
-        "generated": false
+        "generated": false,
+        "check": true
       },
       {
         "name": "ativo",
@@ -1745,7 +1784,8 @@
         "type": "bigint",
         "comment": "Identidade numérica do registro na API.",
         "nullable": false,
-        "generated": false
+        "generated": false,
+        "unique": true
       },
       {
         "name": "andar",
@@ -1806,7 +1846,8 @@
     ],
     "primary_key": [
       "id"
-    ]
+    ],
+    "foreign_key_count": 5
   },
   {
     "kind": "table",
@@ -1838,7 +1879,8 @@
         "type": "integer",
         "comment": null,
         "nullable": false,
-        "generated": false
+        "generated": false,
+        "check": true
       },
       {
         "name": "referencia",
@@ -1872,7 +1914,8 @@
     ],
     "primary_key": [
       "id"
-    ]
+    ],
+    "foreign_key_count": 1
   },
   {
     "kind": "table",
@@ -1910,7 +1953,8 @@
     ],
     "primary_key": [
       "id_registro"
-    ]
+    ],
+    "foreign_key_count": 1
   },
   {
     "kind": "table",
@@ -1955,7 +1999,8 @@
     ],
     "primary_key": [
       "id_registro"
-    ]
+    ],
+    "foreign_key_count": 1
   },
   {
     "kind": "table",
@@ -2000,7 +2045,8 @@
     ],
     "primary_key": [
       "id_registro"
-    ]
+    ],
+    "foreign_key_count": 1
   },
   {
     "kind": "table",
@@ -2032,7 +2078,8 @@
         "type": "integer",
         "comment": null,
         "nullable": false,
-        "generated": false
+        "generated": false,
+        "check": true
       },
       {
         "name": "opcao",
@@ -2052,7 +2099,8 @@
     ],
     "primary_key": [
       "id"
-    ]
+    ],
+    "foreign_key_count": 1
   },
   {
     "kind": "table",
@@ -2111,7 +2159,8 @@
     ],
     "primary_key": [
       "id_registro"
-    ]
+    ],
+    "foreign_key_count": 1
   },
   {
     "kind": "table",
@@ -2170,7 +2219,8 @@
     ],
     "primary_key": [
       "id_registro"
-    ]
+    ],
+    "foreign_key_count": 1
   },
   {
     "kind": "table",
@@ -2243,7 +2293,8 @@
     ],
     "primary_key": [
       "id_registro"
-    ]
+    ],
+    "foreign_key_count": 1
   },
   {
     "kind": "table",
@@ -2302,7 +2353,8 @@
     ],
     "primary_key": [
       "id_registro"
-    ]
+    ],
+    "foreign_key_count": 1
   },
   {
     "kind": "table",
@@ -2320,35 +2372,40 @@
         "type": "smallint",
         "comment": null,
         "nullable": false,
-        "generated": false
+        "generated": false,
+        "check": true
       },
       {
         "name": "ano_serie",
         "type": "smallint",
         "comment": null,
         "nullable": false,
-        "generated": false
+        "generated": false,
+        "check": true
       },
       {
         "name": "modo_primeiro",
         "type": "character varying(5)",
         "comment": null,
         "nullable": false,
-        "generated": false
+        "generated": false,
+        "check": true
       },
       {
         "name": "modo_segundo",
         "type": "character varying(5)",
         "comment": null,
         "nullable": false,
-        "generated": false
+        "generated": false,
+        "check": true
       },
       {
         "name": "versao",
         "type": "bigint",
         "comment": "Versão usada para impedir sobrescrita por outra aba ou dispositivo.",
         "nullable": false,
-        "generated": false
+        "generated": false,
+        "check": true
       },
       {
         "name": "regra_calculo",
@@ -2377,7 +2434,8 @@
     "primary_key": [
       "id_usuario",
       "ano_letivo"
-    ]
+    ],
+    "foreign_key_count": 0
   },
   {
     "kind": "table",
@@ -2395,7 +2453,8 @@
         "type": "smallint",
         "comment": null,
         "nullable": false,
-        "generated": false
+        "generated": false,
+        "check": true
       },
       {
         "name": "nome",
@@ -2409,7 +2468,8 @@
     "references": [],
     "primary_key": [
       "id"
-    ]
+    ],
+    "foreign_key_count": 0
   },
   {
     "kind": "table",
@@ -2448,35 +2508,40 @@
         "type": "smallint",
         "comment": null,
         "nullable": false,
-        "generated": false
+        "generated": false,
+        "check": true
       },
       {
         "name": "n1",
         "type": "numeric(4,2)",
         "comment": null,
         "nullable": true,
-        "generated": false
+        "generated": false,
+        "check": true
       },
       {
         "name": "n2",
         "type": "numeric(4,2)",
         "comment": null,
         "nullable": true,
-        "generated": false
+        "generated": false,
+        "check": true
       },
       {
         "name": "media_informada",
         "type": "numeric(4,2)",
         "comment": null,
         "nullable": true,
-        "generated": false
+        "generated": false,
+        "check": true
       },
       {
         "name": "peso_n1",
         "type": "smallint",
         "comment": null,
         "nullable": false,
-        "generated": false
+        "generated": false,
+        "check": true
       }
     ],
     "comment": "Notas N1/N2, média informada e pesos por disciplina e semestre. Nota vazia é NULL.",
@@ -2512,7 +2577,8 @@
       "ano_letivo",
       "id_disciplina",
       "semestre"
-    ]
+    ],
+    "foreign_key_count": 2
   },
   {
     "kind": "table",
@@ -2551,7 +2617,8 @@
         "type": "numeric(4,2)",
         "comment": null,
         "nullable": true,
-        "generated": false
+        "generated": false,
+        "check": true
       }
     ],
     "comment": "Nota de recuperação final por conta, ano letivo e disciplina.",
@@ -2586,7 +2653,8 @@
       "id_usuario",
       "ano_letivo",
       "id_disciplina"
-    ]
+    ],
+    "foreign_key_count": 2
   },
   {
     "kind": "table",
@@ -2631,7 +2699,8 @@
     ],
     "primary_key": [
       "id_registro"
-    ]
+    ],
+    "foreign_key_count": 1
   },
   {
     "kind": "table",
@@ -2704,7 +2773,8 @@
     ],
     "primary_key": [
       "id_registro"
-    ]
+    ],
+    "foreign_key_count": 1
   },
   {
     "kind": "table",
@@ -2749,7 +2819,8 @@
     ],
     "primary_key": [
       "id_registro"
-    ]
+    ],
+    "foreign_key_count": 1
   },
   {
     "kind": "table",
@@ -2767,14 +2838,17 @@
         "type": "character varying(150)",
         "comment": null,
         "nullable": false,
-        "generated": false
+        "generated": false,
+        "unique": true,
+        "check": true
       }
     ],
     "comment": "Nomes de professores reutilizados pelos horários.",
     "references": [],
     "primary_key": [
       "id"
-    ]
+    ],
+    "foreign_key_count": 0
   },
   {
     "kind": "table",
@@ -2806,7 +2880,8 @@
         "type": "integer",
         "comment": null,
         "nullable": false,
-        "generated": false
+        "generated": false,
+        "check": true
       },
       {
         "name": "referencia",
@@ -2854,7 +2929,8 @@
     ],
     "primary_key": [
       "id"
-    ]
+    ],
+    "foreign_key_count": 1
   },
   {
     "kind": "table",
@@ -2893,7 +2969,8 @@
     "references": [],
     "primary_key": [
       "id"
-    ]
+    ],
+    "foreign_key_count": 0
   },
   {
     "kind": "table",
@@ -2911,7 +2988,8 @@
         "type": "character varying(40)",
         "comment": null,
         "nullable": false,
-        "generated": false
+        "generated": false,
+        "check": true
       },
       {
         "name": "referencia",
@@ -2925,7 +3003,8 @@
         "type": "character varying(320)",
         "comment": null,
         "nullable": false,
-        "generated": false
+        "generated": false,
+        "check": true
       },
       {
         "name": "id_pai",
@@ -2939,7 +3018,8 @@
         "type": "bigint",
         "comment": null,
         "nullable": false,
-        "generated": false
+        "generated": false,
+        "check": true
       },
       {
         "name": "atualizado_em",
@@ -2959,7 +3039,8 @@
     ],
     "primary_key": [
       "id"
-    ]
+    ],
+    "foreign_key_count": 1
   },
   {
     "kind": "table",
@@ -3088,7 +3169,8 @@
     ],
     "primary_key": [
       "id_registro"
-    ]
+    ],
+    "foreign_key_count": 1
   },
   {
     "kind": "table",
@@ -3147,7 +3229,8 @@
     ],
     "primary_key": [
       "id_registro"
-    ]
+    ],
+    "foreign_key_count": 1
   },
   {
     "kind": "table",
@@ -3200,7 +3283,8 @@
     "references": [],
     "primary_key": [
       "sequencia"
-    ]
+    ],
+    "foreign_key_count": 0
   },
   {
     "kind": "table",
@@ -3315,7 +3399,8 @@
     ],
     "primary_key": [
       "id_registro"
-    ]
+    ],
+    "foreign_key_count": 1
   },
   {
     "kind": "table",
@@ -3409,7 +3494,8 @@
     ],
     "primary_key": [
       "id_registro"
-    ]
+    ],
+    "foreign_key_count": 1
   },
   {
     "kind": "table",
@@ -3427,14 +3513,17 @@
         "type": "character varying(150)",
         "comment": null,
         "nullable": false,
-        "generated": false
+        "generated": false,
+        "unique": true,
+        "check": true
       }
     ],
     "comment": "Nomes das turmas do catálogo de horários.",
     "references": [],
     "primary_key": [
       "id"
-    ]
+    ],
+    "foreign_key_count": 0
   },
   {
     "kind": "table",
@@ -3486,7 +3575,8 @@
     ],
     "primary_key": [
       "id_registro"
-    ]
+    ],
+    "foreign_key_count": 1
   },
   {
     "kind": "table",
@@ -3504,21 +3594,24 @@
         "type": "bigint",
         "comment": null,
         "nullable": true,
-        "generated": false
+        "generated": false,
+        "check": true
       },
       {
         "name": "id_auditoria_legada",
         "type": "bigint",
         "comment": null,
         "nullable": true,
-        "generated": false
+        "generated": false,
+        "check": true
       },
       {
         "name": "id_revisao",
         "type": "bigint",
         "comment": null,
         "nullable": true,
-        "generated": false
+        "generated": false,
+        "check": true
       },
       {
         "name": "id_pai",
@@ -3539,35 +3632,40 @@
         "type": "integer",
         "comment": null,
         "nullable": false,
-        "generated": false
+        "generated": false,
+        "check": true
       },
       {
         "name": "tipo",
         "type": "character varying(12)",
         "comment": null,
         "nullable": false,
-        "generated": false
+        "generated": false,
+        "check": true
       },
       {
         "name": "valor_textual",
         "type": "character varying(1048576)",
         "comment": null,
         "nullable": true,
-        "generated": false
+        "generated": false,
+        "check": true
       },
       {
         "name": "valor_numerico",
         "type": "numeric",
         "comment": null,
         "nullable": true,
-        "generated": false
+        "generated": false,
+        "check": true
       },
       {
         "name": "valor_logico",
         "type": "boolean",
         "comment": null,
         "nullable": true,
-        "generated": false
+        "generated": false,
+        "check": true
       }
     ],
     "comment": "Campos tipados das versões históricas, ligados à auditoria ou revisão e preservados após a exclusão do registro original.",
@@ -3595,7 +3693,8 @@
     ],
     "primary_key": [
       "id"
-    ]
+    ],
+    "foreign_key_count": 4
   },
   {
     "kind": "table",
@@ -3620,21 +3719,24 @@
         "type": "character varying(32)",
         "comment": null,
         "nullable": false,
-        "generated": false
+        "generated": false,
+        "check": true
       },
       {
         "name": "chave_visitante",
         "type": "character varying(128)",
         "comment": null,
         "nullable": false,
-        "generated": false
+        "generated": false,
+        "check": true
       },
       {
         "name": "site",
         "type": "character varying(32)",
         "comment": null,
         "nullable": false,
-        "generated": false
+        "generated": false,
+        "check": true
       }
     ],
     "comment": "Visitas da Agenda e do Cadê o professor, agrupadas por visitante e intervalo de 30 minutos.",
@@ -3645,7 +3747,8 @@
       "intervalo_meia_hora",
       "tipo_visitante",
       "chave_visitante"
-    ]
+    ],
+    "foreign_key_count": 0
   },
   {
     "kind": "table",
@@ -3683,6 +3786,7 @@
     ],
     "primary_key": [
       "id_registro"
-    ]
+    ],
+    "foreign_key_count": 1
   }
 ]

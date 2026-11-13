@@ -9,33 +9,34 @@
   <script src="{{ '/assets/docs.js' | relative_url }}?v={{ site.github.build_revision }}" defer></script>
 </head>
 <body class="grid min-h-screen grid-cols-1 bg-paper-50 font-sans text-ink-800 antialiased lg:grid-cols-[17rem_minmax(0,1fr)]">
+  {% include doc-icons.html %}
   <a class="skip-link" href="#conteudo">Ir para o conteúdo</a>
   <aside class="sidebar db-sidebar sticky top-0 z-20 flex h-auto flex-col gap-3 px-3 py-3 sm:px-4 lg:h-screen lg:gap-6 lg:px-4 lg:py-6">
     <a class="brand" href="{{ '/' | relative_url }}"><span class="brand-mark" aria-hidden="true">T2</span><span><strong>Tech-2D</strong><small>Banco de dados · Documentação</small></span></a>
     <div class="database-switch" aria-label="Tecnologias documentadas">
-      <a href="{{ '/' | relative_url }}"{% unless page.url == '/redis.html' %} aria-current="true"{% endunless %}>PostgreSQL</a>
-      <a href="{{ '/redis.html' | relative_url }}"{% if page.url == '/redis.html' %} aria-current="page"{% endif %}>Redis</a>
+      <a href="{{ '/' | relative_url }}"{% unless page.url == '/redis.html' %} aria-current="true"{% endunless %}>{% include doc-icon.html name="database" %}PostgreSQL</a>
+      <a href="{{ '/redis.html' | relative_url }}"{% if page.url == '/redis.html' %} aria-current="page"{% endif %}>{% include doc-icon.html name="cache" %}Redis</a>
     </div>
     <div class="sidebar-explorer">
       <nav class="explorer-navigation" aria-label="Documentação do banco">
-        <a href="{{ '/' | relative_url }}"{% if page.url == '/' %} aria-current="page"{% endif %}>Visão geral</a>
+        <a href="{{ '/' | relative_url }}"{% if page.url == '/' %} aria-current="page"{% endif %}>{% include doc-icon.html name="home" %}Visão geral</a>
         <p class="nav-section-label">Explorador</p>
-        <a href="{{ '/postgresql.html' | relative_url }}"{% if page.url == '/postgresql.html' %} aria-current="page"{% endif %}>Banco de dados</a>
-        <a href="{{ '/schemas.html' | relative_url }}"{% if page.url == '/schemas.html' %} aria-current="page"{% endif %}>Schemas</a>
-        <a href="{{ '/modelagem.html' | relative_url }}"{% if page.url == '/modelagem.html' %} aria-current="page"{% endif %}>Modelagem e relações</a>
-        <a href="{{ '/consultas.html' | relative_url }}"{% if page.url == '/consultas.html' %} aria-current="page"{% endif %}>Scripts e consultas</a>
+        <a href="{{ '/postgresql.html' | relative_url }}"{% if page.url == '/postgresql.html' %} aria-current="page"{% endif %}>{% include doc-icon.html name="table" %}Banco de dados</a>
+        <a href="{{ '/schemas.html' | relative_url }}"{% if page.url == '/schemas.html' %} aria-current="page"{% endif %}>{% include doc-icon.html name="layers" %}Schemas</a>
+        <a href="{{ '/modelagem.html' | relative_url }}"{% if page.url == '/modelagem.html' %} aria-current="page"{% endif %}>{% include doc-icon.html name="diagram" %}Modelagem e relações</a>
+        <a href="{{ '/consultas.html' | relative_url }}"{% if page.url == '/consultas.html' %} aria-current="page"{% endif %}>{% include doc-icon.html name="code" %}Scripts e consultas</a>
         <p class="nav-section-label">Objetos · tech2d</p>
         {% assign tables = site.data.schema | where: 'kind', 'table' %}
         <details class="nav-object-group"{% if page.url == '/postgresql.html' %} open{% endif %}>
-          <summary>Tabelas <span>{{ tables.size }}</span></summary>
+          <summary>{% include doc-icon.html name="table" %}Tabelas <span>{{ tables.size }}</span></summary>
           <div class="nav-object-list">{% for table in tables %}<a data-object-link href="{{ '/postgresql.html' | relative_url }}#obj-{{ table.name }}">{{ table.name }}</a>{% endfor %}</div>
         </details>
         <details class="nav-object-group"{% if page.url == '/views.html' %} open{% endif %}>
-          <summary>Views <span>{{ site.data.views.size }}</span></summary>
+          <summary>{% include doc-icon.html name="eye" %}Views <span>{{ site.data.views.size }}</span></summary>
           <div class="nav-object-list">{% for view in site.data.views %}<a data-object-link href="{{ '/views.html' | relative_url }}#view-{{ view.name }}">{{ view.name }}</a>{% endfor %}</div>
         </details>
         <details class="nav-object-group"{% if page.url == '/funcoes.html' %} open{% endif %}>
-          <summary>Funções e procedures <span>{{ site.data.routines.size }}</span></summary>
+          <summary>{% include doc-icon.html name="code" %}Funções e procedures <span>{{ site.data.routines.size }}</span></summary>
           <a class="nav-object-overview" href="{{ '/funcoes.html' | relative_url }}">Ver assinaturas e finalidades</a>
           <div class="nav-object-list">{% for routine in site.data.routines %}<a data-object-link href="{{ '/funcoes.html' | relative_url }}#{{ routine.anchor }}">{{ routine.name }}</a>{% endfor %}</div>
         </details>

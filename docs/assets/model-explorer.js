@@ -9,6 +9,22 @@ function element(tag, text, className) {
   return item
 }
 
+function icon(name) {
+  const ns = 'http://www.w3.org/2000/svg'
+  const svg = document.createElementNS(ns, 'svg')
+  const use = document.createElementNS(ns, 'use')
+  svg.setAttribute('aria-hidden', 'true')
+  svg.setAttribute('focusable', 'false')
+  svg.setAttribute('class', 'docs-icon')
+  use.setAttribute('href', '#icon-' + name)
+  svg.append(use)
+  return svg
+}
+
+function tag(label, style) {
+  return element('span', label, 'schema-tag schema-tag-' + style)
+}
+
 function data(id) {
   return JSON.parse(document.getElementById(id).textContent)
 }
@@ -101,7 +117,9 @@ function initialize(explorer) {
     const block = element('section', '', 'model-relation-block')
     const outgoing = direction === 'out'
     const references = outgoing ? table.references : incoming.get(table.name)
-    block.append(element('h3', outgoing ? 'Depende de' : 'Usado por tabelas'))
+    const title = element('h3', outgoing ? 'Depende de' : 'Usado por tabelas')
+    title.prepend(icon('link'))
+    block.append(title)
     if (!references.length) block.append(element('p', 'Nenhuma chave estrangeira nesta direção.', 'model-empty'))
     for (const ref of references) {
       const item = element('div', '', 'model-relation')
@@ -114,52 +132,59 @@ function initialize(explorer) {
     panel.append(block)
   }
 
-  function showColumns(table) {
-    const wrap = element('div', '', 'model-columns')
-    const grid = element('table', '', 'dictionary-table')
-    const caption = element('caption', 'Colunas de ' + table.name, 'visually-hidden')
-    const headings = grid.createTHead().insertRow()
-    grid.prepend(caption)
-    for (const title of ['Coluna', 'Tipo', 'Finalidade']) {
-      const th = element('th', title)
-      th.scope = 'col'
-      headings.append(th)
-    }
-    const body = grid.createTBody()
+  function schemaCard(table) {
+    const card = element('section', '', 'schema-card')
+    const header = element('header', '', 'schema-card-header')
+    const heading = element('div')
+    heading.append(element('h2', table.name), element('p', 'tech2d · ' + table.columns.length + ' colunas'))
+    header.append(icon('table'), heading)
+    if (table.foreign_key_count) header.append(tag(table.foreign_key_count + ' FK', 'fk'))
+    const columns = element('ul', '', 'schema-columns')
+    columns.setAttribute('aria-label', 'Colunas de ' + table.name)
     for (const column of table.columns) {
-      const row = body.insertRow()
-      const name = element('th')
-      name.scope = 'row'
-      const qualities = []
-      if (table.primary_key.includes(column.name)) qualities.push('PK')
-      if (table.references.some(ref => ref.column === column.name)) qualities.push('FK')
-      if (column.generated) qualities.push('Gerada pelo banco')
-      qualities.push(column.nullable ? 'Aceita nulo' : 'Obrigatória')
-      name.append(element('code', column.name), element('small', qualities.join(' · '), 'column-null'))
-      row.append(name)
-      row.insertCell().append(element('code', column.type.replace('character varying', 'varchar').replace('timestamp with time zone', 'timestamptz')))
-      row.insertCell().textContent = notes[table.name]?.[column.name] || column.comment || 'Sem descrição registrada.'
+      const row = element('li', '', 'schema-column')
+      const name = element('span', '', 'schema-column-name')
+      const props = element('span', '', 'schema-column-properties')
+      const primary = table.primary_key.includes(column.name)
+      const foreign = table.references.some(ref => ref.column === column.name)
+      if (primary || foreign) {
+        const mark = element('span', '', primary ? 'column-key' : 'column-link')
+        mark.append(icon(primary ? 'key' : 'link'))
+        name.append(mark)
+      }
+      name.append(element('code', column.name))
+      props.append(element('code', column.type.replace('character varying', 'varchar').replace('timestamp with time zone', 'timestamptz'), 'schema-column-type'))
+      if (primary) props.append(tag('PK', 'pk'))
+      if (foreign) props.append(tag('FK', 'fk'))
+      if (column.unique) props.append(tag('UNIQUE', 'unique'))
+      if (column.check) props.append(tag('CHECK', 'check'))
+      if (column.generated) props.append(tag('IDENTITY', 'identity'))
+      if (!column.nullable) props.append(tag('NOT NULL', 'required'))
+      row.append(name, props)
+      const note = notes[table.name]?.[column.name] || column.comment
+      if (note) row.append(element('small', note, 'schema-column-note'))
+      columns.append(row)
     }
-    wrap.append(grid)
-    return wrap
+    card.append(header)
+    if (table.comment) card.append(element('p', table.comment, 'schema-card-description'))
+    card.append(columns)
+    return card
   }
 
   function renderDetails() {
     const table = tableByName.get(selected)
-    const header = element('header', '', 'model-table-header')
-    header.append(element('span', areaByTable.get(selected)?.name || 'PostgreSQL', 'model-area-label'),
-      element('h2', titles.get(selected) || selected), element('code', 'tech2d.' + selected))
-    if (table.comment) header.append(element('p', table.comment))
-    const catalogLink = element('a', 'Abrir no catálogo de tabelas')
+    const catalogLink = element('a', 'Abrir no catálogo de tabelas', 'model-catalog-link')
     catalogLink.href = new URL('postgresql.html#obj-' + selected, location.href)
-    header.append(catalogLink)
+    catalogLink.append(icon('arrow'))
     const relations = element('div', '', 'model-relations')
     showRelationships(table, relations, 'out')
     showRelationships(table, relations, 'in')
     const related = viewUsage.get(selected)
     if (related.length) {
       const block = element('section', '', 'model-view-usage')
-      block.append(element('h3', 'Usado por views'))
+      const title = element('h3', 'Usado por views')
+      title.prepend(icon('eye'))
+      block.append(title)
       for (const name of related) {
         const link = element('a', name, 'model-object-link')
         link.href = new URL('views.html#view-' + name, location.href)
@@ -167,7 +192,7 @@ function initialize(explorer) {
       }
       relations.append(block)
     }
-    details.replaceChildren(header, relations, showColumns(table))
+    details.replaceChildren(schemaCard(table), catalogLink, relations)
   }
 
   function clearPath() {

@@ -1,6 +1,7 @@
 ---
 title: Tabelas e colunas
 description: Consulte tabelas, colunas, chaves e relações do esquema tech2d.
+wide: true
 ---
 
 O schema `tech2d` separa os dados por assunto. As tabelas usam colunas tipadas e chaves estrangeiras. A tabela `registros_aplicacao` guarda a identidade numérica, a versão e a referência externa de cada registro. As views preparam o formato que a API entrega aos sites.
@@ -10,44 +11,62 @@ O schema `tech2d` separa os dados por assunto. As tabelas usam colunas tipadas e
 {% assign tables = site.data.schema | where: "kind", "table" %}
 <p class="catalog-overview"><strong>{{ tables.size }} tabelas</strong> no schema <code>tech2d</code> · <a href="{{ '/views.html' | relative_url }}">{{ site.data.views.size }} views</a> · <a href="{{ '/schemas.html' | relative_url }}">Schemas do banco</a></p>
 
-Busque pelo nome da tabela, pela coluna ou pelo tipo. Abra uma tabela para consultar o que cada campo guarda, as chaves e os vínculos.
+Busque por tabela, coluna ou tipo. Abra **Detalhes e relações** para consultar a finalidade de cada coluna e as tabelas vinculadas.
 
 <div class="catalog-controls" data-catalog-controls hidden>
-  <label for="catalog-search">Buscar no catálogo<input id="catalog-search" type="search" placeholder="Ex.: visitas, id_turma ou jsonb" autocomplete="off"></label>
+  <label for="catalog-search"><span class="catalog-label-icon">{% include doc-icon.html name="search" %}Buscar no catálogo</span><input id="catalog-search" type="search" placeholder="Ex.: visitas, id_turma ou jsonb" autocomplete="off"></label>
   <label for="catalog-group">Área<select id="catalog-group"><option value="">Todas as áreas</option>{% for group in site.data.catalog %}<option value="{{ group.id }}">{{ group.name }}</option>{% endfor %}</select></label>
   <div class="catalog-actions">
     <p class="catalog-status" data-catalog-status role="status"></p>
-    <button type="button" data-catalog-toggle>Abrir resultados</button>
+    <button type="button" data-catalog-toggle>Abrir detalhes</button>
   </div>
 </div>
 
 {% for group in site.data.catalog %}
-<section class="catalog-group" data-catalog-group="{{ group.id }}" aria-labelledby="{{ group.id }}">
+<section class="catalog-group schema-card-group" data-catalog-group="{{ group.id }}" aria-labelledby="{{ group.id }}">
   <h3 id="{{ group.id }}">{{ group.name }}</h3>
   {% for item in group.objects %}
   {% assign object = site.data.schema | where: "name", item.name | first %}
   {% assign column_notes = site.data.column_notes[item.name] %}
-  <details class="catalog-object" id="obj-{{ item.name }}" data-catalog-object>
-    <summary><span><strong>{{ item.title }}</strong> <code class="object-identifier">{{ item.name }}</code><span class="object-description">{{ object.comment | escape }}</span></span><span class="object-kind">{{ object.columns.size }} colunas</span></summary>
-    <div class="object-body">
-      {% if object.primary_key.size > 0 %}<p><strong>Chave primária</strong> <code>{{ object.primary_key | join: ", " }}</code></p>{% endif %}
-      {% if object.references.size > 0 %}<ul class="object-relations" aria-label="Chaves estrangeiras">{% for relation in object.references %}<li><code>{{ relation.column }}</code> <span aria-hidden="true">→</span> <a href="#obj-{{ relation.table }}"><code>{{ relation.table }}.{{ relation.target }}</code></a></li>{% endfor %}</ul>{% endif %}
-      <p><a href="{{ '/modelagem.html' | relative_url }}#tabela={{ item.name }}">Explorar relações desta tabela</a></p>
-      <table class="dictionary-table">
-        <caption class="visually-hidden">Colunas de {{ item.name }}</caption>
-        <thead><tr><th scope="col">Coluna</th><th scope="col">Tipo</th><th scope="col">Finalidade</th></tr></thead>
-        <tbody>
+  <article class="schema-card" id="obj-{{ item.name }}" data-catalog-object>
+    <header class="schema-card-header">
+      {% include doc-icon.html name="table" %}
+      <div><h4>{{ item.name }}</h4><p>tech2d · {{ object.columns.size }} colunas</p></div>
+      {% if object.foreign_key_count > 0 %}<span class="schema-tag schema-tag-fk" title="Total de chaves estrangeiras">{{ object.foreign_key_count }} FK</span>{% endif %}
+    </header>
+    <p class="schema-card-description">{{ object.comment | default: item.title | escape }}</p>
+    <ul class="schema-columns" aria-label="Colunas de {{ item.name }}">
+      {% for column in object.columns %}
+      {% assign refs = object.references | where: "column", column.name %}
+      <li class="schema-column">
+        <span class="schema-column-name">{% if object.primary_key contains column.name %}<span class="column-key">{% include doc-icon.html name="key" %}</span>{% elsif refs.size > 0 %}<span class="column-link">{% include doc-icon.html name="link" %}</span>{% endif %}<code>{{ column.name }}</code></span>
+        <span class="schema-column-properties">
+          <code class="schema-column-type">{{ column.type | replace: "character varying", "varchar" | replace: "timestamp with time zone", "timestamptz" | escape }}</code>
+          {% if object.primary_key contains column.name %}<span class="schema-tag schema-tag-pk" title="Chave primária">PK</span>{% endif %}
+          {% if refs.size > 0 %}<span class="schema-tag schema-tag-fk" title="Chave estrangeira">FK</span>{% endif %}
+          {% if column.unique %}<span class="schema-tag schema-tag-unique">UNIQUE</span>{% endif %}
+          {% if column.check %}<span class="schema-tag schema-tag-check">CHECK</span>{% endif %}
+          {% if column.generated %}<span class="schema-tag schema-tag-identity">IDENTITY</span>{% endif %}
+          {% unless column.nullable %}<span class="schema-tag schema-tag-required">NOT NULL</span>{% endunless %}
+        </span>
+      </li>
+      {% endfor %}
+    </ul>
+    <details class="schema-card-details" data-catalog-expand>
+      <summary>Detalhes e relações</summary>
+      <div>
+        {% if object.primary_key.size > 0 %}<p><strong>Chave primária</strong> <code>{{ object.primary_key | join: ", " }}</code></p>{% endif %}
+        {% if object.references.size > 0 %}<ul class="object-relations" aria-label="Chaves estrangeiras">{% for relation in object.references %}<li><code>{{ relation.column }}</code> → <a href="#obj-{{ relation.table }}"><code>{{ relation.table }}.{{ relation.target }}</code></a></li>{% endfor %}</ul>{% endif %}
+        <p><a href="{{ '/modelagem.html' | relative_url }}#tabela={{ item.name }}">Explorar relações desta tabela {% include doc-icon.html name="arrow" %}</a></p>
+        <dl class="schema-column-notes">
           {% for column in object.columns %}
-          <tr>
-            <th scope="row"><code>{{ column.name }}</code><small class="column-null">{% if object.primary_key contains column.name %}Chave primária · {% endif %}{% if column.generated %}Gerada pelo banco · {% endif %}{% if column.nullable %}Aceita nulo{% else %}Obrigatória{% endif %}</small></th>
-            <td><code>{{ column.type | replace: "character varying", "varchar" | replace: "timestamp with time zone", "timestamptz" | escape }}</code></td>
-            <td>{{ column_notes[column.name] | default: column.comment | default: "Sem descrição registrada." | escape }}</td>
-          </tr>
+          <dt><code>{{ column.name }}</code></dt>
+          <dd>{{ column_notes[column.name] | default: column.comment | default: "Sem descrição registrada." | escape }}</dd>
           {% endfor %}
-        </tbody>
-      </table>
-    </div>
-  </details>
+        </dl>
+      </div>
+    </details>
+  </article>
   {% endfor %}
 </section>
 {% endfor %}
