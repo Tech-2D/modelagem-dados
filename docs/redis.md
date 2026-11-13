@@ -1,28 +1,35 @@
 ---
 title: Redis
+description: Cache dos catálogos públicos integrado ao PostgreSQL.
 ---
 
-O Redis foi usado como cache compartilhado para os catálogos de atividades e horários. O fluxo atual de produção passa pelo **PostgreSQL**. O Worker de compatibilidade também encaminha as leituras ao SQL com `SQL_READS_ENABLED=true`. As chaves abaixo documentam a implementação legada de `consultas-api`.
+O Redis acelera as consultas públicas da API SQL. O PostgreSQL armazena os dados e fornece a revisão de cada catálogo, usada para escolher a chave do cache.
 
-## Chaves e prazos
+**Estado da conexão:** a integração está implementada. O endereço salvo na configuração anterior não é mais encontrado no DNS. O cache fica desativado até receber uma conexão válida; as consultas continuam sendo respondidas pelo PostgreSQL.
 
-A base dos snapshots era `tech2d:public:v1:<catalogo>`, com `agenda` ou `schedules` no lugar de `<catalogo>`.
+## Catálogos e chaves
 
-| Chave | Valor | Expiração |
+| Catálogo | Conteúdo público | TTL |
 | --- | --- | --- |
-| `<base>` | JSON com os dados, a data de geração e um marcador opcional de invalidação | Até 72 horas de retenção |
-| `<base>:lock` | Identificador da renovação em andamento | 30 segundos |
-| `<base>:retry` | Marcador de espera após falha de renovação | 5 minutos |
-| `<base>:epoch` | Versão usada para detectar invalidação concorrente | Sem TTL definido pelo código |
-| `tech2d:public:rate:<hash>` | Contador de requisições por IP representado por hash | 60 segundos |
+| agenda | Atividades, turmas, atualizações e anúncio | 60 segundos |
+| updates | Atualizações, turmas e anúncio | 60 segundos |
+| schedules | Horários ativos, com filtros de turma, dia e busca | 300 segundos |
 
-Os snapshots da Agenda ficavam frescos por **30 minutos** e os de horários por **6 horas**. Após esse prazo, o cache podia servir a cópia anterior, marcada como desatualizada, enquanto tentava renovar. O limite configurado era de **180 consultas por minuto** por chave de rede.
+Formato: <code>tech2d:sql:public:v1:CATALOGO:REVISAO:HASH_FILTROS</code>.
 
-## Ciclo de uma consulta legada
+A revisão identifica os registros e suas versões. O hash dos filtros separa consultas de turmas, dias e buscas diferentes. As cópias antigas expiram pelo TTL.
 
-1. A API tenta reutilizar o snapshot no cache local ou no Redis.
-2. Se precisa renovar, uma única execução adquire a trava e consulta o Firestore.
-3. A publicação confere a versão de invalidação. Se ela mudou durante a renovação, o resultado antigo não é publicado.
-4. Em caso de falha, a API pode servir uma cópia anterior válida. Sem cópia disponível, responde com indisponibilidade temporária.
+## Invalidação após alterações
 
-O cache guardava apenas projeções dos catálogos públicos. No fluxo atual, o PostgreSQL mantém os dados de aplicação, as gravações e as estatísticas de acesso.
+1. A API verifica acesso e filtros.
+2. A função SQL <code>revisao_catalogo_publico</code> calcula a revisão dos registros.
+3. A API procura a chave correspondente à revisão e aos filtros no Redis.
+4. Se não encontra uma cópia, consulta o SQL e guarda somente a resposta pública no cache.
+
+Inclusões, alterações e exclusões feitas pela interface de gravação da aplicação mudam a revisão. A próxima consulta usa uma chave nova. Alterações diretas nas tabelas devem atualizar a versão do registro; o TTL também limita a retenção de cada cópia.
+
+## Indisponibilidade e acesso
+
+A API usa o PostgreSQL quando o Redis falha. Cada operação de rede do cache tem limite de 700 ms. O header <code>X-Catalog-Cache</code> informa HIT, MISS, BYPASS ou UNAVAILABLE.
+
+Contas, tokens, permissões, mensagens privadas e quadros pessoais não entram no cache. As credenciais ficam nos secrets do Worker SQL; os navegadores acessam somente a API.

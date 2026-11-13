@@ -1,4 +1,8 @@
-SELECT COALESCE(obj_description(to_regnamespace('tech2d'), 'pg_namespace'), '') LIKE '%tech2d-schema-version:023_notas_pegaki' AS latest_023 \gset
+SELECT COALESCE(obj_description(to_regnamespace('tech2d'), 'pg_namespace'), '') LIKE '%tech2d-schema-version:024_notas_pegaki' AS latest_024 \gset
+\if :latest_024
+\echo Schema tech2d já está na versão 024.
+\else
+SELECT COALESCE(obj_description(to_regnamespace('tech2d'), 'pg_namespace'), '') LIKE '%tech2d-schema-version:023_revisao_cache_publico' AS latest_023 \gset
 \if :latest_023
 \echo Schema tech2d já está na versão 023.
 \else
@@ -67,7 +71,9 @@ SELECT NOT EXISTS (SELECT FROM tech2d.schema_migrations WHERE version = '010_com
 \ir migrations/022_remover_campos_nulos.sql
 \endif
 \endif
+\ir migrations/023_revisao_cache_publico.sql
+\endif
 
-\ir migrations/023_notas_pegaki.sql
-COMMENT ON SCHEMA tech2d IS 'Dados da Tech-2D. tech2d-schema-version:023_notas_pegaki';
+\ir migrations/024_notas_pegaki.sql
+COMMENT ON SCHEMA tech2d IS 'Dados da Tech-2D. tech2d-schema-version:024_notas_pegaki';
 \endif

@@ -20,7 +20,7 @@ permalink: /
   <a href="{{ '/views.html' | relative_url }}"><strong>Consultar as views da API</strong><span>Veja a origem dos dados e os nomes dos campos usados pela API.</span></a>
   <a href="{{ '/modelagem.html' | relative_url }}"><strong>Entender a modelagem</strong><span>Veja de onde vêm as atividades, como os horários se ligam e o que é registrado nas visitas.</span></a>
   <a href="{{ '/consultas.html' | relative_url }}"><strong>Consultar exemplos SQL</strong><span>Copie consultas de atividades, horários e totais de visitas para usar em um banco local.</span></a>
-  <a href="{{ '/redis.html' | relative_url }}"><strong>Consultar o Redis legado</strong><span>Conheça as chaves, os prazos e a renovação usados pelo cache anterior.</span></a>
+  <a href="{{ '/redis.html' | relative_url }}"><strong>Consultar o Redis</strong><span>Veja as chaves, os prazos e a integração do cache com o PostgreSQL.</span></a>
 </div>
 
 ## Serviços e dados
@@ -30,7 +30,7 @@ permalink: /
 | PostgreSQL | Armazena atividades, horários, avisos, permissões e estatísticas. |
 | Firebase Authentication | Identifica a conta. A API verifica a sessão e aplica as permissões. |
 | Cloudflare R2 | Guarda arquivos anexados. A API controla quem pode acessar cada arquivo. |
-| Redis | Guardava cópias temporárias dos catálogos na implementação anterior. |
+| Redis | Cache de catálogos públicos integrado à API SQL; aguarda uma conexão válida para ativação. |
 | Firestore | Origem histórica dos dados preservados na migração para PostgreSQL. |
 
 [Código da API compartilhada](https://github.com/Tech-2D/api)

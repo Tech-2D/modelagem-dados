@@ -5,7 +5,7 @@ title: Notas do Pegaki
 
 # Notas do Pegaki
 
-A migration `023_notas_pegaki.sql` adiciona o caderno de notas privado ao PostgreSQL centralizado. O Firebase Authentication identifica a conta; a API obtém o UID do token validado, sem aceitar um proprietário pelo corpo da requisição.
+A migration `024_notas_pegaki.sql` adiciona o caderno de notas privado ao PostgreSQL centralizado. O Firebase Authentication identifica a conta; a API obtém o UID do token validado, sem aceitar um proprietário pelo corpo da requisição.
 
 | Objeto | Finalidade |
 | --- | --- |
