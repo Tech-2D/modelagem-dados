@@ -101,3 +101,15 @@ if (navigator.clipboard) {
     block.before(toolbar)
   }
 }
+
+// Mantém destacado o objeto aberto por um link do explorador.
+function markExplorerObject() {
+  for (const link of document.querySelectorAll('[data-object-link]')) {
+    const url = new URL(link.href);
+    const selected = url.pathname === location.pathname && url.hash === location.hash;
+    if (selected) { link.setAttribute('aria-current', 'location'); link.closest('details').open = true; }
+    else link.removeAttribute('aria-current');
+  }
+}
+window.addEventListener('hashchange', markExplorerObject);
+markExplorerObject();

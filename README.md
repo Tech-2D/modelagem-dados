@@ -47,3 +47,14 @@ A documentação usa Tailwind CSS 4.3.5 para o layout responsivo. A folha pronta
 npm ci
 npm run build:css
 ```
+
+
+## Objetos no menu lateral
+
+O explorador usa os inventários de `docs/_data/schema.json`, `views.json` e `routines.json` para gerar grupos, contagens e links. Ao adicionar uma tabela ou view, atualize o inventário correspondente. Para regenerar as funções e procedures após uma migration:
+
+```sh
+psql -d tech2d_local -v ON_ERROR_STOP=1 -At -f sql/routines.psql > docs/_data/routines.json
+```
+
+As âncoras das rotinas usam nome e assinatura, mantendo os links estáveis quando novos objetos são incluídos.

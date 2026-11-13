@@ -122,3 +122,30 @@ button, input, select { font: inherit; }
   .object-body { padding: .55rem; }
   .object-kind { font-size: .65rem; }
 }
+
+/* Explorador de objetos gerado pelos catálogos da documentação. */
+.db-sidebar { overflow: hidden; }
+.database-switch { display: grid; grid-template-columns: 1fr 1fr; gap: .4rem; border: 1px solid #3d5273; padding: .35rem; border-radius: .75rem; }
+.database-switch a { padding: .55rem .4rem; text-align: center; border-radius: .45rem; color: #bdcde6; text-decoration: none; font-size: .82rem; }
+.database-switch a[aria-current] { background: #254470; color: white; box-shadow: inset 0 0 0 1px #6686b5; }
+.database-switch small { font-size: .65rem; opacity: .8; }
+.sidebar-explorer { min-height: 0; flex: 1; overflow-y: auto; scrollbar-width: thin; scrollbar-color: #6686b5 transparent; }
+.sidebar-explorer > summary { padding: .5rem; cursor: pointer; font-weight: 700; }
+.sidebar .explorer-navigation { display: grid; gap: .2rem; }
+.sidebar .nav-section-label { margin: 1.2rem .7rem .35rem; font-size: .65rem; text-transform: uppercase; letter-spacing: .12em; color: #9fb5d6; }
+.nav-object-group > summary { display: flex; align-items: center; gap: .5rem; padding: .65rem .7rem; cursor: pointer; list-style: none; border-radius: .4rem; font-size: .87rem; }
+.nav-object-group > summary::before { content: '›'; color: #8ab9ff; transition: transform .15s; }
+.nav-object-group[open] > summary::before { transform: rotate(90deg); }
+.nav-object-group > summary span { margin-left: auto; font: .7rem Consolas, monospace; padding: .1rem .35rem; border-radius: .3rem; background: #254470; color: #cde0ff; }
+.nav-object-group > summary:hover { background: #254470; }
+.nav-object-list { display: grid; margin-left: 1rem; border-left: 1px solid #3d5273; padding-left: .35rem; }
+.sidebar .nav-object-list a { padding: .4rem .5rem; overflow-wrap: anywhere; font: .72rem/1.5 Consolas, monospace; }
+.sidebar .nav-object-list a[aria-current="location"] { background: #254470; color: white; box-shadow: inset 2px 0 #8ab9ff; }
+.sidebar .nav-object-overview { display: block; font-size: .73rem; color: #8ab9ff; }
+.sidebar-footer { display: grid; gap: .7rem; border-top: 1px solid #3d5273; padding-top: 1rem; }
+.sidebar-footer .repo-link { margin: 0; font-size: .75rem; }
+.read-only-badge { display: flex; align-items: center; gap: .45rem; font-size: .7rem; color: #bdcde6; }
+.read-only-badge span { width: .4rem; height: .4rem; border-radius: 50%; background: #8ab9ff; }
+@media (min-width: 1024px) { .mobile-explorer-toggle { display: none; } }
+@media (max-width: 1023px) { .sidebar-explorer { max-height: 48vh; } .sidebar-footer { display: none; } }
+@media (prefers-reduced-motion: reduce) { .nav-object-group > summary::before { transition: none; } }

@@ -1,0 +1,11 @@
+WITH routines AS (
+ SELECT p.proname AS name, pg_get_function_identity_arguments(p.oid) AS arguments,
+   pg_get_function_result(p.oid) AS result, l.lanname AS language,
+   p.prokind='p' AS procedure, obj_description(p.oid,'pg_proc') AS comment
+ FROM pg_proc p JOIN pg_namespace n ON n.oid=p.pronamespace
+ JOIN pg_language l ON l.oid=p.prolang
+ WHERE n.nspname='tech2d' AND p.prokind IN ('f','p')
+), catalog AS (
+ SELECT *, 'rotina-' || name || '-' || substr(md5(arguments),1,8) AS anchor FROM routines
+)
+SELECT jsonb_pretty(coalesce(jsonb_agg(to_jsonb(catalog) ORDER BY name,arguments),'[]'::jsonb)) FROM catalog;
