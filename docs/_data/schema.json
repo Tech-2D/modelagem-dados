@@ -2306,6 +2306,290 @@
   },
   {
     "kind": "table",
+    "name": "pegaki_cadernos",
+    "columns": [
+      {
+        "name": "id_usuario",
+        "type": "character varying(128)",
+        "comment": "UID validado no Firebase Authentication, nunca escolhido pelo cliente.",
+        "nullable": false,
+        "generated": false
+      },
+      {
+        "name": "ano_letivo",
+        "type": "smallint",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      },
+      {
+        "name": "ano_serie",
+        "type": "smallint",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      },
+      {
+        "name": "modo_primeiro",
+        "type": "character varying(5)",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      },
+      {
+        "name": "modo_segundo",
+        "type": "character varying(5)",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      },
+      {
+        "name": "versao",
+        "type": "bigint",
+        "comment": "Versão usada para impedir sobrescrita por outra aba ou dispositivo.",
+        "nullable": false,
+        "generated": false
+      },
+      {
+        "name": "regra_calculo",
+        "type": "character varying(32)",
+        "comment": "Versão da fórmula, para rastreabilidade dos cálculos.",
+        "nullable": false,
+        "generated": false
+      },
+      {
+        "name": "criado_em",
+        "type": "timestamp with time zone",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      },
+      {
+        "name": "alterado_em",
+        "type": "timestamp with time zone",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      }
+    ],
+    "comment": "Caderno privado da conta Firebase por ano letivo, série, modos de entrada e versão otimista.",
+    "references": [],
+    "primary_key": [
+      "id_usuario",
+      "ano_letivo"
+    ]
+  },
+  {
+    "kind": "table",
+    "name": "pegaki_disciplinas",
+    "columns": [
+      {
+        "name": "id",
+        "type": "smallint",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      },
+      {
+        "name": "ano_serie",
+        "type": "smallint",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      },
+      {
+        "name": "nome",
+        "type": "character varying(160)",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      }
+    ],
+    "comment": "Catálogo de disciplinas por série; IDs estáveis para as notas e futuras análises.",
+    "references": [],
+    "primary_key": [
+      "id"
+    ]
+  },
+  {
+    "kind": "table",
+    "name": "pegaki_notas",
+    "columns": [
+      {
+        "name": "id_usuario",
+        "type": "character varying(128)",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      },
+      {
+        "name": "ano_letivo",
+        "type": "smallint",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      },
+      {
+        "name": "ano_serie",
+        "type": "smallint",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      },
+      {
+        "name": "id_disciplina",
+        "type": "smallint",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      },
+      {
+        "name": "semestre",
+        "type": "smallint",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      },
+      {
+        "name": "n1",
+        "type": "numeric(4,2)",
+        "comment": null,
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "n2",
+        "type": "numeric(4,2)",
+        "comment": null,
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "media_informada",
+        "type": "numeric(4,2)",
+        "comment": null,
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "peso_n1",
+        "type": "smallint",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      }
+    ],
+    "comment": "Notas N1/N2, média informada e pesos por disciplina e semestre. Nota vazia é NULL.",
+    "references": [
+      {
+        "table": "pegaki_disciplinas",
+        "column": "id_disciplina",
+        "target": "id"
+      },
+      {
+        "table": "pegaki_disciplinas",
+        "column": "ano_serie",
+        "target": "ano_serie"
+      },
+      {
+        "table": "pegaki_cadernos",
+        "column": "id_usuario",
+        "target": "id_usuario"
+      },
+      {
+        "table": "pegaki_cadernos",
+        "column": "ano_letivo",
+        "target": "ano_letivo"
+      },
+      {
+        "table": "pegaki_cadernos",
+        "column": "ano_serie",
+        "target": "ano_serie"
+      }
+    ],
+    "primary_key": [
+      "id_usuario",
+      "ano_letivo",
+      "id_disciplina",
+      "semestre"
+    ]
+  },
+  {
+    "kind": "table",
+    "name": "pegaki_recuperacoes",
+    "columns": [
+      {
+        "name": "id_usuario",
+        "type": "character varying(128)",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      },
+      {
+        "name": "ano_letivo",
+        "type": "smallint",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      },
+      {
+        "name": "ano_serie",
+        "type": "smallint",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      },
+      {
+        "name": "id_disciplina",
+        "type": "smallint",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      },
+      {
+        "name": "nota",
+        "type": "numeric(4,2)",
+        "comment": null,
+        "nullable": true,
+        "generated": false
+      }
+    ],
+    "comment": "Nota de recuperação final por conta, ano letivo e disciplina.",
+    "references": [
+      {
+        "table": "pegaki_disciplinas",
+        "column": "id_disciplina",
+        "target": "id"
+      },
+      {
+        "table": "pegaki_disciplinas",
+        "column": "ano_serie",
+        "target": "ano_serie"
+      },
+      {
+        "table": "pegaki_cadernos",
+        "column": "id_usuario",
+        "target": "id_usuario"
+      },
+      {
+        "table": "pegaki_cadernos",
+        "column": "ano_letivo",
+        "target": "ano_letivo"
+      },
+      {
+        "table": "pegaki_cadernos",
+        "column": "ano_serie",
+        "target": "ano_serie"
+      }
+    ],
+    "primary_key": [
+      "id_usuario",
+      "ano_letivo",
+      "id_disciplina"
+    ]
+  },
+  {
+    "kind": "table",
     "name": "perfis_administrativos",
     "columns": [
       {

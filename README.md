@@ -34,7 +34,7 @@ O repositório [Tech-2D/api](https://github.com/Tech-2D/api) é a fonte das migr
 psql -d tech2d_local -v ON_ERROR_STOP=1 -At -f sql/catalog.psql > docs/_data/schema.json
 ```
 
-Inclua o título em português em `docs/_data/catalog.yml` e descreva a função do objeto com `COMMENT ON` na migração. O catálogo extrai a descrição das tabelas dos comentários do PostgreSQL. Mantenha a finalidade dos campos em `docs/_data/column_notes.json` e o inventário de views em `docs/_data/views.json`. O catálogo corresponde ao esquema PostgreSQL após a migration 022; as migrations anteriores ficam preservadas como histórico.
+Inclua o título em português em `docs/_data/catalog.yml` e descreva a função do objeto com `COMMENT ON` na migração. O catálogo extrai a descrição das tabelas dos comentários do PostgreSQL. Mantenha a finalidade dos campos em `docs/_data/column_notes.json` e o inventário de views em `docs/_data/views.json`. O catálogo corresponde ao esquema PostgreSQL após a migration 024; as migrations anteriores ficam preservadas como histórico.
 
 O site é gerado pelo GitHub Pages a partir de `docs/`. A organização das páginas foi inspirada no [Astro Database Workspace](https://github.com/Astro-Inter/astro-database).
 
@@ -58,3 +58,7 @@ psql -d tech2d_local -v ON_ERROR_STOP=1 -At -f sql/routines.psql > docs/_data/ro
 ```
 
 As âncoras das rotinas usam nome e assinatura, mantendo os links estáveis quando novos objetos são incluídos.
+
+## Notas do Pegaki
+
+A [modelagem de notas](docs/notas-pegaki.md) descreve as quatro tabelas novas e a visão de resultados privados, com RLS e fórmulas versionadas para futuras análises. A migration 024 foi aplicada ao PostgreSQL centralizado em 13/11/2026. O cálculo e o isolamento por conta foram conferidos no banco real assumindo o papel limitado da API em uma transação revertida.
