@@ -11,7 +11,7 @@ Um schema organiza objetos de um mesmo banco. Em `tech2d.atividades`, `tech2d` �
 
 | Schema | Responsável | O que contém |
 | --- | --- | --- |
-| `tech2d` | Tech-2D | Dados da Agenda e do Cadê o professor. São {{ tables.size }} tabelas, {{ site.data.views.size }} views e a função que sincroniza os horários. |
+| `tech2d` | Tech-2D | Dados da Agenda e do Cadê o professor. São {{ tables.size }} tabelas, {{ site.data.views.size }} views e funções de leitura, gravação e auditoria. |
 | `public` | PostgreSQL | Schema padrão do banco. Na conferência do Aiven estava vazio. |
 | `information_schema` | PostgreSQL | Metadados padronizados sobre tabelas, colunas, tipos e permissões visíveis à conta conectada. |
 | `pg_catalog` | PostgreSQL | Catálogos internos com definições de tipos, funções, índices e outros objetos do servidor. |
@@ -28,4 +28,4 @@ Inventário conferido no Aiven em 12/11/2026. Schemas internos de armazenamento 
 
 ## Estruturas aposentadas
 
-O schema `legado_firestore` e a cópia bruta `tech2d.documentos_firestore` foram retirados. A migração 018 também removeu `estado_migracao` e `migracoes_esquema` com suas views. Os arquivos SQL no Git guardam o histórico, e o comentário de `tech2d` informa a versão instalada.
+O schema `legado_firestore` e a cópia bruta `tech2d.documentos_firestore` foram retirados. A migração 018 também removeu `estado_migracao` e `migracoes_esquema` com suas views. A migração 020 substituiu `documentos_aplicacao` e `documentos_catalogo` por tabelas tipadas. Os arquivos SQL no Git guardam o histórico, e o comentário de `tech2d` informa a versão instalada.

@@ -5,13 +5,14 @@ SELECT obj_description('tech2d'::regnamespace, 'pg_namespace') AS versao_do_sche
 WITH periodo AS (
   SELECT (now() AT TIME ZONE 'America/Sao_Paulo')::date AS data_inicio
 )
-SELECT a.data, a.hora, a.titulo, a.tipo, a.id_turma
+SELECT r.referencia AS id_publico, a.data, a.hora, a.titulo, a.tipo, a.turma
 FROM tech2d.atividades AS a
+JOIN tech2d.registros_aplicacao AS r ON r.id = a.id_registro
 CROSS JOIN periodo AS p
-WHERE (a.id_turma = 'TURMA-EXEMPLO' OR a.id_turma IS NULL)
-  AND a.data >= to_char(p.data_inicio, 'YYYY-MM-DD')
-  AND a.data < to_char(p.data_inicio + 7, 'YYYY-MM-DD')
-ORDER BY a.data, a.hora NULLS LAST, a.id;
+WHERE (a.turma = 'TURMA-EXEMPLO' OR a.turma IS NULL)
+  AND a.data >= p.data_inicio
+  AND a.data < p.data_inicio + 7
+ORDER BY a.data, a.hora NULLS LAST, r.referencia;
 
 -- Horários ativos da turma de exemplo e suas referências.
 SELECT h.id, turma.nome AS turma, professor.nome AS professor,

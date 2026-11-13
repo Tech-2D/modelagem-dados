@@ -3,7 +3,7 @@ title: Tabelas e colunas
 description: Consulte tabelas, colunas, chaves e relações do esquema tech2d.
 ---
 
-O esquema `tech2d` combina **documentos JSONB** com **tabelas de consulta**. Os documentos preservam caminhos e IDs usados pela aplicação. As projeções facilitam filtros de agenda, horários e permissões. A API atualiza o documento e suas projeções na mesma transação.
+O schema `tech2d` separa os dados por assunto. As tabelas usam colunas tipadas e chaves estrangeiras. A tabela `registros_aplicacao` guarda a identidade numérica, a versão e a referência externa de cada registro. As views preparam o formato que a API entrega aos sites.
 
 ## Tabelas por área
 
@@ -38,7 +38,7 @@ Busque pelo nome da tabela, pela coluna ou pelo tipo. Abra uma tabela para consu
         <tbody>
           {% for column in object.columns %}
           <tr>
-            <th scope="row"><code>{{ column.name }}</code><small class="column-null">{% if object.primary_key contains column.name %}Chave primária · {% endif %}{% if column.nullable %}Aceita nulo{% else %}Obrigatória{% endif %}</small></th>
+            <th scope="row"><code>{{ column.name }}</code><small class="column-null">{% if object.primary_key contains column.name %}Chave primária · {% endif %}{% if column.generated %}Gerada pelo banco · {% endif %}{% if column.nullable %}Aceita nulo{% else %}Obrigatória{% endif %}</small></th>
             <td><code>{{ column.type | replace: "character varying", "varchar" | replace: "timestamp with time zone", "timestamptz" | escape }}</code></td>
             <td>{{ column_notes[column.name] | escape }}</td>
           </tr>
@@ -57,7 +57,7 @@ Busque pelo nome da tabela, pela coluna ou pelo tipo. Abra uma tabela para consu
 
 Abra a [modelagem]({{ '/modelagem.html' | relative_url }}) para seguir os vínculos de horários, atividades e contas. No catálogo, as chaves estrangeiras levam diretamente à tabela relacionada.
 
-As colunas `data` e `hora` em `atividades` usam `varchar(10)` e `varchar(5)` para preservar o formato usado pela aplicação. Horários de aula em `faixas_horario` usam `time`, e timestamps de auditoria e último acesso usam `timestamptz`.
+`atividades.data` usa `date` e `atividades.hora` usa `time`. O horário é opcional. Cada anexo fica em uma linha de `anexos_atividade`, com posição, nome, tamanho e referência ao arquivo no R2.
 
 ## Acesso ao banco
 
@@ -87,6 +87,8 @@ Os catálogos públicos passam por projeções que selecionam os campos da respo
 | 016 | Retira os nomes em inglês após a atualização dos serviços |
 | 017 | Remove a cópia bruta do Firestore e sua view |
 | 018 | Remove os controles de migração e registra a versão no comentário do schema |
+| 019 | Instala a interface de gravação usada pela API durante a troca |
+| 020 | Usa chaves numéricas e colunas tipadas. Separa anexos, votos, Kanban e dados históricos |
 
 Em um banco local vazio, siga os passos em [Consultas SQL]({{ '/consultas.html' | relative_url }}). O script de instalação aplica as migrações na ordem acima.
 

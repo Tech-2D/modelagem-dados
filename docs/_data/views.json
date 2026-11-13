@@ -1,21 +1,20 @@
 [
   {
     "name": "catalogo_horarios",
-    "comment": "View que recompõe o horário com as referências relacionais, o andar e a sala.",
+    "comment": "Reúne professor, disciplina, turma, faixa de horário, andar e sala.",
     "dependencies": [
-      "disciplinas",
-      "documentos_catalogo",
-      "faixas_horario",
       "horarios_aula",
       "professores",
-      "turmas"
+      "disciplinas",
+      "turmas",
+      "faixas_horario"
     ],
     "columns": [
       {
         "name": "id",
         "source": "id",
         "type": "character varying(320)",
-        "note": "ID da aula vindo de horarios_aula."
+        "note": "Identificador externo esperado pelo site."
       },
       {
         "name": "dia_semana",
@@ -45,7 +44,7 @@
   },
   {
     "name": "visao_acessos_recentes_professores",
-    "comment": "Último acesso autenticado ao Cadê o professor.",
+    "comment": "Interface SQL de compatibilidade para acessos_recentes_professores",
     "dependencies": [
       "acessos_recentes_professores"
     ],
@@ -72,22 +71,24 @@
   },
   {
     "name": "visao_atividades",
-    "comment": "Projeção para consultas por data e turma, recorrências e expurgo.",
+    "comment": "Atividades com seus anexos, para o calendário e os links diretos.",
     "dependencies": [
-      "atividades"
+      "atividades",
+      "anexos_atividade",
+      "registros_aplicacao"
     ],
     "columns": [
       {
         "name": "id",
-        "source": "id",
+        "source": "referencia",
         "type": "character varying(320)",
-        "note": "ID da atividade, usado no caminho do documento e no link direto."
+        "note": "Identificador externo esperado pelo site."
       },
       {
         "name": "turma_id",
-        "source": "id_turma",
-        "type": "character varying(100)",
-        "note": "Chave da turma na Agenda. Nulo indica atividade geral."
+        "source": "turma",
+        "type": "character varying(150)",
+        "note": "Turma associada ao registro."
       },
       {
         "name": "title",
@@ -98,7 +99,7 @@
       {
         "name": "description",
         "source": "descricao",
-        "type": "character varying(2000)",
+        "type": "character varying",
         "note": "Instruções e detalhes da atividade."
       },
       {
@@ -110,20 +111,20 @@
       {
         "name": "subject",
         "source": "disciplina",
-        "type": "character varying(120)",
+        "type": "character varying(150)",
         "note": "Nome da disciplina, quando informado."
       },
       {
         "name": "date",
         "source": "data",
         "type": "character varying(10)",
-        "note": "Data no formato AAAA-MM-DD."
+        "note": "Data da atividade."
       },
       {
         "name": "time",
         "source": "hora",
-        "type": "character varying(5)",
-        "note": "Hora local no formato HH:MM, quando definida."
+        "type": "text",
+        "note": "Horário local da atividade, quando informado."
       },
       {
         "name": "created_by",
@@ -139,15 +140,15 @@
       },
       {
         "name": "recurring_id",
-        "source": "id_recorrencia",
+        "source": "referencia_recorrencia",
         "type": "character varying(320)",
-        "note": "ID da regra que gerou uma ocorrência recorrente."
+        "note": "Identificador da regra que gerou esta ocorrência."
       },
       {
         "name": "attachments",
-        "source": "anexos",
+        "source": "attachments",
         "type": "jsonb",
-        "note": "Metadados dos arquivos anexados, que ficam no R2."
+        "note": "Lista de anexos montada a partir dos registros de anexos na ordem original."
       },
       {
         "name": "created_at",
@@ -157,15 +158,15 @@
       },
       {
         "name": "updated_at",
-        "source": "atualizado_em",
+        "source": "alterado_em",
         "type": "timestamp with time zone",
-        "note": "Data e hora da última alteração."
+        "note": "Momento da última alteração, no formato ISO da API."
       },
       {
         "name": "version",
         "source": "versao",
         "type": "bigint",
-        "note": "Versão usada para detectar edição concorrente."
+        "note": "Versão do registro usada para detectar conflitos."
       }
     ]
   },
@@ -173,7 +174,8 @@
     "name": "visao_auditoria_aplicacao",
     "comment": "Histórico das alterações do fluxo atual de gravação.",
     "dependencies": [
-      "auditoria_aplicacao"
+      "auditoria_aplicacao",
+      "valores_historico"
     ],
     "columns": [
       {
@@ -202,9 +204,9 @@
       },
       {
         "name": "previous_data",
-        "source": "dados_anteriores",
+        "source": "previous_data",
         "type": "jsonb",
-        "note": "Conteúdo anterior, quando havia documento."
+        "note": "Conteúdo anterior reconstruído a partir das linhas da auditoria."
       },
       {
         "name": "changed_at",
@@ -218,7 +220,8 @@
     "name": "visao_auditoria_atividades_legada",
     "comment": "Histórico da rota legada de gravação de atividades, cujas escritas estão desativadas.",
     "dependencies": [
-      "auditoria_atividades_legada"
+      "auditoria_atividades_legada",
+      "valores_historico"
     ],
     "columns": [
       {
@@ -247,9 +250,9 @@
       },
       {
         "name": "previous_data",
-        "source": "dados_anteriores",
+        "source": "previous_data",
         "type": "jsonb",
-        "note": "Dados que existiam antes da alteração, quando disponíveis."
+        "note": "Conteúdo anterior reconstruído a partir das linhas da auditoria."
       },
       {
         "name": "changed_at",
@@ -261,7 +264,7 @@
   },
   {
     "name": "visao_bloqueios_agenda",
-    "comment": "Bloqueios por e-mail ou rede aplicados à Agenda.",
+    "comment": "Interface SQL de compatibilidade para bloqueios_agenda",
     "dependencies": [
       "bloqueios_agenda"
     ],
@@ -300,7 +303,7 @@
   },
   {
     "name": "visao_catalogo_horarios",
-    "comment": "View que recompõe o horário com as referências relacionais, o andar e a sala.",
+    "comment": "Apelidos de colunas usados pela API do Cadê o professor.",
     "dependencies": [
       "catalogo_horarios"
     ],
@@ -309,7 +312,7 @@
         "name": "id",
         "source": "id",
         "type": "character varying(320)",
-        "note": "ID da aula vindo de horarios_aula."
+        "note": "Identificador externo esperado pelo site."
       },
       {
         "name": "day_of_week",
@@ -333,13 +336,13 @@
         "name": "data",
         "source": "dados",
         "type": "jsonb",
-        "note": "Objeto com professor, disciplina, turma, horários, sala e andar."
+        "note": "Objeto montado na consulta a partir das colunas tipadas."
       }
     ]
   },
   {
     "name": "visao_disciplinas",
-    "comment": "Nomes das disciplinas reutilizadas pelos horários.",
+    "comment": "Interface SQL de compatibilidade para disciplinas",
     "dependencies": [
       "disciplinas"
     ],
@@ -360,79 +363,85 @@
   },
   {
     "name": "visao_documentos_aplicacao",
-    "comment": "Fonte dos documentos ativos, como atividades, avisos, enquetes, votos e cartões do Kanban.",
+    "comment": "Contrato de leitura da API. Reconstrói os objetos a partir das tabelas tipadas.",
     "dependencies": [
-      "documentos_aplicacao"
+      "registros_aplicacao"
     ],
     "columns": [
       {
         "name": "path",
-        "source": "caminho",
-        "type": "character varying(512)",
-        "note": "Caminho único, como activities/{id} ou polls/{id}/votes/{uid}."
+        "source": "path",
+        "type": "text",
+        "note": "Referência externa composta para o contrato da API."
       },
       {
         "name": "collection",
-        "source": "colecao",
-        "type": "character varying(256)",
-        "note": "Caminho da coleção que contém o documento."
+        "source": "collection",
+        "type": "text",
+        "note": "Nome da coleção conforme o contrato da API."
       },
       {
         "name": "id",
         "source": "id",
         "type": "character varying(320)",
-        "note": "Último segmento do caminho, usado como ID dentro da coleção."
+        "note": "Identificador externo esperado pelo site."
       },
       {
         "name": "data",
-        "source": "dados",
+        "source": "data",
         "type": "jsonb",
-        "note": "Conteúdo em JSONB. A API aplica regras próprias a cada coleção."
+        "note": "Objeto montado na consulta a partir das colunas tipadas."
       },
       {
         "name": "version",
-        "source": "versao",
+        "source": "version",
         "type": "bigint",
-        "note": "Versão usada para detectar conflitos de edição."
+        "note": "Versão do registro usada para detectar conflitos."
       },
       {
         "name": "updated_at",
-        "source": "atualizado_em",
+        "source": "updated_at",
         "type": "timestamp with time zone",
-        "note": "Data e hora da última atualização."
+        "note": "Data e hora da última alteração."
       }
     ]
   },
   {
     "name": "visao_documentos_catalogo",
-    "comment": "Projeções de catálogo e dados complementares dos horários, como andar e sala.",
+    "comment": "Catálogo calculado a partir das tabelas tipadas.",
     "dependencies": [
-      "documentos_catalogo"
+      "registros_aplicacao",
+      "turmas_agenda",
+      "atualizacoes_agenda",
+      "anuncios",
+      "avisos_turma",
+      "enquetes",
+      "horarios_aula"
     ],
     "columns": [
       {
         "name": "collection",
-        "source": "colecao",
-        "type": "character varying(128)",
-        "note": "Coleção da entrada de catálogo."
+        "source": "collection",
+        "type": "character varying(40)",
+        "note": "Nome da coleção conforme o contrato da API."
       },
       {
         "name": "id",
         "source": "id",
         "type": "character varying(320)",
-        "note": "ID da entrada dentro da coleção."
+        "note": "Identificador externo esperado pelo site."
       },
       {
         "name": "data",
-        "source": "dados",
+        "source": "data",
         "type": "jsonb",
-        "note": "Conteúdo da entrada. Nos horários, inclui complementos como sala e andar."
+        "note": "Objeto montado na consulta a partir das colunas tipadas."
       }
     ]
   },
   {
     "name": "visao_faixas_horario",
-    "comment": "Pares de horário de início e fim reutilizados pelas aulas.",
+    "comment": "Interface SQL de compatibilidade para faixas_horario",
     "dependencies": [
       "faixas_horario"
     ],
@@ -459,7 +468,7 @@
   },
   {
     "name": "visao_horarios_aula",
-    "comment": "Liga professor, disciplina, turma e faixa de horário a um dia da semana.",
+    "comment": "Interface SQL de compatibilidade para horarios_aula",
     "dependencies": [
       "horarios_aula"
     ],
@@ -468,7 +477,7 @@
         "name": "id",
         "source": "id",
         "type": "character varying(320)",
-        "note": "ID da aula, também usado na entrada complementar do catálogo."
+        "note": "Identificador externo da aula, preservado para o site."
       },
       {
         "name": "teacher_id",
@@ -510,15 +519,16 @@
   },
   {
     "name": "visao_perfis_administrativos",
-    "comment": "Projeção de papel e turma da conta para consultas da API.",
+    "comment": "Papéis e turmas administrativas no formato consumido pela API.",
     "dependencies": [
-      "perfis_administrativos"
+      "perfis_administrativos",
+      "registros_aplicacao"
     ],
     "columns": [
       {
         "name": "uid",
-        "source": "id_usuario",
-        "type": "character varying(128)",
+        "source": "referencia",
+        "type": "character varying(320)",
         "note": "UID da conta no Firebase Authentication."
       },
       {
@@ -529,21 +539,21 @@
       },
       {
         "name": "turma_id",
-        "source": "id_turma",
-        "type": "character varying(100)",
-        "note": "Chave da turma associada ao papel, quando aplicável."
+        "source": "turma",
+        "type": "character varying(150)",
+        "note": "Turma associada ao registro."
       },
       {
         "name": "data",
-        "source": "dados",
+        "source": "data",
         "type": "jsonb",
-        "note": "Dados complementares do perfil projetado para a API."
+        "note": "Objeto montado na consulta a partir das colunas tipadas."
       }
     ]
   },
   {
     "name": "visao_professores",
-    "comment": "Nomes de professores reutilizados pelos horários.",
+    "comment": "Interface SQL de compatibilidade para professores",
     "dependencies": [
       "professores"
     ],
@@ -564,7 +574,7 @@
   },
   {
     "name": "visao_recibos_gravacao",
-    "comment": "Recibos que impedem uma gravação repetida de ser aplicada duas vezes.",
+    "comment": "Interface SQL de compatibilidade para recibos_gravacao",
     "dependencies": [
       "recibos_gravacao"
     ],
@@ -599,7 +609,8 @@
     "name": "visao_revisoes_origem",
     "comment": "Versões preservadas durante a reconciliação com o Firestore.",
     "dependencies": [
-      "revisoes_origem"
+      "revisoes_origem",
+      "valores_historico"
     ],
     "columns": [
       {
@@ -622,9 +633,9 @@
       },
       {
         "name": "fields",
-        "source": "campos",
+        "source": "fields",
         "type": "jsonb",
-        "note": "Campos tipados da versão anterior."
+        "note": "Campos históricos reconstruídos a partir de valores tipados."
       },
       {
         "name": "source_updated_at",
@@ -648,7 +659,7 @@
   },
   {
     "name": "visao_turmas",
-    "comment": "Nomes das turmas do catálogo de horários.",
+    "comment": "Interface SQL de compatibilidade para turmas",
     "dependencies": [
       "turmas"
     ],

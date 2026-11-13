@@ -3,7 +3,7 @@ title: Views da API
 description: Consulte as colunas usadas pela API e as tabelas que fornecem os dados.
 ---
 
-O schema `tech2d` tem {{ site.data.views.size }} views. `catalogo_horarios` reúne professor, disciplina, turma, horário e localização. As views com prefixo `visao_` mantêm os nomes de colunas esperados pela API, incluindo nomes em inglês. O catálogo de tabelas apresenta os nomes físicos em português.
+O schema `tech2d` tem {{ site.data.views.size }} views. `catalogo_horarios` reúne professor, disciplina, turma, horário e localização. As views com prefixo `visao_` mantêm os nomes de colunas esperados pela API, incluindo nomes em inglês. O catálogo de tabelas apresenta os nomes físicos em português. As colunas JSONB das views são calculadas na consulta para montar as respostas da API. Os valores persistidos nas tabelas são tipados.
 
 ## Colunas e origem
 

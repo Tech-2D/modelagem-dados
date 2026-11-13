@@ -1,18 +1,17 @@
--- Execute after applying the migrations to a local database.
+
 WITH relations AS (
   SELECT c.oid, c.relname AS name,
     CASE c.relkind WHEN 'v' THEN 'view' ELSE 'table' END AS kind
-  FROM pg_class c
-  JOIN pg_namespace n ON n.oid = c.relnamespace
+  FROM pg_class c JOIN pg_namespace n ON n.oid = c.relnamespace
   WHERE n.nspname = 'tech2d' AND c.relkind IN ('r', 'p', 'v')
-    AND NOT (c.relkind = 'v' AND COALESCE(obj_description(c.oid, 'pg_class'), '') LIKE 'Interface SQL de compatibilidade para %')
-),
-catalog AS (
+), catalog AS (
   SELECT r.name, r.kind, obj_description(r.oid, 'pg_class') AS comment,
     (SELECT jsonb_agg(jsonb_build_object(
       'name', a.attname,
       'type', format_type(a.atttypid, a.atttypmod),
-      'nullable', NOT a.attnotnull
+      'nullable', NOT a.attnotnull,
+      'generated', a.attidentity <> '',
+      'comment', col_description(r.oid, a.attnum)
     ) ORDER BY a.attnum)
     FROM pg_attribute a WHERE a.attrelid = r.oid AND a.attnum > 0 AND NOT a.attisdropped) AS columns,
     COALESCE((SELECT jsonb_agg(a.attname ORDER BY k.position)
@@ -22,13 +21,13 @@ catalog AS (
       WHERE c.conrelid = r.oid AND c.contype = 'p'), '[]'::jsonb) AS primary_key,
     COALESCE((SELECT jsonb_agg(jsonb_build_object(
       'column', source.attname, 'table', target.name, 'target', destination.attname
-    ) ORDER BY source.attname, target.name)
+    ) ORDER BY c.conname, k.position)
       FROM pg_constraint c
       JOIN relations target ON target.oid = c.confrelid
-      CROSS JOIN LATERAL unnest(c.conkey, c.confkey) AS k(source_number, target_number)
+      CROSS JOIN LATERAL unnest(c.conkey, c.confkey) WITH ORDINALITY AS k(source_number, target_number, position)
       JOIN pg_attribute source ON source.attrelid = c.conrelid AND source.attnum = k.source_number
       JOIN pg_attribute destination ON destination.attrelid = c.confrelid AND destination.attnum = k.target_number
       WHERE c.conrelid = r.oid AND c.contype = 'f'), '[]'::jsonb) AS references
-  FROM relations r
+  FROM relations r WHERE r.kind='table'
 )
 SELECT jsonb_pretty(jsonb_agg(to_jsonb(catalog) ORDER BY name)) FROM catalog;

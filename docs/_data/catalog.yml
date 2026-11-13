@@ -1,18 +1,28 @@
 - id: agenda
-  name: Agenda e aplicação
+  name: Atividades e avisos
   objects:
-    - name: documentos_aplicacao
-      title: Documentos da aplicação
     - name: atividades
       title: Atividades da Agenda
-    - name: documentos_catalogo
-      title: Catálogos e dados complementares
-    - name: perfis_administrativos
-      title: Perfis de acesso administrativo
-    - name: recibos_gravacao
-      title: Recibos de gravação
-    - name: auditoria_aplicacao
-      title: Auditoria da aplicação
+    - name: anexos_atividade
+      title: Metadados dos arquivos anexados às atividades
+    - name: regras_recorrencia
+      title: Regras de repetição
+    - name: regras_retencao
+      title: Políticas de expurgo por turma
+    - name: atividades_arquivadas
+      title: Metadados do expurgo de atividades
+    - name: conteudo_atividade_arquivada
+      title: Conteúdo das atividades arquivadas
+    - name: anexos_atividade_arquivada
+      title: Metadados dos anexos de atividades arquivadas
+    - name: turmas_agenda
+      title: Turmas habilitadas na Agenda
+    - name: avisos_turma
+      title: Avisos publicados no quadro da turma
+    - name: anuncios
+      title: Comunicados gerais
+    - name: atualizacoes_agenda
+      title: Histórico público de atualizações
 - id: horarios
   name: Horários dos professores
   objects:
@@ -23,12 +33,62 @@
     - name: disciplinas
       title: Disciplinas
     - name: turmas
-      title: Turmas
+      title: Turmas do catálogo de horários
     - name: faixas_horario
       title: Faixas de horário
-- id: acessos
-  name: Acessos e moderação
+- id: enquetes
+  name: Enquetes, sugestões e colaboração
   objects:
+    - name: enquetes
+      title: Enquetes das turmas
+    - name: opcoes_enquete
+      title: Opções de cada enquete, na ordem exibida
+    - name: votos_enquete
+      title: Votos em enquetes
+    - name: acessos_votacao
+      title: Autorizações para votar
+    - name: sugestoes_atividade
+      title: Sugestões de novas atividades
+    - name: sugestoes_melhoria
+      title: Sugestões de melhoria da Agenda
+    - name: mensagens_sugestao
+      title: Mensagens privadas sobre sugestões
+    - name: chat_representantes
+      title: Mensagens do chat dos representantes
+    - name: anotacoes
+      title: Anotações de estudo
+- id: kanban
+  name: Kanban
+  objects:
+    - name: espacos_kanban
+      title: Espaços pessoais e compartilhados do Kanban
+    - name: quadros_kanban
+      title: Quadros do Kanban em cada espaço
+    - name: colunas_kanban
+      title: Colunas dos quadros
+    - name: cartoes_kanban
+      title: Cartões dos quadros
+    - name: itens_checklist
+      title: Itens das listas dos cartões
+    - name: participantes_kanban
+      title: Participantes de quadros compartilhados
+    - name: pedidos_kanban
+      title: Pedidos de acesso a quadros compartilhados
+    - name: limpeza_anexos_kanban
+      title: Fila de limpeza dos anexos de cartões removidos
+- id: acessos
+  name: Contas, turmas e acessos
+  objects:
+    - name: perfis_administrativos
+      title: Papéis administrativos
+    - name: perfis_comunidade
+      title: Perfis públicos da comunidade
+    - name: pedidos_agenda
+      title: Pedidos de criação de agenda
+    - name: pedidos_representacao
+      title: Solicitações de representantes
+    - name: convites_representacao
+      title: Convites de representantes
     - name: visitas_aos_sites
       title: Visitas aos sites
     - name: acessos_recentes_agenda
@@ -40,7 +100,23 @@
 - id: operacao
   name: Operação e histórico
   objects:
+    - name: registros_aplicacao
+      title: Identidade e versão dos registros
+    - name: recibos_gravacao
+      title: Recibos de gravação
+    - name: envios_anexos
+      title: Envios pendentes de anexos
+    - name: limites_servico
+      title: Contadores de solicitações por janela
+    - name: preferencias_resumo
+      title: Preferências de e-mail por conta
+    - name: entregas_resumo
+      title: Reservas de envio do resumo semanal
+    - name: auditoria_aplicacao
+      title: Auditoria da aplicação
     - name: auditoria_atividades_legada
       title: Auditoria legada de atividades
     - name: revisoes_origem
-      title: Revisões dos dados de origem
+      title: Revisões históricas da origem
+    - name: valores_historico
+      title: Campos tipados do histórico

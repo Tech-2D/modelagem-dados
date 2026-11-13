@@ -20,6 +20,18 @@ O banco começa vazio. Para consultar atividades e horários, insira dados de te
 SELECT obj_description('tech2d'::regnamespace, 'pg_namespace') AS versao_do_schema;
 ```
 
+## Localizar uma atividade por link
+
+O valor após `#atividade=` no endereço da Agenda é a referência externa. Use a tabela de identidades para encontrá-la e juntar os dados da atividade.
+
+```sql
+SELECT r.id, r.referencia, a.titulo, a.data, a.hora
+FROM tech2d.registros_aplicacao AS r
+JOIN tech2d.atividades AS a ON a.id_registro = r.id
+WHERE r.tipo = 'activities' AND r.referencia_pai = ''
+  AND r.referencia = 'ID-EXEMPLO';
+```
+
 ## Buscar horários por turma
 
 A view [`catalogo_horarios`]({{ '/views.html#view-catalogo_horarios' | relative_url }}) já reúne as referências dos horários. Filtre pela turma e pelo estado da aula.

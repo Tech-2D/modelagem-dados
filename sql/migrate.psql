@@ -1,6 +1,13 @@
-SELECT COALESCE(obj_description(to_regnamespace('tech2d'), 'pg_namespace'), '') LIKE '%tech2d-schema-version:018_remover_controles_migracao' AS installed \gset
+SELECT COALESCE(obj_description(to_regnamespace('tech2d'), 'pg_namespace'), '') LIKE '%tech2d-schema-version:020_normalizar_dados' AS installed \gset
 \if :installed
-\echo Schema tech2d já está na versão 018.
+\echo Schema tech2d já está na versão 020.
+\else
+SELECT COALESCE(obj_description(to_regnamespace('tech2d'), 'pg_namespace'), '') LIKE '%tech2d-schema-version:019_interface_gravacao' AS has_interface \gset
+\if :has_interface
+\ir migrations/020_normalizar_dados.sql
+\else
+SELECT COALESCE(obj_description(to_regnamespace('tech2d'), 'pg_namespace'), '') LIKE '%tech2d-schema-version:018_remover_controles_migracao' AS has_controls_removed \gset
+\if :has_controls_removed
 \else
 SELECT to_regclass('tech2d.migracoes_esquema') IS NULL AS needs_portuguese_schema \gset
 \if :needs_portuguese_schema
@@ -34,4 +41,8 @@ SELECT NOT EXISTS (SELECT FROM tech2d.schema_migrations WHERE version = '010_com
 \ir migrations/016_remover_views_em_ingles.sql
 \ir migrations/017_remover_arquivo_firestore.sql
 \ir migrations/018_remover_controles_migracao.sql
+\endif
+\ir migrations/019_interface_gravacao.sql
+\ir migrations/020_normalizar_dados.sql
+\endif
 \endif

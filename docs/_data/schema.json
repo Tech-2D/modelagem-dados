@@ -6,22 +6,30 @@
       {
         "name": "id_usuario",
         "type": "character varying(128)",
-        "nullable": false
+        "comment": null,
+        "nullable": false,
+        "generated": false
       },
       {
         "name": "email",
         "type": "character varying(320)",
-        "nullable": true
+        "comment": null,
+        "nullable": true,
+        "generated": false
       },
       {
         "name": "ultimo_acesso_em",
         "type": "timestamp with time zone",
-        "nullable": false
+        "comment": null,
+        "nullable": false,
+        "generated": false
       },
       {
         "name": "chave_rede",
         "type": "character varying(64)",
-        "nullable": true
+        "comment": null,
+        "nullable": true,
+        "generated": false
       }
     ],
     "comment": "Último acesso autenticado à Agenda e referência de rede usada para moderação.",
@@ -37,17 +45,23 @@
       {
         "name": "id_usuario",
         "type": "character varying(128)",
-        "nullable": false
+        "comment": null,
+        "nullable": false,
+        "generated": false
       },
       {
         "name": "email",
         "type": "character varying(320)",
-        "nullable": true
+        "comment": null,
+        "nullable": true,
+        "generated": false
       },
       {
         "name": "ultimo_acesso_em",
         "type": "timestamp with time zone",
-        "nullable": false
+        "comment": null,
+        "nullable": false,
+        "generated": false
       }
     ],
     "comment": "Último acesso autenticado ao Cadê o professor.",
@@ -58,88 +72,684 @@
   },
   {
     "kind": "table",
-    "name": "atividades",
+    "name": "acessos_votacao",
+    "columns": [
+      {
+        "name": "id_registro",
+        "type": "bigint",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      },
+      {
+        "name": "email",
+        "type": "character varying(320)",
+        "comment": "Campo email no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "turma",
+        "type": "character varying(150)",
+        "comment": "Campo turmaId no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "situacao",
+        "type": "character varying(32)",
+        "comment": "Campo status no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "solicitado_em",
+        "type": "character varying(40)",
+        "comment": "Campo requestedAt no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "revisado_em",
+        "type": "character varying(40)",
+        "comment": "Campo reviewedAt no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "revisado_por",
+        "type": "character varying(128)",
+        "comment": "Campo reviewedBy no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "campos_nulos",
+        "type": "character varying(64)[]",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      }
+    ],
+    "comment": "Autorizações para votar",
+    "references": [
+      {
+        "table": "registros_aplicacao",
+        "column": "id_registro",
+        "target": "id"
+      }
+    ],
+    "primary_key": [
+      "id_registro"
+    ]
+  },
+  {
+    "kind": "table",
+    "name": "anexos_atividade",
     "columns": [
       {
         "name": "id",
-        "type": "character varying(320)",
-        "nullable": false
+        "type": "bigint",
+        "comment": null,
+        "nullable": false,
+        "generated": true
       },
       {
-        "name": "id_turma",
-        "type": "character varying(100)",
-        "nullable": true
+        "name": "id_pai",
+        "type": "bigint",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      },
+      {
+        "name": "grupo",
+        "type": "character varying(32)",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      },
+      {
+        "name": "ordem",
+        "type": "integer",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      },
+      {
+        "name": "referencia",
+        "type": "character varying(180)",
+        "comment": "Campo id no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "nome",
+        "type": "character varying(500)",
+        "comment": "Campo name no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "tipo_mime",
+        "type": "character varying(150)",
+        "comment": "Campo contentType no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "tamanho_bytes",
+        "type": "bigint",
+        "comment": "Campo size no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "chave_arquivo",
+        "type": "character varying(1024)",
+        "comment": "Campo storagePath no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "enviado_em",
+        "type": "character varying(40)",
+        "comment": "Campo uploadedAt no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "enviado_por",
+        "type": "character varying(128)",
+        "comment": "Campo uploadedBy no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "campos_nulos",
+        "type": "character varying(64)[]",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      }
+    ],
+    "comment": "Metadados dos arquivos anexados às atividades",
+    "references": [
+      {
+        "table": "atividades",
+        "column": "id_pai",
+        "target": "id_registro"
+      }
+    ],
+    "primary_key": [
+      "id"
+    ]
+  },
+  {
+    "kind": "table",
+    "name": "anexos_atividade_arquivada",
+    "columns": [
+      {
+        "name": "id",
+        "type": "bigint",
+        "comment": null,
+        "nullable": false,
+        "generated": true
+      },
+      {
+        "name": "id_pai",
+        "type": "bigint",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      },
+      {
+        "name": "grupo",
+        "type": "character varying(32)",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      },
+      {
+        "name": "ordem",
+        "type": "integer",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      },
+      {
+        "name": "referencia",
+        "type": "character varying(180)",
+        "comment": "Campo id no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "nome",
+        "type": "character varying(500)",
+        "comment": "Campo name no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "tipo_mime",
+        "type": "character varying(150)",
+        "comment": "Campo contentType no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "tamanho_bytes",
+        "type": "bigint",
+        "comment": "Campo size no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "chave_arquivo",
+        "type": "character varying(1024)",
+        "comment": "Campo storagePath no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "enviado_em",
+        "type": "character varying(40)",
+        "comment": "Campo uploadedAt no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "enviado_por",
+        "type": "character varying(128)",
+        "comment": "Campo uploadedBy no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "campos_nulos",
+        "type": "character varying(64)[]",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      }
+    ],
+    "comment": "Metadados dos anexos de atividades arquivadas",
+    "references": [
+      {
+        "table": "conteudo_atividade_arquivada",
+        "column": "id_pai",
+        "target": "id"
+      }
+    ],
+    "primary_key": [
+      "id"
+    ]
+  },
+  {
+    "kind": "table",
+    "name": "anotacoes",
+    "columns": [
+      {
+        "name": "id_registro",
+        "type": "bigint",
+        "comment": null,
+        "nullable": false,
+        "generated": false
       },
       {
         "name": "titulo",
         "type": "character varying(120)",
-        "nullable": false
+        "comment": "Campo title no contrato da API.",
+        "nullable": true,
+        "generated": false
       },
       {
-        "name": "descricao",
-        "type": "character varying(2000)",
-        "nullable": false
-      },
-      {
-        "name": "tipo",
-        "type": "character varying(32)",
-        "nullable": false
+        "name": "conteudo",
+        "type": "character varying(5000)",
+        "comment": "Campo content no contrato da API.",
+        "nullable": true,
+        "generated": false
       },
       {
         "name": "disciplina",
         "type": "character varying(120)",
-        "nullable": true
+        "comment": "Campo subject no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "turma",
+        "type": "character varying(80)",
+        "comment": "Campo className no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "id_autor",
+        "type": "character varying(128)",
+        "comment": "Campo authorUid no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "email_autor",
+        "type": "character varying(320)",
+        "comment": "Campo authorEmail no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "criado_em",
+        "type": "character varying(40)",
+        "comment": "Campo createdAt no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "alterado_em",
+        "type": "character varying(40)",
+        "comment": "Campo updatedAt no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "campos_nulos",
+        "type": "character varying(64)[]",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      }
+    ],
+    "comment": "Anotações de estudo",
+    "references": [
+      {
+        "table": "registros_aplicacao",
+        "column": "id_registro",
+        "target": "id"
+      }
+    ],
+    "primary_key": [
+      "id_registro"
+    ]
+  },
+  {
+    "kind": "table",
+    "name": "anuncios",
+    "columns": [
+      {
+        "name": "id_registro",
+        "type": "bigint",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      },
+      {
+        "name": "mensagem",
+        "type": "character varying(500)",
+        "comment": "Campo message no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "alterado_em",
+        "type": "character varying(40)",
+        "comment": "Campo updatedAt no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "campos_nulos",
+        "type": "character varying(64)[]",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      }
+    ],
+    "comment": "Comunicados gerais",
+    "references": [
+      {
+        "table": "registros_aplicacao",
+        "column": "id_registro",
+        "target": "id"
+      }
+    ],
+    "primary_key": [
+      "id_registro"
+    ]
+  },
+  {
+    "kind": "table",
+    "name": "atividades",
+    "columns": [
+      {
+        "name": "id_registro",
+        "type": "bigint",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      },
+      {
+        "name": "titulo",
+        "type": "character varying(120)",
+        "comment": "Campo title no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "descricao",
+        "type": "character varying(2000)",
+        "comment": "Campo description no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "tipo",
+        "type": "character varying(32)",
+        "comment": "Campo type no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "disciplina",
+        "type": "character varying(150)",
+        "comment": "Campo subject no contrato da API.",
+        "nullable": true,
+        "generated": false
       },
       {
         "name": "data",
-        "type": "character varying(10)",
-        "nullable": false
+        "type": "date",
+        "comment": "Campo date no contrato da API.",
+        "nullable": true,
+        "generated": false
       },
       {
         "name": "hora",
-        "type": "character varying(5)",
-        "nullable": true
+        "type": "time without time zone",
+        "comment": "Campo time no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "turma",
+        "type": "character varying(150)",
+        "comment": "Campo turmaId no contrato da API.",
+        "nullable": true,
+        "generated": false
       },
       {
         "name": "criado_por",
         "type": "character varying(128)",
-        "nullable": true
+        "comment": "Campo createdBy no contrato da API.",
+        "nullable": true,
+        "generated": false
       },
       {
         "name": "email_criador",
         "type": "character varying(320)",
-        "nullable": true
+        "comment": "Campo createdByEmail no contrato da API.",
+        "nullable": true,
+        "generated": false
       },
       {
-        "name": "id_recorrencia",
+        "name": "referencia_recorrencia",
         "type": "character varying(320)",
-        "nullable": true
-      },
-      {
-        "name": "anexos",
-        "type": "jsonb",
-        "nullable": false
+        "comment": "Campo recurringId no contrato da API.",
+        "nullable": true,
+        "generated": false
       },
       {
         "name": "criado_em",
-        "type": "timestamp with time zone",
-        "nullable": true
+        "type": "character varying(40)",
+        "comment": "Campo createdAt no contrato da API.",
+        "nullable": true,
+        "generated": false
       },
       {
-        "name": "atualizado_em",
-        "type": "timestamp with time zone",
-        "nullable": true
+        "name": "alterado_em",
+        "type": "character varying(40)",
+        "comment": "Campo updatedAt no contrato da API.",
+        "nullable": true,
+        "generated": false
       },
       {
-        "name": "versao",
-        "type": "bigint",
-        "nullable": false
+        "name": "campos_nulos",
+        "type": "character varying(64)[]",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      },
+      {
+        "name": "listas_presentes",
+        "type": "character varying(64)[]",
+        "comment": null,
+        "nullable": false,
+        "generated": false
       }
     ],
-    "comment": "Projeção para consultas por data e turma, recorrências e expurgo.",
-    "references": [],
+    "comment": "Atividades da Agenda",
+    "references": [
+      {
+        "table": "registros_aplicacao",
+        "column": "id_registro",
+        "target": "id"
+      }
+    ],
     "primary_key": [
-      "id"
+      "id_registro"
+    ]
+  },
+  {
+    "kind": "table",
+    "name": "atividades_arquivadas",
+    "columns": [
+      {
+        "name": "id_registro",
+        "type": "bigint",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      },
+      {
+        "name": "referencia_atividade",
+        "type": "character varying(320)",
+        "comment": "Campo originalId no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "turma",
+        "type": "character varying(150)",
+        "comment": "Campo turmaId no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "motivo",
+        "type": "character varying(32)",
+        "comment": "Campo reason no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "arquivada_em",
+        "type": "character varying(40)",
+        "comment": "Campo archivedAt no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "dias_retencao",
+        "type": "smallint",
+        "comment": "Campo retentionDays no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "anexos_removidos_em",
+        "type": "character varying(40)",
+        "comment": "Campo r2CleanedAt no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "campos_nulos",
+        "type": "character varying(64)[]",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      }
+    ],
+    "comment": "Metadados do expurgo de atividades",
+    "references": [
+      {
+        "table": "registros_aplicacao",
+        "column": "id_registro",
+        "target": "id"
+      }
+    ],
+    "primary_key": [
+      "id_registro"
+    ]
+  },
+  {
+    "kind": "table",
+    "name": "atualizacoes_agenda",
+    "columns": [
+      {
+        "name": "id_registro",
+        "type": "bigint",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      },
+      {
+        "name": "titulo",
+        "type": "character varying(120)",
+        "comment": "Campo title no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "conteudo",
+        "type": "character varying(2000)",
+        "comment": "Campo body no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "criado_por",
+        "type": "character varying(128)",
+        "comment": "Campo createdBy no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "publicado_em",
+        "type": "character varying(40)",
+        "comment": "Campo publishedAt no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "referencia_sugestao",
+        "type": "character varying(180)",
+        "comment": "Campo sourceFeedbackId no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "nome_credito",
+        "type": "character varying(60)",
+        "comment": "Campo sourceName no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "mensagem_sugestao",
+        "type": "character varying(2000)",
+        "comment": "Campo sourceMessage no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "campos_nulos",
+        "type": "character varying(64)[]",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      }
+    ],
+    "comment": "Histórico público de atualizações",
+    "references": [
+      {
+        "table": "registros_aplicacao",
+        "column": "id_registro",
+        "target": "id"
+      }
+    ],
+    "primary_key": [
+      "id_registro"
     ]
   },
   {
@@ -149,32 +759,37 @@
       {
         "name": "sequencia",
         "type": "bigint",
-        "nullable": false
+        "comment": null,
+        "nullable": false,
+        "generated": true
       },
       {
         "name": "autor",
         "type": "character varying(256)",
-        "nullable": false
+        "comment": null,
+        "nullable": false,
+        "generated": false
       },
       {
         "name": "caminho",
         "type": "character varying(512)",
-        "nullable": false
+        "comment": null,
+        "nullable": false,
+        "generated": false
       },
       {
         "name": "operacao",
         "type": "character varying(32)",
-        "nullable": false
-      },
-      {
-        "name": "dados_anteriores",
-        "type": "jsonb",
-        "nullable": true
+        "comment": null,
+        "nullable": false,
+        "generated": false
       },
       {
         "name": "alterado_em",
         "type": "timestamp with time zone",
-        "nullable": false
+        "comment": null,
+        "nullable": false,
+        "generated": false
       }
     ],
     "comment": "Histórico das alterações do fluxo atual de gravação.",
@@ -190,32 +805,37 @@
       {
         "name": "sequencia",
         "type": "bigint",
-        "nullable": false
+        "comment": null,
+        "nullable": false,
+        "generated": true
       },
       {
         "name": "id_atividade",
         "type": "character varying(320)",
-        "nullable": false
+        "comment": null,
+        "nullable": false,
+        "generated": false
       },
       {
         "name": "id_usuario",
         "type": "character varying(128)",
-        "nullable": false
+        "comment": null,
+        "nullable": false,
+        "generated": false
       },
       {
         "name": "acao",
         "type": "character varying(32)",
-        "nullable": false
-      },
-      {
-        "name": "dados_anteriores",
-        "type": "jsonb",
-        "nullable": true
+        "comment": null,
+        "nullable": false,
+        "generated": false
       },
       {
         "name": "alterado_em",
         "type": "timestamp with time zone",
-        "nullable": false
+        "comment": null,
+        "nullable": false,
+        "generated": false
       }
     ],
     "comment": "Histórico da rota legada de gravação de atividades, cujas escritas estão desativadas.",
@@ -226,32 +846,143 @@
   },
   {
     "kind": "table",
+    "name": "avisos_turma",
+    "columns": [
+      {
+        "name": "id_registro",
+        "type": "bigint",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      },
+      {
+        "name": "turma",
+        "type": "character varying(150)",
+        "comment": "Campo turmaId no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "titulo",
+        "type": "character varying(60)",
+        "comment": "Campo title no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "conteudo",
+        "type": "character varying(500)",
+        "comment": "Campo body no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "tipo",
+        "type": "character varying(32)",
+        "comment": "Campo type no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "expira_em",
+        "type": "character varying(40)",
+        "comment": "Campo expiresAt no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "expurgo_em",
+        "type": "character varying(40)",
+        "comment": "Campo purgeAt no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "criado_por",
+        "type": "character varying(128)",
+        "comment": "Campo createdBy no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "email_autor",
+        "type": "character varying(320)",
+        "comment": "Campo authorEmail no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "criado_em",
+        "type": "character varying(40)",
+        "comment": "Campo createdAt no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "alterado_em",
+        "type": "character varying(40)",
+        "comment": "Campo updatedAt no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "campos_nulos",
+        "type": "character varying(64)[]",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      }
+    ],
+    "comment": "Avisos publicados no quadro da turma",
+    "references": [
+      {
+        "table": "registros_aplicacao",
+        "column": "id_registro",
+        "target": "id"
+      }
+    ],
+    "primary_key": [
+      "id_registro"
+    ]
+  },
+  {
+    "kind": "table",
     "name": "bloqueios_agenda",
     "columns": [
       {
         "name": "id",
         "type": "uuid",
-        "nullable": false
+        "comment": null,
+        "nullable": false,
+        "generated": false
       },
       {
         "name": "tipo",
         "type": "character varying(32)",
-        "nullable": false
+        "comment": null,
+        "nullable": false,
+        "generated": false
       },
       {
         "name": "alvo",
         "type": "character varying(320)",
-        "nullable": false
+        "comment": null,
+        "nullable": false,
+        "generated": false
       },
       {
         "name": "criado_em",
         "type": "timestamp with time zone",
-        "nullable": false
+        "comment": null,
+        "nullable": false,
+        "generated": false
       },
       {
         "name": "criado_por",
         "type": "character varying(128)",
-        "nullable": false
+        "comment": null,
+        "nullable": false,
+        "generated": false
       }
     ],
     "comment": "Bloqueios por e-mail ou rede aplicados à Agenda.",
@@ -261,38 +992,491 @@
     ]
   },
   {
-    "kind": "view",
-    "name": "catalogo_horarios",
+    "kind": "table",
+    "name": "cartoes_kanban",
     "columns": [
       {
         "name": "id",
-        "type": "character varying(320)",
-        "nullable": true
+        "type": "bigint",
+        "comment": null,
+        "nullable": false,
+        "generated": true
       },
       {
-        "name": "dia_semana",
-        "type": "smallint",
-        "nullable": true
+        "name": "id_pai",
+        "type": "bigint",
+        "comment": null,
+        "nullable": false,
+        "generated": false
       },
       {
-        "name": "ativo",
-        "type": "boolean",
-        "nullable": true
+        "name": "grupo",
+        "type": "character varying(32)",
+        "comment": null,
+        "nullable": false,
+        "generated": false
       },
       {
-        "name": "nome_turma",
-        "type": "character varying(150)",
-        "nullable": true
+        "name": "ordem",
+        "type": "integer",
+        "comment": null,
+        "nullable": false,
+        "generated": false
       },
       {
-        "name": "dados",
-        "type": "jsonb",
-        "nullable": true
+        "name": "referencia",
+        "type": "character varying(80)",
+        "comment": "Campo id no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "referencia_coluna",
+        "type": "character varying(80)",
+        "comment": "Campo columnId no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "titulo",
+        "type": "character varying(160)",
+        "comment": "Campo title no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "descricao",
+        "type": "character varying(3000)",
+        "comment": "Campo description no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "prioridade",
+        "type": "character varying(16)",
+        "comment": "Campo priority no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "prazo",
+        "type": "date",
+        "comment": "Campo dueDate no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "id_responsavel",
+        "type": "character varying(128)",
+        "comment": "Campo assigneeId no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "etiquetas",
+        "type": "character varying(30)[]",
+        "comment": "Campo labels no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "referencias_atividades",
+        "type": "character varying(128)[]",
+        "comment": "Campo activityIds no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "campos_nulos",
+        "type": "character varying(64)[]",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      },
+      {
+        "name": "listas_presentes",
+        "type": "character varying(64)[]",
+        "comment": null,
+        "nullable": false,
+        "generated": false
       }
     ],
-    "comment": "View que recompõe o horário com as referências relacionais, o andar e a sala.",
-    "references": [],
-    "primary_key": []
+    "comment": "Cartões dos quadros",
+    "references": [
+      {
+        "table": "colunas_kanban",
+        "column": "id_pai",
+        "target": "id_pai"
+      },
+      {
+        "table": "colunas_kanban",
+        "column": "referencia_coluna",
+        "target": "referencia"
+      },
+      {
+        "table": "quadros_kanban",
+        "column": "id_pai",
+        "target": "id"
+      }
+    ],
+    "primary_key": [
+      "id"
+    ]
+  },
+  {
+    "kind": "table",
+    "name": "chat_representantes",
+    "columns": [
+      {
+        "name": "id_registro",
+        "type": "bigint",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      },
+      {
+        "name": "mensagem",
+        "type": "character varying(2000)",
+        "comment": "Campo text no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "remetente",
+        "type": "character varying(128)",
+        "comment": "Campo senderId no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "email_remetente",
+        "type": "character varying(320)",
+        "comment": "Campo senderEmail no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "papel_remetente",
+        "type": "character varying(32)",
+        "comment": "Campo senderRole no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "turma_remetente",
+        "type": "character varying(150)",
+        "comment": "Campo senderTurma no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "criado_em",
+        "type": "character varying(40)",
+        "comment": "Campo createdAt no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "campos_nulos",
+        "type": "character varying(64)[]",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      }
+    ],
+    "comment": "Mensagens do chat dos representantes",
+    "references": [
+      {
+        "table": "registros_aplicacao",
+        "column": "id_registro",
+        "target": "id"
+      }
+    ],
+    "primary_key": [
+      "id_registro"
+    ]
+  },
+  {
+    "kind": "table",
+    "name": "colunas_kanban",
+    "columns": [
+      {
+        "name": "id",
+        "type": "bigint",
+        "comment": null,
+        "nullable": false,
+        "generated": true
+      },
+      {
+        "name": "id_pai",
+        "type": "bigint",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      },
+      {
+        "name": "grupo",
+        "type": "character varying(32)",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      },
+      {
+        "name": "ordem",
+        "type": "integer",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      },
+      {
+        "name": "referencia",
+        "type": "character varying(80)",
+        "comment": "Campo id no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "nome",
+        "type": "character varying(60)",
+        "comment": "Campo name no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "cor",
+        "type": "character varying(16)",
+        "comment": "Campo color no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "concluida",
+        "type": "boolean",
+        "comment": "Campo done no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "campos_nulos",
+        "type": "character varying(64)[]",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      }
+    ],
+    "comment": "Colunas dos quadros",
+    "references": [
+      {
+        "table": "quadros_kanban",
+        "column": "id_pai",
+        "target": "id"
+      }
+    ],
+    "primary_key": [
+      "id"
+    ]
+  },
+  {
+    "kind": "table",
+    "name": "conteudo_atividade_arquivada",
+    "columns": [
+      {
+        "name": "id",
+        "type": "bigint",
+        "comment": null,
+        "nullable": false,
+        "generated": true
+      },
+      {
+        "name": "id_pai",
+        "type": "bigint",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      },
+      {
+        "name": "grupo",
+        "type": "character varying(32)",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      },
+      {
+        "name": "ordem",
+        "type": "integer",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      },
+      {
+        "name": "titulo",
+        "type": "character varying(120)",
+        "comment": "Campo title no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "descricao",
+        "type": "character varying(2000)",
+        "comment": "Campo description no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "tipo",
+        "type": "character varying(32)",
+        "comment": "Campo type no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "disciplina",
+        "type": "character varying(150)",
+        "comment": "Campo subject no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "data",
+        "type": "date",
+        "comment": "Campo date no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "hora",
+        "type": "time without time zone",
+        "comment": "Campo time no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "turma",
+        "type": "character varying(150)",
+        "comment": "Campo turmaId no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "criado_por",
+        "type": "character varying(128)",
+        "comment": "Campo createdBy no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "email_criador",
+        "type": "character varying(320)",
+        "comment": "Campo createdByEmail no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "referencia_recorrencia",
+        "type": "character varying(320)",
+        "comment": "Campo recurringId no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "criado_em",
+        "type": "character varying(40)",
+        "comment": "Campo createdAt no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "alterado_em",
+        "type": "character varying(40)",
+        "comment": "Campo updatedAt no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "campos_nulos",
+        "type": "character varying(64)[]",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      },
+      {
+        "name": "listas_presentes",
+        "type": "character varying(64)[]",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      }
+    ],
+    "comment": "Conteúdo das atividades arquivadas",
+    "references": [
+      {
+        "table": "atividades_arquivadas",
+        "column": "id_pai",
+        "target": "id_registro"
+      }
+    ],
+    "primary_key": [
+      "id"
+    ]
+  },
+  {
+    "kind": "table",
+    "name": "convites_representacao",
+    "columns": [
+      {
+        "name": "id_registro",
+        "type": "bigint",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      },
+      {
+        "name": "email",
+        "type": "character varying(320)",
+        "comment": "Campo email no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "turma",
+        "type": "character varying(150)",
+        "comment": "Campo turmaId no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "referencia_pedido",
+        "type": "character varying(180)",
+        "comment": "Campo requestId no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "aprovado_em",
+        "type": "character varying(40)",
+        "comment": "Campo approvedAt no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "campos_nulos",
+        "type": "character varying(64)[]",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      }
+    ],
+    "comment": "Convites de representantes",
+    "references": [
+      {
+        "table": "registros_aplicacao",
+        "column": "id_registro",
+        "target": "id"
+      }
+    ],
+    "primary_key": [
+      "id_registro"
+    ]
   },
   {
     "kind": "table",
@@ -301,12 +1485,16 @@
       {
         "name": "id",
         "type": "bigint",
-        "nullable": false
+        "comment": null,
+        "nullable": false,
+        "generated": true
       },
       {
         "name": "nome",
         "type": "character varying(150)",
-        "nullable": false
+        "comment": null,
+        "nullable": false,
+        "generated": false
       }
     ],
     "comment": "Nomes das disciplinas reutilizadas pelos horários.",
@@ -317,70 +1505,280 @@
   },
   {
     "kind": "table",
-    "name": "documentos_aplicacao",
+    "name": "enquetes",
     "columns": [
       {
-        "name": "caminho",
-        "type": "character varying(512)",
-        "nullable": false
-      },
-      {
-        "name": "colecao",
-        "type": "character varying(256)",
-        "nullable": false
-      },
-      {
-        "name": "id",
-        "type": "character varying(320)",
-        "nullable": false
-      },
-      {
-        "name": "dados",
-        "type": "jsonb",
-        "nullable": false
-      },
-      {
-        "name": "versao",
+        "name": "id_registro",
         "type": "bigint",
-        "nullable": false
+        "comment": null,
+        "nullable": false,
+        "generated": false
       },
       {
-        "name": "atualizado_em",
-        "type": "timestamp with time zone",
-        "nullable": false
+        "name": "turma",
+        "type": "character varying(150)",
+        "comment": "Campo turmaId no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "pergunta",
+        "type": "character varying(160)",
+        "comment": "Campo question no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "situacao",
+        "type": "character varying(32)",
+        "comment": "Campo status no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "criado_por",
+        "type": "character varying(128)",
+        "comment": "Campo createdBy no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "criado_em",
+        "type": "character varying(40)",
+        "comment": "Campo createdAt no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "campos_nulos",
+        "type": "character varying(64)[]",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      },
+      {
+        "name": "listas_presentes",
+        "type": "character varying(64)[]",
+        "comment": null,
+        "nullable": false,
+        "generated": false
       }
     ],
-    "comment": "Fonte dos documentos ativos, como atividades, avisos, enquetes, votos e cartões do Kanban.",
-    "references": [],
+    "comment": "Enquetes das turmas",
+    "references": [
+      {
+        "table": "registros_aplicacao",
+        "column": "id_registro",
+        "target": "id"
+      }
+    ],
     "primary_key": [
-      "caminho"
+      "id_registro"
     ]
   },
   {
     "kind": "table",
-    "name": "documentos_catalogo",
+    "name": "entregas_resumo",
     "columns": [
       {
-        "name": "colecao",
-        "type": "character varying(128)",
-        "nullable": false
+        "name": "id_registro",
+        "type": "bigint",
+        "comment": null,
+        "nullable": false,
+        "generated": false
       },
       {
-        "name": "id",
-        "type": "character varying(320)",
-        "nullable": false
+        "name": "situacao",
+        "type": "character varying(32)",
+        "comment": "Campo status no contrato da API.",
+        "nullable": true,
+        "generated": false
       },
       {
-        "name": "dados",
-        "type": "jsonb",
-        "nullable": false
+        "name": "inicio_semana",
+        "type": "date",
+        "comment": "Campo weekStart no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "criada_em_ms",
+        "type": "bigint",
+        "comment": "Campo createdAt no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "concluida_em_ms",
+        "type": "bigint",
+        "comment": "Campo completedAt no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "campos_nulos",
+        "type": "character varying(64)[]",
+        "comment": null,
+        "nullable": false,
+        "generated": false
       }
     ],
-    "comment": "Projeções de catálogo e dados complementares dos horários, como andar e sala.",
-    "references": [],
+    "comment": "Reservas de envio do resumo semanal",
+    "references": [
+      {
+        "table": "registros_aplicacao",
+        "column": "id_registro",
+        "target": "id"
+      }
+    ],
     "primary_key": [
-      "colecao",
-      "id"
+      "id_registro"
+    ]
+  },
+  {
+    "kind": "table",
+    "name": "envios_anexos",
+    "columns": [
+      {
+        "name": "id_registro",
+        "type": "bigint",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      },
+      {
+        "name": "referencia_atividade",
+        "type": "character varying(320)",
+        "comment": "Campo activityId no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "nome",
+        "type": "character varying(500)",
+        "comment": "Campo name no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "tipo_mime",
+        "type": "character varying(150)",
+        "comment": "Campo contentType no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "tamanho_bytes",
+        "type": "bigint",
+        "comment": "Campo size no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "chave_arquivo",
+        "type": "character varying(1024)",
+        "comment": "Campo key no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "id_usuario",
+        "type": "character varying(128)",
+        "comment": "Campo uid no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "criado_em_ms",
+        "type": "bigint",
+        "comment": "Campo createdAt no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "campos_nulos",
+        "type": "character varying(64)[]",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      }
+    ],
+    "comment": "Envios pendentes de anexos",
+    "references": [
+      {
+        "table": "registros_aplicacao",
+        "column": "id_registro",
+        "target": "id"
+      }
+    ],
+    "primary_key": [
+      "id_registro"
+    ]
+  },
+  {
+    "kind": "table",
+    "name": "espacos_kanban",
+    "columns": [
+      {
+        "name": "id_registro",
+        "type": "bigint",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      },
+      {
+        "name": "id_proprietario",
+        "type": "character varying(128)",
+        "comment": "Campo ownerId no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "versao_formato",
+        "type": "smallint",
+        "comment": "Campo schemaVersion no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "criado_em",
+        "type": "character varying(40)",
+        "comment": "Campo createdAt no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "alterado_em",
+        "type": "character varying(40)",
+        "comment": "Campo updatedAt no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "campos_nulos",
+        "type": "character varying(64)[]",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      },
+      {
+        "name": "listas_presentes",
+        "type": "character varying(64)[]",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      }
+    ],
+    "comment": "Espaços pessoais e compartilhados do Kanban",
+    "references": [
+      {
+        "table": "registros_aplicacao",
+        "column": "id_registro",
+        "target": "id"
+      }
+    ],
+    "primary_key": [
+      "id_registro"
     ]
   },
   {
@@ -390,17 +1788,23 @@
       {
         "name": "id",
         "type": "bigint",
-        "nullable": false
+        "comment": null,
+        "nullable": false,
+        "generated": true
       },
       {
         "name": "hora_inicio",
         "type": "time(0) without time zone",
-        "nullable": false
+        "comment": null,
+        "nullable": false,
+        "generated": false
       },
       {
         "name": "hora_fim",
         "type": "time(0) without time zone",
-        "nullable": false
+        "comment": null,
+        "nullable": false,
+        "generated": false
       }
     ],
     "comment": "Pares de horário de início e fim reutilizados pelas aulas.",
@@ -416,49 +1820,110 @@
       {
         "name": "id",
         "type": "character varying(320)",
-        "nullable": false
+        "comment": null,
+        "nullable": false,
+        "generated": false
       },
       {
         "name": "id_professor",
         "type": "bigint",
-        "nullable": false
+        "comment": null,
+        "nullable": false,
+        "generated": false
       },
       {
         "name": "id_disciplina",
         "type": "bigint",
-        "nullable": false
+        "comment": null,
+        "nullable": false,
+        "generated": false
       },
       {
         "name": "id_turma",
         "type": "bigint",
-        "nullable": false
+        "comment": null,
+        "nullable": false,
+        "generated": false
       },
       {
         "name": "id_faixa_horario",
         "type": "bigint",
-        "nullable": false
+        "comment": null,
+        "nullable": false,
+        "generated": false
       },
       {
         "name": "dia_semana",
         "type": "smallint",
-        "nullable": false
+        "comment": null,
+        "nullable": false,
+        "generated": false
       },
       {
         "name": "ativo",
         "type": "boolean",
-        "nullable": false
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      },
+      {
+        "name": "id_registro",
+        "type": "bigint",
+        "comment": "Identidade numérica do registro na API.",
+        "nullable": false,
+        "generated": false
+      },
+      {
+        "name": "andar",
+        "type": "character varying(80)",
+        "comment": "Andar informado para a aula.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "sala",
+        "type": "character varying(500)",
+        "comment": "Descrição da sala ou localização da aula.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "criado_em",
+        "type": "character varying(40)",
+        "comment": null,
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "alterado_em",
+        "type": "character varying(40)",
+        "comment": null,
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "campos_nulos",
+        "type": "character varying(64)[]",
+        "comment": null,
+        "nullable": false,
+        "generated": false
       }
     ],
     "comment": "Liga professor, disciplina, turma e faixa de horário a um dia da semana.",
     "references": [
       {
-        "table": "disciplinas",
-        "column": "id_disciplina",
+        "table": "registros_aplicacao",
+        "column": "id_registro",
         "target": "id"
       },
       {
-        "table": "faixas_horario",
-        "column": "id_faixa_horario",
+        "table": "turmas",
+        "column": "id_turma",
+        "target": "id"
+      },
+      {
+        "table": "disciplinas",
+        "column": "id_disciplina",
         "target": "id"
       },
       {
@@ -467,8 +1932,8 @@
         "target": "id"
       },
       {
-        "table": "turmas",
-        "column": "id_turma",
+        "table": "faixas_horario",
+        "column": "id_faixa_horario",
         "target": "id"
       }
     ],
@@ -478,33 +1943,738 @@
   },
   {
     "kind": "table",
-    "name": "perfis_administrativos",
+    "name": "itens_checklist",
     "columns": [
+      {
+        "name": "id",
+        "type": "bigint",
+        "comment": null,
+        "nullable": false,
+        "generated": true
+      },
+      {
+        "name": "id_pai",
+        "type": "bigint",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      },
+      {
+        "name": "grupo",
+        "type": "character varying(32)",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      },
+      {
+        "name": "ordem",
+        "type": "integer",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      },
+      {
+        "name": "referencia",
+        "type": "character varying(80)",
+        "comment": "Campo id no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "descricao",
+        "type": "character varying(200)",
+        "comment": "Campo text no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "concluido",
+        "type": "boolean",
+        "comment": "Campo done no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "campos_nulos",
+        "type": "character varying(64)[]",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      }
+    ],
+    "comment": "Itens das listas dos cartões",
+    "references": [
+      {
+        "table": "cartoes_kanban",
+        "column": "id_pai",
+        "target": "id"
+      }
+    ],
+    "primary_key": [
+      "id"
+    ]
+  },
+  {
+    "kind": "table",
+    "name": "limites_servico",
+    "columns": [
+      {
+        "name": "id_registro",
+        "type": "bigint",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      },
+      {
+        "name": "quantidade",
+        "type": "integer",
+        "comment": "Campo count no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "expira_em_ms",
+        "type": "bigint",
+        "comment": "Campo resetAt no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "campos_nulos",
+        "type": "character varying(64)[]",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      }
+    ],
+    "comment": "Contadores de solicitações por janela",
+    "references": [
+      {
+        "table": "registros_aplicacao",
+        "column": "id_registro",
+        "target": "id"
+      }
+    ],
+    "primary_key": [
+      "id_registro"
+    ]
+  },
+  {
+    "kind": "table",
+    "name": "limpeza_anexos_kanban",
+    "columns": [
+      {
+        "name": "id_registro",
+        "type": "bigint",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      },
+      {
+        "name": "referencia_espaco",
+        "type": "character varying(512)",
+        "comment": "Campo path no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "referencia_quadro",
+        "type": "character varying(80)",
+        "comment": "Campo board no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "referencia_cartao",
+        "type": "character varying(80)",
+        "comment": "Campo task no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "campos_nulos",
+        "type": "character varying(64)[]",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      }
+    ],
+    "comment": "Fila de limpeza dos anexos de cartões removidos",
+    "references": [
+      {
+        "table": "registros_aplicacao",
+        "column": "id_registro",
+        "target": "id"
+      }
+    ],
+    "primary_key": [
+      "id_registro"
+    ]
+  },
+  {
+    "kind": "table",
+    "name": "mensagens_sugestao",
+    "columns": [
+      {
+        "name": "id_registro",
+        "type": "bigint",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      },
+      {
+        "name": "mensagem",
+        "type": "character varying(2000)",
+        "comment": "Campo text no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "remetente",
+        "type": "character varying(128)",
+        "comment": "Campo senderId no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "criado_em",
+        "type": "character varying(40)",
+        "comment": "Campo createdAt no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "campos_nulos",
+        "type": "character varying(64)[]",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      }
+    ],
+    "comment": "Mensagens privadas sobre sugestões",
+    "references": [
+      {
+        "table": "registros_aplicacao",
+        "column": "id_registro",
+        "target": "id"
+      }
+    ],
+    "primary_key": [
+      "id_registro"
+    ]
+  },
+  {
+    "kind": "table",
+    "name": "opcoes_enquete",
+    "columns": [
+      {
+        "name": "id",
+        "type": "bigint",
+        "comment": null,
+        "nullable": false,
+        "generated": true
+      },
+      {
+        "name": "id_pai",
+        "type": "bigint",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      },
+      {
+        "name": "grupo",
+        "type": "character varying(32)",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      },
+      {
+        "name": "ordem",
+        "type": "integer",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      },
+      {
+        "name": "opcao",
+        "type": "character varying(100)",
+        "comment": "Campo valor no contrato da API.",
+        "nullable": true,
+        "generated": false
+      }
+    ],
+    "comment": "Opções de cada enquete, na ordem exibida",
+    "references": [
+      {
+        "table": "enquetes",
+        "column": "id_pai",
+        "target": "id_registro"
+      }
+    ],
+    "primary_key": [
+      "id"
+    ]
+  },
+  {
+    "kind": "table",
+    "name": "participantes_kanban",
+    "columns": [
+      {
+        "name": "id_registro",
+        "type": "bigint",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      },
+      {
+        "name": "referencia_quadro",
+        "type": "character varying(80)",
+        "comment": "Campo boardId no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
       {
         "name": "id_usuario",
         "type": "character varying(128)",
-        "nullable": false
+        "comment": "Campo userId no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "email",
+        "type": "character varying(320)",
+        "comment": "Campo userEmail no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "nome",
+        "type": "character varying(80)",
+        "comment": "Campo name no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "criado_em",
+        "type": "character varying(40)",
+        "comment": "Campo createdAt no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "campos_nulos",
+        "type": "character varying(64)[]",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      }
+    ],
+    "comment": "Participantes de quadros compartilhados",
+    "references": [
+      {
+        "table": "registros_aplicacao",
+        "column": "id_registro",
+        "target": "id"
+      }
+    ],
+    "primary_key": [
+      "id_registro"
+    ]
+  },
+  {
+    "kind": "table",
+    "name": "pedidos_agenda",
+    "columns": [
+      {
+        "name": "id_registro",
+        "type": "bigint",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      },
+      {
+        "name": "nome_turma",
+        "type": "character varying(150)",
+        "comment": "Campo className no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "email",
+        "type": "character varying(320)",
+        "comment": "Campo email no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "situacao",
+        "type": "character varying(32)",
+        "comment": "Campo status no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "criado_em",
+        "type": "character varying(40)",
+        "comment": "Campo createdAt no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "revisado_em",
+        "type": "character varying(40)",
+        "comment": "Campo reviewedAt no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "campos_nulos",
+        "type": "character varying(64)[]",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      }
+    ],
+    "comment": "Pedidos de criação de agenda",
+    "references": [
+      {
+        "table": "registros_aplicacao",
+        "column": "id_registro",
+        "target": "id"
+      }
+    ],
+    "primary_key": [
+      "id_registro"
+    ]
+  },
+  {
+    "kind": "table",
+    "name": "pedidos_kanban",
+    "columns": [
+      {
+        "name": "id_registro",
+        "type": "bigint",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      },
+      {
+        "name": "referencia_quadro",
+        "type": "character varying(80)",
+        "comment": "Campo boardId no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "id_usuario",
+        "type": "character varying(128)",
+        "comment": "Campo userId no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "email",
+        "type": "character varying(320)",
+        "comment": "Campo userEmail no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "nome",
+        "type": "character varying(80)",
+        "comment": "Campo name no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "criado_em",
+        "type": "character varying(40)",
+        "comment": "Campo createdAt no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "situacao",
+        "type": "character varying(32)",
+        "comment": "Campo status no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "alterado_em",
+        "type": "character varying(40)",
+        "comment": "Campo updatedAt no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "campos_nulos",
+        "type": "character varying(64)[]",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      }
+    ],
+    "comment": "Pedidos de acesso a quadros compartilhados",
+    "references": [
+      {
+        "table": "registros_aplicacao",
+        "column": "id_registro",
+        "target": "id"
+      }
+    ],
+    "primary_key": [
+      "id_registro"
+    ]
+  },
+  {
+    "kind": "table",
+    "name": "pedidos_representacao",
+    "columns": [
+      {
+        "name": "id_registro",
+        "type": "bigint",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      },
+      {
+        "name": "turma",
+        "type": "character varying(150)",
+        "comment": "Campo turmaId no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "email",
+        "type": "character varying(320)",
+        "comment": "Campo email no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "situacao",
+        "type": "character varying(32)",
+        "comment": "Campo status no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "criado_em",
+        "type": "character varying(40)",
+        "comment": "Campo createdAt no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "revisado_em",
+        "type": "character varying(40)",
+        "comment": "Campo reviewedAt no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "campos_nulos",
+        "type": "character varying(64)[]",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      }
+    ],
+    "comment": "Solicitações de representantes",
+    "references": [
+      {
+        "table": "registros_aplicacao",
+        "column": "id_registro",
+        "target": "id"
+      }
+    ],
+    "primary_key": [
+      "id_registro"
+    ]
+  },
+  {
+    "kind": "table",
+    "name": "perfis_administrativos",
+    "columns": [
+      {
+        "name": "id_registro",
+        "type": "bigint",
+        "comment": null,
+        "nullable": false,
+        "generated": false
       },
       {
         "name": "papel",
         "type": "character varying(32)",
-        "nullable": false
+        "comment": "Campo role no contrato da API.",
+        "nullable": true,
+        "generated": false
       },
       {
-        "name": "id_turma",
-        "type": "character varying(100)",
-        "nullable": true
+        "name": "turma",
+        "type": "character varying(150)",
+        "comment": "Campo turmaId no contrato da API.",
+        "nullable": true,
+        "generated": false
       },
       {
-        "name": "dados",
-        "type": "jsonb",
-        "nullable": false
+        "name": "criado_em",
+        "type": "character varying(40)",
+        "comment": "Campo createdAt no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "campos_nulos",
+        "type": "character varying(64)[]",
+        "comment": null,
+        "nullable": false,
+        "generated": false
       }
     ],
-    "comment": "Projeção de papel e turma da conta para consultas da API.",
-    "references": [],
+    "comment": "Papéis administrativos",
+    "references": [
+      {
+        "table": "registros_aplicacao",
+        "column": "id_registro",
+        "target": "id"
+      }
+    ],
     "primary_key": [
-      "id_usuario"
+      "id_registro"
+    ]
+  },
+  {
+    "kind": "table",
+    "name": "perfis_comunidade",
+    "columns": [
+      {
+        "name": "id_registro",
+        "type": "bigint",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      },
+      {
+        "name": "nome",
+        "type": "character varying(80)",
+        "comment": "Campo displayName no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "empresa",
+        "type": "character varying(100)",
+        "comment": "Campo company no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "turma",
+        "type": "character varying(80)",
+        "comment": "Campo className no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "sala",
+        "type": "character varying(80)",
+        "comment": "Campo room no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "andar",
+        "type": "character varying(80)",
+        "comment": "Campo floor no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "url_foto",
+        "type": "character varying(2048)",
+        "comment": "Campo photoUrl no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "alterado_em",
+        "type": "character varying(40)",
+        "comment": "Campo updatedAt no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "campos_nulos",
+        "type": "character varying(64)[]",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      }
+    ],
+    "comment": "Perfis públicos da comunidade",
+    "references": [
+      {
+        "table": "registros_aplicacao",
+        "column": "id_registro",
+        "target": "id"
+      }
+    ],
+    "primary_key": [
+      "id_registro"
+    ]
+  },
+  {
+    "kind": "table",
+    "name": "preferencias_resumo",
+    "columns": [
+      {
+        "name": "id_registro",
+        "type": "bigint",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      },
+      {
+        "name": "ativo",
+        "type": "boolean",
+        "comment": "Campo enabled no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "turma",
+        "type": "character varying(150)",
+        "comment": "Campo turmaId no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "alterada_em_ms",
+        "type": "bigint",
+        "comment": "Campo updatedAt no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "campos_nulos",
+        "type": "character varying(64)[]",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      }
+    ],
+    "comment": "Preferências de e-mail por conta",
+    "references": [
+      {
+        "table": "registros_aplicacao",
+        "column": "id_registro",
+        "target": "id"
+      }
+    ],
+    "primary_key": [
+      "id_registro"
     ]
   },
   {
@@ -514,16 +2684,107 @@
       {
         "name": "id",
         "type": "bigint",
-        "nullable": false
+        "comment": null,
+        "nullable": false,
+        "generated": true
       },
       {
         "name": "nome",
         "type": "character varying(150)",
-        "nullable": false
+        "comment": null,
+        "nullable": false,
+        "generated": false
       }
     ],
     "comment": "Nomes de professores reutilizados pelos horários.",
     "references": [],
+    "primary_key": [
+      "id"
+    ]
+  },
+  {
+    "kind": "table",
+    "name": "quadros_kanban",
+    "columns": [
+      {
+        "name": "id",
+        "type": "bigint",
+        "comment": null,
+        "nullable": false,
+        "generated": true
+      },
+      {
+        "name": "id_pai",
+        "type": "bigint",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      },
+      {
+        "name": "grupo",
+        "type": "character varying(32)",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      },
+      {
+        "name": "ordem",
+        "type": "integer",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      },
+      {
+        "name": "referencia",
+        "type": "character varying(80)",
+        "comment": "Campo id no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "nome",
+        "type": "character varying(80)",
+        "comment": "Campo name no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "cor",
+        "type": "character varying(16)",
+        "comment": "Campo color no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "compacto",
+        "type": "boolean",
+        "comment": "Campo compact no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "campos_nulos",
+        "type": "character varying(64)[]",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      },
+      {
+        "name": "listas_presentes",
+        "type": "character varying(64)[]",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      }
+    ],
+    "comment": "Quadros do Kanban em cada espaço",
+    "references": [
+      {
+        "table": "espacos_kanban",
+        "column": "id_pai",
+        "target": "id_registro"
+      }
+    ],
     "primary_key": [
       "id"
     ]
@@ -535,22 +2796,30 @@
       {
         "name": "id",
         "type": "character varying(128)",
-        "nullable": false
+        "comment": null,
+        "nullable": false,
+        "generated": false
       },
       {
         "name": "autor",
         "type": "character varying(256)",
-        "nullable": false
+        "comment": null,
+        "nullable": false,
+        "generated": false
       },
       {
         "name": "hash_requisicao",
         "type": "character varying(64)",
-        "nullable": false
+        "comment": null,
+        "nullable": false,
+        "generated": false
       },
       {
         "name": "confirmado_em",
         "type": "timestamp with time zone",
-        "nullable": false
+        "comment": null,
+        "nullable": false,
+        "generated": false
       }
     ],
     "comment": "Recibos que impedem uma gravação repetida de ser aplicada duas vezes.",
@@ -561,42 +2830,317 @@
   },
   {
     "kind": "table",
+    "name": "registros_aplicacao",
+    "columns": [
+      {
+        "name": "id",
+        "type": "bigint",
+        "comment": null,
+        "nullable": false,
+        "generated": true
+      },
+      {
+        "name": "tipo",
+        "type": "character varying(40)",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      },
+      {
+        "name": "referencia",
+        "type": "character varying(320)",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      },
+      {
+        "name": "referencia_pai",
+        "type": "character varying(320)",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      },
+      {
+        "name": "id_pai",
+        "type": "bigint",
+        "comment": null,
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "versao",
+        "type": "bigint",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      },
+      {
+        "name": "atualizado_em",
+        "type": "timestamp with time zone",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      }
+    ],
+    "comment": "Identidade numérica e versão dos registros. As referências textuais preservam os identificadores externos da API.",
+    "references": [
+      {
+        "table": "registros_aplicacao",
+        "column": "id_pai",
+        "target": "id"
+      }
+    ],
+    "primary_key": [
+      "id"
+    ]
+  },
+  {
+    "kind": "table",
+    "name": "regras_recorrencia",
+    "columns": [
+      {
+        "name": "id_registro",
+        "type": "bigint",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      },
+      {
+        "name": "titulo",
+        "type": "character varying(120)",
+        "comment": "Campo title no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "descricao",
+        "type": "character varying(2000)",
+        "comment": "Campo description no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "tipo",
+        "type": "character varying(32)",
+        "comment": "Campo type no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "disciplina",
+        "type": "character varying(150)",
+        "comment": "Campo subject no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "hora",
+        "type": "time without time zone",
+        "comment": "Campo time no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "turma",
+        "type": "character varying(150)",
+        "comment": "Campo turmaId no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "criado_por",
+        "type": "character varying(128)",
+        "comment": "Campo createdBy no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "email_criador",
+        "type": "character varying(320)",
+        "comment": "Campo createdByEmail no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "criado_em",
+        "type": "character varying(40)",
+        "comment": "Campo createdAt no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "inicio",
+        "type": "date",
+        "comment": "Campo startDate no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "fim",
+        "type": "date",
+        "comment": "Campo endDate no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "ativa",
+        "type": "boolean",
+        "comment": "Campo active no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "excluida",
+        "type": "boolean",
+        "comment": "Campo deleted no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "intervalo_semanas",
+        "type": "smallint",
+        "comment": "Campo intervalWeeks no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "dias_semana",
+        "type": "smallint[]",
+        "comment": "Campo weekdays no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "campos_nulos",
+        "type": "character varying(64)[]",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      }
+    ],
+    "comment": "Regras de repetição",
+    "references": [
+      {
+        "table": "registros_aplicacao",
+        "column": "id_registro",
+        "target": "id"
+      }
+    ],
+    "primary_key": [
+      "id_registro"
+    ]
+  },
+  {
+    "kind": "table",
+    "name": "regras_retencao",
+    "columns": [
+      {
+        "name": "id_registro",
+        "type": "bigint",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      },
+      {
+        "name": "turma",
+        "type": "character varying(150)",
+        "comment": "Campo turmaId no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "dias",
+        "type": "smallint",
+        "comment": "Campo days no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "ativa",
+        "type": "boolean",
+        "comment": "Campo enabled no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "alterado_por",
+        "type": "character varying(128)",
+        "comment": "Campo updatedBy no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "alterado_em",
+        "type": "character varying(40)",
+        "comment": "Campo updatedAt no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "campos_nulos",
+        "type": "character varying(64)[]",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      }
+    ],
+    "comment": "Políticas de expurgo por turma",
+    "references": [
+      {
+        "table": "registros_aplicacao",
+        "column": "id_registro",
+        "target": "id"
+      }
+    ],
+    "primary_key": [
+      "id_registro"
+    ]
+  },
+  {
+    "kind": "table",
     "name": "revisoes_origem",
     "columns": [
       {
         "name": "sequencia",
         "type": "bigint",
-        "nullable": false
+        "comment": null,
+        "nullable": false,
+        "generated": true
       },
       {
         "name": "id_projeto",
         "type": "character varying(128)",
-        "nullable": false
+        "comment": null,
+        "nullable": false,
+        "generated": false
       },
       {
         "name": "caminho",
         "type": "character varying(1024)",
-        "nullable": false
-      },
-      {
-        "name": "campos",
-        "type": "jsonb",
-        "nullable": false
+        "comment": null,
+        "nullable": false,
+        "generated": false
       },
       {
         "name": "atualizado_na_origem_em",
         "type": "character varying(64)",
-        "nullable": true
+        "comment": null,
+        "nullable": true,
+        "generated": false
       },
       {
         "name": "motivo",
         "type": "character varying(128)",
-        "nullable": false
+        "comment": null,
+        "nullable": false,
+        "generated": false
       },
       {
         "name": "salvo_em",
         "type": "timestamp with time zone",
-        "nullable": false
+        "comment": null,
+        "nullable": false,
+        "generated": false
       }
     ],
     "comment": "Versões preservadas durante a reconciliação com o Firestore.",
@@ -607,21 +3151,416 @@
   },
   {
     "kind": "table",
+    "name": "sugestoes_atividade",
+    "columns": [
+      {
+        "name": "id_registro",
+        "type": "bigint",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      },
+      {
+        "name": "titulo",
+        "type": "character varying(120)",
+        "comment": "Campo title no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "descricao",
+        "type": "character varying(2000)",
+        "comment": "Campo description no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "tipo",
+        "type": "character varying(32)",
+        "comment": "Campo type no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "disciplina",
+        "type": "character varying(150)",
+        "comment": "Campo subject no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "data",
+        "type": "date",
+        "comment": "Campo date no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "hora",
+        "type": "time without time zone",
+        "comment": "Campo time no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "turma",
+        "type": "character varying(150)",
+        "comment": "Campo turmaId no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "criado_em",
+        "type": "character varying(40)",
+        "comment": "Campo createdAt no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "alterado_em",
+        "type": "character varying(40)",
+        "comment": "Campo updatedAt no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "situacao",
+        "type": "character varying(32)",
+        "comment": "Campo status no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "resolucao",
+        "type": "character varying(32)",
+        "comment": "Campo resolution no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "comentario_revisao",
+        "type": "character varying(500)",
+        "comment": "Campo reviewComment no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "encerrada_em",
+        "type": "character varying(40)",
+        "comment": "Campo closedAt no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "campos_nulos",
+        "type": "character varying(64)[]",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      }
+    ],
+    "comment": "Sugestões de novas atividades",
+    "references": [
+      {
+        "table": "registros_aplicacao",
+        "column": "id_registro",
+        "target": "id"
+      }
+    ],
+    "primary_key": [
+      "id_registro"
+    ]
+  },
+  {
+    "kind": "table",
+    "name": "sugestoes_melhoria",
+    "columns": [
+      {
+        "name": "id_registro",
+        "type": "bigint",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      },
+      {
+        "name": "mensagem",
+        "type": "character varying(2000)",
+        "comment": "Campo message no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "turma",
+        "type": "character varying(150)",
+        "comment": "Campo turmaId no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "criado_por",
+        "type": "character varying(128)",
+        "comment": "Campo createdBy no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "email_criador",
+        "type": "character varying(320)",
+        "comment": "Campo createdByEmail no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "criado_em",
+        "type": "character varying(40)",
+        "comment": "Campo createdAt no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "credito_autorizado",
+        "type": "boolean",
+        "comment": "Campo publicCreditAllowed no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "nome_credito",
+        "type": "character varying(60)",
+        "comment": "Campo publicCreditName no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "situacao",
+        "type": "character varying(32)",
+        "comment": "Campo status no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "concluida_em",
+        "type": "character varying(40)",
+        "comment": "Campo completedAt no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "concluida_por",
+        "type": "character varying(128)",
+        "comment": "Campo completedBy no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "campos_nulos",
+        "type": "character varying(64)[]",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      }
+    ],
+    "comment": "Sugestões de melhoria da Agenda",
+    "references": [
+      {
+        "table": "registros_aplicacao",
+        "column": "id_registro",
+        "target": "id"
+      }
+    ],
+    "primary_key": [
+      "id_registro"
+    ]
+  },
+  {
+    "kind": "table",
     "name": "turmas",
     "columns": [
       {
         "name": "id",
         "type": "bigint",
-        "nullable": false
+        "comment": null,
+        "nullable": false,
+        "generated": true
       },
       {
         "name": "nome",
         "type": "character varying(150)",
-        "nullable": false
+        "comment": null,
+        "nullable": false,
+        "generated": false
       }
     ],
     "comment": "Nomes das turmas do catálogo de horários.",
     "references": [],
+    "primary_key": [
+      "id"
+    ]
+  },
+  {
+    "kind": "table",
+    "name": "turmas_agenda",
+    "columns": [
+      {
+        "name": "id_registro",
+        "type": "bigint",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      },
+      {
+        "name": "nome",
+        "type": "character varying(150)",
+        "comment": "Campo name no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "ativa",
+        "type": "boolean",
+        "comment": "Campo active no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "referencia_pedido",
+        "type": "character varying(180)",
+        "comment": "Campo requestId no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "aprovada_em",
+        "type": "character varying(40)",
+        "comment": "Campo approvedAt no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "campos_nulos",
+        "type": "character varying(64)[]",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      }
+    ],
+    "comment": "Turmas habilitadas na Agenda",
+    "references": [
+      {
+        "table": "registros_aplicacao",
+        "column": "id_registro",
+        "target": "id"
+      }
+    ],
+    "primary_key": [
+      "id_registro"
+    ]
+  },
+  {
+    "kind": "table",
+    "name": "valores_historico",
+    "columns": [
+      {
+        "name": "id",
+        "type": "bigint",
+        "comment": null,
+        "nullable": false,
+        "generated": true
+      },
+      {
+        "name": "id_auditoria",
+        "type": "bigint",
+        "comment": null,
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "id_auditoria_legada",
+        "type": "bigint",
+        "comment": null,
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "id_revisao",
+        "type": "bigint",
+        "comment": null,
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "id_pai",
+        "type": "bigint",
+        "comment": null,
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "chave",
+        "type": "character varying(1024)",
+        "comment": null,
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "ordem",
+        "type": "integer",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      },
+      {
+        "name": "tipo",
+        "type": "character varying(12)",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      },
+      {
+        "name": "valor_textual",
+        "type": "character varying(1048576)",
+        "comment": null,
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "valor_numerico",
+        "type": "numeric",
+        "comment": null,
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "valor_logico",
+        "type": "boolean",
+        "comment": null,
+        "nullable": true,
+        "generated": false
+      }
+    ],
+    "comment": "Campos tipados das versões históricas, ligados à auditoria ou revisão e preservados após a exclusão do registro original.",
+    "references": [
+      {
+        "table": "auditoria_aplicacao",
+        "column": "id_auditoria",
+        "target": "sequencia"
+      },
+      {
+        "table": "auditoria_atividades_legada",
+        "column": "id_auditoria_legada",
+        "target": "sequencia"
+      },
+      {
+        "table": "valores_historico",
+        "column": "id_pai",
+        "target": "id"
+      },
+      {
+        "table": "revisoes_origem",
+        "column": "id_revisao",
+        "target": "sequencia"
+      }
+    ],
     "primary_key": [
       "id"
     ]
@@ -633,27 +3572,37 @@
       {
         "name": "dia",
         "type": "date",
-        "nullable": false
+        "comment": null,
+        "nullable": false,
+        "generated": false
       },
       {
         "name": "intervalo_meia_hora",
         "type": "bigint",
-        "nullable": false
+        "comment": null,
+        "nullable": false,
+        "generated": false
       },
       {
         "name": "tipo_visitante",
         "type": "character varying(32)",
-        "nullable": false
+        "comment": null,
+        "nullable": false,
+        "generated": false
       },
       {
         "name": "chave_visitante",
         "type": "character varying(128)",
-        "nullable": false
+        "comment": null,
+        "nullable": false,
+        "generated": false
       },
       {
         "name": "site",
         "type": "character varying(32)",
-        "nullable": false
+        "comment": null,
+        "nullable": false,
+        "generated": false
       }
     ],
     "comment": "Visitas da Agenda e do Cadê o professor, agrupadas por visitante e intervalo de 30 minutos.",
@@ -664,6 +3613,51 @@
       "intervalo_meia_hora",
       "tipo_visitante",
       "chave_visitante"
+    ]
+  },
+  {
+    "kind": "table",
+    "name": "votos_enquete",
+    "columns": [
+      {
+        "name": "id_registro",
+        "type": "bigint",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      },
+      {
+        "name": "indice_opcao",
+        "type": "smallint",
+        "comment": "Campo optionIndex no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "criado_em",
+        "type": "character varying(40)",
+        "comment": "Campo createdAt no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "campos_nulos",
+        "type": "character varying(64)[]",
+        "comment": null,
+        "nullable": false,
+        "generated": false
+      }
+    ],
+    "comment": "Votos em enquetes",
+    "references": [
+      {
+        "table": "registros_aplicacao",
+        "column": "id_registro",
+        "target": "id"
+      }
+    ],
+    "primary_key": [
+      "id_registro"
     ]
   }
 ]
