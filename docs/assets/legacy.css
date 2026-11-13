@@ -149,3 +149,14 @@ button, input, select { font: inherit; }
 @media (min-width: 1024px) { .mobile-explorer-toggle { display: none; } }
 @media (max-width: 1023px) { .sidebar-explorer { max-height: 48vh; } .sidebar-footer { display: none; } }
 @media (prefers-reduced-motion: reduce) { .nav-object-group > summary::before { transition: none; } }
+
+.db-sidebar { background: #13213a; border-right: 1px solid #293d5d; }
+.db-sidebar .brand { padding: .5rem .4rem .8rem; }
+.db-sidebar .database-switch { flex-shrink: 0; }
+.db-sidebar .explorer-navigation { align-content: start; }
+.db-sidebar .sidebar-footer { flex-shrink: 0; }
+.db-sidebar .sidebar-footer .repo-link { display: block; width: 100%; padding: .65rem .75rem; }
+.db-sidebar .nav-object-group { min-width: 0; }
+.db-sidebar .nav-object-list a { text-decoration: none; }
+.db-sidebar .nav-object-list a:hover { background: #1d3557; color: #fff; }
+@media (max-width: 1023px) { .db-sidebar .sidebar-explorer { max-height: 19rem; overflow-y: auto; } .db-sidebar .brand { padding-bottom: .2rem; } }
