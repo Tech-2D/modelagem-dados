@@ -92,3 +92,5 @@ INSERT INTO tech2d.pegaki_disciplinas(id,ano_serie,nome) VALUES
 (16,2,'Matemática'),
 (17,2,'Matemática 14 - Inteligência Artificial'),
 (18,2,'UX');
+
+COMMENT ON SCHEMA tech2d IS 'Dados da Tech-2D. tech2d-schema-version:024_notas_pegaki';

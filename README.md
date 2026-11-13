@@ -61,4 +61,4 @@ As âncoras das rotinas usam nome e assinatura, mantendo os links estáveis quan
 
 ## Notas do Pegaki
 
-A [modelagem de notas](docs/notas-pegaki.md) descreve as quatro tabelas novas e a visão de resultados privados, com RLS e fórmulas versionadas para futuras análises. O catálogo foi gerado em banco de teste; a presença dos arquivos não comprova aplicação em produção.
+A [modelagem de notas](docs/notas-pegaki.md) descreve as quatro tabelas novas e a visão de resultados privados, com RLS e fórmulas versionadas para futuras análises. A migration 024 foi aplicada ao PostgreSQL centralizado em 13/11/2026. O cálculo e o isolamento por conta foram conferidos no banco real assumindo o papel limitado da API em uma transação revertida.
