@@ -131,7 +131,7 @@
   },
   "cartoes_kanban": {
     "id": "Identificador numérico gerado pelo banco.",
-    "id_pai": "Identifica a linha de colunas_kanban que contém este item. A chave estrangeira mantém o vínculo e evita itens sem um pai válido.",
+    "id_pai": "Identifica o quadro em quadros_kanban que contém a tarefa. A chave composta com referencia_coluna exige que a coluna escolhida pertença a esse mesmo quadro.",
     "ordem": "Posição do item dentro da lista, a partir de zero. Preserva a sequência escolhida na interface ao reconstruir a resposta da API.",
     "referencia": "Identificador externo preservado para os comandos da interface. Permite localizar o mesmo item após reordenar ou recarregar a lista.",
     "referencia_coluna": "Identificador externo da coluna do mesmo quadro. Mantém o cartão na etapa correta e impede vinculá-lo à coluna de outro quadro.",
