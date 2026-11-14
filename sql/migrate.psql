@@ -1,3 +1,7 @@
+SELECT COALESCE(obj_description(to_regnamespace('tech2d'), 'pg_namespace'), '') LIKE '%tech2d-schema-version:037_atualizacoes_no_redis' AS latest_037 \gset
+\if :latest_037
+\echo Estrutura já instalada na versão 037.
+\else
 SELECT COALESCE(obj_description(to_regnamespace('tech2d'), 'pg_namespace'), '') LIKE '%tech2d-schema-version:036_expurgo_direto' AS latest_036 \gset
 \if :latest_036
 \echo Estrutura já instalada na versão 036.
@@ -153,4 +157,9 @@ COMMENT ON SCHEMA tech2d IS 'Dados da Tech-2D. tech2d-schema-version:024_notas_p
 \endif
 
 \ir migrations/036_expurgo_direto.sql
+\endif
+
+BEGIN;
+\ir migrations/037_atualizacoes_no_redis.sql
+COMMIT;
 \endif

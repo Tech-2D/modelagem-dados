@@ -11,10 +11,6 @@
     "feature": "Calendário · Dia, semana, mês e detalhes",
     "description": "Alimenta o calendário, os links diretos de atividades e as consultas das automações. Representantes editam atividades da própria turma; administradores têm o acesso permitido pela política da API."
   },
-  "atualizacoes_agenda": {
-    "feature": "Menu · Atualizações e aviso de novidades",
-    "description": "Armazena os avisos publicados pelos administradores, exibidos no histórico e no popup de novidades. Pode relacionar a atualização a uma sugestão e ao crédito autorizado por seu autor."
-  },
   "auditoria_aplicacao": {
     "feature": "API · Histórico de alterações",
     "description": "Recebe os registros de gravações feitos pela aplicação. Identifica quem alterou o quê; valores_historico conserva o estado anterior em campos tipados. É um recurso de operação, sem edição pelo usuário comum."

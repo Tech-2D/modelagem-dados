@@ -9,7 +9,7 @@ O schema `tech2d` tem {{ site.data.views.size }} views. `catalogo_horarios` reú
 
 | Função | Responsabilidade |
 | --- | --- |
-| `consultar_catalogo_agenda(turma, incluir_atividades)` | Seleciona as atividades gerais e da turma, reúne turmas e atualizações e devolve o catálogo em uma consulta. |
+| `consultar_catalogo_agenda(turma, incluir_atividades)` | Seleciona as atividades gerais e da turma, reúne as turmas habilitadas e devolve o catálogo em uma consulta. |
 
 O Worker autentica a conta, verifica as permissões das rotas e seleciona os campos das respostas públicas. Os jobs calculam as datas das recorrências e decidem quais políticas de retenção estão vigentes. Eles consultam `visao_atividades_automacao` para filtrar pelas colunas de turma, data e regra de recorrência. Ao excluir atividades por expurgo ou pausa de recorrência, o Worker apaga os anexos do R2 antes de excluir os registros no PostgreSQL.
 

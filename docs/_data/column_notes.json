@@ -33,16 +33,6 @@
     "criado_em": "Momento de criação da atividade. Conserva a origem temporal do cadastro para o histórico e as respostas da API.",
     "alterado_em": "Momento da última alteração, no formato ISO da API."
   },
-  "atualizacoes_agenda": {
-    "id_registro": "Chave da linha de negócio em registros_aplicacao. Liga o conteúdo à referência externa e à versão usada pela API para detectar conflitos de edição.",
-    "titulo": "Nome da atualização mostrado no popup e no histórico. Resume a mudança para que o usuário reconheça a novidade.",
-    "conteudo": "Texto publicado pelo usuário ou pela administração.",
-    "criado_por": "UID da conta que criou o registro.",
-    "publicado_em": "Momento da publicação da atualização.",
-    "referencia_sugestao": "ID da sugestão que originou a atualização. Mantém o vínculo entre o pedido do usuário e a melhoria publicada.",
-    "nome_credito": "Nome escolhido para o crédito público. Só deve ser publicado conforme a autorização do autor da sugestão.",
-    "mensagem_sugestao": "Trecho da sugestão incluído na publicação. Dá contexto ao crédito sem exigir que o leitor abra a conversa privada."
-  },
   "auditoria_aplicacao": {
     "sequencia": "Identificador sequencial da entrada.",
     "autor": "Conta ou serviço que realizou a operação.",

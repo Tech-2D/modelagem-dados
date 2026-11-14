@@ -33,7 +33,7 @@ O Worker autentica o usuário e verifica as permissões antes de executar essas 
 
 ## Simplificações aplicadas
 
-A versão `036_expurgo_direto` está instalada no banco.
+A versão `037_atualizacoes_no_redis` está instalada no banco.
 
 | Mudança | Estrutura atual |
 | --- | --- |
