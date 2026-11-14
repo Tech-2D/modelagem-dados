@@ -11,10 +11,6 @@
     "feature": "Expurgo · Limpeza de arquivos",
     "description": "Conserva os metadados dos anexos de uma atividade arquivada. A rotina de limpeza usa a chave do objeto para remover os arquivos no R2 e evitar que o armazenamento fique ocupado após o expurgo."
   },
-  "anotacoes": {
-    "feature": "Compatibilidade · Anotações de estudo",
-    "description": "Representa registros do tipo notebookNotes aceitos pelo contrato de documentos da API. É uma estrutura remanescente do recurso de anotações; não é o caderno privado de notas escolares do Pegaki."
-  },
   "anuncios": {
     "feature": "Agenda · Comunicados gerais",
     "description": "Fornece a mensagem geral incluída no catálogo da Agenda. Permite mudar o comunicado pelo fluxo administrativo sem alterar o código do site."

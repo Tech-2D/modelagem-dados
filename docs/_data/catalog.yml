@@ -45,8 +45,6 @@
       title: Mensagens privadas sobre sugestões
     - name: chat_representantes
       title: Mensagens do chat dos representantes
-    - name: anotacoes
-      title: Anotações de estudo
 - id: kanban
   name: Kanban
   objects:

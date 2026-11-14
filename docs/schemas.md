@@ -33,7 +33,7 @@ O Worker autentica o usuário e verifica as permissões antes de executar essas 
 
 ## Simplificações aplicadas
 
-A versão `033_retirar_enquetes` está instalada no banco, conferida em 13/11/2026.
+A versão `034_retirar_anotacoes` está instalada no banco, conferida em 13/11/2026.
 
 | Mudança | Estrutura atual |
 | --- | --- |
@@ -48,3 +48,7 @@ O histórico dos scripts fica no Git. A versão instalada fica no comentário de
 ## Recurso retirado: enquetes
 
 A versão 033 removeu as enquetes da Agenda, suas opções e votos e a aprovação de eleitores. As quatro tabelas e as funções exclusivas foram retiradas; os caminhos antigos da API recusam consultas e gravações. O quadro de avisos, as sugestões e suas conversas continuam disponíveis.
+
+## Recurso retirado: anotações de estudo
+
+A versão 034 removeu a tabela `anotacoes` do antigo Caderno Infinito, que estava vazia, e suas duas funções SQL exclusivas. O caminho `notebookNotes` foi retirado das permissões de leitura e gravação da API. Os cadernos, notas e recuperações do Pegaki continuam descritos no catálogo de notas escolares.

@@ -36,15 +36,6 @@
         "procedure": false
     },
     {
-        "name": "gravar_anotacoes",
-        "anchor": "rotina-gravar_anotacoes-65a7a60d",
-        "result": "void",
-        "comment": null,
-        "language": "plpgsql",
-        "arguments": "alvo bigint, objeto jsonb",
-        "procedure": false
-    },
-    {
         "name": "gravar_anuncios",
         "anchor": "rotina-gravar_anuncios-65a7a60d",
         "result": "void",
@@ -380,15 +371,6 @@
     {
         "name": "ler_anexos_atividade_arquivada",
         "anchor": "rotina-ler_anexos_atividade_arquivada-c9ce0023",
-        "result": "jsonb",
-        "comment": null,
-        "language": "sql",
-        "arguments": "alvo bigint",
-        "procedure": false
-    },
-    {
-        "name": "ler_anotacoes",
-        "anchor": "rotina-ler_anotacoes-c9ce0023",
         "result": "jsonb",
         "comment": null,
         "language": "sql",
