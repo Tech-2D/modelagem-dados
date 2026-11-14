@@ -18,18 +18,6 @@
     "enviado_em": "Momento do envio, no formato ISO da API.",
     "enviado_por": "Identifica quem enviou o material, para atribuir a origem do anexo dentro do fluxo autorizado de arquivos."
   },
-  "anexos_atividade_arquivada": {
-    "id": "Identificador numérico gerado pelo banco.",
-    "id_pai": "Identifica a linha de atividades_arquivadas que contém este item. A chave estrangeira mantém o vínculo e evita itens sem um pai válido.",
-    "ordem": "Posição do item dentro da lista, a partir de zero. Preserva a sequência escolhida na interface ao reconstruir a resposta da API.",
-    "referencia": "Identificador externo preservado para os comandos da interface. Permite localizar o mesmo item após reordenar ou recarregar a lista.",
-    "nome": "Nome que o arquivo tinha na atividade original. Conserva a identificação do material no registro arquivado.",
-    "tipo_mime": "Tipo de conteúdo registrado no envio original. Preserva a classificação do material durante o arquivamento.",
-    "tamanho_bytes": "Volume do arquivo original em bytes. Conserva a informação de tamanho mesmo após a limpeza do objeto no R2.",
-    "chave_arquivo": "Localizador do objeto no R2 que a rotina de expurgo precisa limpar. Não contém o arquivo nem uma credencial de acesso.",
-    "enviado_em": "Momento do envio, no formato ISO da API.",
-    "enviado_por": "Identifica a conta que enviou o material antes do arquivamento. Conserva a origem do anexo no registro arquivado."
-  },
   "atividades": {
     "id_registro": "Chave da linha de negócio em registros_aplicacao. Liga o conteúdo à referência externa e à versão usada pela API para detectar conflitos de edição.",
     "titulo": "Nome da entrega ou compromisso mostrado no calendário, nos detalhes e nos resumos. Permite identificar rapidamente a atividade.",
@@ -43,28 +31,6 @@
     "email_criador": "E-mail de quem criou a atividade, usado internamente.",
     "referencia_recorrencia": "Identifica a regra que gerou a ocorrência. Permite à automação reconhecer atividades já geradas e evitar novas cópias da mesma ocorrência.",
     "criado_em": "Momento de criação da atividade. Conserva a origem temporal do cadastro para o histórico e as respostas da API.",
-    "alterado_em": "Momento da última alteração, no formato ISO da API."
-  },
-  "atividades_arquivadas": {
-    "id_registro": "Chave da linha de negócio em registros_aplicacao. Liga o conteúdo à referência externa e à versão usada pela API para detectar conflitos de edição.",
-    "referencia_atividade": "ID externo da atividade original. Permite reconhecer o que foi retirado do calendário, mesmo após a exclusão do registro ativo.",
-    "turma": "Sala sob cuja política a atividade foi arquivada. Preserva o contexto administrativo do expurgo.",
-    "motivo": "Justificativa do arquivamento registrada pela rotina. Explica por que a atividade deixou o calendário ativo.",
-    "arquivada_em": "Momento em que a atividade foi arquivada.",
-    "dias_retencao": "Prazo de retenção que estava ativo no momento do expurgo.",
-    "anexos_removidos_em": "Marca a conclusão da limpeza de anexos no R2. Ajuda a rotina a não repetir uma exclusão já concluída.",
-    "tem_conteudo": "Indica se existe uma cópia do conteúdo original nesta linha. Distingue um arquivo com conteúdo de um registro que tem apenas metadados do expurgo.",
-    "titulo": "Título da atividade antes do expurgo. Permite identificar a entrega que deixou o calendário ativo.",
-    "descricao": "Instruções originais preservadas no arquivamento. Mantém o contexto do que foi solicitado aos alunos.",
-    "tipo": "Categoria da atividade original, como tarefa, prova ou evento. Conserva a classificação após o expurgo.",
-    "disciplina": "Matéria registrada na atividade original; conserva o contexto da entrega após o arquivamento.",
-    "data": "Dia da atividade original. Permite verificar por que ela foi alcançada pela política de retenção.",
-    "hora": "Horário local da atividade, quando informado.",
-    "turma_original": "Valor da turma na atividade antes do expurgo. Evita perder essa informação quando ela difere da turma usada no arquivamento.",
-    "criado_por": "UID da conta que criou o registro.",
-    "email_criador": "E-mail da conta que criou o registro.",
-    "referencia_recorrencia": "Identificador da regra que gerou esta ocorrência.",
-    "criado_em": "Momento de criação, no formato ISO da API.",
     "alterado_em": "Momento da última alteração, no formato ISO da API."
   },
   "atualizacoes_agenda": {

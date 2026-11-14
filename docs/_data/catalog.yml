@@ -9,10 +9,6 @@
       title: Regras de repetição
     - name: regras_retencao
       title: Políticas de expurgo por turma
-    - name: atividades_arquivadas
-      title: Metadados do expurgo de atividades
-    - name: anexos_atividade_arquivada
-      title: Metadados dos anexos de atividades arquivadas
     - name: turmas_agenda
       title: Turmas habilitadas na Agenda
     - name: avisos_turma

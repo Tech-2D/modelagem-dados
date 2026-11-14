@@ -27,19 +27,19 @@ As tabelas podem se relacionar entre áreas por chaves estrangeiras. O [explorad
 
 ## Tabelas, views e funções
 
-As [tabelas]({{ '/postgresql.html' | relative_url }}) armazenam os dados em colunas tipadas. As [views]({{ '/views.html' | relative_url }}) reúnem os campos usados nas respostas da API. As [funções]({{ '/funcoes.html' | relative_url }}) executam operações como gravação, consulta de catálogos e arquivamento. As [procedures]({{ '/procedures.html' | relative_url }}) têm uma página separada; o inventário informa se alguma estiver instalada.
+As [tabelas]({{ '/postgresql.html' | relative_url }}) armazenam os dados em colunas tipadas. As [views]({{ '/views.html' | relative_url }}) reúnem os campos usados nas respostas da API. As [funções]({{ '/funcoes.html' | relative_url }}) executam operações como gravação, consulta de catálogos e expurgo. As [procedures]({{ '/procedures.html' | relative_url }}) têm uma página separada; o inventário informa se alguma estiver instalada.
 
 O Worker autentica o usuário e verifica as permissões antes de executar essas operações com o papel limitado `tech2d_api`. O prefixo `tech2d` não concede acesso aos dados por si só.
 
 ## Simplificações aplicadas
 
-A versão `035_anuncios_no_redis` está instalada no banco.
+A versão `036_expurgo_direto` está instalada no banco.
 
 | Mudança | Estrutura atual |
 | --- | --- |
 | Acessos recentes da Agenda e dos professores | Uma tabela, `acessos_recentes`, com chave composta por `site` e `id_usuario`. O campo site também identifica os acessos do Pegaki. |
 | Catálogo de matérias | O Pegaki reutiliza disciplinas; disciplinas_series associa matérias e séries sem repetir nomes. visao_disciplinas_pegaki preserva os rótulos usados pela interface. |
-| Arquivo de atividades | `atividades_arquivadas` reúne metadados do expurgo e conteúdo original. `anexos_atividade_arquivada` conserva os anexos e sua ordem. |
+| Expurgo de atividades | O Worker exclui os anexos do R2 antes de remover a atividade e seus metadados do PostgreSQL. A rotina não cria cópias. |
 | Auditoria da antiga rota de atividades | A tabela antiga foi retirada; as operações atuais usam `auditoria_aplicacao` e `valores_historico`. |
 | Listas e agrupamentos | Foram removidos os marcadores `grupo` e `listas_presentes`. A ordem continua explícita nas tabelas filhas, e a API devolve listas vazias como `[]`. |
 

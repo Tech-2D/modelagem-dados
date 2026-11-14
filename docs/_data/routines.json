@@ -9,15 +9,6 @@
         "procedure": false
     },
     {
-        "name": "arquivar_atividade",
-        "anchor": "rotina-arquivar_atividade-f69f05bc",
-        "result": "boolean",
-        "comment": "Arquiva uma atividade da turma, retira a linha ativa e grava auditoria em uma única operação.",
-        "language": "plpgsql",
-        "arguments": "p_id text, p_motivo text, p_arquivada_em text, p_dias_retencao integer",
-        "procedure": false
-    },
-    {
         "name": "consultar_catalogo_agenda",
         "anchor": "rotina-consultar_catalogo_agenda-1ef8c8f7",
         "result": "TABLE(activities jsonb, documents jsonb)",
@@ -38,15 +29,6 @@
     {
         "name": "gravar_atividades",
         "anchor": "rotina-gravar_atividades-65a7a60d",
-        "result": "void",
-        "comment": null,
-        "language": "plpgsql",
-        "arguments": "alvo bigint, objeto jsonb",
-        "procedure": false
-    },
-    {
-        "name": "gravar_atividades_arquivadas",
-        "anchor": "rotina-gravar_atividades_arquivadas-65a7a60d",
         "result": "void",
         "comment": null,
         "language": "plpgsql",
@@ -297,15 +279,6 @@
         "procedure": false
     },
     {
-        "name": "inserir_anexos_atividade_arquivada",
-        "anchor": "rotina-inserir_anexos_atividade_arquivada-32f84b30",
-        "result": "void",
-        "comment": null,
-        "language": "plpgsql",
-        "arguments": "pai bigint, posicao integer, objeto jsonb",
-        "procedure": false
-    },
-    {
         "name": "inserir_auditoria",
         "anchor": "rotina-inserir_auditoria-d41d8cd9",
         "result": "trigger",
@@ -360,26 +333,8 @@
         "procedure": false
     },
     {
-        "name": "ler_anexos_atividade_arquivada",
-        "anchor": "rotina-ler_anexos_atividade_arquivada-c9ce0023",
-        "result": "jsonb",
-        "comment": null,
-        "language": "sql",
-        "arguments": "alvo bigint",
-        "procedure": false
-    },
-    {
         "name": "ler_atividades",
         "anchor": "rotina-ler_atividades-c9ce0023",
-        "result": "jsonb",
-        "comment": null,
-        "language": "sql",
-        "arguments": "alvo bigint",
-        "procedure": false
-    },
-    {
-        "name": "ler_atividades_arquivadas",
-        "anchor": "rotina-ler_atividades_arquivadas-c9ce0023",
         "result": "jsonb",
         "comment": null,
         "language": "sql",
@@ -425,15 +380,6 @@
     {
         "name": "ler_colunas_kanban",
         "anchor": "rotina-ler_colunas_kanban-c9ce0023",
-        "result": "jsonb",
-        "comment": null,
-        "language": "sql",
-        "arguments": "alvo bigint",
-        "procedure": false
-    },
-    {
-        "name": "ler_conteudo_atividade_arquivada",
-        "anchor": "rotina-ler_conteudo_atividade_arquivada-c9ce0023",
         "result": "jsonb",
         "comment": null,
         "language": "sql",

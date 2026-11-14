@@ -69,7 +69,7 @@ A visão [Catálogo de horários]({{ '/views.html#view-catalogo_horarios' | rela
 
 `atividades.turma` usa a chave de turma da Agenda. `horarios_aula.id_turma` aponta para o identificador numérico do catálogo de aulas.
 
-A tabela de atividades arquivadas reúne os metadados do expurgo e os dados originais. Os anexos arquivados apontam diretamente para essa tabela e conservam a ordem. Listas de anexos vazias são devolvidas como <code>[]</code>.
+O expurgo diário usa a regra de retenção da turma. A API exclui os anexos do Cloudflare R2 e, após a confirmação, remove a atividade e seus metadados do PostgreSQL. Uma falha no R2 mantém a atividade para nova tentativa.
 
 ## Sugestões e conversas
 

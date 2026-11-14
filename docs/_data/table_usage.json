@@ -7,17 +7,9 @@
     "feature": "Atividade · Materiais e downloads",
     "description": "Usada ao criar, editar e abrir os materiais de uma atividade. Guarda os metadados e a ordem dos anexos; o conteúdo binário permanece no Cloudflare R2, com download autorizado pela API."
   },
-  "anexos_atividade_arquivada": {
-    "feature": "Expurgo · Limpeza de arquivos",
-    "description": "Conserva os metadados dos anexos de uma atividade arquivada. A rotina de limpeza usa a chave do objeto para remover os arquivos no R2 e evitar que o armazenamento fique ocupado após o expurgo."
-  },
   "atividades": {
     "feature": "Calendário · Dia, semana, mês e detalhes",
     "description": "Alimenta o calendário, os links diretos de atividades e as consultas das automações. Representantes editam atividades da própria turma; administradores têm o acesso permitido pela política da API."
-  },
-  "atividades_arquivadas": {
-    "feature": "Administração · Expurgo de atividades",
-    "description": "A função arquivar_atividade cria este registro ao retirar uma atividade antiga do calendário. A mesma linha guarda o motivo do expurgo e o conteúdo original; a limpeza do R2 usa os anexos relacionados."
   },
   "atualizacoes_agenda": {
     "feature": "Menu · Atualizações e aviso de novidades",
@@ -25,7 +17,7 @@
   },
   "auditoria_aplicacao": {
     "feature": "API · Histórico de alterações",
-    "description": "Recebe os registros de gravações e arquivamentos feitos pela aplicação. Identifica quem alterou o quê; valores_historico conserva o estado anterior em campos tipados. É um recurso de operação, sem edição pelo usuário comum."
+    "description": "Recebe os registros de gravações feitos pela aplicação. Identifica quem alterou o quê; valores_historico conserva o estado anterior em campos tipados. É um recurso de operação, sem edição pelo usuário comum."
   },
   "avisos_turma": {
     "feature": "Turma · Quadro de avisos",
@@ -157,7 +149,7 @@
   },
   "regras_retencao": {
     "feature": "Representantes · Expurgo da turma",
-    "description": "Define a política de retenção de atividades antigas de cada sala. O job de expurgo consulta as regras ativas para selecionar as atividades que serão arquivadas e encaminhadas à limpeza de anexos."
+    "description": "Define por quanto tempo cada turma mantém as atividades no calendário. Na rotina diária, a API aplica a regra da turma, exclui os anexos do R2 e remove a atividade e seus metadados do PostgreSQL."
   },
   "sugestoes_atividade": {
     "feature": "Menu · Sugerir atividade",
