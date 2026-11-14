@@ -30,11 +30,6 @@
     "enviado_em": "Momento do envio, no formato ISO da API.",
     "enviado_por": "Identifica a conta que enviou o material antes do arquivamento. Conserva a origem do anexo no registro arquivado."
   },
-  "anuncios": {
-    "id_registro": "Chave da linha de negócio em registros_aplicacao. Liga o conteúdo à referência externa e à versão usada pela API para detectar conflitos de edição.",
-    "mensagem": "Texto do comunicado geral incluído no catálogo da Agenda. É o conteúdo que o administrador quer apresentar à comunidade.",
-    "alterado_em": "Momento da última alteração, no formato ISO da API."
-  },
   "atividades": {
     "id_registro": "Chave da linha de negócio em registros_aplicacao. Liga o conteúdo à referência externa e à versão usada pela API para detectar conflitos de edição.",
     "titulo": "Nome da entrega ou compromisso mostrado no calendário, nos detalhes e nos resumos. Permite identificar rapidamente a atividade.",

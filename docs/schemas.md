@@ -33,7 +33,7 @@ O Worker autentica o usuário e verifica as permissões antes de executar essas 
 
 ## Simplificações aplicadas
 
-A versão `034_retirar_anotacoes` está instalada no banco, conferida em 13/11/2026.
+A versão `035_anuncios_no_redis` está instalada no banco.
 
 | Mudança | Estrutura atual |
 | --- | --- |

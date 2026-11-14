@@ -108,6 +108,7 @@ Os catálogos públicos passam por projeções que selecionam os campos da respo
 | 029–032 | Unifica os acessos dos três sites e faz o Pegaki reutilizar o catálogo geral de disciplinas |
 | 033 | Retira enquetes, opções, votos, autorizações de eleitores e as funções exclusivas do recurso |
 | 034 | Retira a tabela de anotações do antigo Caderno Infinito e o contrato notebookNotes da API |
+| 035 | Retira a tabela de comunicados gerais após a mudança para Redis |
 
 Em um banco local vazio, siga os passos em [Consultas SQL]({{ '/consultas.html' | relative_url }}). O script de instalação aplica as migrações na ordem acima.
 

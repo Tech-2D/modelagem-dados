@@ -9,7 +9,7 @@ O schema `tech2d` tem {{ site.data.views.size }} views. `catalogo_horarios` reú
 
 | Função | Responsabilidade |
 | --- | --- |
-| `consultar_catalogo_agenda(turma, incluir_atividades)` | Seleciona as atividades gerais e da turma, reúne turmas, atualizações e anúncios e devolve o catálogo em uma consulta. |
+| `consultar_catalogo_agenda(turma, incluir_atividades)` | Seleciona as atividades gerais e da turma, reúne turmas e atualizações e devolve o catálogo em uma consulta. |
 | `arquivar_atividade(id, motivo, arquivada_em, dias_retencao)` | Cria a cópia de uma atividade da turma, remove o registro ativo e grava a auditoria na mesma operação. |
 
 O Worker autentica a conta, verifica as permissões das rotas e seleciona os campos das respostas públicas. Os jobs calculam as datas das recorrências e decidem quais políticas de retenção estão vigentes. Eles consultam `visao_atividades_automacao` para filtrar pelas colunas de turma, data e regra de recorrência. O Worker cuida da limpeza dos arquivos no R2.

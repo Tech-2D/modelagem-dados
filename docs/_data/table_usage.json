@@ -11,10 +11,6 @@
     "feature": "Expurgo · Limpeza de arquivos",
     "description": "Conserva os metadados dos anexos de uma atividade arquivada. A rotina de limpeza usa a chave do objeto para remover os arquivos no R2 e evitar que o armazenamento fique ocupado após o expurgo."
   },
-  "anuncios": {
-    "feature": "Agenda · Comunicados gerais",
-    "description": "Fornece a mensagem geral incluída no catálogo da Agenda. Permite mudar o comunicado pelo fluxo administrativo sem alterar o código do site."
-  },
   "atividades": {
     "feature": "Calendário · Dia, semana, mês e detalhes",
     "description": "Alimenta o calendário, os links diretos de atividades e as consultas das automações. Representantes editam atividades da própria turma; administradores têm o acesso permitido pela política da API."

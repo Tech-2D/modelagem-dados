@@ -40,7 +40,7 @@ permalink: /
 | PostgreSQL | Armazena atividades, horários, avisos, permissões e estatísticas. |
 | Firebase Authentication | Identifica a conta. A API verifica a sessão e aplica as permissões. |
 | Cloudflare R2 | Guarda arquivos anexados. A API controla quem pode acessar cada arquivo. |
-| Redis | Cache de catálogos integrado à API SQL, com retorno ao PostgreSQL se o cache estiver indisponível. |
+| Redis | Cache de catálogos e armazenamento do comunicado geral por sete dias. |
 | Firestore | Origem histórica dos dados preservados na migração para PostgreSQL. |
 
 [Código da API compartilhada](https://github.com/Tech-2D/api)

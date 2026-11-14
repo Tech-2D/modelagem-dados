@@ -276,51 +276,6 @@
     },
     {
         "kind": "table",
-        "name": "anuncios",
-        "columns": [
-            {
-                "name": "id_registro",
-                "type": "bigint",
-                "check": false,
-                "unique": false,
-                "comment": null,
-                "nullable": false,
-                "generated": false
-            },
-            {
-                "name": "mensagem",
-                "type": "character varying(500)",
-                "check": false,
-                "unique": false,
-                "comment": "Campo message no contrato da API.",
-                "nullable": true,
-                "generated": false
-            },
-            {
-                "name": "alterado_em",
-                "type": "character varying(40)",
-                "check": false,
-                "unique": false,
-                "comment": "Campo updatedAt no contrato da API.",
-                "nullable": true,
-                "generated": false
-            }
-        ],
-        "comment": "Comunicados gerais",
-        "references": [
-            {
-                "table": "registros_aplicacao",
-                "column": "id_registro",
-                "target": "id"
-            }
-        ],
-        "primary_key": [
-            "id_registro"
-        ],
-        "foreign_key_count": 1
-    },
-    {
-        "kind": "table",
         "name": "atividades",
         "columns": [
             {

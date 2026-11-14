@@ -17,8 +17,6 @@
       title: Turmas habilitadas na Agenda
     - name: avisos_turma
       title: Avisos publicados no quadro da turma
-    - name: anuncios
-      title: Comunicados gerais
     - name: atualizacoes_agenda
       title: Histórico público de atualizações
 - id: horarios
