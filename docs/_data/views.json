@@ -142,7 +142,7 @@
   },
   {
     "name": "visao_atividades_automacao",
-    "comment": "Atividades com turma, data e recorrência tipadas para os jobs. O conteúdo é reconstruído apenas para uso no arquivamento.",
+    "comment": "Atividades por turma, data e recorrência, com os dados usados pelas automações.",
     "dependencies": [
       "atividades",
       "registros_aplicacao"
@@ -182,7 +182,7 @@
         "name": "conteudo",
         "source": "conteudo",
         "type": "jsonb",
-        "note": "Conteúdo reconstruído para arquivar a atividade e preservar a auditoria."
+        "note": "Conteúdo da atividade. A rotina de exclusão lê as referências dos anexos para removê-los do R2."
       }
     ]
   },

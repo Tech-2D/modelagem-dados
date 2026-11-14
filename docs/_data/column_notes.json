@@ -319,7 +319,7 @@
   "regras_retencao": {
     "id_registro": "Chave da linha de negócio em registros_aplicacao. Liga o conteúdo à referência externa e à versão usada pela API para detectar conflitos de edição.",
     "turma": "Sala cuja retenção esta política controla. Evita aplicar a configuração de um representante a outra sala.",
-    "dias": "Quantidade de dias de atividades antigas mantidas antes do arquivamento. Define o corte usado pelo job de expurgo.",
+    "dias": "Quantidade de dias que a turma mantém as atividades no calendário. Define a data de corte para a exclusão da atividade e dos anexos.",
     "ativa": "Indica se a regra ou configuração está ativa.",
     "alterado_por": "UID de quem modificou a política. Permite atribuir a responsabilidade pela configuração do expurgo.",
     "alterado_em": "Momento da última alteração, no formato ISO da API."
