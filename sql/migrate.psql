@@ -159,7 +159,5 @@ COMMENT ON SCHEMA tech2d IS 'Dados da Tech-2D. tech2d-schema-version:024_notas_p
 \ir migrations/036_expurgo_direto.sql
 \endif
 
-BEGIN;
 \ir migrations/037_atualizacoes_no_redis.sql
-COMMIT;
 \endif
