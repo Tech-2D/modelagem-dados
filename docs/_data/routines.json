@@ -36,15 +36,6 @@
         "procedure": false
     },
     {
-        "name": "gravar_acessos_votacao",
-        "anchor": "rotina-gravar_acessos_votacao-65a7a60d",
-        "result": "void",
-        "comment": null,
-        "language": "plpgsql",
-        "arguments": "alvo bigint, objeto jsonb",
-        "procedure": false
-    },
-    {
         "name": "gravar_anotacoes",
         "anchor": "rotina-gravar_anotacoes-65a7a60d",
         "result": "void",
@@ -119,15 +110,6 @@
     {
         "name": "gravar_convites_representacao",
         "anchor": "rotina-gravar_convites_representacao-65a7a60d",
-        "result": "void",
-        "comment": null,
-        "language": "plpgsql",
-        "arguments": "alvo bigint, objeto jsonb",
-        "procedure": false
-    },
-    {
-        "name": "gravar_enquetes",
-        "anchor": "rotina-gravar_enquetes-65a7a60d",
         "result": "void",
         "comment": null,
         "language": "plpgsql",
@@ -324,15 +306,6 @@
         "procedure": false
     },
     {
-        "name": "gravar_votos_enquete",
-        "anchor": "rotina-gravar_votos_enquete-65a7a60d",
-        "result": "void",
-        "comment": null,
-        "language": "plpgsql",
-        "arguments": "alvo bigint, objeto jsonb",
-        "procedure": false
-    },
-    {
         "name": "inserir_anexos_atividade",
         "anchor": "rotina-inserir_anexos_atividade-32f84b30",
         "result": "void",
@@ -387,30 +360,12 @@
         "procedure": false
     },
     {
-        "name": "inserir_opcoes_enquete",
-        "anchor": "rotina-inserir_opcoes_enquete-32f84b30",
-        "result": "void",
-        "comment": null,
-        "language": "plpgsql",
-        "arguments": "pai bigint, posicao integer, objeto jsonb",
-        "procedure": false
-    },
-    {
         "name": "inserir_quadros_kanban",
         "anchor": "rotina-inserir_quadros_kanban-32f84b30",
         "result": "void",
         "comment": null,
         "language": "plpgsql",
         "arguments": "pai bigint, posicao integer, objeto jsonb",
-        "procedure": false
-    },
-    {
-        "name": "ler_acessos_votacao",
-        "anchor": "rotina-ler_acessos_votacao-c9ce0023",
-        "result": "jsonb",
-        "comment": null,
-        "language": "sql",
-        "arguments": "alvo bigint",
         "procedure": false
     },
     {
@@ -524,15 +479,6 @@
     {
         "name": "ler_convites_representacao",
         "anchor": "rotina-ler_convites_representacao-c9ce0023",
-        "result": "jsonb",
-        "comment": null,
-        "language": "sql",
-        "arguments": "alvo bigint",
-        "procedure": false
-    },
-    {
-        "name": "ler_enquetes",
-        "anchor": "rotina-ler_enquetes-c9ce0023",
         "result": "jsonb",
         "comment": null,
         "language": "sql",
@@ -743,15 +689,6 @@
         "result": "jsonb",
         "comment": null,
         "language": "plpgsql",
-        "arguments": "alvo bigint",
-        "procedure": false
-    },
-    {
-        "name": "ler_votos_enquete",
-        "anchor": "rotina-ler_votos_enquete-c9ce0023",
-        "result": "jsonb",
-        "comment": null,
-        "language": "sql",
         "arguments": "alvo bigint",
         "procedure": false
     },

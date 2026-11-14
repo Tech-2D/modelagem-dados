@@ -17,7 +17,7 @@ As áreas abaixo servem para navegar na documentação. Elas não criam schemas 
 
 ## Como as partes se conectam
 
-- **Agenda:** atividades, anexos, avisos, enquetes, sugestões, representantes e resumos por e-mail.
+- **Agenda:** atividades, anexos, avisos, sugestões, representantes e resumos por e-mail.
 - **Cadê o professor:** horários de aula e os catálogos de professores, disciplinas, turmas e faixas de horário.
 - **Kanban:** espaços, quadros, colunas, cartões, checklists, participantes e pedidos de acesso.
 - **Pegaki:** disciplinas, cadernos, notas e recuperações. As notas são protegidas por conta com RLS.
@@ -33,7 +33,7 @@ O Worker autentica o usuário e verifica as permissões antes de executar essas 
 
 ## Simplificações aplicadas
 
-A versão `032_retirar_catalogo_pegaki` está instalada no banco, conferida em 13/11/2026.
+A versão `033_retirar_enquetes` está instalada no banco, conferida em 13/11/2026.
 
 | Mudança | Estrutura atual |
 | --- | --- |
@@ -44,3 +44,7 @@ A versão `032_retirar_catalogo_pegaki` está instalada no banco, conferida em 1
 | Listas e agrupamentos | Foram removidos os marcadores `grupo` e `listas_presentes`. A ordem continua explícita nas tabelas filhas, e a API devolve listas vazias como `[]`. |
 
 O histórico dos scripts fica no Git. A versão instalada fica no comentário de `tech2d`, sem uma tabela de controle de migrações. Os schemas internos do PostgreSQL e do Aiven pertencem ao serviço e não fazem parte das áreas da aplicação.
+
+## Recurso retirado: enquetes
+
+A versão 033 removeu as enquetes da Agenda, suas opções e votos e a aprovação de eleitores. As quatro tabelas e as funções exclusivas foram retiradas; os caminhos antigos da API recusam consultas e gravações. O quadro de avisos, as sugestões e suas conversas continuam disponíveis.

@@ -71,9 +71,9 @@ A visão [Catálogo de horários]({{ '/views.html#view-catalogo_horarios' | rela
 
 A tabela de atividades arquivadas reúne os metadados do expurgo e os dados originais. Os anexos arquivados apontam diretamente para essa tabela e conservam a ordem. Listas de anexos vazias são devolvidas como <code>[]</code>.
 
-## Enquetes e conversas
+## Sugestões e conversas
 
-`enquetes` guarda a pergunta, turma e situação. `opcoes_enquete` guarda uma linha por opção e sua ordem. Cada voto tem um identificador numérico, uma referência à enquete e o índice da opção. Mensagens sobre sugestões usam a mesma ligação entre registro pai e filho.
+`sugestoes_melhoria` registra o feedback autenticado. Cada linha de `mensagens_sugestao` se liga à sugestão por `registros_aplicacao.id_pai`. A API limita a conversa ao autor da sugestão e aos administradores.
 
 ## Kanban
 

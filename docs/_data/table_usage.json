@@ -3,10 +3,6 @@
     "feature": "Administração · Usuários e estatísticas",
     "description": "Usada pela API de acessos e pela moderação para mostrar a última visita autenticada da conta em cada site. A chave composta preserva acessos independentes na Agenda, no Cadê o professor e no Pegaki. Não armazena todas as visitas; esse histórico agregado fica em visitas_aos_sites."
   },
-  "acessos_votacao": {
-    "feature": "Enquetes da turma · Aprovação de eleitores",
-    "description": "Registra o pedido do aluno para votar em uma turma e a revisão pelo representante. A API consulta a aprovação antes de aceitar um voto; ter uma conta autenticada não basta para votar em qualquer sala."
-  },
   "anexos_atividade": {
     "feature": "Atividade · Materiais e downloads",
     "description": "Usada ao criar, editar e abrir os materiais de uma atividade. Guarda os metadados e a ordem dos anexos; o conteúdo binário permanece no Cloudflare R2, com download autorizado pela API."
@@ -71,10 +67,6 @@
     "feature": "Catálogo compartilhado · Matérias por série",
     "description": "Relaciona uma disciplina já existente à série em que ela pode receber notas no Pegaki. É uma associação, sem outro nome de matéria. As chaves estrangeiras das notas impedem usar disciplinas de uma série diferente."
   },
-  "enquetes": {
-    "feature": "Turma · Enquetes de votação",
-    "description": "Representa a pergunta publicada pelo representante e seu estado de votação. As opções ficam em opcoes_enquete, e os votos e autorizações são consultados separadamente para controlar participação e resultado."
-  },
   "entregas_resumo": {
     "feature": "Automação · Resumo semanal por e-mail",
     "description": "Controla a reserva e a conclusão dos envios do resumo semanal. O serviço consulta esses registros para coordenar as tentativas e não repetir inadvertidamente um envio já processado."
@@ -110,10 +102,6 @@
   "mensagens_sugestao": {
     "feature": "Minhas sugestões · Conversa com a administração",
     "description": "Guarda as mensagens privadas vinculadas a uma sugestão de melhoria. A ligação com o registro pai permite à API restringir a conversa ao autor da sugestão e aos administradores."
-  },
-  "opcoes_enquete": {
-    "feature": "Enquetes · Alternativas de votação",
-    "description": "Contém as alternativas da pergunta, uma por linha, na ordem apresentada ao aluno. A posição é importante porque o voto identifica a opção escolhida por seu índice."
   },
   "participantes_kanban": {
     "feature": "Kanban compartilhado · Membros autorizados",
@@ -202,9 +190,5 @@
   "visitas_aos_sites": {
     "feature": "Administração · Estatísticas de acesso",
     "description": "Alimenta os totais e a comparação de uso entre sites. A combinação de data, intervalo, visitante e site evita contar várias vezes a mesma visita dentro de uma janela de meia hora. A retenção é de 90 dias."
-  },
-  "votos_enquete": {
-    "feature": "Enquetes · Voto de cada participante",
-    "description": "Registra a opção escolhida pela conta em uma enquete. O registro pai e a referência do usuário são usados pela API para limitar a participação e apurar os resultados autorizados."
   }
 }

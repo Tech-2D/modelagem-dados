@@ -1,3 +1,7 @@
+SELECT COALESCE(obj_description(to_regnamespace('tech2d'), 'pg_namespace'), '') LIKE '%tech2d-schema-version:033_retirar_enquetes' AS latest_033 \gset
+\if :latest_033
+\echo Estrutura já instalada na versão 033.
+\else
 SELECT COALESCE(obj_description(to_regnamespace('tech2d'), 'pg_namespace'), '') LIKE '%tech2d-schema-version:032_retirar_catalogo_pegaki' AS latest_032 \gset
 \if :latest_032
 \echo Estrutura já instalada na versão 032.
@@ -125,4 +129,7 @@ COMMENT ON SCHEMA tech2d IS 'Dados da Tech-2D. tech2d-schema-version:024_notas_p
 \endif
 
 \ir migrations/032_retirar_catalogo_pegaki.sql
+\endif
+
+\ir migrations/033_retirar_enquetes.sql
 \endif

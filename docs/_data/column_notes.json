@@ -6,15 +6,6 @@
     "ultimo_acesso_em": "Momento da visita mais recente. Alimenta a listagem administrativa e a retenção de 90 dias; uma visita atrasada não deve substituir uma mais nova.",
     "chave_rede": "Código derivado da rede para moderação da Agenda; não é um IP em texto aberto. Fica nulo nos acessos dos professores e do Pegaki."
   },
-  "acessos_votacao": {
-    "id_registro": "Chave da linha de negócio em registros_aplicacao. Liga o conteúdo à referência externa e à versão usada pela API para detectar conflitos de edição.",
-    "email": "E-mail da conta que pediu acesso. Ajuda o representante a identificar o aluno antes de autorizar a votação.",
-    "turma": "Sala para a qual foi pedida autorização; impede tratar a aprovação como acesso a todas as enquetes do sistema.",
-    "situacao": "Decisão atual sobre o pedido. A política de votação exige a autorização apropriada antes de aceitar o voto.",
-    "solicitado_em": "Instante em que a conta pediu autorização. Permite ordenar os pedidos e distinguir uma solicitação nova de outra já revisada.",
-    "revisado_em": "Instante da decisão do representante. Registra quando o acesso para votar foi avaliado.",
-    "revisado_por": "UID de quem avaliou o pedido. Permite identificar o responsável pela liberação ou recusa."
-  },
   "anexos_atividade": {
     "id": "Identificador numérico gerado pelo banco.",
     "id_pai": "Identifica a linha de atividades que contém este item. A chave estrangeira mantém o vínculo e evita itens sem um pai válido.",
@@ -176,14 +167,6 @@
     "id_disciplina": "Referência à matéria em disciplinas. Permite reutilizar a mesma matéria em várias séries sem cadastrar novamente o nome.",
     "ano_serie": "Série de 1 a 3 em que a matéria pode receber notas. Compõe a chave e valida a compatibilidade entre a disciplina e o caderno."
   },
-  "enquetes": {
-    "id_registro": "Chave da linha de negócio em registros_aplicacao. Liga o conteúdo à referência externa e à versão usada pela API para detectar conflitos de edição.",
-    "turma": "Sala à qual pertence a votação. Delimita a administração da enquete e a autorização dos eleitores.",
-    "pergunta": "Pergunta mostrada na tela de votação, à qual as alternativas de opcoes_enquete respondem.",
-    "situacao": "Estado da enquete, usado pela API para decidir se ela ainda aceita votos.",
-    "criado_por": "UID da conta que criou o registro.",
-    "criado_em": "Momento de criação, no formato ISO da API."
-  },
   "entregas_resumo": {
     "id_registro": "Chave da linha de negócio em registros_aplicacao. Liga o conteúdo à referência externa e à versão usada pela API para detectar conflitos de edição.",
     "situacao": "Estado de processamento do envio, distinguindo reserva e conclusão. Ajuda a coordenar tentativas sem duplicar um resumo já enviado.",
@@ -251,12 +234,6 @@
     "mensagem": "Texto trocado na conversa privada da sugestão. Permite esclarecer detalhes do pedido entre o autor e a administração.",
     "remetente": "UID do autor desta mensagem. Permite distinguir a resposta da administração da mensagem enviada pelo dono da sugestão.",
     "criado_em": "Momento de criação, no formato ISO da API."
-  },
-  "opcoes_enquete": {
-    "id": "Identificador numérico gerado pelo banco.",
-    "id_pai": "Identifica a linha de enquetes que contém este item. A chave estrangeira mantém o vínculo e evita itens sem um pai válido.",
-    "ordem": "Posição do item dentro da lista, a partir de zero. Preserva a sequência escolhida na interface ao reconstruir a resposta da API.",
-    "opcao": "Texto exibido como opção na enquete."
   },
   "participantes_kanban": {
     "id_registro": "Chave da linha de negócio em registros_aplicacao. Liga o conteúdo à referência externa e à versão usada pela API para detectar conflitos de edição.",
@@ -364,9 +341,9 @@
   },
   "registros_aplicacao": {
     "id": "Identificador numérico gerado pelo PostgreSQL.",
-    "tipo": "Tipo de registro usado pela API, como activities ou polls/votes.",
+    "tipo": "Tipo de registro usado pela API, como activities ou feedback/messages. Direciona a leitura e a gravação para a tabela de negócio correspondente.",
     "referencia": "Identificador externo preservado para os sites e links existentes.",
-    "referencia_pai": "Referência externa do registro pai, usada em votos e mensagens. Vazia para registros principais.",
+    "referencia_pai": "Referência externa da sugestão a que uma mensagem pertence. Vazia nos registros principais; preserva o vínculo aceito pelo contrato da API.",
     "id_pai": "Identifica a linha de registros_aplicacao que contém este item. A chave estrangeira mantém o vínculo e evita itens sem um pai válido.",
     "versao": "Versão usada para detectar conflitos de edição.",
     "atualizado_em": "Data e hora da última alteração da linha."
@@ -454,10 +431,5 @@
     "tipo_visitante": "Categoria da chave de visitante. O registro atual exige autenticação; a categoria anônima preserva a leitura do histórico existente.",
     "chave_visitante": "UID para acessos autenticados ou código derivado para o histórico anônimo. Permite deduplicar visitas sem guardar um IP literal.",
     "site": "Origem da visita: agenda, professores ou pegaki. Permite comparar o uso de cada site no mesmo painel."
-  },
-  "votos_enquete": {
-    "id_registro": "Chave da linha de negócio em registros_aplicacao. Liga o conteúdo à referência externa e à versão usada pela API para detectar conflitos de edição.",
-    "indice_opcao": "Posição da opção selecionada, começando em zero.",
-    "criado_em": "Momento de criação, no formato ISO da API."
   }
 }

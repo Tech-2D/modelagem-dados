@@ -106,6 +106,7 @@ Os catálogos públicos passam por projeções que selecionam os campos da respo
 | 027 | Consolida os acessos recentes da Agenda e dos professores por site e conta |
 | 028 | Unifica o arquivo de atividades, remove marcadores de listas e aposenta a auditoria antiga |
 | 029–032 | Unifica os acessos dos três sites e faz o Pegaki reutilizar o catálogo geral de disciplinas |
+| 033 | Retira enquetes, opções, votos, autorizações de eleitores e as funções exclusivas do recurso |
 
 Em um banco local vazio, siga os passos em [Consultas SQL]({{ '/consultas.html' | relative_url }}). O script de instalação aplica as migrações na ordem acima.
 

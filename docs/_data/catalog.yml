@@ -34,17 +34,9 @@
       title: Turmas do catálogo de horários
     - name: faixas_horario
       title: Faixas de horário
-- id: enquetes
-  name: Enquetes, sugestões e colaboração
+- id: colaboracao
+  name: Sugestões e colaboração
   objects:
-    - name: enquetes
-      title: Enquetes das turmas
-    - name: opcoes_enquete
-      title: Opções de cada enquete, na ordem exibida
-    - name: votos_enquete
-      title: Votos em enquetes
-    - name: acessos_votacao
-      title: Autorizações para votar
     - name: sugestoes_atividade
       title: Sugestões de novas atividades
     - name: sugestoes_melhoria
