@@ -1,52 +1,71 @@
 [
   {
     "kind": "table",
-    "name": "acessos_recentes_agenda",
+    "name": "acessos_recentes",
     "columns": [
+      {
+        "name": "site",
+        "type": "character varying(16)",
+        "check": true,
+        "unique": false,
+        "comment": "Site em que a conta foi vista.",
+        "nullable": false,
+        "generated": false
+      },
       {
         "name": "id_usuario",
         "type": "character varying(128)",
-        "comment": null,
+        "check": false,
+        "unique": false,
+        "comment": "UID da conta autenticada.",
         "nullable": false,
         "generated": false
       },
       {
         "name": "email",
         "type": "character varying(320)",
-        "comment": null,
+        "check": false,
+        "unique": false,
+        "comment": "E-mail da conta, quando disponível.",
         "nullable": true,
         "generated": false
       },
       {
         "name": "ultimo_acesso_em",
         "type": "timestamp with time zone",
-        "comment": null,
+        "check": false,
+        "unique": false,
+        "comment": "Momento do último acesso autenticado ao site.",
         "nullable": false,
         "generated": false
       },
       {
         "name": "chave_rede",
         "type": "character varying(64)",
-        "comment": null,
+        "check": true,
+        "unique": false,
+        "comment": "Identificador de rede derivado para moderação da Agenda.",
         "nullable": true,
-        "generated": false,
-        "check": true
+        "generated": false
       }
     ],
-    "comment": "Último acesso autenticado à Agenda e referência de rede usada para moderação.",
+    "comment": "Último acesso autenticado por site e conta. A chave de rede só é usada na Agenda.",
     "references": [],
     "primary_key": [
+      "site",
       "id_usuario"
     ],
     "foreign_key_count": 0
   },
   {
     "kind": "table",
-    "name": "acessos_recentes_professores",
+    "name": "acessos_recentes_pegaki",
     "columns": [
       {
-        "name": "id_usuario",
+        "name": "uid",
         "type": "character varying(128)",
+        "check": false,
+        "unique": false,
         "comment": null,
         "nullable": false,
         "generated": false
@@ -54,22 +73,26 @@
       {
         "name": "email",
         "type": "character varying(320)",
+        "check": false,
+        "unique": false,
         "comment": null,
         "nullable": true,
         "generated": false
       },
       {
-        "name": "ultimo_acesso_em",
+        "name": "last_seen_at",
         "type": "timestamp with time zone",
+        "check": false,
+        "unique": false,
         "comment": null,
         "nullable": false,
         "generated": false
       }
     ],
-    "comment": "Último acesso autenticado ao Cadê o professor.",
+    "comment": "Último acesso com login por conta no Pegaki, com retenção de 90 dias.",
     "references": [],
     "primary_key": [
-      "id_usuario"
+      "uid"
     ],
     "foreign_key_count": 0
   },
@@ -80,6 +103,8 @@
       {
         "name": "id_registro",
         "type": "bigint",
+        "check": false,
+        "unique": false,
         "comment": null,
         "nullable": false,
         "generated": false
@@ -87,6 +112,8 @@
       {
         "name": "email",
         "type": "character varying(320)",
+        "check": false,
+        "unique": false,
         "comment": "Campo email no contrato da API.",
         "nullable": true,
         "generated": false
@@ -94,6 +121,8 @@
       {
         "name": "turma",
         "type": "character varying(150)",
+        "check": false,
+        "unique": false,
         "comment": "Campo turmaId no contrato da API.",
         "nullable": true,
         "generated": false
@@ -101,6 +130,8 @@
       {
         "name": "situacao",
         "type": "character varying(32)",
+        "check": false,
+        "unique": false,
         "comment": "Campo status no contrato da API.",
         "nullable": true,
         "generated": false
@@ -108,6 +139,8 @@
       {
         "name": "solicitado_em",
         "type": "character varying(40)",
+        "check": false,
+        "unique": false,
         "comment": "Campo requestedAt no contrato da API.",
         "nullable": true,
         "generated": false
@@ -115,6 +148,8 @@
       {
         "name": "revisado_em",
         "type": "character varying(40)",
+        "check": false,
+        "unique": false,
         "comment": "Campo reviewedAt no contrato da API.",
         "nullable": true,
         "generated": false
@@ -122,6 +157,8 @@
       {
         "name": "revisado_por",
         "type": "character varying(128)",
+        "check": false,
+        "unique": false,
         "comment": "Campo reviewedBy no contrato da API.",
         "nullable": true,
         "generated": false
@@ -147,6 +184,8 @@
       {
         "name": "id",
         "type": "bigint",
+        "check": false,
+        "unique": false,
         "comment": null,
         "nullable": false,
         "generated": true
@@ -154,13 +193,8 @@
       {
         "name": "id_pai",
         "type": "bigint",
-        "comment": null,
-        "nullable": false,
-        "generated": false
-      },
-      {
-        "name": "grupo",
-        "type": "character varying(32)",
+        "check": false,
+        "unique": false,
         "comment": null,
         "nullable": false,
         "generated": false
@@ -168,14 +202,17 @@
       {
         "name": "ordem",
         "type": "integer",
+        "check": true,
+        "unique": false,
         "comment": null,
         "nullable": false,
-        "generated": false,
-        "check": true
+        "generated": false
       },
       {
         "name": "referencia",
         "type": "character varying(180)",
+        "check": false,
+        "unique": false,
         "comment": "Campo id no contrato da API.",
         "nullable": true,
         "generated": false
@@ -183,6 +220,8 @@
       {
         "name": "nome",
         "type": "character varying(500)",
+        "check": false,
+        "unique": false,
         "comment": "Campo name no contrato da API.",
         "nullable": true,
         "generated": false
@@ -190,6 +229,8 @@
       {
         "name": "tipo_mime",
         "type": "character varying(150)",
+        "check": false,
+        "unique": false,
         "comment": "Campo contentType no contrato da API.",
         "nullable": true,
         "generated": false
@@ -197,6 +238,8 @@
       {
         "name": "tamanho_bytes",
         "type": "bigint",
+        "check": false,
+        "unique": false,
         "comment": "Campo size no contrato da API.",
         "nullable": true,
         "generated": false
@@ -204,6 +247,8 @@
       {
         "name": "chave_arquivo",
         "type": "character varying(1024)",
+        "check": false,
+        "unique": false,
         "comment": "Campo storagePath no contrato da API.",
         "nullable": true,
         "generated": false
@@ -211,6 +256,8 @@
       {
         "name": "enviado_em",
         "type": "character varying(40)",
+        "check": false,
+        "unique": false,
         "comment": "Campo uploadedAt no contrato da API.",
         "nullable": true,
         "generated": false
@@ -218,6 +265,8 @@
       {
         "name": "enviado_por",
         "type": "character varying(128)",
+        "check": false,
+        "unique": false,
         "comment": "Campo uploadedBy no contrato da API.",
         "nullable": true,
         "generated": false
@@ -243,6 +292,8 @@
       {
         "name": "id",
         "type": "bigint",
+        "check": false,
+        "unique": false,
         "comment": null,
         "nullable": false,
         "generated": true
@@ -250,13 +301,8 @@
       {
         "name": "id_pai",
         "type": "bigint",
-        "comment": null,
-        "nullable": false,
-        "generated": false
-      },
-      {
-        "name": "grupo",
-        "type": "character varying(32)",
+        "check": false,
+        "unique": false,
         "comment": null,
         "nullable": false,
         "generated": false
@@ -264,14 +310,17 @@
       {
         "name": "ordem",
         "type": "integer",
+        "check": true,
+        "unique": false,
         "comment": null,
         "nullable": false,
-        "generated": false,
-        "check": true
+        "generated": false
       },
       {
         "name": "referencia",
         "type": "character varying(180)",
+        "check": false,
+        "unique": false,
         "comment": "Campo id no contrato da API.",
         "nullable": true,
         "generated": false
@@ -279,6 +328,8 @@
       {
         "name": "nome",
         "type": "character varying(500)",
+        "check": false,
+        "unique": false,
         "comment": "Campo name no contrato da API.",
         "nullable": true,
         "generated": false
@@ -286,6 +337,8 @@
       {
         "name": "tipo_mime",
         "type": "character varying(150)",
+        "check": false,
+        "unique": false,
         "comment": "Campo contentType no contrato da API.",
         "nullable": true,
         "generated": false
@@ -293,6 +346,8 @@
       {
         "name": "tamanho_bytes",
         "type": "bigint",
+        "check": false,
+        "unique": false,
         "comment": "Campo size no contrato da API.",
         "nullable": true,
         "generated": false
@@ -300,6 +355,8 @@
       {
         "name": "chave_arquivo",
         "type": "character varying(1024)",
+        "check": false,
+        "unique": false,
         "comment": "Campo storagePath no contrato da API.",
         "nullable": true,
         "generated": false
@@ -307,6 +364,8 @@
       {
         "name": "enviado_em",
         "type": "character varying(40)",
+        "check": false,
+        "unique": false,
         "comment": "Campo uploadedAt no contrato da API.",
         "nullable": true,
         "generated": false
@@ -314,6 +373,8 @@
       {
         "name": "enviado_por",
         "type": "character varying(128)",
+        "check": false,
+        "unique": false,
         "comment": "Campo uploadedBy no contrato da API.",
         "nullable": true,
         "generated": false
@@ -322,9 +383,9 @@
     "comment": "Metadados dos anexos de atividades arquivadas",
     "references": [
       {
-        "table": "conteudo_atividade_arquivada",
+        "table": "atividades_arquivadas",
         "column": "id_pai",
-        "target": "id"
+        "target": "id_registro"
       }
     ],
     "primary_key": [
@@ -339,6 +400,8 @@
       {
         "name": "id_registro",
         "type": "bigint",
+        "check": false,
+        "unique": false,
         "comment": null,
         "nullable": false,
         "generated": false
@@ -346,6 +409,8 @@
       {
         "name": "titulo",
         "type": "character varying(120)",
+        "check": false,
+        "unique": false,
         "comment": "Campo title no contrato da API.",
         "nullable": true,
         "generated": false
@@ -353,6 +418,8 @@
       {
         "name": "conteudo",
         "type": "character varying(5000)",
+        "check": false,
+        "unique": false,
         "comment": "Campo content no contrato da API.",
         "nullable": true,
         "generated": false
@@ -360,6 +427,8 @@
       {
         "name": "disciplina",
         "type": "character varying(120)",
+        "check": false,
+        "unique": false,
         "comment": "Campo subject no contrato da API.",
         "nullable": true,
         "generated": false
@@ -367,6 +436,8 @@
       {
         "name": "turma",
         "type": "character varying(80)",
+        "check": false,
+        "unique": false,
         "comment": "Campo className no contrato da API.",
         "nullable": true,
         "generated": false
@@ -374,6 +445,8 @@
       {
         "name": "id_autor",
         "type": "character varying(128)",
+        "check": false,
+        "unique": false,
         "comment": "Campo authorUid no contrato da API.",
         "nullable": true,
         "generated": false
@@ -381,6 +454,8 @@
       {
         "name": "email_autor",
         "type": "character varying(320)",
+        "check": false,
+        "unique": false,
         "comment": "Campo authorEmail no contrato da API.",
         "nullable": true,
         "generated": false
@@ -388,6 +463,8 @@
       {
         "name": "criado_em",
         "type": "character varying(40)",
+        "check": false,
+        "unique": false,
         "comment": "Campo createdAt no contrato da API.",
         "nullable": true,
         "generated": false
@@ -395,6 +472,8 @@
       {
         "name": "alterado_em",
         "type": "character varying(40)",
+        "check": false,
+        "unique": false,
         "comment": "Campo updatedAt no contrato da API.",
         "nullable": true,
         "generated": false
@@ -420,6 +499,8 @@
       {
         "name": "id_registro",
         "type": "bigint",
+        "check": false,
+        "unique": false,
         "comment": null,
         "nullable": false,
         "generated": false
@@ -427,6 +508,8 @@
       {
         "name": "mensagem",
         "type": "character varying(500)",
+        "check": false,
+        "unique": false,
         "comment": "Campo message no contrato da API.",
         "nullable": true,
         "generated": false
@@ -434,6 +517,8 @@
       {
         "name": "alterado_em",
         "type": "character varying(40)",
+        "check": false,
+        "unique": false,
         "comment": "Campo updatedAt no contrato da API.",
         "nullable": true,
         "generated": false
@@ -459,6 +544,8 @@
       {
         "name": "id_registro",
         "type": "bigint",
+        "check": false,
+        "unique": false,
         "comment": null,
         "nullable": false,
         "generated": false
@@ -466,6 +553,8 @@
       {
         "name": "titulo",
         "type": "character varying(120)",
+        "check": false,
+        "unique": false,
         "comment": "Campo title no contrato da API.",
         "nullable": true,
         "generated": false
@@ -473,6 +562,8 @@
       {
         "name": "descricao",
         "type": "character varying(2000)",
+        "check": false,
+        "unique": false,
         "comment": "Campo description no contrato da API.",
         "nullable": true,
         "generated": false
@@ -480,6 +571,8 @@
       {
         "name": "tipo",
         "type": "character varying(32)",
+        "check": false,
+        "unique": false,
         "comment": "Campo type no contrato da API.",
         "nullable": true,
         "generated": false
@@ -487,6 +580,8 @@
       {
         "name": "disciplina",
         "type": "character varying(150)",
+        "check": false,
+        "unique": false,
         "comment": "Campo subject no contrato da API.",
         "nullable": true,
         "generated": false
@@ -494,6 +589,8 @@
       {
         "name": "data",
         "type": "date",
+        "check": false,
+        "unique": false,
         "comment": "Campo date no contrato da API.",
         "nullable": true,
         "generated": false
@@ -501,6 +598,8 @@
       {
         "name": "hora",
         "type": "time without time zone",
+        "check": false,
+        "unique": false,
         "comment": "Campo time no contrato da API.",
         "nullable": true,
         "generated": false
@@ -508,6 +607,8 @@
       {
         "name": "turma",
         "type": "character varying(150)",
+        "check": false,
+        "unique": false,
         "comment": "Campo turmaId no contrato da API.",
         "nullable": true,
         "generated": false
@@ -515,6 +616,8 @@
       {
         "name": "criado_por",
         "type": "character varying(128)",
+        "check": false,
+        "unique": false,
         "comment": "Campo createdBy no contrato da API.",
         "nullable": true,
         "generated": false
@@ -522,6 +625,8 @@
       {
         "name": "email_criador",
         "type": "character varying(320)",
+        "check": false,
+        "unique": false,
         "comment": "Campo createdByEmail no contrato da API.",
         "nullable": true,
         "generated": false
@@ -529,6 +634,8 @@
       {
         "name": "referencia_recorrencia",
         "type": "character varying(320)",
+        "check": false,
+        "unique": false,
         "comment": "Campo recurringId no contrato da API.",
         "nullable": true,
         "generated": false
@@ -536,6 +643,8 @@
       {
         "name": "criado_em",
         "type": "character varying(40)",
+        "check": false,
+        "unique": false,
         "comment": "Campo createdAt no contrato da API.",
         "nullable": true,
         "generated": false
@@ -543,15 +652,10 @@
       {
         "name": "alterado_em",
         "type": "character varying(40)",
+        "check": false,
+        "unique": false,
         "comment": "Campo updatedAt no contrato da API.",
         "nullable": true,
-        "generated": false
-      },
-      {
-        "name": "listas_presentes",
-        "type": "character varying(64)[]",
-        "comment": null,
-        "nullable": false,
         "generated": false
       }
     ],
@@ -575,6 +679,8 @@
       {
         "name": "id_registro",
         "type": "bigint",
+        "check": false,
+        "unique": false,
         "comment": null,
         "nullable": false,
         "generated": false
@@ -582,6 +688,8 @@
       {
         "name": "referencia_atividade",
         "type": "character varying(320)",
+        "check": false,
+        "unique": false,
         "comment": "Campo originalId no contrato da API.",
         "nullable": true,
         "generated": false
@@ -589,6 +697,8 @@
       {
         "name": "turma",
         "type": "character varying(150)",
+        "check": false,
+        "unique": false,
         "comment": "Campo turmaId no contrato da API.",
         "nullable": true,
         "generated": false
@@ -596,6 +706,8 @@
       {
         "name": "motivo",
         "type": "character varying(32)",
+        "check": false,
+        "unique": false,
         "comment": "Campo reason no contrato da API.",
         "nullable": true,
         "generated": false
@@ -603,6 +715,8 @@
       {
         "name": "arquivada_em",
         "type": "character varying(40)",
+        "check": false,
+        "unique": false,
         "comment": "Campo archivedAt no contrato da API.",
         "nullable": true,
         "generated": false
@@ -610,6 +724,8 @@
       {
         "name": "dias_retencao",
         "type": "smallint",
+        "check": false,
+        "unique": false,
         "comment": "Campo retentionDays no contrato da API.",
         "nullable": true,
         "generated": false
@@ -617,7 +733,126 @@
       {
         "name": "anexos_removidos_em",
         "type": "character varying(40)",
+        "check": false,
+        "unique": false,
         "comment": "Campo r2CleanedAt no contrato da API.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "tem_conteudo",
+        "type": "boolean",
+        "check": false,
+        "unique": false,
+        "comment": "Indica se o arquivo inclui a cópia dos dados originais.",
+        "nullable": false,
+        "generated": false
+      },
+      {
+        "name": "titulo",
+        "type": "character varying(120)",
+        "check": false,
+        "unique": false,
+        "comment": null,
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "descricao",
+        "type": "character varying(2000)",
+        "check": false,
+        "unique": false,
+        "comment": null,
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "tipo",
+        "type": "character varying(32)",
+        "check": false,
+        "unique": false,
+        "comment": null,
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "disciplina",
+        "type": "character varying(150)",
+        "check": false,
+        "unique": false,
+        "comment": null,
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "data",
+        "type": "date",
+        "check": false,
+        "unique": false,
+        "comment": null,
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "hora",
+        "type": "time without time zone",
+        "check": false,
+        "unique": false,
+        "comment": null,
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "turma_original",
+        "type": "character varying(150)",
+        "check": false,
+        "unique": false,
+        "comment": "Turma na cópia original, preservada independentemente dos metadados de arquivamento.",
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "criado_por",
+        "type": "character varying(128)",
+        "check": false,
+        "unique": false,
+        "comment": null,
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "email_criador",
+        "type": "character varying(320)",
+        "check": false,
+        "unique": false,
+        "comment": null,
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "referencia_recorrencia",
+        "type": "character varying(320)",
+        "check": false,
+        "unique": false,
+        "comment": null,
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "criado_em",
+        "type": "character varying(40)",
+        "check": false,
+        "unique": false,
+        "comment": null,
+        "nullable": true,
+        "generated": false
+      },
+      {
+        "name": "alterado_em",
+        "type": "character varying(40)",
+        "check": false,
+        "unique": false,
+        "comment": null,
         "nullable": true,
         "generated": false
       }
@@ -642,6 +877,8 @@
       {
         "name": "id_registro",
         "type": "bigint",
+        "check": false,
+        "unique": false,
         "comment": null,
         "nullable": false,
         "generated": false
@@ -649,6 +886,8 @@
       {
         "name": "titulo",
         "type": "character varying(120)",
+        "check": false,
+        "unique": false,
         "comment": "Campo title no contrato da API.",
         "nullable": true,
         "generated": false
@@ -656,6 +895,8 @@
       {
         "name": "conteudo",
         "type": "character varying(2000)",
+        "check": false,
+        "unique": false,
         "comment": "Campo body no contrato da API.",
         "nullable": true,
         "generated": false
@@ -663,6 +904,8 @@
       {
         "name": "criado_por",
         "type": "character varying(128)",
+        "check": false,
+        "unique": false,
         "comment": "Campo createdBy no contrato da API.",
         "nullable": true,
         "generated": false
@@ -670,6 +913,8 @@
       {
         "name": "publicado_em",
         "type": "character varying(40)",
+        "check": false,
+        "unique": false,
         "comment": "Campo publishedAt no contrato da API.",
         "nullable": true,
         "generated": false
@@ -677,6 +922,8 @@
       {
         "name": "referencia_sugestao",
         "type": "character varying(180)",
+        "check": false,
+        "unique": false,
         "comment": "Campo sourceFeedbackId no contrato da API.",
         "nullable": true,
         "generated": false
@@ -684,6 +931,8 @@
       {
         "name": "nome_credito",
         "type": "character varying(60)",
+        "check": false,
+        "unique": false,
         "comment": "Campo sourceName no contrato da API.",
         "nullable": true,
         "generated": false
@@ -691,6 +940,8 @@
       {
         "name": "mensagem_sugestao",
         "type": "character varying(2000)",
+        "check": false,
+        "unique": false,
         "comment": "Campo sourceMessage no contrato da API.",
         "nullable": true,
         "generated": false
@@ -716,6 +967,8 @@
       {
         "name": "sequencia",
         "type": "bigint",
+        "check": false,
+        "unique": false,
         "comment": null,
         "nullable": false,
         "generated": true
@@ -723,6 +976,8 @@
       {
         "name": "autor",
         "type": "character varying(256)",
+        "check": false,
+        "unique": false,
         "comment": null,
         "nullable": false,
         "generated": false
@@ -730,6 +985,8 @@
       {
         "name": "caminho",
         "type": "character varying(512)",
+        "check": false,
+        "unique": false,
         "comment": null,
         "nullable": false,
         "generated": false
@@ -737,6 +994,8 @@
       {
         "name": "operacao",
         "type": "character varying(32)",
+        "check": false,
+        "unique": false,
         "comment": null,
         "nullable": false,
         "generated": false
@@ -744,6 +1003,8 @@
       {
         "name": "alterado_em",
         "type": "timestamp with time zone",
+        "check": false,
+        "unique": false,
         "comment": null,
         "nullable": false,
         "generated": false
@@ -758,59 +1019,13 @@
   },
   {
     "kind": "table",
-    "name": "auditoria_atividades_legada",
-    "columns": [
-      {
-        "name": "sequencia",
-        "type": "bigint",
-        "comment": null,
-        "nullable": false,
-        "generated": true
-      },
-      {
-        "name": "id_atividade",
-        "type": "character varying(320)",
-        "comment": null,
-        "nullable": false,
-        "generated": false
-      },
-      {
-        "name": "id_usuario",
-        "type": "character varying(128)",
-        "comment": null,
-        "nullable": false,
-        "generated": false
-      },
-      {
-        "name": "acao",
-        "type": "character varying(32)",
-        "comment": null,
-        "nullable": false,
-        "generated": false,
-        "check": true
-      },
-      {
-        "name": "alterado_em",
-        "type": "timestamp with time zone",
-        "comment": null,
-        "nullable": false,
-        "generated": false
-      }
-    ],
-    "comment": "Histórico da rota legada de gravação de atividades, cujas escritas estão desativadas.",
-    "references": [],
-    "primary_key": [
-      "sequencia"
-    ],
-    "foreign_key_count": 0
-  },
-  {
-    "kind": "table",
     "name": "avisos_turma",
     "columns": [
       {
         "name": "id_registro",
         "type": "bigint",
+        "check": false,
+        "unique": false,
         "comment": null,
         "nullable": false,
         "generated": false
@@ -818,6 +1033,8 @@
       {
         "name": "turma",
         "type": "character varying(150)",
+        "check": false,
+        "unique": false,
         "comment": "Campo turmaId no contrato da API.",
         "nullable": true,
         "generated": false
@@ -825,6 +1042,8 @@
       {
         "name": "titulo",
         "type": "character varying(60)",
+        "check": false,
+        "unique": false,
         "comment": "Campo title no contrato da API.",
         "nullable": true,
         "generated": false
@@ -832,6 +1051,8 @@
       {
         "name": "conteudo",
         "type": "character varying(500)",
+        "check": false,
+        "unique": false,
         "comment": "Campo body no contrato da API.",
         "nullable": true,
         "generated": false
@@ -839,6 +1060,8 @@
       {
         "name": "tipo",
         "type": "character varying(32)",
+        "check": false,
+        "unique": false,
         "comment": "Campo type no contrato da API.",
         "nullable": true,
         "generated": false
@@ -846,6 +1069,8 @@
       {
         "name": "expira_em",
         "type": "character varying(40)",
+        "check": false,
+        "unique": false,
         "comment": "Campo expiresAt no contrato da API.",
         "nullable": true,
         "generated": false
@@ -853,6 +1078,8 @@
       {
         "name": "expurgo_em",
         "type": "character varying(40)",
+        "check": false,
+        "unique": false,
         "comment": "Campo purgeAt no contrato da API.",
         "nullable": true,
         "generated": false
@@ -860,6 +1087,8 @@
       {
         "name": "criado_por",
         "type": "character varying(128)",
+        "check": false,
+        "unique": false,
         "comment": "Campo createdBy no contrato da API.",
         "nullable": true,
         "generated": false
@@ -867,6 +1096,8 @@
       {
         "name": "email_autor",
         "type": "character varying(320)",
+        "check": false,
+        "unique": false,
         "comment": "Campo authorEmail no contrato da API.",
         "nullable": true,
         "generated": false
@@ -874,6 +1105,8 @@
       {
         "name": "criado_em",
         "type": "character varying(40)",
+        "check": false,
+        "unique": false,
         "comment": "Campo createdAt no contrato da API.",
         "nullable": true,
         "generated": false
@@ -881,6 +1114,8 @@
       {
         "name": "alterado_em",
         "type": "character varying(40)",
+        "check": false,
+        "unique": false,
         "comment": "Campo updatedAt no contrato da API.",
         "nullable": true,
         "generated": false
@@ -906,6 +1141,8 @@
       {
         "name": "id",
         "type": "uuid",
+        "check": false,
+        "unique": false,
         "comment": null,
         "nullable": false,
         "generated": false
@@ -913,22 +1150,26 @@
       {
         "name": "tipo",
         "type": "character varying(32)",
+        "check": true,
+        "unique": false,
         "comment": null,
         "nullable": false,
-        "generated": false,
-        "check": true
+        "generated": false
       },
       {
         "name": "alvo",
         "type": "character varying(320)",
+        "check": true,
+        "unique": false,
         "comment": null,
         "nullable": false,
-        "generated": false,
-        "check": true
+        "generated": false
       },
       {
         "name": "criado_em",
         "type": "timestamp with time zone",
+        "check": false,
+        "unique": false,
         "comment": null,
         "nullable": false,
         "generated": false
@@ -936,6 +1177,8 @@
       {
         "name": "criado_por",
         "type": "character varying(128)",
+        "check": false,
+        "unique": false,
         "comment": null,
         "nullable": false,
         "generated": false
@@ -955,6 +1198,8 @@
       {
         "name": "id",
         "type": "bigint",
+        "check": false,
+        "unique": false,
         "comment": null,
         "nullable": false,
         "generated": true
@@ -962,13 +1207,8 @@
       {
         "name": "id_pai",
         "type": "bigint",
-        "comment": null,
-        "nullable": false,
-        "generated": false
-      },
-      {
-        "name": "grupo",
-        "type": "character varying(32)",
+        "check": false,
+        "unique": false,
         "comment": null,
         "nullable": false,
         "generated": false
@@ -976,14 +1216,17 @@
       {
         "name": "ordem",
         "type": "integer",
+        "check": true,
+        "unique": false,
         "comment": null,
         "nullable": false,
-        "generated": false,
-        "check": true
+        "generated": false
       },
       {
         "name": "referencia",
         "type": "character varying(80)",
+        "check": false,
+        "unique": false,
         "comment": "Campo id no contrato da API.",
         "nullable": true,
         "generated": false
@@ -991,6 +1234,8 @@
       {
         "name": "referencia_coluna",
         "type": "character varying(80)",
+        "check": false,
+        "unique": false,
         "comment": "Campo columnId no contrato da API.",
         "nullable": true,
         "generated": false
@@ -998,6 +1243,8 @@
       {
         "name": "titulo",
         "type": "character varying(160)",
+        "check": false,
+        "unique": false,
         "comment": "Campo title no contrato da API.",
         "nullable": true,
         "generated": false
@@ -1005,6 +1252,8 @@
       {
         "name": "descricao",
         "type": "character varying(3000)",
+        "check": false,
+        "unique": false,
         "comment": "Campo description no contrato da API.",
         "nullable": true,
         "generated": false
@@ -1012,6 +1261,8 @@
       {
         "name": "prioridade",
         "type": "character varying(16)",
+        "check": false,
+        "unique": false,
         "comment": "Campo priority no contrato da API.",
         "nullable": true,
         "generated": false
@@ -1019,6 +1270,8 @@
       {
         "name": "prazo",
         "type": "date",
+        "check": false,
+        "unique": false,
         "comment": "Campo dueDate no contrato da API.",
         "nullable": true,
         "generated": false
@@ -1026,6 +1279,8 @@
       {
         "name": "id_responsavel",
         "type": "character varying(128)",
+        "check": false,
+        "unique": false,
         "comment": "Campo assigneeId no contrato da API.",
         "nullable": true,
         "generated": false
@@ -1033,6 +1288,8 @@
       {
         "name": "etiquetas",
         "type": "character varying(30)[]",
+        "check": false,
+        "unique": false,
         "comment": "Campo labels no contrato da API.",
         "nullable": true,
         "generated": false
@@ -1040,15 +1297,10 @@
       {
         "name": "referencias_atividades",
         "type": "character varying(128)[]",
+        "check": false,
+        "unique": false,
         "comment": "Campo activityIds no contrato da API.",
         "nullable": true,
-        "generated": false
-      },
-      {
-        "name": "listas_presentes",
-        "type": "character varying(64)[]",
-        "comment": null,
-        "nullable": false,
         "generated": false
       }
     ],
@@ -1082,6 +1334,8 @@
       {
         "name": "id_registro",
         "type": "bigint",
+        "check": false,
+        "unique": false,
         "comment": null,
         "nullable": false,
         "generated": false
@@ -1089,6 +1343,8 @@
       {
         "name": "mensagem",
         "type": "character varying(2000)",
+        "check": false,
+        "unique": false,
         "comment": "Campo text no contrato da API.",
         "nullable": true,
         "generated": false
@@ -1096,6 +1352,8 @@
       {
         "name": "remetente",
         "type": "character varying(128)",
+        "check": false,
+        "unique": false,
         "comment": "Campo senderId no contrato da API.",
         "nullable": true,
         "generated": false
@@ -1103,6 +1361,8 @@
       {
         "name": "email_remetente",
         "type": "character varying(320)",
+        "check": false,
+        "unique": false,
         "comment": "Campo senderEmail no contrato da API.",
         "nullable": true,
         "generated": false
@@ -1110,6 +1370,8 @@
       {
         "name": "papel_remetente",
         "type": "character varying(32)",
+        "check": false,
+        "unique": false,
         "comment": "Campo senderRole no contrato da API.",
         "nullable": true,
         "generated": false
@@ -1117,6 +1379,8 @@
       {
         "name": "turma_remetente",
         "type": "character varying(150)",
+        "check": false,
+        "unique": false,
         "comment": "Campo senderTurma no contrato da API.",
         "nullable": true,
         "generated": false
@@ -1124,6 +1388,8 @@
       {
         "name": "criado_em",
         "type": "character varying(40)",
+        "check": false,
+        "unique": false,
         "comment": "Campo createdAt no contrato da API.",
         "nullable": true,
         "generated": false
@@ -1149,6 +1415,8 @@
       {
         "name": "id",
         "type": "bigint",
+        "check": false,
+        "unique": false,
         "comment": null,
         "nullable": false,
         "generated": true
@@ -1156,13 +1424,8 @@
       {
         "name": "id_pai",
         "type": "bigint",
-        "comment": null,
-        "nullable": false,
-        "generated": false
-      },
-      {
-        "name": "grupo",
-        "type": "character varying(32)",
+        "check": false,
+        "unique": false,
         "comment": null,
         "nullable": false,
         "generated": false
@@ -1170,14 +1433,17 @@
       {
         "name": "ordem",
         "type": "integer",
+        "check": true,
+        "unique": false,
         "comment": null,
         "nullable": false,
-        "generated": false,
-        "check": true
+        "generated": false
       },
       {
         "name": "referencia",
         "type": "character varying(80)",
+        "check": false,
+        "unique": false,
         "comment": "Campo id no contrato da API.",
         "nullable": true,
         "generated": false
@@ -1185,6 +1451,8 @@
       {
         "name": "nome",
         "type": "character varying(60)",
+        "check": false,
+        "unique": false,
         "comment": "Campo name no contrato da API.",
         "nullable": true,
         "generated": false
@@ -1192,6 +1460,8 @@
       {
         "name": "cor",
         "type": "character varying(16)",
+        "check": false,
+        "unique": false,
         "comment": "Campo color no contrato da API.",
         "nullable": true,
         "generated": false
@@ -1199,6 +1469,8 @@
       {
         "name": "concluida",
         "type": "boolean",
+        "check": false,
+        "unique": false,
         "comment": "Campo done no contrato da API.",
         "nullable": true,
         "generated": false
@@ -1219,149 +1491,13 @@
   },
   {
     "kind": "table",
-    "name": "conteudo_atividade_arquivada",
-    "columns": [
-      {
-        "name": "id",
-        "type": "bigint",
-        "comment": null,
-        "nullable": false,
-        "generated": true
-      },
-      {
-        "name": "id_pai",
-        "type": "bigint",
-        "comment": null,
-        "nullable": false,
-        "generated": false
-      },
-      {
-        "name": "grupo",
-        "type": "character varying(32)",
-        "comment": null,
-        "nullable": false,
-        "generated": false
-      },
-      {
-        "name": "ordem",
-        "type": "integer",
-        "comment": null,
-        "nullable": false,
-        "generated": false,
-        "check": true
-      },
-      {
-        "name": "titulo",
-        "type": "character varying(120)",
-        "comment": "Campo title no contrato da API.",
-        "nullable": true,
-        "generated": false
-      },
-      {
-        "name": "descricao",
-        "type": "character varying(2000)",
-        "comment": "Campo description no contrato da API.",
-        "nullable": true,
-        "generated": false
-      },
-      {
-        "name": "tipo",
-        "type": "character varying(32)",
-        "comment": "Campo type no contrato da API.",
-        "nullable": true,
-        "generated": false
-      },
-      {
-        "name": "disciplina",
-        "type": "character varying(150)",
-        "comment": "Campo subject no contrato da API.",
-        "nullable": true,
-        "generated": false
-      },
-      {
-        "name": "data",
-        "type": "date",
-        "comment": "Campo date no contrato da API.",
-        "nullable": true,
-        "generated": false
-      },
-      {
-        "name": "hora",
-        "type": "time without time zone",
-        "comment": "Campo time no contrato da API.",
-        "nullable": true,
-        "generated": false
-      },
-      {
-        "name": "turma",
-        "type": "character varying(150)",
-        "comment": "Campo turmaId no contrato da API.",
-        "nullable": true,
-        "generated": false
-      },
-      {
-        "name": "criado_por",
-        "type": "character varying(128)",
-        "comment": "Campo createdBy no contrato da API.",
-        "nullable": true,
-        "generated": false
-      },
-      {
-        "name": "email_criador",
-        "type": "character varying(320)",
-        "comment": "Campo createdByEmail no contrato da API.",
-        "nullable": true,
-        "generated": false
-      },
-      {
-        "name": "referencia_recorrencia",
-        "type": "character varying(320)",
-        "comment": "Campo recurringId no contrato da API.",
-        "nullable": true,
-        "generated": false
-      },
-      {
-        "name": "criado_em",
-        "type": "character varying(40)",
-        "comment": "Campo createdAt no contrato da API.",
-        "nullable": true,
-        "generated": false
-      },
-      {
-        "name": "alterado_em",
-        "type": "character varying(40)",
-        "comment": "Campo updatedAt no contrato da API.",
-        "nullable": true,
-        "generated": false
-      },
-      {
-        "name": "listas_presentes",
-        "type": "character varying(64)[]",
-        "comment": null,
-        "nullable": false,
-        "generated": false
-      }
-    ],
-    "comment": "Conteúdo das atividades arquivadas",
-    "references": [
-      {
-        "table": "atividades_arquivadas",
-        "column": "id_pai",
-        "target": "id_registro"
-      }
-    ],
-    "primary_key": [
-      "id"
-    ],
-    "foreign_key_count": 1
-  },
-  {
-    "kind": "table",
     "name": "convites_representacao",
     "columns": [
       {
         "name": "id_registro",
         "type": "bigint",
+        "check": false,
+        "unique": false,
         "comment": null,
         "nullable": false,
         "generated": false
@@ -1369,6 +1505,8 @@
       {
         "name": "email",
         "type": "character varying(320)",
+        "check": false,
+        "unique": false,
         "comment": "Campo email no contrato da API.",
         "nullable": true,
         "generated": false
@@ -1376,6 +1514,8 @@
       {
         "name": "turma",
         "type": "character varying(150)",
+        "check": false,
+        "unique": false,
         "comment": "Campo turmaId no contrato da API.",
         "nullable": true,
         "generated": false
@@ -1383,6 +1523,8 @@
       {
         "name": "referencia_pedido",
         "type": "character varying(180)",
+        "check": false,
+        "unique": false,
         "comment": "Campo requestId no contrato da API.",
         "nullable": true,
         "generated": false
@@ -1390,6 +1532,8 @@
       {
         "name": "aprovado_em",
         "type": "character varying(40)",
+        "check": false,
+        "unique": false,
         "comment": "Campo approvedAt no contrato da API.",
         "nullable": true,
         "generated": false
@@ -1415,6 +1559,8 @@
       {
         "name": "id",
         "type": "bigint",
+        "check": false,
+        "unique": false,
         "comment": null,
         "nullable": false,
         "generated": true
@@ -1422,11 +1568,11 @@
       {
         "name": "nome",
         "type": "character varying(150)",
+        "check": true,
+        "unique": true,
         "comment": null,
         "nullable": false,
-        "generated": false,
-        "unique": true,
-        "check": true
+        "generated": false
       }
     ],
     "comment": "Nomes das disciplinas reutilizadas pelos horários.",
@@ -1443,6 +1589,8 @@
       {
         "name": "id_registro",
         "type": "bigint",
+        "check": false,
+        "unique": false,
         "comment": null,
         "nullable": false,
         "generated": false
@@ -1450,6 +1598,8 @@
       {
         "name": "turma",
         "type": "character varying(150)",
+        "check": false,
+        "unique": false,
         "comment": "Campo turmaId no contrato da API.",
         "nullable": true,
         "generated": false
@@ -1457,6 +1607,8 @@
       {
         "name": "pergunta",
         "type": "character varying(160)",
+        "check": false,
+        "unique": false,
         "comment": "Campo question no contrato da API.",
         "nullable": true,
         "generated": false
@@ -1464,6 +1616,8 @@
       {
         "name": "situacao",
         "type": "character varying(32)",
+        "check": false,
+        "unique": false,
         "comment": "Campo status no contrato da API.",
         "nullable": true,
         "generated": false
@@ -1471,6 +1625,8 @@
       {
         "name": "criado_por",
         "type": "character varying(128)",
+        "check": false,
+        "unique": false,
         "comment": "Campo createdBy no contrato da API.",
         "nullable": true,
         "generated": false
@@ -1478,15 +1634,10 @@
       {
         "name": "criado_em",
         "type": "character varying(40)",
+        "check": false,
+        "unique": false,
         "comment": "Campo createdAt no contrato da API.",
         "nullable": true,
-        "generated": false
-      },
-      {
-        "name": "listas_presentes",
-        "type": "character varying(64)[]",
-        "comment": null,
-        "nullable": false,
         "generated": false
       }
     ],
@@ -1510,6 +1661,8 @@
       {
         "name": "id_registro",
         "type": "bigint",
+        "check": false,
+        "unique": false,
         "comment": null,
         "nullable": false,
         "generated": false
@@ -1517,6 +1670,8 @@
       {
         "name": "situacao",
         "type": "character varying(32)",
+        "check": false,
+        "unique": false,
         "comment": "Campo status no contrato da API.",
         "nullable": true,
         "generated": false
@@ -1524,6 +1679,8 @@
       {
         "name": "inicio_semana",
         "type": "date",
+        "check": false,
+        "unique": false,
         "comment": "Campo weekStart no contrato da API.",
         "nullable": true,
         "generated": false
@@ -1531,6 +1688,8 @@
       {
         "name": "criada_em_ms",
         "type": "bigint",
+        "check": false,
+        "unique": false,
         "comment": "Campo createdAt no contrato da API.",
         "nullable": true,
         "generated": false
@@ -1538,6 +1697,8 @@
       {
         "name": "concluida_em_ms",
         "type": "bigint",
+        "check": false,
+        "unique": false,
         "comment": "Campo completedAt no contrato da API.",
         "nullable": true,
         "generated": false
@@ -1563,6 +1724,8 @@
       {
         "name": "id_registro",
         "type": "bigint",
+        "check": false,
+        "unique": false,
         "comment": null,
         "nullable": false,
         "generated": false
@@ -1570,6 +1733,8 @@
       {
         "name": "referencia_atividade",
         "type": "character varying(320)",
+        "check": false,
+        "unique": false,
         "comment": "Campo activityId no contrato da API.",
         "nullable": true,
         "generated": false
@@ -1577,6 +1742,8 @@
       {
         "name": "nome",
         "type": "character varying(500)",
+        "check": false,
+        "unique": false,
         "comment": "Campo name no contrato da API.",
         "nullable": true,
         "generated": false
@@ -1584,6 +1751,8 @@
       {
         "name": "tipo_mime",
         "type": "character varying(150)",
+        "check": false,
+        "unique": false,
         "comment": "Campo contentType no contrato da API.",
         "nullable": true,
         "generated": false
@@ -1591,6 +1760,8 @@
       {
         "name": "tamanho_bytes",
         "type": "bigint",
+        "check": false,
+        "unique": false,
         "comment": "Campo size no contrato da API.",
         "nullable": true,
         "generated": false
@@ -1598,6 +1769,8 @@
       {
         "name": "chave_arquivo",
         "type": "character varying(1024)",
+        "check": false,
+        "unique": false,
         "comment": "Campo key no contrato da API.",
         "nullable": true,
         "generated": false
@@ -1605,6 +1778,8 @@
       {
         "name": "id_usuario",
         "type": "character varying(128)",
+        "check": false,
+        "unique": false,
         "comment": "Campo uid no contrato da API.",
         "nullable": true,
         "generated": false
@@ -1612,6 +1787,8 @@
       {
         "name": "criado_em_ms",
         "type": "bigint",
+        "check": false,
+        "unique": false,
         "comment": "Campo createdAt no contrato da API.",
         "nullable": true,
         "generated": false
@@ -1637,6 +1814,8 @@
       {
         "name": "id_registro",
         "type": "bigint",
+        "check": false,
+        "unique": false,
         "comment": null,
         "nullable": false,
         "generated": false
@@ -1644,6 +1823,8 @@
       {
         "name": "id_proprietario",
         "type": "character varying(128)",
+        "check": false,
+        "unique": false,
         "comment": "Campo ownerId no contrato da API.",
         "nullable": true,
         "generated": false
@@ -1651,6 +1832,8 @@
       {
         "name": "versao_formato",
         "type": "smallint",
+        "check": false,
+        "unique": false,
         "comment": "Campo schemaVersion no contrato da API.",
         "nullable": true,
         "generated": false
@@ -1658,6 +1841,8 @@
       {
         "name": "criado_em",
         "type": "character varying(40)",
+        "check": false,
+        "unique": false,
         "comment": "Campo createdAt no contrato da API.",
         "nullable": true,
         "generated": false
@@ -1665,15 +1850,10 @@
       {
         "name": "alterado_em",
         "type": "character varying(40)",
+        "check": false,
+        "unique": false,
         "comment": "Campo updatedAt no contrato da API.",
         "nullable": true,
-        "generated": false
-      },
-      {
-        "name": "listas_presentes",
-        "type": "character varying(64)[]",
-        "comment": null,
-        "nullable": false,
         "generated": false
       }
     ],
@@ -1697,6 +1877,8 @@
       {
         "name": "id",
         "type": "bigint",
+        "check": false,
+        "unique": false,
         "comment": null,
         "nullable": false,
         "generated": true
@@ -1704,18 +1886,20 @@
       {
         "name": "hora_inicio",
         "type": "time(0) without time zone",
+        "check": true,
+        "unique": false,
         "comment": null,
         "nullable": false,
-        "generated": false,
-        "check": true
+        "generated": false
       },
       {
         "name": "hora_fim",
         "type": "time(0) without time zone",
+        "check": true,
+        "unique": false,
         "comment": null,
         "nullable": false,
-        "generated": false,
-        "check": true
+        "generated": false
       }
     ],
     "comment": "Pares de horário de início e fim reutilizados pelas aulas.",
@@ -1732,6 +1916,8 @@
       {
         "name": "id",
         "type": "character varying(320)",
+        "check": false,
+        "unique": false,
         "comment": null,
         "nullable": false,
         "generated": false
@@ -1739,6 +1925,8 @@
       {
         "name": "id_professor",
         "type": "bigint",
+        "check": false,
+        "unique": false,
         "comment": null,
         "nullable": false,
         "generated": false
@@ -1746,6 +1934,8 @@
       {
         "name": "id_disciplina",
         "type": "bigint",
+        "check": false,
+        "unique": false,
         "comment": null,
         "nullable": false,
         "generated": false
@@ -1753,6 +1943,8 @@
       {
         "name": "id_turma",
         "type": "bigint",
+        "check": false,
+        "unique": false,
         "comment": null,
         "nullable": false,
         "generated": false
@@ -1760,6 +1952,8 @@
       {
         "name": "id_faixa_horario",
         "type": "bigint",
+        "check": false,
+        "unique": false,
         "comment": null,
         "nullable": false,
         "generated": false
@@ -1767,14 +1961,17 @@
       {
         "name": "dia_semana",
         "type": "smallint",
+        "check": true,
+        "unique": false,
         "comment": null,
         "nullable": false,
-        "generated": false,
-        "check": true
+        "generated": false
       },
       {
         "name": "ativo",
         "type": "boolean",
+        "check": false,
+        "unique": false,
         "comment": null,
         "nullable": false,
         "generated": false
@@ -1782,14 +1979,17 @@
       {
         "name": "id_registro",
         "type": "bigint",
+        "check": false,
+        "unique": true,
         "comment": "Identidade numérica do registro na API.",
         "nullable": false,
-        "generated": false,
-        "unique": true
+        "generated": false
       },
       {
         "name": "andar",
         "type": "character varying(80)",
+        "check": false,
+        "unique": false,
         "comment": "Andar informado para a aula.",
         "nullable": true,
         "generated": false
@@ -1797,6 +1997,8 @@
       {
         "name": "sala",
         "type": "character varying(500)",
+        "check": false,
+        "unique": false,
         "comment": "Descrição da sala ou localização da aula.",
         "nullable": true,
         "generated": false
@@ -1804,6 +2006,8 @@
       {
         "name": "criado_em",
         "type": "character varying(40)",
+        "check": false,
+        "unique": false,
         "comment": null,
         "nullable": true,
         "generated": false
@@ -1811,6 +2015,8 @@
       {
         "name": "alterado_em",
         "type": "character varying(40)",
+        "check": false,
+        "unique": false,
         "comment": null,
         "nullable": true,
         "generated": false
@@ -1856,6 +2062,8 @@
       {
         "name": "id",
         "type": "bigint",
+        "check": false,
+        "unique": false,
         "comment": null,
         "nullable": false,
         "generated": true
@@ -1863,13 +2071,8 @@
       {
         "name": "id_pai",
         "type": "bigint",
-        "comment": null,
-        "nullable": false,
-        "generated": false
-      },
-      {
-        "name": "grupo",
-        "type": "character varying(32)",
+        "check": false,
+        "unique": false,
         "comment": null,
         "nullable": false,
         "generated": false
@@ -1877,14 +2080,17 @@
       {
         "name": "ordem",
         "type": "integer",
+        "check": true,
+        "unique": false,
         "comment": null,
         "nullable": false,
-        "generated": false,
-        "check": true
+        "generated": false
       },
       {
         "name": "referencia",
         "type": "character varying(80)",
+        "check": false,
+        "unique": false,
         "comment": "Campo id no contrato da API.",
         "nullable": true,
         "generated": false
@@ -1892,6 +2098,8 @@
       {
         "name": "descricao",
         "type": "character varying(200)",
+        "check": false,
+        "unique": false,
         "comment": "Campo text no contrato da API.",
         "nullable": true,
         "generated": false
@@ -1899,6 +2107,8 @@
       {
         "name": "concluido",
         "type": "boolean",
+        "check": false,
+        "unique": false,
         "comment": "Campo done no contrato da API.",
         "nullable": true,
         "generated": false
@@ -1924,6 +2134,8 @@
       {
         "name": "id_registro",
         "type": "bigint",
+        "check": false,
+        "unique": false,
         "comment": null,
         "nullable": false,
         "generated": false
@@ -1931,6 +2143,8 @@
       {
         "name": "quantidade",
         "type": "integer",
+        "check": false,
+        "unique": false,
         "comment": "Campo count no contrato da API.",
         "nullable": true,
         "generated": false
@@ -1938,6 +2152,8 @@
       {
         "name": "expira_em_ms",
         "type": "bigint",
+        "check": false,
+        "unique": false,
         "comment": "Campo resetAt no contrato da API.",
         "nullable": true,
         "generated": false
@@ -1963,6 +2179,8 @@
       {
         "name": "id_registro",
         "type": "bigint",
+        "check": false,
+        "unique": false,
         "comment": null,
         "nullable": false,
         "generated": false
@@ -1970,6 +2188,8 @@
       {
         "name": "referencia_espaco",
         "type": "character varying(512)",
+        "check": false,
+        "unique": false,
         "comment": "Campo path no contrato da API.",
         "nullable": true,
         "generated": false
@@ -1977,6 +2197,8 @@
       {
         "name": "referencia_quadro",
         "type": "character varying(80)",
+        "check": false,
+        "unique": false,
         "comment": "Campo board no contrato da API.",
         "nullable": true,
         "generated": false
@@ -1984,6 +2206,8 @@
       {
         "name": "referencia_cartao",
         "type": "character varying(80)",
+        "check": false,
+        "unique": false,
         "comment": "Campo task no contrato da API.",
         "nullable": true,
         "generated": false
@@ -2009,6 +2233,8 @@
       {
         "name": "id_registro",
         "type": "bigint",
+        "check": false,
+        "unique": false,
         "comment": null,
         "nullable": false,
         "generated": false
@@ -2016,6 +2242,8 @@
       {
         "name": "mensagem",
         "type": "character varying(2000)",
+        "check": false,
+        "unique": false,
         "comment": "Campo text no contrato da API.",
         "nullable": true,
         "generated": false
@@ -2023,6 +2251,8 @@
       {
         "name": "remetente",
         "type": "character varying(128)",
+        "check": false,
+        "unique": false,
         "comment": "Campo senderId no contrato da API.",
         "nullable": true,
         "generated": false
@@ -2030,6 +2260,8 @@
       {
         "name": "criado_em",
         "type": "character varying(40)",
+        "check": false,
+        "unique": false,
         "comment": "Campo createdAt no contrato da API.",
         "nullable": true,
         "generated": false
@@ -2055,6 +2287,8 @@
       {
         "name": "id",
         "type": "bigint",
+        "check": false,
+        "unique": false,
         "comment": null,
         "nullable": false,
         "generated": true
@@ -2062,13 +2296,8 @@
       {
         "name": "id_pai",
         "type": "bigint",
-        "comment": null,
-        "nullable": false,
-        "generated": false
-      },
-      {
-        "name": "grupo",
-        "type": "character varying(32)",
+        "check": false,
+        "unique": false,
         "comment": null,
         "nullable": false,
         "generated": false
@@ -2076,14 +2305,17 @@
       {
         "name": "ordem",
         "type": "integer",
+        "check": true,
+        "unique": false,
         "comment": null,
         "nullable": false,
-        "generated": false,
-        "check": true
+        "generated": false
       },
       {
         "name": "opcao",
         "type": "character varying(100)",
+        "check": false,
+        "unique": false,
         "comment": "Campo valor no contrato da API.",
         "nullable": true,
         "generated": false
@@ -2109,6 +2341,8 @@
       {
         "name": "id_registro",
         "type": "bigint",
+        "check": false,
+        "unique": false,
         "comment": null,
         "nullable": false,
         "generated": false
@@ -2116,6 +2350,8 @@
       {
         "name": "referencia_quadro",
         "type": "character varying(80)",
+        "check": false,
+        "unique": false,
         "comment": "Campo boardId no contrato da API.",
         "nullable": true,
         "generated": false
@@ -2123,6 +2359,8 @@
       {
         "name": "id_usuario",
         "type": "character varying(128)",
+        "check": false,
+        "unique": false,
         "comment": "Campo userId no contrato da API.",
         "nullable": true,
         "generated": false
@@ -2130,6 +2368,8 @@
       {
         "name": "email",
         "type": "character varying(320)",
+        "check": false,
+        "unique": false,
         "comment": "Campo userEmail no contrato da API.",
         "nullable": true,
         "generated": false
@@ -2137,6 +2377,8 @@
       {
         "name": "nome",
         "type": "character varying(80)",
+        "check": false,
+        "unique": false,
         "comment": "Campo name no contrato da API.",
         "nullable": true,
         "generated": false
@@ -2144,6 +2386,8 @@
       {
         "name": "criado_em",
         "type": "character varying(40)",
+        "check": false,
+        "unique": false,
         "comment": "Campo createdAt no contrato da API.",
         "nullable": true,
         "generated": false
@@ -2169,6 +2413,8 @@
       {
         "name": "id_registro",
         "type": "bigint",
+        "check": false,
+        "unique": false,
         "comment": null,
         "nullable": false,
         "generated": false
@@ -2176,6 +2422,8 @@
       {
         "name": "nome_turma",
         "type": "character varying(150)",
+        "check": false,
+        "unique": false,
         "comment": "Campo className no contrato da API.",
         "nullable": true,
         "generated": false
@@ -2183,6 +2431,8 @@
       {
         "name": "email",
         "type": "character varying(320)",
+        "check": false,
+        "unique": false,
         "comment": "Campo email no contrato da API.",
         "nullable": true,
         "generated": false
@@ -2190,6 +2440,8 @@
       {
         "name": "situacao",
         "type": "character varying(32)",
+        "check": false,
+        "unique": false,
         "comment": "Campo status no contrato da API.",
         "nullable": true,
         "generated": false
@@ -2197,6 +2449,8 @@
       {
         "name": "criado_em",
         "type": "character varying(40)",
+        "check": false,
+        "unique": false,
         "comment": "Campo createdAt no contrato da API.",
         "nullable": true,
         "generated": false
@@ -2204,6 +2458,8 @@
       {
         "name": "revisado_em",
         "type": "character varying(40)",
+        "check": false,
+        "unique": false,
         "comment": "Campo reviewedAt no contrato da API.",
         "nullable": true,
         "generated": false
@@ -2229,6 +2485,8 @@
       {
         "name": "id_registro",
         "type": "bigint",
+        "check": false,
+        "unique": false,
         "comment": null,
         "nullable": false,
         "generated": false
@@ -2236,6 +2494,8 @@
       {
         "name": "referencia_quadro",
         "type": "character varying(80)",
+        "check": false,
+        "unique": false,
         "comment": "Campo boardId no contrato da API.",
         "nullable": true,
         "generated": false
@@ -2243,6 +2503,8 @@
       {
         "name": "id_usuario",
         "type": "character varying(128)",
+        "check": false,
+        "unique": false,
         "comment": "Campo userId no contrato da API.",
         "nullable": true,
         "generated": false
@@ -2250,6 +2512,8 @@
       {
         "name": "email",
         "type": "character varying(320)",
+        "check": false,
+        "unique": false,
         "comment": "Campo userEmail no contrato da API.",
         "nullable": true,
         "generated": false
@@ -2257,6 +2521,8 @@
       {
         "name": "nome",
         "type": "character varying(80)",
+        "check": false,
+        "unique": false,
         "comment": "Campo name no contrato da API.",
         "nullable": true,
         "generated": false
@@ -2264,6 +2530,8 @@
       {
         "name": "criado_em",
         "type": "character varying(40)",
+        "check": false,
+        "unique": false,
         "comment": "Campo createdAt no contrato da API.",
         "nullable": true,
         "generated": false
@@ -2271,6 +2539,8 @@
       {
         "name": "situacao",
         "type": "character varying(32)",
+        "check": false,
+        "unique": false,
         "comment": "Campo status no contrato da API.",
         "nullable": true,
         "generated": false
@@ -2278,6 +2548,8 @@
       {
         "name": "alterado_em",
         "type": "character varying(40)",
+        "check": false,
+        "unique": false,
         "comment": "Campo updatedAt no contrato da API.",
         "nullable": true,
         "generated": false
@@ -2303,6 +2575,8 @@
       {
         "name": "id_registro",
         "type": "bigint",
+        "check": false,
+        "unique": false,
         "comment": null,
         "nullable": false,
         "generated": false
@@ -2310,6 +2584,8 @@
       {
         "name": "turma",
         "type": "character varying(150)",
+        "check": false,
+        "unique": false,
         "comment": "Campo turmaId no contrato da API.",
         "nullable": true,
         "generated": false
@@ -2317,6 +2593,8 @@
       {
         "name": "email",
         "type": "character varying(320)",
+        "check": false,
+        "unique": false,
         "comment": "Campo email no contrato da API.",
         "nullable": true,
         "generated": false
@@ -2324,6 +2602,8 @@
       {
         "name": "situacao",
         "type": "character varying(32)",
+        "check": false,
+        "unique": false,
         "comment": "Campo status no contrato da API.",
         "nullable": true,
         "generated": false
@@ -2331,6 +2611,8 @@
       {
         "name": "criado_em",
         "type": "character varying(40)",
+        "check": false,
+        "unique": false,
         "comment": "Campo createdAt no contrato da API.",
         "nullable": true,
         "generated": false
@@ -2338,6 +2620,8 @@
       {
         "name": "revisado_em",
         "type": "character varying(40)",
+        "check": false,
+        "unique": false,
         "comment": "Campo reviewedAt no contrato da API.",
         "nullable": true,
         "generated": false
@@ -2363,6 +2647,8 @@
       {
         "name": "id_usuario",
         "type": "character varying(128)",
+        "check": false,
+        "unique": false,
         "comment": "UID validado no Firebase Authentication, nunca escolhido pelo cliente.",
         "nullable": false,
         "generated": false
@@ -2370,46 +2656,53 @@
       {
         "name": "ano_letivo",
         "type": "smallint",
+        "check": true,
+        "unique": false,
         "comment": null,
         "nullable": false,
-        "generated": false,
-        "check": true
+        "generated": false
       },
       {
         "name": "ano_serie",
         "type": "smallint",
+        "check": true,
+        "unique": false,
         "comment": null,
         "nullable": false,
-        "generated": false,
-        "check": true
+        "generated": false
       },
       {
         "name": "modo_primeiro",
         "type": "character varying(5)",
+        "check": true,
+        "unique": false,
         "comment": null,
         "nullable": false,
-        "generated": false,
-        "check": true
+        "generated": false
       },
       {
         "name": "modo_segundo",
         "type": "character varying(5)",
+        "check": true,
+        "unique": false,
         "comment": null,
         "nullable": false,
-        "generated": false,
-        "check": true
+        "generated": false
       },
       {
         "name": "versao",
         "type": "bigint",
+        "check": true,
+        "unique": false,
         "comment": "Versão usada para impedir sobrescrita por outra aba ou dispositivo.",
         "nullable": false,
-        "generated": false,
-        "check": true
+        "generated": false
       },
       {
         "name": "regra_calculo",
         "type": "character varying(32)",
+        "check": false,
+        "unique": false,
         "comment": "Versão da fórmula, para rastreabilidade dos cálculos.",
         "nullable": false,
         "generated": false
@@ -2417,6 +2710,8 @@
       {
         "name": "criado_em",
         "type": "timestamp with time zone",
+        "check": false,
+        "unique": false,
         "comment": null,
         "nullable": false,
         "generated": false
@@ -2424,6 +2719,8 @@
       {
         "name": "alterado_em",
         "type": "timestamp with time zone",
+        "check": false,
+        "unique": false,
         "comment": null,
         "nullable": false,
         "generated": false
@@ -2444,6 +2741,8 @@
       {
         "name": "id",
         "type": "smallint",
+        "check": false,
+        "unique": false,
         "comment": null,
         "nullable": false,
         "generated": false
@@ -2451,14 +2750,17 @@
       {
         "name": "ano_serie",
         "type": "smallint",
+        "check": true,
+        "unique": false,
         "comment": null,
         "nullable": false,
-        "generated": false,
-        "check": true
+        "generated": false
       },
       {
         "name": "nome",
         "type": "character varying(160)",
+        "check": false,
+        "unique": false,
         "comment": null,
         "nullable": false,
         "generated": false
@@ -2478,6 +2780,8 @@
       {
         "name": "id_usuario",
         "type": "character varying(128)",
+        "check": false,
+        "unique": false,
         "comment": null,
         "nullable": false,
         "generated": false
@@ -2485,6 +2789,8 @@
       {
         "name": "ano_letivo",
         "type": "smallint",
+        "check": false,
+        "unique": false,
         "comment": null,
         "nullable": false,
         "generated": false
@@ -2492,6 +2798,8 @@
       {
         "name": "ano_serie",
         "type": "smallint",
+        "check": false,
+        "unique": false,
         "comment": null,
         "nullable": false,
         "generated": false
@@ -2499,6 +2807,8 @@
       {
         "name": "id_disciplina",
         "type": "smallint",
+        "check": false,
+        "unique": false,
         "comment": null,
         "nullable": false,
         "generated": false
@@ -2506,42 +2816,47 @@
       {
         "name": "semestre",
         "type": "smallint",
+        "check": true,
+        "unique": false,
         "comment": null,
         "nullable": false,
-        "generated": false,
-        "check": true
+        "generated": false
       },
       {
         "name": "n1",
         "type": "numeric(4,2)",
+        "check": true,
+        "unique": false,
         "comment": null,
         "nullable": true,
-        "generated": false,
-        "check": true
+        "generated": false
       },
       {
         "name": "n2",
         "type": "numeric(4,2)",
+        "check": true,
+        "unique": false,
         "comment": null,
         "nullable": true,
-        "generated": false,
-        "check": true
+        "generated": false
       },
       {
         "name": "media_informada",
         "type": "numeric(4,2)",
+        "check": true,
+        "unique": false,
         "comment": null,
         "nullable": true,
-        "generated": false,
-        "check": true
+        "generated": false
       },
       {
         "name": "peso_n1",
         "type": "smallint",
+        "check": true,
+        "unique": false,
         "comment": null,
         "nullable": false,
-        "generated": false,
-        "check": true
+        "generated": false
       }
     ],
     "comment": "Notas N1/N2, média informada e pesos por disciplina e semestre. Nota vazia é NULL.",
@@ -2587,6 +2902,8 @@
       {
         "name": "id_usuario",
         "type": "character varying(128)",
+        "check": false,
+        "unique": false,
         "comment": null,
         "nullable": false,
         "generated": false
@@ -2594,6 +2911,8 @@
       {
         "name": "ano_letivo",
         "type": "smallint",
+        "check": false,
+        "unique": false,
         "comment": null,
         "nullable": false,
         "generated": false
@@ -2601,6 +2920,8 @@
       {
         "name": "ano_serie",
         "type": "smallint",
+        "check": false,
+        "unique": false,
         "comment": null,
         "nullable": false,
         "generated": false
@@ -2608,6 +2929,8 @@
       {
         "name": "id_disciplina",
         "type": "smallint",
+        "check": false,
+        "unique": false,
         "comment": null,
         "nullable": false,
         "generated": false
@@ -2615,10 +2938,11 @@
       {
         "name": "nota",
         "type": "numeric(4,2)",
+        "check": true,
+        "unique": false,
         "comment": null,
         "nullable": true,
-        "generated": false,
-        "check": true
+        "generated": false
       }
     ],
     "comment": "Nota de recuperação final por conta, ano letivo e disciplina.",
@@ -2663,6 +2987,8 @@
       {
         "name": "id_registro",
         "type": "bigint",
+        "check": false,
+        "unique": false,
         "comment": null,
         "nullable": false,
         "generated": false
@@ -2670,6 +2996,8 @@
       {
         "name": "papel",
         "type": "character varying(32)",
+        "check": false,
+        "unique": false,
         "comment": "Campo role no contrato da API.",
         "nullable": true,
         "generated": false
@@ -2677,6 +3005,8 @@
       {
         "name": "turma",
         "type": "character varying(150)",
+        "check": false,
+        "unique": false,
         "comment": "Campo turmaId no contrato da API.",
         "nullable": true,
         "generated": false
@@ -2684,6 +3014,8 @@
       {
         "name": "criado_em",
         "type": "character varying(40)",
+        "check": false,
+        "unique": false,
         "comment": "Campo createdAt no contrato da API.",
         "nullable": true,
         "generated": false
@@ -2709,6 +3041,8 @@
       {
         "name": "id_registro",
         "type": "bigint",
+        "check": false,
+        "unique": false,
         "comment": null,
         "nullable": false,
         "generated": false
@@ -2716,6 +3050,8 @@
       {
         "name": "nome",
         "type": "character varying(80)",
+        "check": false,
+        "unique": false,
         "comment": "Campo displayName no contrato da API.",
         "nullable": true,
         "generated": false
@@ -2723,6 +3059,8 @@
       {
         "name": "empresa",
         "type": "character varying(100)",
+        "check": false,
+        "unique": false,
         "comment": "Campo company no contrato da API.",
         "nullable": true,
         "generated": false
@@ -2730,6 +3068,8 @@
       {
         "name": "turma",
         "type": "character varying(80)",
+        "check": false,
+        "unique": false,
         "comment": "Campo className no contrato da API.",
         "nullable": true,
         "generated": false
@@ -2737,6 +3077,8 @@
       {
         "name": "sala",
         "type": "character varying(80)",
+        "check": false,
+        "unique": false,
         "comment": "Campo room no contrato da API.",
         "nullable": true,
         "generated": false
@@ -2744,6 +3086,8 @@
       {
         "name": "andar",
         "type": "character varying(80)",
+        "check": false,
+        "unique": false,
         "comment": "Campo floor no contrato da API.",
         "nullable": true,
         "generated": false
@@ -2751,6 +3095,8 @@
       {
         "name": "url_foto",
         "type": "character varying(2048)",
+        "check": false,
+        "unique": false,
         "comment": "Campo photoUrl no contrato da API.",
         "nullable": true,
         "generated": false
@@ -2758,6 +3104,8 @@
       {
         "name": "alterado_em",
         "type": "character varying(40)",
+        "check": false,
+        "unique": false,
         "comment": "Campo updatedAt no contrato da API.",
         "nullable": true,
         "generated": false
@@ -2783,6 +3131,8 @@
       {
         "name": "id_registro",
         "type": "bigint",
+        "check": false,
+        "unique": false,
         "comment": null,
         "nullable": false,
         "generated": false
@@ -2790,6 +3140,8 @@
       {
         "name": "ativo",
         "type": "boolean",
+        "check": false,
+        "unique": false,
         "comment": "Campo enabled no contrato da API.",
         "nullable": true,
         "generated": false
@@ -2797,6 +3149,8 @@
       {
         "name": "turma",
         "type": "character varying(150)",
+        "check": false,
+        "unique": false,
         "comment": "Campo turmaId no contrato da API.",
         "nullable": true,
         "generated": false
@@ -2804,6 +3158,8 @@
       {
         "name": "alterada_em_ms",
         "type": "bigint",
+        "check": false,
+        "unique": false,
         "comment": "Campo updatedAt no contrato da API.",
         "nullable": true,
         "generated": false
@@ -2829,6 +3185,8 @@
       {
         "name": "id",
         "type": "bigint",
+        "check": false,
+        "unique": false,
         "comment": null,
         "nullable": false,
         "generated": true
@@ -2836,11 +3194,11 @@
       {
         "name": "nome",
         "type": "character varying(150)",
+        "check": true,
+        "unique": true,
         "comment": null,
         "nullable": false,
-        "generated": false,
-        "unique": true,
-        "check": true
+        "generated": false
       }
     ],
     "comment": "Nomes de professores reutilizados pelos horários.",
@@ -2857,6 +3215,8 @@
       {
         "name": "id",
         "type": "bigint",
+        "check": false,
+        "unique": false,
         "comment": null,
         "nullable": false,
         "generated": true
@@ -2864,13 +3224,8 @@
       {
         "name": "id_pai",
         "type": "bigint",
-        "comment": null,
-        "nullable": false,
-        "generated": false
-      },
-      {
-        "name": "grupo",
-        "type": "character varying(32)",
+        "check": false,
+        "unique": false,
         "comment": null,
         "nullable": false,
         "generated": false
@@ -2878,14 +3233,17 @@
       {
         "name": "ordem",
         "type": "integer",
+        "check": true,
+        "unique": false,
         "comment": null,
         "nullable": false,
-        "generated": false,
-        "check": true
+        "generated": false
       },
       {
         "name": "referencia",
         "type": "character varying(80)",
+        "check": false,
+        "unique": false,
         "comment": "Campo id no contrato da API.",
         "nullable": true,
         "generated": false
@@ -2893,6 +3251,8 @@
       {
         "name": "nome",
         "type": "character varying(80)",
+        "check": false,
+        "unique": false,
         "comment": "Campo name no contrato da API.",
         "nullable": true,
         "generated": false
@@ -2900,6 +3260,8 @@
       {
         "name": "cor",
         "type": "character varying(16)",
+        "check": false,
+        "unique": false,
         "comment": "Campo color no contrato da API.",
         "nullable": true,
         "generated": false
@@ -2907,15 +3269,10 @@
       {
         "name": "compacto",
         "type": "boolean",
+        "check": false,
+        "unique": false,
         "comment": "Campo compact no contrato da API.",
         "nullable": true,
-        "generated": false
-      },
-      {
-        "name": "listas_presentes",
-        "type": "character varying(64)[]",
-        "comment": null,
-        "nullable": false,
         "generated": false
       }
     ],
@@ -2939,6 +3296,8 @@
       {
         "name": "id",
         "type": "character varying(128)",
+        "check": false,
+        "unique": false,
         "comment": null,
         "nullable": false,
         "generated": false
@@ -2946,6 +3305,8 @@
       {
         "name": "autor",
         "type": "character varying(256)",
+        "check": false,
+        "unique": false,
         "comment": null,
         "nullable": false,
         "generated": false
@@ -2953,6 +3314,8 @@
       {
         "name": "hash_requisicao",
         "type": "character varying(64)",
+        "check": false,
+        "unique": false,
         "comment": null,
         "nullable": false,
         "generated": false
@@ -2960,6 +3323,8 @@
       {
         "name": "confirmado_em",
         "type": "timestamp with time zone",
+        "check": false,
+        "unique": false,
         "comment": null,
         "nullable": false,
         "generated": false
@@ -2979,6 +3344,8 @@
       {
         "name": "id",
         "type": "bigint",
+        "check": false,
+        "unique": false,
         "comment": null,
         "nullable": false,
         "generated": true
@@ -2986,14 +3353,17 @@
       {
         "name": "tipo",
         "type": "character varying(40)",
+        "check": true,
+        "unique": false,
         "comment": null,
         "nullable": false,
-        "generated": false,
-        "check": true
+        "generated": false
       },
       {
         "name": "referencia",
         "type": "character varying(320)",
+        "check": false,
+        "unique": false,
         "comment": null,
         "nullable": false,
         "generated": false
@@ -3001,14 +3371,17 @@
       {
         "name": "referencia_pai",
         "type": "character varying(320)",
+        "check": true,
+        "unique": false,
         "comment": null,
         "nullable": false,
-        "generated": false,
-        "check": true
+        "generated": false
       },
       {
         "name": "id_pai",
         "type": "bigint",
+        "check": false,
+        "unique": false,
         "comment": null,
         "nullable": true,
         "generated": false
@@ -3016,14 +3389,17 @@
       {
         "name": "versao",
         "type": "bigint",
+        "check": true,
+        "unique": false,
         "comment": null,
         "nullable": false,
-        "generated": false,
-        "check": true
+        "generated": false
       },
       {
         "name": "atualizado_em",
         "type": "timestamp with time zone",
+        "check": false,
+        "unique": false,
         "comment": null,
         "nullable": false,
         "generated": false
@@ -3049,6 +3425,8 @@
       {
         "name": "id_registro",
         "type": "bigint",
+        "check": false,
+        "unique": false,
         "comment": null,
         "nullable": false,
         "generated": false
@@ -3056,6 +3434,8 @@
       {
         "name": "titulo",
         "type": "character varying(120)",
+        "check": false,
+        "unique": false,
         "comment": "Campo title no contrato da API.",
         "nullable": true,
         "generated": false
@@ -3063,6 +3443,8 @@
       {
         "name": "descricao",
         "type": "character varying(2000)",
+        "check": false,
+        "unique": false,
         "comment": "Campo description no contrato da API.",
         "nullable": true,
         "generated": false
@@ -3070,6 +3452,8 @@
       {
         "name": "tipo",
         "type": "character varying(32)",
+        "check": false,
+        "unique": false,
         "comment": "Campo type no contrato da API.",
         "nullable": true,
         "generated": false
@@ -3077,6 +3461,8 @@
       {
         "name": "disciplina",
         "type": "character varying(150)",
+        "check": false,
+        "unique": false,
         "comment": "Campo subject no contrato da API.",
         "nullable": true,
         "generated": false
@@ -3084,6 +3470,8 @@
       {
         "name": "hora",
         "type": "time without time zone",
+        "check": false,
+        "unique": false,
         "comment": "Campo time no contrato da API.",
         "nullable": true,
         "generated": false
@@ -3091,6 +3479,8 @@
       {
         "name": "turma",
         "type": "character varying(150)",
+        "check": false,
+        "unique": false,
         "comment": "Campo turmaId no contrato da API.",
         "nullable": true,
         "generated": false
@@ -3098,6 +3488,8 @@
       {
         "name": "criado_por",
         "type": "character varying(128)",
+        "check": false,
+        "unique": false,
         "comment": "Campo createdBy no contrato da API.",
         "nullable": true,
         "generated": false
@@ -3105,6 +3497,8 @@
       {
         "name": "email_criador",
         "type": "character varying(320)",
+        "check": false,
+        "unique": false,
         "comment": "Campo createdByEmail no contrato da API.",
         "nullable": true,
         "generated": false
@@ -3112,6 +3506,8 @@
       {
         "name": "criado_em",
         "type": "character varying(40)",
+        "check": false,
+        "unique": false,
         "comment": "Campo createdAt no contrato da API.",
         "nullable": true,
         "generated": false
@@ -3119,6 +3515,8 @@
       {
         "name": "inicio",
         "type": "date",
+        "check": false,
+        "unique": false,
         "comment": "Campo startDate no contrato da API.",
         "nullable": true,
         "generated": false
@@ -3126,6 +3524,8 @@
       {
         "name": "fim",
         "type": "date",
+        "check": false,
+        "unique": false,
         "comment": "Campo endDate no contrato da API.",
         "nullable": true,
         "generated": false
@@ -3133,6 +3533,8 @@
       {
         "name": "ativa",
         "type": "boolean",
+        "check": false,
+        "unique": false,
         "comment": "Campo active no contrato da API.",
         "nullable": true,
         "generated": false
@@ -3140,6 +3542,8 @@
       {
         "name": "excluida",
         "type": "boolean",
+        "check": false,
+        "unique": false,
         "comment": "Campo deleted no contrato da API.",
         "nullable": true,
         "generated": false
@@ -3147,6 +3551,8 @@
       {
         "name": "intervalo_semanas",
         "type": "smallint",
+        "check": false,
+        "unique": false,
         "comment": "Campo intervalWeeks no contrato da API.",
         "nullable": true,
         "generated": false
@@ -3154,6 +3560,8 @@
       {
         "name": "dias_semana",
         "type": "smallint[]",
+        "check": false,
+        "unique": false,
         "comment": "Campo weekdays no contrato da API.",
         "nullable": true,
         "generated": false
@@ -3179,6 +3587,8 @@
       {
         "name": "id_registro",
         "type": "bigint",
+        "check": false,
+        "unique": false,
         "comment": null,
         "nullable": false,
         "generated": false
@@ -3186,6 +3596,8 @@
       {
         "name": "turma",
         "type": "character varying(150)",
+        "check": false,
+        "unique": false,
         "comment": "Campo turmaId no contrato da API.",
         "nullable": true,
         "generated": false
@@ -3193,6 +3605,8 @@
       {
         "name": "dias",
         "type": "smallint",
+        "check": false,
+        "unique": false,
         "comment": "Campo days no contrato da API.",
         "nullable": true,
         "generated": false
@@ -3200,6 +3614,8 @@
       {
         "name": "ativa",
         "type": "boolean",
+        "check": false,
+        "unique": false,
         "comment": "Campo enabled no contrato da API.",
         "nullable": true,
         "generated": false
@@ -3207,6 +3623,8 @@
       {
         "name": "alterado_por",
         "type": "character varying(128)",
+        "check": false,
+        "unique": false,
         "comment": "Campo updatedBy no contrato da API.",
         "nullable": true,
         "generated": false
@@ -3214,6 +3632,8 @@
       {
         "name": "alterado_em",
         "type": "character varying(40)",
+        "check": false,
+        "unique": false,
         "comment": "Campo updatedAt no contrato da API.",
         "nullable": true,
         "generated": false
@@ -3239,6 +3659,8 @@
       {
         "name": "id_registro",
         "type": "bigint",
+        "check": false,
+        "unique": false,
         "comment": null,
         "nullable": false,
         "generated": false
@@ -3246,6 +3668,8 @@
       {
         "name": "titulo",
         "type": "character varying(120)",
+        "check": false,
+        "unique": false,
         "comment": "Campo title no contrato da API.",
         "nullable": true,
         "generated": false
@@ -3253,6 +3677,8 @@
       {
         "name": "descricao",
         "type": "character varying(2000)",
+        "check": false,
+        "unique": false,
         "comment": "Campo description no contrato da API.",
         "nullable": true,
         "generated": false
@@ -3260,6 +3686,8 @@
       {
         "name": "tipo",
         "type": "character varying(32)",
+        "check": false,
+        "unique": false,
         "comment": "Campo type no contrato da API.",
         "nullable": true,
         "generated": false
@@ -3267,6 +3695,8 @@
       {
         "name": "disciplina",
         "type": "character varying(150)",
+        "check": false,
+        "unique": false,
         "comment": "Campo subject no contrato da API.",
         "nullable": true,
         "generated": false
@@ -3274,6 +3704,8 @@
       {
         "name": "data",
         "type": "date",
+        "check": false,
+        "unique": false,
         "comment": "Campo date no contrato da API.",
         "nullable": true,
         "generated": false
@@ -3281,6 +3713,8 @@
       {
         "name": "hora",
         "type": "time without time zone",
+        "check": false,
+        "unique": false,
         "comment": "Campo time no contrato da API.",
         "nullable": true,
         "generated": false
@@ -3288,6 +3722,8 @@
       {
         "name": "turma",
         "type": "character varying(150)",
+        "check": false,
+        "unique": false,
         "comment": "Campo turmaId no contrato da API.",
         "nullable": true,
         "generated": false
@@ -3295,6 +3731,8 @@
       {
         "name": "criado_em",
         "type": "character varying(40)",
+        "check": false,
+        "unique": false,
         "comment": "Campo createdAt no contrato da API.",
         "nullable": true,
         "generated": false
@@ -3302,6 +3740,8 @@
       {
         "name": "alterado_em",
         "type": "character varying(40)",
+        "check": false,
+        "unique": false,
         "comment": "Campo updatedAt no contrato da API.",
         "nullable": true,
         "generated": false
@@ -3309,6 +3749,8 @@
       {
         "name": "situacao",
         "type": "character varying(32)",
+        "check": false,
+        "unique": false,
         "comment": "Campo status no contrato da API.",
         "nullable": true,
         "generated": false
@@ -3316,6 +3758,8 @@
       {
         "name": "resolucao",
         "type": "character varying(32)",
+        "check": false,
+        "unique": false,
         "comment": "Campo resolution no contrato da API.",
         "nullable": true,
         "generated": false
@@ -3323,6 +3767,8 @@
       {
         "name": "comentario_revisao",
         "type": "character varying(500)",
+        "check": false,
+        "unique": false,
         "comment": "Campo reviewComment no contrato da API.",
         "nullable": true,
         "generated": false
@@ -3330,6 +3776,8 @@
       {
         "name": "encerrada_em",
         "type": "character varying(40)",
+        "check": false,
+        "unique": false,
         "comment": "Campo closedAt no contrato da API.",
         "nullable": true,
         "generated": false
@@ -3355,6 +3803,8 @@
       {
         "name": "id_registro",
         "type": "bigint",
+        "check": false,
+        "unique": false,
         "comment": null,
         "nullable": false,
         "generated": false
@@ -3362,6 +3812,8 @@
       {
         "name": "mensagem",
         "type": "character varying(2000)",
+        "check": false,
+        "unique": false,
         "comment": "Campo message no contrato da API.",
         "nullable": true,
         "generated": false
@@ -3369,6 +3821,8 @@
       {
         "name": "turma",
         "type": "character varying(150)",
+        "check": false,
+        "unique": false,
         "comment": "Campo turmaId no contrato da API.",
         "nullable": true,
         "generated": false
@@ -3376,6 +3830,8 @@
       {
         "name": "criado_por",
         "type": "character varying(128)",
+        "check": false,
+        "unique": false,
         "comment": "Campo createdBy no contrato da API.",
         "nullable": true,
         "generated": false
@@ -3383,6 +3839,8 @@
       {
         "name": "email_criador",
         "type": "character varying(320)",
+        "check": false,
+        "unique": false,
         "comment": "Campo createdByEmail no contrato da API.",
         "nullable": true,
         "generated": false
@@ -3390,6 +3848,8 @@
       {
         "name": "criado_em",
         "type": "character varying(40)",
+        "check": false,
+        "unique": false,
         "comment": "Campo createdAt no contrato da API.",
         "nullable": true,
         "generated": false
@@ -3397,6 +3857,8 @@
       {
         "name": "credito_autorizado",
         "type": "boolean",
+        "check": false,
+        "unique": false,
         "comment": "Campo publicCreditAllowed no contrato da API.",
         "nullable": true,
         "generated": false
@@ -3404,6 +3866,8 @@
       {
         "name": "nome_credito",
         "type": "character varying(60)",
+        "check": false,
+        "unique": false,
         "comment": "Campo publicCreditName no contrato da API.",
         "nullable": true,
         "generated": false
@@ -3411,6 +3875,8 @@
       {
         "name": "situacao",
         "type": "character varying(32)",
+        "check": false,
+        "unique": false,
         "comment": "Campo status no contrato da API.",
         "nullable": true,
         "generated": false
@@ -3418,6 +3884,8 @@
       {
         "name": "concluida_em",
         "type": "character varying(40)",
+        "check": false,
+        "unique": false,
         "comment": "Campo completedAt no contrato da API.",
         "nullable": true,
         "generated": false
@@ -3425,6 +3893,8 @@
       {
         "name": "concluida_por",
         "type": "character varying(128)",
+        "check": false,
+        "unique": false,
         "comment": "Campo completedBy no contrato da API.",
         "nullable": true,
         "generated": false
@@ -3450,6 +3920,8 @@
       {
         "name": "id",
         "type": "bigint",
+        "check": false,
+        "unique": false,
         "comment": null,
         "nullable": false,
         "generated": true
@@ -3457,11 +3929,11 @@
       {
         "name": "nome",
         "type": "character varying(150)",
+        "check": true,
+        "unique": true,
         "comment": null,
         "nullable": false,
-        "generated": false,
-        "unique": true,
-        "check": true
+        "generated": false
       }
     ],
     "comment": "Nomes das turmas do catálogo de horários.",
@@ -3478,6 +3950,8 @@
       {
         "name": "id_registro",
         "type": "bigint",
+        "check": false,
+        "unique": false,
         "comment": null,
         "nullable": false,
         "generated": false
@@ -3485,6 +3959,8 @@
       {
         "name": "nome",
         "type": "character varying(150)",
+        "check": false,
+        "unique": false,
         "comment": "Campo name no contrato da API.",
         "nullable": true,
         "generated": false
@@ -3492,6 +3968,8 @@
       {
         "name": "ativa",
         "type": "boolean",
+        "check": false,
+        "unique": false,
         "comment": "Campo active no contrato da API.",
         "nullable": true,
         "generated": false
@@ -3499,6 +3977,8 @@
       {
         "name": "referencia_pedido",
         "type": "character varying(180)",
+        "check": false,
+        "unique": false,
         "comment": "Campo requestId no contrato da API.",
         "nullable": true,
         "generated": false
@@ -3506,6 +3986,8 @@
       {
         "name": "aprovada_em",
         "type": "character varying(40)",
+        "check": false,
+        "unique": false,
         "comment": "Campo approvedAt no contrato da API.",
         "nullable": true,
         "generated": false
@@ -3531,6 +4013,8 @@
       {
         "name": "id",
         "type": "bigint",
+        "check": false,
+        "unique": false,
         "comment": null,
         "nullable": false,
         "generated": true
@@ -3538,22 +4022,17 @@
       {
         "name": "id_auditoria",
         "type": "bigint",
+        "check": false,
+        "unique": false,
         "comment": null,
-        "nullable": true,
-        "generated": false,
-        "check": true
-      },
-      {
-        "name": "id_auditoria_legada",
-        "type": "bigint",
-        "comment": null,
-        "nullable": true,
-        "generated": false,
-        "check": true
+        "nullable": false,
+        "generated": false
       },
       {
         "name": "id_pai",
         "type": "bigint",
+        "check": false,
+        "unique": false,
         "comment": null,
         "nullable": true,
         "generated": false
@@ -3561,6 +4040,8 @@
       {
         "name": "chave",
         "type": "character varying(1024)",
+        "check": false,
+        "unique": false,
         "comment": null,
         "nullable": true,
         "generated": false
@@ -3568,42 +4049,47 @@
       {
         "name": "ordem",
         "type": "integer",
+        "check": true,
+        "unique": false,
         "comment": null,
         "nullable": false,
-        "generated": false,
-        "check": true
+        "generated": false
       },
       {
         "name": "tipo",
         "type": "character varying(12)",
+        "check": true,
+        "unique": false,
         "comment": null,
         "nullable": false,
-        "generated": false,
-        "check": true
+        "generated": false
       },
       {
         "name": "valor_textual",
         "type": "character varying(1048576)",
+        "check": true,
+        "unique": false,
         "comment": null,
         "nullable": true,
-        "generated": false,
-        "check": true
+        "generated": false
       },
       {
         "name": "valor_numerico",
         "type": "numeric",
+        "check": true,
+        "unique": false,
         "comment": null,
         "nullable": true,
-        "generated": false,
-        "check": true
+        "generated": false
       },
       {
         "name": "valor_logico",
         "type": "boolean",
+        "check": true,
+        "unique": false,
         "comment": null,
         "nullable": true,
-        "generated": false,
-        "check": true
+        "generated": false
       }
     ],
     "comment": "Campos tipados das auditorias das operações da aplicação, preservados após a exclusão do registro original.",
@@ -3611,11 +4097,6 @@
       {
         "table": "auditoria_aplicacao",
         "column": "id_auditoria",
-        "target": "sequencia"
-      },
-      {
-        "table": "auditoria_atividades_legada",
-        "column": "id_auditoria_legada",
         "target": "sequencia"
       },
       {
@@ -3627,7 +4108,7 @@
     "primary_key": [
       "id"
     ],
-    "foreign_key_count": 3
+    "foreign_key_count": 2
   },
   {
     "kind": "table",
@@ -3636,6 +4117,8 @@
       {
         "name": "dia",
         "type": "date",
+        "check": false,
+        "unique": false,
         "comment": null,
         "nullable": false,
         "generated": false
@@ -3643,6 +4126,8 @@
       {
         "name": "intervalo_meia_hora",
         "type": "bigint",
+        "check": false,
+        "unique": false,
         "comment": null,
         "nullable": false,
         "generated": false
@@ -3650,26 +4135,29 @@
       {
         "name": "tipo_visitante",
         "type": "character varying(32)",
+        "check": true,
+        "unique": false,
         "comment": null,
         "nullable": false,
-        "generated": false,
-        "check": true
+        "generated": false
       },
       {
         "name": "chave_visitante",
         "type": "character varying(128)",
+        "check": true,
+        "unique": false,
         "comment": null,
         "nullable": false,
-        "generated": false,
-        "check": true
+        "generated": false
       },
       {
         "name": "site",
         "type": "character varying(32)",
+        "check": true,
+        "unique": false,
         "comment": null,
         "nullable": false,
-        "generated": false,
-        "check": true
+        "generated": false
       }
     ],
     "comment": "Visitas da Agenda e do Cadê o professor, agrupadas por visitante e intervalo de 30 minutos.",
@@ -3690,6 +4178,8 @@
       {
         "name": "id_registro",
         "type": "bigint",
+        "check": false,
+        "unique": false,
         "comment": null,
         "nullable": false,
         "generated": false
@@ -3697,6 +4187,8 @@
       {
         "name": "indice_opcao",
         "type": "smallint",
+        "check": false,
+        "unique": false,
         "comment": "Campo optionIndex no contrato da API.",
         "nullable": true,
         "generated": false
@@ -3704,6 +4196,8 @@
       {
         "name": "criado_em",
         "type": "character varying(40)",
+        "check": false,
+        "unique": false,
         "comment": "Campo createdAt no contrato da API.",
         "nullable": true,
         "generated": false

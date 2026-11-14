@@ -11,8 +11,6 @@
       title: Políticas de expurgo por turma
     - name: atividades_arquivadas
       title: Metadados do expurgo de atividades
-    - name: conteudo_atividade_arquivada
-      title: Conteúdo das atividades arquivadas
     - name: anexos_atividade_arquivada
       title: Metadados dos anexos de atividades arquivadas
     - name: turmas_agenda
@@ -91,10 +89,10 @@
       title: Convites de representantes
     - name: visitas_aos_sites
       title: Visitas aos sites
-    - name: acessos_recentes_agenda
-      title: Acessos recentes à Agenda
-    - name: acessos_recentes_professores
-      title: Acessos recentes ao Cadê o professor
+    - name: acessos_recentes
+      title: Acessos recentes da Agenda e do Cadê o professor
+    - name: acessos_recentes_pegaki
+      title: Acessos recentes ao Pegaki
     - name: bloqueios_agenda
       title: Bloqueios de acesso à Agenda
 - id: operacao
@@ -114,8 +112,6 @@
       title: Reservas de envio do resumo semanal
     - name: auditoria_aplicacao
       title: Auditoria da aplicação
-    - name: auditoria_atividades_legada
-      title: Auditoria legada de atividades
     - name: valores_historico
       title: Campos tipados do histórico
 

@@ -1,15 +1,12 @@
 {
-  "acessos_recentes_agenda": {
-    "id_usuario": "UID da conta no Firebase Authentication.",
+  "acessos_recentes": {
+    "site": "Site em que a conta foi vista.",
+    "id_usuario": "UID da conta autenticada.",
     "email": "E-mail da conta, quando disponível.",
-    "ultimo_acesso_em": "Data e hora do último acesso autenticado à Agenda.",
-    "chave_rede": "Código derivado do IP para aplicar bloqueios de rede."
+    "ultimo_acesso_em": "Momento do último acesso autenticado ao site.",
+    "chave_rede": "Identificador de rede derivado para moderação da Agenda."
   },
-  "acessos_recentes_professores": {
-    "id_usuario": "UID da conta no Firebase Authentication.",
-    "email": "E-mail da conta, quando disponível.",
-    "ultimo_acesso_em": "Data e hora do último acesso autenticado ao Cadê o professor."
-  },
+  "acessos_recentes_pegaki": {},
   "acessos_votacao": {
     "id_registro": "Identificador numérico que liga a linha ao registro principal e à sua versão.",
     "email": "E-mail associado ao registro.",
@@ -22,7 +19,6 @@
   "anexos_atividade": {
     "id": "Identificador numérico gerado pelo banco.",
     "id_pai": "Identificador numérico da linha que contém este registro.",
-    "grupo": "Nome da lista ou propriedade à qual a linha pertence.",
     "ordem": "Posição da linha na lista, começando em zero.",
     "referencia": "Identificador externo usado pela API.",
     "nome": "Nome exibido no site.",
@@ -35,7 +31,6 @@
   "anexos_atividade_arquivada": {
     "id": "Identificador numérico gerado pelo banco.",
     "id_pai": "Identificador numérico da linha que contém este registro.",
-    "grupo": "Nome da lista ou propriedade à qual a linha pertence.",
     "ordem": "Posição da linha na lista, começando em zero.",
     "referencia": "Identificador externo usado pela API.",
     "nome": "Nome exibido no site.",
@@ -74,8 +69,7 @@
     "email_criador": "E-mail de quem criou a atividade, usado internamente.",
     "referencia_recorrencia": "Identificador da regra que gerou esta ocorrência.",
     "criado_em": "Data e hora da criação.",
-    "alterado_em": "Momento da última alteração, no formato ISO da API.",
-    "listas_presentes": "Listas presentes no registro. Permite reconstruir uma lista vazia na resposta."
+    "alterado_em": "Momento da última alteração, no formato ISO da API."
   },
   "atividades_arquivadas": {
     "id_registro": "Identificador numérico que liga a linha ao registro principal e à sua versão.",
@@ -84,7 +78,20 @@
     "motivo": "Campo reason no contrato da API.",
     "arquivada_em": "Momento em que a atividade foi arquivada.",
     "dias_retencao": "Prazo de retenção que estava ativo no momento do expurgo.",
-    "anexos_removidos_em": "Momento em que a limpeza do R2 foi concluída."
+    "anexos_removidos_em": "Momento em que a limpeza do R2 foi concluída.",
+    "tem_conteudo": "Indica se o arquivo inclui a cópia dos dados originais.",
+    "titulo": "Título exibido no site.",
+    "descricao": "Descrição do item.",
+    "tipo": "Categoria do registro.",
+    "disciplina": "Nome da disciplina associada.",
+    "data": "Data da atividade.",
+    "hora": "Horário local da atividade, quando informado.",
+    "turma_original": "Turma na cópia original, preservada independentemente dos metadados de arquivamento.",
+    "criado_por": "UID da conta que criou o registro.",
+    "email_criador": "E-mail da conta que criou o registro.",
+    "referencia_recorrencia": "Identificador da regra que gerou esta ocorrência.",
+    "criado_em": "Momento de criação, no formato ISO da API.",
+    "alterado_em": "Momento da última alteração, no formato ISO da API."
   },
   "atualizacoes_agenda": {
     "id_registro": "Identificador numérico que liga a linha ao registro principal e à sua versão.",
@@ -102,13 +109,6 @@
     "caminho": "Caminho do documento afetado.",
     "operacao": "Operação realizada, como criação, alteração ou exclusão.",
     "alterado_em": "Data e hora da alteração."
-  },
-  "auditoria_atividades_legada": {
-    "sequencia": "Identificador sequencial da entrada histórica.",
-    "id_atividade": "ID da atividade afetada pela rota antiga.",
-    "id_usuario": "UID da conta responsável pela alteração.",
-    "acao": "Ação executada na atividade.",
-    "alterado_em": "Data e hora da alteração histórica."
   },
   "avisos_turma": {
     "id_registro": "Identificador numérico que liga a linha ao registro principal e à sua versão.",
@@ -133,7 +133,6 @@
   "cartoes_kanban": {
     "id": "Identificador numérico gerado pelo banco.",
     "id_pai": "Identificador numérico da linha que contém este registro.",
-    "grupo": "Nome da lista ou propriedade à qual a linha pertence.",
     "ordem": "Posição da linha na lista, começando em zero.",
     "referencia": "Identificador externo usado pela API.",
     "referencia_coluna": "Identificador da coluna de destino dentro do mesmo quadro.",
@@ -143,8 +142,7 @@
     "prazo": "Data de entrega do cartão, quando informada.",
     "id_responsavel": "Campo assigneeId no contrato da API.",
     "etiquetas": "Etiquetas do cartão na ordem escolhida.",
-    "referencias_atividades": "Identificadores externos das atividades vinculadas ao cartão.",
-    "listas_presentes": "Listas presentes no registro. Permite reconstruir uma lista vazia na resposta."
+    "referencias_atividades": "Identificadores externos das atividades vinculadas ao cartão."
   },
   "chat_representantes": {
     "id_registro": "Identificador numérico que liga a linha ao registro principal e à sua versão.",
@@ -158,31 +156,11 @@
   "colunas_kanban": {
     "id": "Identificador numérico gerado pelo banco.",
     "id_pai": "Identificador numérico da linha que contém este registro.",
-    "grupo": "Nome da lista ou propriedade à qual a linha pertence.",
     "ordem": "Posição da linha na lista, começando em zero.",
     "referencia": "Identificador externo usado pela API.",
     "nome": "Nome exibido no site.",
     "cor": "Cor de apresentação escolhida no Kanban.",
     "concluida": "Campo done no contrato da API."
-  },
-  "conteudo_atividade_arquivada": {
-    "id": "Identificador numérico gerado pelo banco.",
-    "id_pai": "Identificador numérico da linha que contém este registro.",
-    "grupo": "Nome da lista ou propriedade à qual a linha pertence.",
-    "ordem": "Posição da linha na lista, começando em zero.",
-    "titulo": "Título exibido no site.",
-    "descricao": "Descrição do item.",
-    "tipo": "Categoria do registro.",
-    "disciplina": "Nome da disciplina associada.",
-    "data": "Data da atividade.",
-    "hora": "Horário local da atividade, quando informado.",
-    "turma": "Turma associada ao registro.",
-    "criado_por": "UID da conta que criou o registro.",
-    "email_criador": "E-mail da conta que criou o registro.",
-    "referencia_recorrencia": "Identificador da regra que gerou esta ocorrência.",
-    "criado_em": "Momento de criação, no formato ISO da API.",
-    "alterado_em": "Momento da última alteração, no formato ISO da API.",
-    "listas_presentes": "Listas presentes no registro. Permite reconstruir uma lista vazia na resposta."
   },
   "convites_representacao": {
     "id_registro": "Identificador numérico que liga a linha ao registro principal e à sua versão.",
@@ -201,8 +179,7 @@
     "pergunta": "Campo question no contrato da API.",
     "situacao": "Estado atual do registro.",
     "criado_por": "UID da conta que criou o registro.",
-    "criado_em": "Momento de criação, no formato ISO da API.",
-    "listas_presentes": "Listas presentes no registro. Permite reconstruir uma lista vazia na resposta."
+    "criado_em": "Momento de criação, no formato ISO da API."
   },
   "entregas_resumo": {
     "id_registro": "Identificador numérico que liga a linha ao registro principal e à sua versão.",
@@ -226,8 +203,7 @@
     "id_proprietario": "Campo ownerId no contrato da API.",
     "versao_formato": "Campo schemaVersion no contrato da API.",
     "criado_em": "Momento de criação, no formato ISO da API.",
-    "alterado_em": "Momento da última alteração, no formato ISO da API.",
-    "listas_presentes": "Listas presentes no registro. Permite reconstruir uma lista vazia na resposta."
+    "alterado_em": "Momento da última alteração, no formato ISO da API."
   },
   "faixas_horario": {
     "id": "ID numérico da faixa.",
@@ -251,7 +227,6 @@
   "itens_checklist": {
     "id": "Identificador numérico gerado pelo banco.",
     "id_pai": "Identificador numérico da linha que contém este registro.",
-    "grupo": "Nome da lista ou propriedade à qual a linha pertence.",
     "ordem": "Posição da linha na lista, começando em zero.",
     "referencia": "Identificador externo usado pela API.",
     "descricao": "Descrição do item.",
@@ -277,7 +252,6 @@
   "opcoes_enquete": {
     "id": "Identificador numérico gerado pelo banco.",
     "id_pai": "Identificador numérico da linha que contém este registro.",
-    "grupo": "Nome da lista ou propriedade à qual a linha pertence.",
     "ordem": "Posição da linha na lista, começando em zero.",
     "opcao": "Texto exibido como opção na enquete."
   },
@@ -315,6 +289,14 @@
     "criado_em": "Momento de criação, no formato ISO da API.",
     "revisado_em": "Momento da avaliação do pedido."
   },
+  "pegaki_cadernos": {
+    "id_usuario": "UID validado no Firebase Authentication, nunca escolhido pelo cliente.",
+    "versao": "Versão usada para impedir sobrescrita por outra aba ou dispositivo.",
+    "regra_calculo": "Versão da fórmula, para rastreabilidade dos cálculos."
+  },
+  "pegaki_disciplinas": {},
+  "pegaki_notas": {},
+  "pegaki_recuperacoes": {},
   "perfis_administrativos": {
     "id_registro": "Identificador numérico que liga a linha ao registro principal e à sua versão.",
     "papel": "Papel usado nas verificações de acesso.",
@@ -344,13 +326,11 @@
   "quadros_kanban": {
     "id": "Identificador numérico gerado pelo banco.",
     "id_pai": "Identificador numérico da linha que contém este registro.",
-    "grupo": "Nome da lista ou propriedade à qual a linha pertence.",
     "ordem": "Posição da linha na lista, começando em zero.",
     "referencia": "Identificador externo usado pela API.",
     "nome": "Nome exibido no site.",
     "cor": "Cor de apresentação escolhida no Kanban.",
-    "compacto": "Campo compact no contrato da API.",
-    "listas_presentes": "Listas presentes no registro. Permite reconstruir uma lista vazia na resposta."
+    "compacto": "Campo compact no contrato da API."
   },
   "recibos_gravacao": {
     "id": "ID de uma solicitação de gravação.",
@@ -436,7 +416,6 @@
   "valores_historico": {
     "id": "Identificador numérico gerado pelo banco.",
     "id_auditoria": "Entrada da auditoria atual à qual o campo pertence.",
-    "id_auditoria_legada": "Entrada da auditoria de atividades da interface anterior.",
     "id_pai": "Campo ou lista que contém este valor. Nulo na raiz.",
     "chave": "Nome do campo quando faz parte de um objeto.",
     "ordem": "Posição quando o valor faz parte de uma lista.",

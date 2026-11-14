@@ -98,6 +98,9 @@ Os catálogos públicos passam por projeções que selecionam os campos da respo
 | 023 | Expõe a revisão restrita dos catálogos públicos para o cache Redis |
 | 024 | Adiciona cadernos privados de notas do Pegaki |
 | 025 | Remove a tabela e a view de revisões da migração para PostgreSQL |
+| 026 | Adiciona o registro de acessos autenticados ao Pegaki |
+| 027 | Consolida os acessos recentes da Agenda e dos professores por site e conta |
+| 028 | Unifica o arquivo de atividades, remove marcadores de listas e aposenta a auditoria antiga |
 
 Em um banco local vazio, siga os passos em [Consultas SQL]({{ '/consultas.html' | relative_url }}). O script de instalação aplica as migrações na ordem acima.
 

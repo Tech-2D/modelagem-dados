@@ -43,33 +43,6 @@
     ]
   },
   {
-    "name": "visao_acessos_recentes_professores",
-    "comment": "Interface SQL de compatibilidade para acessos_recentes_professores",
-    "dependencies": [
-      "acessos_recentes_professores"
-    ],
-    "columns": [
-      {
-        "name": "uid",
-        "source": "id_usuario",
-        "type": "character varying(128)",
-        "note": "UID da conta no Firebase Authentication."
-      },
-      {
-        "name": "email",
-        "source": "email",
-        "type": "character varying(320)",
-        "note": "E-mail da conta, quando disponível."
-      },
-      {
-        "name": "last_seen_at",
-        "source": "ultimo_acesso_em",
-        "type": "timestamp with time zone",
-        "note": "Data e hora do último acesso autenticado ao Cadê o professor."
-      }
-    ]
-  },
-  {
     "name": "visao_atividades",
     "comment": "Atividades com seus anexos, para o calendário e os links diretos.",
     "dependencies": [
@@ -259,52 +232,6 @@
         "source": "alterado_em",
         "type": "timestamp with time zone",
         "note": "Data e hora da alteração."
-      }
-    ]
-  },
-  {
-    "name": "visao_auditoria_atividades_legada",
-    "comment": "Histórico da rota legada de gravação de atividades, cujas escritas estão desativadas.",
-    "dependencies": [
-      "auditoria_atividades_legada",
-      "valores_historico"
-    ],
-    "columns": [
-      {
-        "name": "sequence",
-        "source": "sequencia",
-        "type": "bigint",
-        "note": "Identificador sequencial da entrada histórica."
-      },
-      {
-        "name": "activity_id",
-        "source": "id_atividade",
-        "type": "character varying(320)",
-        "note": "ID da atividade afetada pela rota antiga."
-      },
-      {
-        "name": "actor_uid",
-        "source": "id_usuario",
-        "type": "character varying(128)",
-        "note": "UID da conta responsável pela alteração."
-      },
-      {
-        "name": "action",
-        "source": "acao",
-        "type": "character varying(32)",
-        "note": "Ação executada na atividade."
-      },
-      {
-        "name": "previous_data",
-        "source": "previous_data",
-        "type": "jsonb",
-        "note": "Conteúdo anterior reconstruído a partir das linhas da auditoria."
-      },
-      {
-        "name": "changed_at",
-        "source": "alterado_em",
-        "type": "timestamp with time zone",
-        "note": "Data e hora da alteração histórica."
       }
     ]
   },

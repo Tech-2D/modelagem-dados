@@ -1,3 +1,12 @@
+SELECT COALESCE(obj_description(to_regnamespace('tech2d'), 'pg_namespace'), '') LIKE '%tech2d-schema-version:028_simplificar_modelagem' AS latest_028 \gset
+\if :latest_028
+\else
+SELECT COALESCE(obj_description(to_regnamespace('tech2d'), 'pg_namespace'), '') LIKE '%tech2d-schema-version:027_unificar_acessos' AS latest_027 \gset
+\if :latest_027
+\else
+SELECT COALESCE(obj_description(to_regnamespace('tech2d'), 'pg_namespace'), '') LIKE '%tech2d-schema-version:026_acessos_pegaki' AS latest_026 \gset
+\if :latest_026
+\else
 SELECT COALESCE(obj_description(to_regnamespace('tech2d'), 'pg_namespace'), '') LIKE '%tech2d-schema-version:025_remover_revisoes_migracao' AS latest_025 \gset
 \if :latest_025
 \echo Schema tech2d já está na versão 025.
@@ -82,4 +91,10 @@ SELECT NOT EXISTS (SELECT FROM tech2d.schema_migrations WHERE version = '010_com
 COMMENT ON SCHEMA tech2d IS 'Dados da Tech-2D. tech2d-schema-version:024_notas_pegaki';
 \endif
 \ir migrations/025_remover_revisoes_migracao.sql
+\endif
+\ir migrations/026_acessos_pegaki.sql
+\endif
+\ir migrations/027_unificar_acessos.sql
+\endif
+\ir migrations/028_simplificar_modelagem.sql
 \endif

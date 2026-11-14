@@ -316,11 +316,11 @@
     },
     {
         "name": "gravar_valor_historico",
-        "anchor": "rotina-gravar_valor_historico-f99b9425",
+        "anchor": "rotina-gravar_valor_historico-6dfc5090",
         "result": "void",
         "comment": null,
         "language": "plpgsql",
-        "arguments": "auditoria bigint, legado bigint, pai bigint, campo character varying, posicao integer, objeto jsonb",
+        "arguments": "auditoria bigint, pai bigint, campo character varying, posicao integer, objeto jsonb",
         "procedure": false
     },
     {
@@ -334,20 +334,20 @@
     },
     {
         "name": "inserir_anexos_atividade",
-        "anchor": "rotina-inserir_anexos_atividade-9063136c",
+        "anchor": "rotina-inserir_anexos_atividade-32f84b30",
         "result": "void",
         "comment": null,
         "language": "plpgsql",
-        "arguments": "pai bigint, campo character varying, posicao integer, objeto jsonb",
+        "arguments": "pai bigint, posicao integer, objeto jsonb",
         "procedure": false
     },
     {
         "name": "inserir_anexos_atividade_arquivada",
-        "anchor": "rotina-inserir_anexos_atividade_arquivada-9063136c",
+        "anchor": "rotina-inserir_anexos_atividade_arquivada-32f84b30",
         "result": "void",
         "comment": null,
         "language": "plpgsql",
-        "arguments": "pai bigint, campo character varying, posicao integer, objeto jsonb",
+        "arguments": "pai bigint, posicao integer, objeto jsonb",
         "procedure": false
     },
     {
@@ -360,66 +360,48 @@
         "procedure": false
     },
     {
-        "name": "inserir_auditoria_legada",
-        "anchor": "rotina-inserir_auditoria_legada-d41d8cd9",
-        "result": "trigger",
-        "comment": null,
-        "language": "plpgsql",
-        "arguments": "",
-        "procedure": false
-    },
-    {
         "name": "inserir_cartoes_kanban",
-        "anchor": "rotina-inserir_cartoes_kanban-9063136c",
+        "anchor": "rotina-inserir_cartoes_kanban-32f84b30",
         "result": "void",
         "comment": null,
         "language": "plpgsql",
-        "arguments": "pai bigint, campo character varying, posicao integer, objeto jsonb",
+        "arguments": "pai bigint, posicao integer, objeto jsonb",
         "procedure": false
     },
     {
         "name": "inserir_colunas_kanban",
-        "anchor": "rotina-inserir_colunas_kanban-9063136c",
+        "anchor": "rotina-inserir_colunas_kanban-32f84b30",
         "result": "void",
         "comment": null,
         "language": "plpgsql",
-        "arguments": "pai bigint, campo character varying, posicao integer, objeto jsonb",
-        "procedure": false
-    },
-    {
-        "name": "inserir_conteudo_atividade_arquivada",
-        "anchor": "rotina-inserir_conteudo_atividade_arquivada-9063136c",
-        "result": "void",
-        "comment": null,
-        "language": "plpgsql",
-        "arguments": "pai bigint, campo character varying, posicao integer, objeto jsonb",
+        "arguments": "pai bigint, posicao integer, objeto jsonb",
         "procedure": false
     },
     {
         "name": "inserir_itens_checklist",
-        "anchor": "rotina-inserir_itens_checklist-9063136c",
+        "anchor": "rotina-inserir_itens_checklist-32f84b30",
         "result": "void",
         "comment": null,
         "language": "plpgsql",
-        "arguments": "pai bigint, campo character varying, posicao integer, objeto jsonb",
+        "arguments": "pai bigint, posicao integer, objeto jsonb",
         "procedure": false
     },
     {
         "name": "inserir_opcoes_enquete",
-        "anchor": "rotina-inserir_opcoes_enquete-9063136c",
+        "anchor": "rotina-inserir_opcoes_enquete-32f84b30",
         "result": "void",
         "comment": null,
         "language": "plpgsql",
-        "arguments": "pai bigint, campo character varying, posicao integer, objeto jsonb",
+        "arguments": "pai bigint, posicao integer, objeto jsonb",
         "procedure": false
     },
     {
         "name": "inserir_quadros_kanban",
-        "anchor": "rotina-inserir_quadros_kanban-9063136c",
+        "anchor": "rotina-inserir_quadros_kanban-32f84b30",
         "result": "void",
         "comment": null,
         "language": "plpgsql",
-        "arguments": "pai bigint, campo character varying, posicao integer, objeto jsonb",
+        "arguments": "pai bigint, posicao integer, objeto jsonb",
         "procedure": false
     },
     {
@@ -771,6 +753,15 @@
         "comment": null,
         "language": "sql",
         "arguments": "alvo bigint",
+        "procedure": false
+    },
+    {
+        "name": "padronizar_listas_registro",
+        "anchor": "rotina-padronizar_listas_registro-e9eeac64",
+        "result": "jsonb",
+        "comment": null,
+        "language": "plpgsql",
+        "arguments": "tipo character varying, objeto jsonb",
         "procedure": false
     },
     {

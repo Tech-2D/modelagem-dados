@@ -68,6 +68,8 @@ A visão [Catálogo de horários]({{ '/views.html#view-catalogo_horarios' | rela
 
 `atividades.turma` usa a chave de turma da Agenda. `horarios_aula.id_turma` aponta para o identificador numérico do catálogo de aulas.
 
+A tabela de atividades arquivadas reúne os metadados do expurgo e os dados originais. Os anexos arquivados apontam diretamente para essa tabela e conservam a ordem. Listas de anexos vazias são devolvidas como <code>[]</code>.
+
 ## Enquetes e conversas
 
 `enquetes` guarda a pergunta, turma e situação. `opcoes_enquete` guarda uma linha por opção e sua ordem. Cada voto tem um identificador numérico, uma referência à enquete e o índice da opção. Mensagens sobre sugestões usam a mesma ligação entre registro pai e filho.
@@ -83,7 +85,7 @@ Os eventos de auditoria guardam a ação, a autoria e o momento da alteração. 
 ## Visitas e permissões
 
 - [Visitas aos sites]({{ '/postgresql.html#obj-visitas_aos_sites' | relative_url }}) separa as visitas por site e deduplica acessos dentro de intervalos de 30 minutos.
-- [Acessos recentes à Agenda]({{ '/postgresql.html#obj-acessos_recentes_agenda' | relative_url }}) e [Acessos recentes ao Cadê o professor]({{ '/postgresql.html#obj-acessos_recentes_professores' | relative_url }}) guardam o último acesso autenticado em cada site.
+- [Acessos recentes]({{ '/postgresql.html#obj-acessos_recentes' | relative_url }}) guarda o último acesso autenticado da Agenda e do Cadê o professor por site e conta. A chave de rede só é usada na Agenda. O Pegaki mantém seu próprio registro.
 - [Perfis de acesso administrativo]({{ '/postgresql.html#obj-perfis_administrativos' | relative_url }}) guarda uma projeção do papel e da turma. A identidade da conta vem do Firebase Authentication.
 - [Bloqueios de acesso à Agenda]({{ '/postgresql.html#obj-bloqueios_agenda' | relative_url }}) guarda os bloqueios por e-mail ou rede aplicados à Agenda.
 
