@@ -17,6 +17,7 @@ if (toc && headings.length > 1) {
 const controls = document.querySelector('[data-catalog-controls]')
 if (controls) {
   const search = controls.querySelector('input')
+  search.value = new URLSearchParams(location.search).get('q') || ''
   const area = controls.querySelector('select')
   const status = controls.querySelector('[data-catalog-status]')
   const toggle = controls.querySelector('[data-catalog-toggle]')
@@ -115,3 +116,21 @@ function markExplorerObject() {
 }
 window.addEventListener('hashchange', markExplorerObject);
 markExplorerObject();
+
+// Busca do catálogo acessível pelo teclado e menu compacto no celular.
+const workspaceQuery = document.querySelector('#workspace-query')
+if (workspaceQuery) workspaceQuery.value = new URLSearchParams(location.search).get('q') || ''
+document.addEventListener('keydown', event => {
+  if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 'k' && workspaceQuery) {
+    event.preventDefault()
+    workspaceQuery.focus()
+  }
+})
+const sidebarToggle = document.querySelector('[data-sidebar-toggle]')
+if (sidebarToggle) {
+  document.body.classList.add('nav-ready')
+  sidebarToggle.addEventListener('click', () => {
+    const open = document.body.classList.toggle('nav-open')
+    sidebarToggle.setAttribute('aria-expanded', String(open))
+  })
+}

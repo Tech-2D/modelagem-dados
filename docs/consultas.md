@@ -5,7 +5,7 @@ description: Exemplos de leitura para explorar o esquema em um PostgreSQL local.
 
 ## Preparar o banco local
 
-Execute os comandos na raiz do clone de [Tech-2D/modelagem-dados](https://github.com/Tech-2D/modelagem-dados). Use um PostgreSQL local com `createdb` e `psql`.
+Execute os comandos na raiz do clone de [Tech-2D/modelagem-dados](https://github.com/Tech-2D/database). Use um PostgreSQL local com `createdb` e `psql`.
 
 ```sh
 createdb tech2d_local
@@ -57,4 +57,4 @@ GROUP BY site, dia
 ORDER BY dia DESC, site;
 ```
 
-[Arquivo com as consultas completas, incluindo atividades da semana](https://github.com/Tech-2D/modelagem-dados/blob/main/sql/examples/consultas.sql)
+[Arquivo com as consultas completas, incluindo atividades da semana](https://github.com/Tech-2D/database/blob/main/sql/examples/consultas.sql)

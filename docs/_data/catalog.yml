@@ -90,9 +90,7 @@
     - name: visitas_aos_sites
       title: Visitas aos sites
     - name: acessos_recentes
-      title: Acessos recentes da Agenda e do Cadê o professor
-    - name: acessos_recentes_pegaki
-      title: Acessos recentes ao Pegaki
+      title: Acessos recentes da Agenda, do Cadê o professor e do Pegaki
     - name: bloqueios_agenda
       title: Bloqueios de acesso à Agenda
 - id: operacao
@@ -118,8 +116,8 @@
 - id: pegaki
   name: Notas e médias do Pegaki
   objects:
-    - name: pegaki_disciplinas
-      title: Disciplinas por série
+    - name: disciplinas_series
+      title: Disciplinas do catálogo compartilhado por série
     - name: pegaki_cadernos
       title: Cadernos por conta e ano letivo
     - name: pegaki_notas

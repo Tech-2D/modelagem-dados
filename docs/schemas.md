@@ -1,31 +1,46 @@
 ---
-title: Schemas do PostgreSQL
-description: Entenda onde ficam os dados da Tech-2D e os metadados do banco defaultdb.
+title: Organização por áreas
+description: Localize as tabelas da Agenda, dos professores, do Kanban e do Pegaki em um único banco.
 ---
 
-Um schema organiza objetos de um mesmo banco. Em `tech2d.atividades`, `tech2d` é o schema e `atividades` é a tabela. Use o nome completo nas consultas para indicar qual objeto você quer acessar.
+Todas as tabelas da aplicação permanecem no schema `tech2d`, dentro do banco `defaultdb`. Não há uma divisão física por aplicativo. Em uma consulta como `tech2d.atividades`, o prefixo identifica onde a tabela está no PostgreSQL.
 
-## Schemas do defaultdb
+As áreas abaixo servem para navegar na documentação. Elas não criam schemas nem cópias das tabelas.
 
-{% assign tables = site.data.schema | where: "kind", "table" %}
-
-| Schema | Responsável | O que contém |
-| --- | --- | --- |
-| `tech2d` | Tech-2D | Dados da Agenda e do Cadê o professor. São {{ tables.size }} tabelas, {{ site.data.views.size }} views e funções de leitura, gravação e auditoria. |
-| `public` | PostgreSQL | Schema padrão do banco. Na conferência do Aiven estava vazio. |
-| `information_schema` | PostgreSQL | Metadados padronizados sobre tabelas, colunas, tipos e permissões visíveis à conta conectada. |
-| `pg_catalog` | PostgreSQL | Catálogos internos com definições de tipos, funções, índices e outros objetos do servidor. |
-| `_avnadmin_monitor` | Aiven | Função interna usada no monitoramento do serviço gerenciado. |
-
-Inventário conferido no Aiven em 12/11/2026. Schemas internos de armazenamento e de sessões temporárias, como `pg_toast` e `pg_temp_*`, ficam fora do catálogo.
-
-## Onde consultar a estrutura
+## Encontre as tabelas
 
 <div class="doc-links">
-  <a href="{{ '/postgresql.html' | relative_url }}"><strong>Tabelas e colunas</strong><span>Tipos, limites, chaves e finalidade dos campos do schema tech2d.</span></a>
-  <a href="{{ '/views.html' | relative_url }}"><strong>Views da API</strong><span>Colunas que a API consulta e tabelas que fornecem os dados.</span></a>
+{% for group in site.data.catalog %}
+  <a href="{{ '/postgresql.html' | relative_url }}#{{ group.id }}"><strong>{{ group.name | escape }}</strong><span>{{ group.objects.size }} tabelas · {% for item in group.objects limit: 3 %}<code>{{ item.name }}</code>{% unless forloop.last %}, {% endunless %}{% endfor %}</span></a>
+{% endfor %}
 </div>
 
-## Estruturas aposentadas
+## Como as partes se conectam
 
-O schema `legado_firestore` e a cópia bruta `tech2d.documentos_firestore` foram retirados. A migração 018 também removeu `estado_migracao` e `migracoes_esquema` com suas views. A migração 020 substituiu `documentos_aplicacao` e `documentos_catalogo` por tabelas tipadas. Os arquivos SQL no Git guardam o histórico, e o comentário de `tech2d` informa a versão instalada.
+- **Agenda:** atividades, anexos, avisos, enquetes, sugestões, representantes e resumos por e-mail.
+- **Cadê o professor:** horários de aula e os catálogos de professores, disciplinas, turmas e faixas de horário.
+- **Kanban:** espaços, quadros, colunas, cartões, checklists, participantes e pedidos de acesso.
+- **Pegaki:** disciplinas, cadernos, notas e recuperações. As notas são protegidas por conta com RLS.
+- **Dados compartilhados:** perfis, identidade e versão dos registros, acessos, auditoria e controles dos serviços.
+
+As tabelas podem se relacionar entre áreas por chaves estrangeiras. O [explorador de relações]({{ '/modelagem.html' | relative_url }}) mostra esses vínculos usando as definições do PostgreSQL.
+
+## Tabelas, views e funções
+
+As [tabelas]({{ '/postgresql.html' | relative_url }}) armazenam os dados em colunas tipadas. As [views]({{ '/views.html' | relative_url }}) reúnem os campos usados nas respostas da API. As [funções]({{ '/funcoes.html' | relative_url }}) executam operações como gravação, consulta de catálogos e arquivamento. As [procedures]({{ '/procedures.html' | relative_url }}) têm uma página separada; o inventário informa se alguma estiver instalada.
+
+O Worker autentica o usuário e verifica as permissões antes de executar essas operações com o papel limitado `tech2d_api`. O prefixo `tech2d` não concede acesso aos dados por si só.
+
+## Simplificações aplicadas
+
+A versão `032_retirar_catalogo_pegaki` está instalada no banco, conferida em 13/11/2026.
+
+| Mudança | Estrutura atual |
+| --- | --- |
+| Acessos recentes da Agenda e dos professores | Uma tabela, `acessos_recentes`, com chave composta por `site` e `id_usuario`. O campo site também identifica os acessos do Pegaki. |
+| Catálogo de matérias | O Pegaki reutiliza disciplinas; disciplinas_series associa matérias e séries sem repetir nomes. visao_disciplinas_pegaki preserva os rótulos usados pela interface. |
+| Arquivo de atividades | `atividades_arquivadas` reúne metadados do expurgo e conteúdo original. `anexos_atividade_arquivada` conserva os anexos e sua ordem. |
+| Auditoria da antiga rota de atividades | A tabela antiga foi retirada; as operações atuais usam `auditoria_aplicacao` e `valores_historico`. |
+| Listas e agrupamentos | Foram removidos os marcadores `grupo` e `listas_presentes`. A ordem continua explícita nas tabelas filhas, e a API devolve listas vazias como `[]`. |
+
+O histórico dos scripts fica no Git. A versão instalada fica no comentário de `tech2d`, sem uma tabela de controle de migrações. Os schemas internos do PostgreSQL e do Aiven pertencem ao serviço e não fazem parte das áreas da aplicação.

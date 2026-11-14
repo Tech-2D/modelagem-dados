@@ -58,6 +58,7 @@ function shortestPath(graph, start, end) {
 }
 
 function initialize(explorer) {
+  const usage = data('model-usage')
   const tables = data('model-schema').filter(object => object.kind === 'table')
   const groups = data('model-groups')
   const views = data('model-views')
@@ -166,7 +167,9 @@ function initialize(explorer) {
       columns.append(row)
     }
     card.append(header)
-    if (table.comment) card.append(element('p', table.comment, 'schema-card-description'))
+    const feature = element('p', usage[table.name]?.feature, 'schema-feature')
+    feature.prepend(icon('layers'))
+    card.append(feature, element('p', usage[table.name]?.description || table.comment, 'schema-card-description'))
     card.append(columns)
     return card
   }

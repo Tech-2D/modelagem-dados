@@ -1,0 +1,210 @@
+{
+  "acessos_recentes": {
+    "feature": "Administração · Usuários e estatísticas",
+    "description": "Usada pela API de acessos e pela moderação para mostrar a última visita autenticada da conta em cada site. A chave composta preserva acessos independentes na Agenda, no Cadê o professor e no Pegaki. Não armazena todas as visitas; esse histórico agregado fica em visitas_aos_sites."
+  },
+  "acessos_votacao": {
+    "feature": "Enquetes da turma · Aprovação de eleitores",
+    "description": "Registra o pedido do aluno para votar em uma turma e a revisão pelo representante. A API consulta a aprovação antes de aceitar um voto; ter uma conta autenticada não basta para votar em qualquer sala."
+  },
+  "anexos_atividade": {
+    "feature": "Atividade · Materiais e downloads",
+    "description": "Usada ao criar, editar e abrir os materiais de uma atividade. Guarda os metadados e a ordem dos anexos; o conteúdo binário permanece no Cloudflare R2, com download autorizado pela API."
+  },
+  "anexos_atividade_arquivada": {
+    "feature": "Expurgo · Limpeza de arquivos",
+    "description": "Conserva os metadados dos anexos de uma atividade arquivada. A rotina de limpeza usa a chave do objeto para remover os arquivos no R2 e evitar que o armazenamento fique ocupado após o expurgo."
+  },
+  "anotacoes": {
+    "feature": "Compatibilidade · Anotações de estudo",
+    "description": "Representa registros do tipo notebookNotes aceitos pelo contrato de documentos da API. É uma estrutura remanescente do recurso de anotações; não é o caderno privado de notas escolares do Pegaki."
+  },
+  "anuncios": {
+    "feature": "Agenda · Comunicados gerais",
+    "description": "Fornece a mensagem geral incluída no catálogo da Agenda. Permite mudar o comunicado pelo fluxo administrativo sem alterar o código do site."
+  },
+  "atividades": {
+    "feature": "Calendário · Dia, semana, mês e detalhes",
+    "description": "Alimenta o calendário, os links diretos de atividades e as consultas das automações. Representantes editam atividades da própria turma; administradores têm o acesso permitido pela política da API."
+  },
+  "atividades_arquivadas": {
+    "feature": "Administração · Expurgo de atividades",
+    "description": "A função arquivar_atividade cria este registro ao retirar uma atividade antiga do calendário. A mesma linha guarda o motivo do expurgo e o conteúdo original; a limpeza do R2 usa os anexos relacionados."
+  },
+  "atualizacoes_agenda": {
+    "feature": "Menu · Atualizações e aviso de novidades",
+    "description": "Armazena os avisos publicados pelos administradores, exibidos no histórico e no popup de novidades. Pode relacionar a atualização a uma sugestão e ao crédito autorizado por seu autor."
+  },
+  "auditoria_aplicacao": {
+    "feature": "API · Histórico de alterações",
+    "description": "Recebe os registros de gravações e arquivamentos feitos pela aplicação. Identifica quem alterou o quê; valores_historico conserva o estado anterior em campos tipados. É um recurso de operação, sem edição pelo usuário comum."
+  },
+  "avisos_turma": {
+    "feature": "Turma · Quadro de avisos",
+    "description": "Usada no mural da sala para comunicados publicados por representantes e administradores. A turma restringe o público, e as datas de validade permitem distinguir um aviso vigente de um comunicado vencido."
+  },
+  "bloqueios_agenda": {
+    "feature": "Administração · Bloquear e desbloquear acessos",
+    "description": "Consultada pela moderação antes das operações protegidas da Agenda. Administradores cadastram e removem bloqueios por e-mail ou identificador de rede; a API não expõe esses dados no catálogo do calendário."
+  },
+  "cartoes_kanban": {
+    "feature": "Meu Kanban · Tarefas pessoais e compartilhadas",
+    "description": "Guarda o conteúdo de cada tarefa exibida nos quadros. Coluna, posição, prazo, prioridade, responsável e vínculos com atividades permitem organizar o trabalho sem transformar o cartão em uma atividade da turma."
+  },
+  "chat_representantes": {
+    "feature": "Representantes · Chat em grupo",
+    "description": "Usada no grupo de comunicação dos representantes e administradores dentro da Agenda. Os dados do remetente contextualizam a mensagem; a API restringe o acesso às contas com o papel necessário."
+  },
+  "colunas_kanban": {
+    "feature": "Meu Kanban · Etapas do quadro",
+    "description": "Define as etapas que recebem os cartões e a ordem em que aparecem. A indicação de conclusão alimenta o cálculo de progresso; mover uma coluna altera sua posição, não o conteúdo das tarefas."
+  },
+  "convites_representacao": {
+    "feature": "Representantes · Liberação por e-mail",
+    "description": "Registra o e-mail aprovado e a turma autorizada para o cadastro do representante. O fluxo de autenticação usa a aprovação para vincular o acesso à conta correta."
+  },
+  "disciplinas": {
+    "feature": "Catálogo compartilhado · Horários e notas",
+    "description": "Concentra os nomes de matérias usados pelos horários dos professores e, por meio de disciplinas_series, pelo Pegaki. O nome não precisa ser copiado para um catálogo próprio de notas."
+  },
+  "disciplinas_series": {
+    "feature": "Catálogo compartilhado · Matérias por série",
+    "description": "Relaciona uma disciplina já existente à série em que ela pode receber notas no Pegaki. É uma associação, sem outro nome de matéria. As chaves estrangeiras das notas impedem usar disciplinas de uma série diferente."
+  },
+  "enquetes": {
+    "feature": "Turma · Enquetes de votação",
+    "description": "Representa a pergunta publicada pelo representante e seu estado de votação. As opções ficam em opcoes_enquete, e os votos e autorizações são consultados separadamente para controlar participação e resultado."
+  },
+  "entregas_resumo": {
+    "feature": "Automação · Resumo semanal por e-mail",
+    "description": "Controla a reserva e a conclusão dos envios do resumo semanal. O serviço consulta esses registros para coordenar as tentativas e não repetir inadvertidamente um envio já processado."
+  },
+  "envios_anexos": {
+    "feature": "Atividade · Preparação do upload",
+    "description": "Registra a autorização temporária de um arquivo antes de ele se tornar anexo definitivo. A API de arquivos confere o usuário, a atividade, o tamanho e a chave do R2 durante o fluxo de envio."
+  },
+  "espacos_kanban": {
+    "feature": "Meu Kanban · Espaços pessoais e compartilhados",
+    "description": "É o ponto de entrada do conteúdo de Kanban associado a registros_aplicacao. Reúne os quadros de um espaço e identifica o proprietário; participantes e pedidos complementam o controle dos espaços compartilhados."
+  },
+  "faixas_horario": {
+    "feature": "Cadê o professor · Intervalos das aulas",
+    "description": "Catálogo reutilizado pelos horários de aula. Armazenar início e fim uma vez evita repetir os mesmos horários em cada vínculo de professor, matéria e turma."
+  },
+  "horarios_aula": {
+    "feature": "Cadê o professor · Busca e grade de aulas",
+    "description": "Define uma aula de um professor, matéria, turma, faixa de horário e dia da semana. O catálogo de horários reúne esses vínculos para a busca, a visualização da semana e os filtros usados pelos sites."
+  },
+  "itens_checklist": {
+    "feature": "Meu Kanban · Checklist de uma tarefa",
+    "description": "Guarda as pequenas etapas de um cartão, separadas do texto da descrição. Permite ordenar os itens e marcar cada um como concluído sem perder sua relação com o cartão."
+  },
+  "limites_servico": {
+    "feature": "Backend · Controle de uso dos serviços",
+    "description": "Representa contadores dos serviços de recuperação de senha e envio de arquivos ou fotos. Quantidade e expiração ajudam o backend a limitar tentativas dentro de uma janela de tempo; não é o histórico de visitas dos alunos."
+  },
+  "limpeza_anexos_kanban": {
+    "feature": "Automação · Limpeza de arquivos do Kanban",
+    "description": "Fila os identificadores de cartões removidos para que a API localize e limpe seus anexos no armazenamento. Separar a limpeza da edição do quadro permite tratar falhas do R2 sem restaurar o cartão excluído."
+  },
+  "mensagens_sugestao": {
+    "feature": "Minhas sugestões · Conversa com a administração",
+    "description": "Guarda as mensagens privadas vinculadas a uma sugestão de melhoria. A ligação com o registro pai permite à API restringir a conversa ao autor da sugestão e aos administradores."
+  },
+  "opcoes_enquete": {
+    "feature": "Enquetes · Alternativas de votação",
+    "description": "Contém as alternativas da pergunta, uma por linha, na ordem apresentada ao aluno. A posição é importante porque o voto identifica a opção escolhida por seu índice."
+  },
+  "participantes_kanban": {
+    "feature": "Kanban compartilhado · Membros autorizados",
+    "description": "Registra as contas que podem participar de um quadro compartilhado. A política de acesso consulta os vínculos; um pedido pendente em pedidos_kanban não equivale a uma participação aprovada."
+  },
+  "pedidos_agenda": {
+    "feature": "Menu · Pedir agenda para minha turma",
+    "description": "Guarda a solicitação de uma nova agenda e sua avaliação administrativa. Permite acompanhar a decisão sem habilitar automaticamente qualquer nome de sala enviado pelo público."
+  },
+  "pedidos_kanban": {
+    "feature": "Kanban compartilhado · Solicitações de acesso",
+    "description": "Representa os pedidos de entrada em um quadro compartilhado. O proprietário revisa esses pedidos no fluxo de compartilhamento antes de criar a participação autorizada."
+  },
+  "pedidos_representacao": {
+    "feature": "Sou representante · Solicitar aprovação",
+    "description": "Armazena o pedido do aluno para representar uma turma. A administração revisa a solicitação e pode gerar o convite que será usado para liberar a conta."
+  },
+  "pegaki_cadernos": {
+    "feature": "Pegaki · Meu caderno de notas",
+    "description": "Guarda a configuração privada do caderno da conta para um ano letivo. A API usa sua versão para evitar que uma aba sobrescreva notas salvas por outra; RLS limita a leitura e a escrita ao próprio usuário."
+  },
+  "pegaki_notas": {
+    "feature": "Pegaki · Notas por matéria e semestre",
+    "description": "Armazena as notas e os pesos informados na calculadora autenticada. A visão de resultados calcula as médias a partir destes valores e do modo de entrada do caderno. RLS mantém as notas privadas."
+  },
+  "pegaki_recuperacoes": {
+    "feature": "Pegaki · Recuperação final",
+    "description": "Guarda a nota de recuperação final separada das avaliações semestrais. A visão de resultados combina esse valor com a média anual conforme a regra do caderno. RLS mantém o isolamento por conta."
+  },
+  "perfis_administrativos": {
+    "feature": "Login · Permissões de administradores e representantes",
+    "description": "Consultada na autenticação das áreas administrativas e nas verificações de gravação. Define o papel da conta e a turma sobre a qual um representante pode atuar; não armazena a senha do Firebase Authentication."
+  },
+  "perfis_comunidade": {
+    "feature": "Menu · Perfis da comunidade",
+    "description": "Fornece os dados que a pessoa escolheu publicar na Agenda e no Cadê o professor. A foto é referenciada por URL; o arquivo é armazenado no Cloudinary, não nesta tabela."
+  },
+  "preferencias_resumo": {
+    "feature": "Configurações · Resumo semanal por e-mail",
+    "description": "Registra a participação da conta no resumo e a turma selecionada para o envio. O serviço usa essa preferência para montar um resumo pertinente à sala do destinatário."
+  },
+  "professores": {
+    "feature": "Cadê o professor · Catálogo de docentes",
+    "description": "Concentra os nomes de professores referenciados pelos horários. Uma alteração no cadastro pode ser refletida nas aulas vinculadas sem regravar o nome em cada horário."
+  },
+  "quadros_kanban": {
+    "feature": "Meu Kanban · Quadros e personalização",
+    "description": "Representa cada quadro dentro de um espaço, com nome, cor, posição e modo compacto. As colunas e os cartões apontam para ele, preservando a organização pessoal ou compartilhada."
+  },
+  "recibos_gravacao": {
+    "feature": "API · Fila de gravações e reenvios",
+    "description": "Registra a confirmação de cada lote enviado pela interface. O identificador e o hash permitem reconhecer uma repetição da mesma requisição, tornando o reenvio da fila seguro contra duplicação."
+  },
+  "registros_aplicacao": {
+    "feature": "API · Identidade e versão dos registros",
+    "description": "Fornece uma identidade numérica compartilhada pelas entidades do contrato de documentos. Tipo, referência externa e versão permitem atender links existentes, relações pai-filho e gravações com detecção de conflito."
+  },
+  "regras_recorrencia": {
+    "feature": "Representantes · Atividades recorrentes",
+    "description": "Guarda o modelo da atividade e o calendário de repetição escolhido. A automação de recorrências consulta as regras ativas e cria as ocorrências na tabela atividades respeitando dias da semana, intervalo e prazo final."
+  },
+  "regras_retencao": {
+    "feature": "Representantes · Expurgo da turma",
+    "description": "Define a política de retenção de atividades antigas de cada sala. O job de expurgo consulta as regras ativas para selecionar as atividades que serão arquivadas e encaminhadas à limpeza de anexos."
+  },
+  "sugestoes_atividade": {
+    "feature": "Menu · Sugerir atividade",
+    "description": "Recebe propostas de atividades enviadas pelos usuários para avaliação de representantes e administradores. A revisão decide o encaminhamento; a sugestão não aparece automaticamente como atividade confirmada do calendário."
+  },
+  "sugestoes_melhoria": {
+    "feature": "Comentar melhoria · Minhas sugestões e administração",
+    "description": "Guarda o feedback autenticado sobre o sistema, seu andamento e a autorização de crédito público. Administradores acompanham e concluem as sugestões e podem vinculá-las a um aviso de atualização."
+  },
+  "turmas": {
+    "feature": "Catálogo compartilhado · Salas dos horários",
+    "description": "Identifica as turmas físicas referenciadas por horarios_aula. Os nomes do catálogo de horários não representam, por si só, aprovação de uma agenda nem a série usada na fórmula do Pegaki."
+  },
+  "turmas_agenda": {
+    "feature": "Agenda · Turmas habilitadas pela administração",
+    "description": "Guarda o nome e a habilitação de agendas aprovadas pelo fluxo de pedidos. Trata da disponibilidade da agenda, enquanto turmas identifica salas dos horários; esses papéis são distintos na implementação atual."
+  },
+  "valores_historico": {
+    "feature": "API · Conteúdo anterior das alterações",
+    "description": "Decompõe os valores do estado anterior de um registro auditado em linhas e tipos. A API reconstrói o conteúdo do histórico com funções SQL; não é uma segunda cópia ativa da atividade ou do quadro."
+  },
+  "visitas_aos_sites": {
+    "feature": "Administração · Estatísticas de acesso",
+    "description": "Alimenta os totais e a comparação de uso entre sites. A combinação de data, intervalo, visitante e site evita contar várias vezes a mesma visita dentro de uma janela de meia hora. A retenção é de 90 dias."
+  },
+  "votos_enquete": {
+    "feature": "Enquetes · Voto de cada participante",
+    "description": "Registra a opção escolhida pela conta em uma enquete. O registro pai e a referência do usuário são usados pela API para limitar a participação e apurar os resultados autorizados."
+  }
+}

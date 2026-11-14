@@ -60,7 +60,7 @@ As 113 colunas de texto passaram a usar `varchar(n)`. Nas 20 tabelas que corresp
 
 A conversão verifica o tamanho de cada valor antes de alterar a coluna. Se encontrar um valor acima do limite, a transação é revertida.
 
-[Script SQL dos limites de varchar](https://github.com/Tech-2D/modelagem-dados/blob/main/sql/varchar_legado_firestore.sql)
+[Script SQL dos limites de varchar](https://github.com/Tech-2D/database/blob/main/sql/varchar_legado_firestore.sql)
 
 ## Conferência da migração
 
@@ -68,4 +68,4 @@ Depois da conferência, foram excluídos 3.684 documentos da origem. A listagem 
 
 A assinatura SHA-256 da cópia original no Aiven coincidiu com a exportação final, incluindo caminhos, campos e versões dos documentos. A transação verificou a cobertura de todos os documentos e as contagens dos registros auxiliares.
 
-O [SQL da migração histórica](https://github.com/Tech-2D/modelagem-dados/blob/main/sql/legado_firestore_2026_11_12.sql) foi usado com a cópia original ainda no Aiven. Ele registra a migração de 12/11/2026 e só se aplica a um banco temporário que tenha recuperado a cópia bruta.
+O [SQL da migração histórica](https://github.com/Tech-2D/database/blob/main/sql/legado_firestore_2026_11_12.sql) foi usado com a cópia original ainda no Aiven. Ele registra a migração de 12/11/2026 e só se aplica a um banco temporário que tenha recuperado a cópia bruta.

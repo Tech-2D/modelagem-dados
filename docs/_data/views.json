@@ -4,10 +4,7 @@
     "comment": "Reúne professor, disciplina, turma, faixa de horário, andar e sala.",
     "dependencies": [
       "horarios_aula",
-      "professores",
-      "disciplinas",
-      "turmas",
-      "faixas_horario"
+      "turmas"
     ],
     "columns": [
       {
@@ -46,8 +43,8 @@
     "name": "visao_atividades",
     "comment": "Atividades com seus anexos, para o calendário e os links diretos.",
     "dependencies": [
-      "atividades",
       "anexos_atividade",
+      "atividades",
       "registros_aplicacao"
     ],
     "columns": [
@@ -191,7 +188,7 @@
   },
   {
     "name": "visao_auditoria_aplicacao",
-    "comment": "Histórico das alterações do fluxo atual de gravação.",
+    "comment": null,
     "dependencies": [
       "auditoria_aplicacao",
       "valores_historico"
@@ -335,6 +332,34 @@
     ]
   },
   {
+    "name": "visao_disciplinas_pegaki",
+    "comment": "Projeção do catálogo compartilhado para o Pegaki. Conserva os rótulos que o frontend usa como chaves, sem armazenar outro catálogo de nomes.",
+    "dependencies": [
+      "disciplinas",
+      "disciplinas_series"
+    ],
+    "columns": [
+      {
+        "name": "id",
+        "source": "id",
+        "type": "bigint",
+        "note": "Identificador da disciplina no catálogo compartilhado."
+      },
+      {
+        "name": "ano_serie",
+        "source": "ano_serie",
+        "type": "smallint",
+        "note": "Série em que a disciplina pode receber notas."
+      },
+      {
+        "name": "nome",
+        "source": "nome",
+        "type": "character varying(160)",
+        "note": "Rótulo apresentado pelo Pegaki para manter as chaves de notas compatíveis."
+      }
+    ]
+  },
+  {
     "name": "visao_documentos_aplicacao",
     "comment": "Contrato de leitura da API. Reconstrói os objetos a partir das tabelas tipadas.",
     "dependencies": [
@@ -383,13 +408,7 @@
     "name": "visao_documentos_catalogo",
     "comment": "Catálogo calculado a partir das tabelas tipadas.",
     "dependencies": [
-      "registros_aplicacao",
-      "turmas_agenda",
-      "atualizacoes_agenda",
-      "anuncios",
-      "avisos_turma",
-      "enquetes",
-      "horarios_aula"
+      "registros_aplicacao"
     ],
     "columns": [
       {
@@ -487,6 +506,108 @@
         "source": "ativo",
         "type": "boolean",
         "note": "Indica se o horário está ativo no catálogo."
+      }
+    ]
+  },
+  {
+    "name": "visao_pegaki_resultados",
+    "comment": "Médias por conta e disciplina do catálogo compartilhado; aplica as fórmulas tech-2026-v1 e preserva RLS nas tabelas de notas.",
+    "dependencies": [
+      "pegaki_cadernos",
+      "pegaki_notas",
+      "pegaki_recuperacoes",
+      "visao_disciplinas_pegaki"
+    ],
+    "columns": [
+      {
+        "name": "id_usuario",
+        "source": "id_usuario",
+        "type": "character varying(128)",
+        "note": "Campo calculado pela definição SQL da view."
+      },
+      {
+        "name": "ano_letivo",
+        "source": "ano_letivo",
+        "type": "smallint",
+        "note": "Campo calculado pela definição SQL da view."
+      },
+      {
+        "name": "ano_serie",
+        "source": "ano_serie",
+        "type": "smallint",
+        "note": "Série em que a disciplina pode receber notas."
+      },
+      {
+        "name": "regra_calculo",
+        "source": "regra_calculo",
+        "type": "character varying(32)",
+        "note": "Campo calculado pela definição SQL da view."
+      },
+      {
+        "name": "versao",
+        "source": "versao",
+        "type": "bigint",
+        "note": "Campo calculado pela definição SQL da view."
+      },
+      {
+        "name": "id_disciplina",
+        "source": "id_disciplina",
+        "type": "bigint",
+        "note": "Campo calculado pela definição SQL da view."
+      },
+      {
+        "name": "nome",
+        "source": "nome",
+        "type": "character varying(160)",
+        "note": "Rótulo apresentado pelo Pegaki para manter as chaves de notas compatíveis."
+      },
+      {
+        "name": "media_primeiro",
+        "source": "media_primeiro",
+        "type": "numeric",
+        "note": "Campo calculado pela definição SQL da view."
+      },
+      {
+        "name": "media_segundo",
+        "source": "media_segundo",
+        "type": "numeric",
+        "note": "Campo calculado pela definição SQL da view."
+      },
+      {
+        "name": "recuperacao_final",
+        "source": "recuperacao_final",
+        "type": "numeric(4,2)",
+        "note": "Campo calculado pela definição SQL da view."
+      },
+      {
+        "name": "media_recuperada",
+        "source": "media_recuperada",
+        "type": "numeric",
+        "note": "Campo calculado pela definição SQL da view."
+      },
+      {
+        "name": "media_anual",
+        "source": "media_anual",
+        "type": "numeric",
+        "note": "Campo calculado pela definição SQL da view."
+      },
+      {
+        "name": "nota_necessaria",
+        "source": "nota_necessaria",
+        "type": "numeric",
+        "note": "Campo calculado pela definição SQL da view."
+      },
+      {
+        "name": "media_final",
+        "source": "media_final",
+        "type": "numeric",
+        "note": "Campo calculado pela definição SQL da view."
+      },
+      {
+        "name": "situacao",
+        "source": "situacao",
+        "type": "text",
+        "note": "Campo calculado pela definição SQL da view."
       }
     ]
   },
@@ -596,78 +717,6 @@
         "source": "nome",
         "type": "character varying(150)",
         "note": "Nome da turma exibido nos horários de aula."
-      }
-    ]
-  },
-  {
-    "name": "visao_pegaki_resultados",
-    "comment": "Médias e situação das notas privadas do Pegaki, com segurança por conta.",
-    "dependencies": [
-      "pegaki_cadernos",
-      "pegaki_disciplinas",
-      "pegaki_notas",
-      "pegaki_recuperacoes"
-    ],
-    "columns": [
-      {
-        "name": "id_usuario",
-        "source": "id_usuario"
-      },
-      {
-        "name": "ano_letivo",
-        "source": "ano_letivo"
-      },
-      {
-        "name": "ano_serie",
-        "source": "ano_serie"
-      },
-      {
-        "name": "regra_calculo",
-        "source": "regra_calculo"
-      },
-      {
-        "name": "versao",
-        "source": "versao"
-      },
-      {
-        "name": "id_disciplina",
-        "source": "id_disciplina"
-      },
-      {
-        "name": "nome",
-        "source": "nome"
-      },
-      {
-        "name": "media_primeiro",
-        "source": "media_primeiro"
-      },
-      {
-        "name": "media_segundo",
-        "source": "media_segundo"
-      },
-      {
-        "name": "recuperacao_final",
-        "source": "recuperacao_final"
-      },
-      {
-        "name": "media_recuperada",
-        "source": "media_recuperada"
-      },
-      {
-        "name": "media_anual",
-        "source": "media_anual"
-      },
-      {
-        "name": "nota_necessaria",
-        "source": "nota_necessaria"
-      },
-      {
-        "name": "media_final",
-        "source": "media_final"
-      },
-      {
-        "name": "situacao",
-        "source": "situacao"
       }
     ]
   }

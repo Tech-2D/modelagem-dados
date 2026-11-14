@@ -5,7 +5,7 @@ description: Cache dos catálogos públicos integrado ao PostgreSQL.
 
 O Redis acelera as consultas públicas da API SQL. O PostgreSQL armazena os dados e fornece a revisão de cada catálogo, usada para escolher a chave do cache.
 
-**Estado da conexão:** a integração está implementada. O endereço salvo na configuração anterior não é mais encontrado no DNS. O cache fica desativado até receber uma conexão válida; as consultas continuam sendo respondidas pelo PostgreSQL.
+**Configuração atual:** o Worker SQL usa `REDIS_CACHE_ENABLED=true`. O resultado de cada consulta aparece no header `X-Catalog-Cache`; em caso de falha ou indisponibilidade do Redis, a API consulta o PostgreSQL. As rotas continuam exigindo a autenticação e as permissões verificadas pelo Worker.
 
 ## Catálogos e chaves
 

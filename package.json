@@ -3,7 +3,8 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
-    "build:css": "node node_modules/@tailwindcss/cli/dist/index.mjs -i src/styles.css -o docs/assets/docs.css --minify"
+    "build:css": "node node_modules/@tailwindcss/cli/dist/index.mjs -i src/styles.css -o docs/assets/docs.css --minify",
+    "check": "node scripts/check-catalog.mjs"
   },
   "devDependencies": {
     "@tailwindcss/cli": "4.3.5",

@@ -4,14 +4,14 @@ description: Consulte tabelas, colunas, chaves e relações do esquema tech2d.
 wide: true
 ---
 
-O schema `tech2d` separa os dados por assunto. As tabelas usam colunas tipadas e chaves estrangeiras. A tabela `registros_aplicacao` guarda a identidade numérica, a versão e a referência externa de cada registro. As views preparam o formato que a API entrega aos sites.
+Todas as tabelas ficam no schema `tech2d`. As áreas desta página agrupam os recursos para consulta, sem separar fisicamente o banco. As tabelas usam colunas tipadas e chaves estrangeiras. A tabela `registros_aplicacao` guarda a identidade numérica, a versão e a referência externa de cada registro. As views preparam o formato que a API entrega aos sites.
 
 ## Tabelas por área
 
 {% assign tables = site.data.schema | where: "kind", "table" %}
-<p class="catalog-overview"><strong>{{ tables.size }} tabelas</strong> no schema <code>tech2d</code> · <a href="{{ '/views.html' | relative_url }}">{{ site.data.views.size }} views</a> · <a href="{{ '/schemas.html' | relative_url }}">Schemas do banco</a></p>
+<p class="catalog-overview"><strong>{{ tables.size }} tabelas</strong> no schema <code>tech2d</code> · <a href="{{ '/views.html' | relative_url }}">{{ site.data.views.size }} views</a> · <a href="{{ '/schemas.html' | relative_url }}">Organização por áreas</a></p>
 
-Busque por tabela, coluna ou tipo, ou filtre por área.
+Busque por tabela, coluna ou tipo, ou filtre por área. Cada card explica onde a tabela é usada no sistema; abaixo de cada campo está sua finalidade e por que ele é necessário.
 
 <div class="catalog-controls" data-catalog-controls hidden>
   <label for="catalog-search"><span class="catalog-label-icon">{% include doc-icon.html name="search" %}Buscar no catálogo</span><input id="catalog-search" type="search" placeholder="Ex.: visitas, id_turma ou jsonb" autocomplete="off"></label>
@@ -26,13 +26,15 @@ Busque por tabela, coluna ou tipo, ou filtre por área.
   <h3 id="{{ group.id }}">{{ group.name }}</h3>
   {% for item in group.objects %}
   {% assign object = site.data.schema | where: "name", item.name | first %}
+  {% assign usage = site.data.table_usage[item.name] %}
   <article class="schema-card" id="obj-{{ item.name }}" data-catalog-object>
     <header class="schema-card-header">
       {% include doc-icon.html name="table" %}
       <div><h4>{{ item.name }}</h4><p>tech2d · {{ object.columns.size }} colunas</p></div>
       {% if object.foreign_key_count > 0 %}<span class="schema-tag schema-tag-fk" title="Total de chaves estrangeiras">{{ object.foreign_key_count }} FK</span>{% endif %}
     </header>
-    <p class="schema-card-description">{{ object.comment | default: item.title | escape }}</p>
+    <p class="schema-feature">{% include doc-icon.html name="layers" %}{{ usage.feature | escape }}</p>
+    <p class="schema-card-description">{{ usage.description | default: object.comment | default: item.title | escape }}</p>
     <ul class="schema-columns" aria-label="Colunas de {{ item.name }}">
       {% for column in object.columns %}
       {% assign refs = object.references | where: "column", column.name %}
@@ -47,6 +49,8 @@ Busque por tabela, coluna ou tipo, ou filtre por área.
           {% if column.generated %}<span class="schema-tag schema-tag-identity">IDENTITY</span>{% endif %}
           {% unless column.nullable %}<span class="schema-tag schema-tag-required">NOT NULL</span>{% endunless %}
         </span>
+        {% assign note = site.data.column_notes[item.name][column.name] | default: column.comment %}
+        <small class="schema-column-note">{{ note | escape }}</small>
       </li>
       {% endfor %}
     </ul>
@@ -101,7 +105,8 @@ Os catálogos públicos passam por projeções que selecionam os campos da respo
 | 026 | Adiciona o registro de acessos autenticados ao Pegaki |
 | 027 | Consolida os acessos recentes da Agenda e dos professores por site e conta |
 | 028 | Unifica o arquivo de atividades, remove marcadores de listas e aposenta a auditoria antiga |
+| 029–032 | Unifica os acessos dos três sites e faz o Pegaki reutilizar o catálogo geral de disciplinas |
 
 Em um banco local vazio, siga os passos em [Consultas SQL]({{ '/consultas.html' | relative_url }}). O script de instalação aplica as migrações na ordem acima.
 
-[Ver arquivos SQL](https://github.com/Tech-2D/modelagem-dados/tree/main/sql/migrations) · [Rodar em um banco local](https://github.com/Tech-2D/modelagem-dados#rodar-o-sql-localmente) · [Consultas de exemplo](https://github.com/Tech-2D/modelagem-dados/blob/main/sql/examples/consultas.sql)
+[Ver arquivos SQL](https://github.com/Tech-2D/database/tree/main/sql/migrations) · [Rodar em um banco local](https://github.com/Tech-2D/database#rodar-o-sql-localmente) · [Consultas de exemplo](https://github.com/Tech-2D/database/blob/main/sql/examples/consultas.sql)

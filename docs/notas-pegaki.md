@@ -3,13 +3,13 @@ layout: default
 title: Notas do Pegaki
 ---
 
-# Notas do Pegaki
-
-A migration `024_notas_pegaki.sql` adiciona o caderno de notas privado ao PostgreSQL centralizado. O Firebase Authentication identifica a conta; a API obtém o UID do token validado, sem aceitar um proprietário pelo corpo da requisição.
+O caderno de notas privado usa o PostgreSQL centralizado. As migrations 030 e 032 substituíram o catálogo separado do Pegaki pelo catálogo compartilhado de disciplinas. O Firebase Authentication identifica a conta; a API obtém o UID do token validado, sem aceitar um proprietário pelo corpo da requisição.
 
 | Objeto | Finalidade |
 | --- | --- |
-| `pegaki_disciplinas` | Catálogo de disciplinas com ID estável e série. |
+| `disciplinas` | Catálogo de matérias compartilhado com os horários. |
+| `disciplinas_series` | Associação entre a matéria existente e a série em que ela é oferecida. |
+| `visao_disciplinas_pegaki` | Projeção de leitura com os rótulos compatíveis com a interface do Pegaki, sem outro cadastro de nomes. |
 | `pegaki_cadernos` | Conta, ano letivo, série, modos de entrada, versão da fórmula e controle de concorrência. |
 | `pegaki_notas` | N1, N2, média informada e peso da N1 por disciplina e semestre. |
 | `pegaki_recuperacoes` | Nota de recuperação final por disciplina. |
@@ -30,3 +30,9 @@ Sem login, o Pegaki continua usando o armazenamento local. Depois do login, as n
 ## Uso futuro pela IA
 
 A visão fornece dados estruturados e resultados reproduzíveis, com conta, ano letivo, disciplina e versão da regra. Esta mudança não envia notas a uma IA e não cria um acesso administrativo global. Uma integração futura deverá consultar a própria conta autenticada e definir o uso das notas de forma explícita.
+
+## Série, turma e habilitação da Agenda
+
+A série do caderno é o ano do Ensino Médio (1, 2 ou 3), usado para escolher as matérias e validar as notas. Ela não é uma sala como 2º TECH D. O Pegaki não mantém outra tabela de turmas.
+
+`turmas` identifica as salas dos horários. `turmas_agenda` registra a habilitação de uma agenda no fluxo de aprovação. A implementação atual mantém esses dois papéis separados; seus nomes não devem ser tratados como identificadores intercambiáveis.

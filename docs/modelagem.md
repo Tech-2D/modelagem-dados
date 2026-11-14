@@ -34,6 +34,7 @@ wide: true
 <script type="application/json" id="model-schema">{{ site.data.schema | jsonify | replace: '<', '\u003c' }}</script>
 <script type="application/json" id="model-groups">{{ site.data.catalog | jsonify | replace: '<', '\u003c' }}</script>
 <script type="application/json" id="model-views">{{ site.data.views | jsonify | replace: '<', '\u003c' }}</script>
+<script type="application/json" id="model-usage">{{ site.data.table_usage | jsonify | replace: '<', '\u003c' }}</script>
 <script type="application/json" id="model-notes">{{ site.data.column_notes | jsonify | replace: '<', '\u003c' }}</script>
 
 ## Relações por área

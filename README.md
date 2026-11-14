@@ -1,12 +1,12 @@
 # Modelagem de dados da Tech-2D
 
-Documentação do PostgreSQL usado pela Agenda e pelo Cadê o professor, com as migrações do esquema `tech2d` e a integração do cache de catálogos públicos em Redis. [Abrir site da documentação](https://tech-2d.github.io/modelagem-dados/)
+Documentação do PostgreSQL usado pela Agenda e pelo Cadê o professor, com as migrações do esquema `tech2d` e a integração do cache de catálogos públicos em Redis. [Abrir site da documentação](https://tech-2d.github.io/database/)
 
 | Conteúdo | Onde encontrar |
 | --- | --- |
 | Arquitetura e serviços de dados | [Visão geral](docs/index.md) |
 | Tabelas, colunas, tipos e chaves | [PostgreSQL](docs/postgresql.md) |
-| Schemas da aplicação e do servidor | [Schemas](docs/schemas.md) |
+| Áreas do sistema e simplificações aplicadas | [Organização por áreas](docs/schemas.md) |
 | Views, colunas e origem dos dados | [Views da API](docs/views.md) |
 | Relações e fluxos dos dados | [Modelagem](docs/modelagem.md) |
 | Exemplos de leitura SQL | [Consultas](docs/consultas.md) |
@@ -34,7 +34,7 @@ O repositório [Tech-2D/api](https://github.com/Tech-2D/api) é a fonte das migr
 psql -d tech2d_local -v ON_ERROR_STOP=1 -At -f sql/catalog.psql > docs/_data/schema.json
 ```
 
-Inclua o título em português em `docs/_data/catalog.yml` e descreva a função do objeto com `COMMENT ON` na migração. O catálogo extrai a descrição das tabelas dos comentários do PostgreSQL. Mantenha a finalidade dos campos em `docs/_data/column_notes.json` e o inventário de views em `docs/_data/views.json`. O catálogo corresponde ao esquema PostgreSQL após a migration 024; as migrations anteriores ficam preservadas como histórico.
+Inclua o título em português em `docs/_data/catalog.yml` e descreva a função do objeto com `COMMENT ON` na migração. O catálogo extrai a descrição das tabelas dos comentários do PostgreSQL. Mantenha a finalidade dos campos em `docs/_data/column_notes.json` e o inventário de views em `docs/_data/views.json`. O catálogo corresponde ao esquema PostgreSQL após a migration 032; as migrations anteriores ficam preservadas como histórico.
 
 O site é gerado pelo GitHub Pages a partir de `docs/`. A organização das páginas foi inspirada no [Astro Database Workspace](https://github.com/Astro-Inter/astro-database).
 
@@ -61,4 +61,17 @@ As âncoras das rotinas usam nome e assinatura, mantendo os links estáveis quan
 
 ## Notas do Pegaki
 
-A [modelagem de notas](docs/notas-pegaki.md) descreve as quatro tabelas novas e a visão de resultados privados, com RLS e fórmulas versionadas para futuras análises. A migration 024 foi aplicada ao PostgreSQL centralizado em 13/11/2026. O cálculo e o isolamento por conta foram conferidos no banco real assumindo o papel limitado da API em uma transação revertida.
+A [modelagem de notas](docs/notas-pegaki.md) descreve os cadernos, notas e recuperações privados, o catálogo compartilhado e a visão de resultados, com RLS e fórmulas versionadas para futuras análises. A migration 024 foi aplicada ao PostgreSQL centralizado em 13/11/2026. O cálculo e o isolamento por conta foram conferidos no banco real assumindo o papel limitado da API em uma transação revertida.
+
+## Finalidade das tabelas e dos campos
+
+Cada card do catálogo e do explorador apresenta onde a tabela é usada no sistema. O arquivo `docs/_data/table_usage.json` mantém a área e a descrição desse uso. `docs/_data/column_notes.json` explica a finalidade de cada campo. Ao alterar o inventário, atualize as duas fontes para que uma tabela ou coluna nova não apareça sem explicação.
+
+Todas as tabelas permanecem em `tech2d`. As áreas do site organizam a navegação; não são schemas separados. A versão 032 consolida os acessos dos três sites e reutiliza o catálogo geral de disciplinas no Pegaki. As migrations 029 e 030 preparam a compatibilidade; publique a API atualizada antes de aplicar 031 e 032.
+
+Antes de publicar a documentação, confira a cobertura e gere o CSS:
+
+```sh
+npm run check
+npm run build:css
+```

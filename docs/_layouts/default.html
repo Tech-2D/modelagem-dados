@@ -8,24 +8,25 @@
   <link rel="stylesheet" href="{{ '/assets/docs.css' | relative_url }}?v={{ site.github.build_revision }}">
   <script src="{{ '/assets/docs.js' | relative_url }}?v={{ site.github.build_revision }}" defer></script>
 </head>
-<body class="grid min-h-screen grid-cols-1 bg-paper-50 font-sans text-ink-800 antialiased lg:grid-cols-[17rem_minmax(0,1fr)]">
+<body class="grid min-h-screen grid-cols-1 bg-paper-50 font-sans text-ink-800 antialiased lg:grid-cols-[16.5rem_minmax(0,1fr)]">
   {% include doc-icons.html %}
   <a class="skip-link" href="#conteudo">Ir para o conteúdo</a>
   <aside class="sidebar db-sidebar sticky top-0 z-20 flex h-auto flex-col gap-3 px-3 py-3 sm:px-4 lg:h-screen lg:gap-6 lg:px-4 lg:py-6">
     <a class="brand" href="{{ '/' | relative_url }}"><span class="brand-mark" aria-hidden="true">T2</span><span><strong>Tech-2D</strong><small>Banco de dados · Documentação</small></span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="sidebar-navigation" data-sidebar-toggle>{% include doc-icon.html name="layers" %}Explorar documentação</button>
     <div class="database-switch" aria-label="Tecnologias documentadas">
       <a href="{{ '/' | relative_url }}"{% unless page.url == '/redis.html' %} aria-current="true"{% endunless %}>{% include doc-icon.html name="database" %}PostgreSQL</a>
       <a href="{{ '/redis.html' | relative_url }}"{% if page.url == '/redis.html' %} aria-current="page"{% endif %}>{% include doc-icon.html name="cache" %}Redis</a>
     </div>
-    <div class="sidebar-explorer">
+    <div class="sidebar-explorer" id="sidebar-navigation">
       <nav class="explorer-navigation" aria-label="Documentação do banco">
         <a href="{{ '/' | relative_url }}"{% if page.url == '/' %} aria-current="page"{% endif %}>{% include doc-icon.html name="home" %}Visão geral</a>
         <p class="nav-section-label">Explorador</p>
         <a href="{{ '/postgresql.html' | relative_url }}"{% if page.url == '/postgresql.html' %} aria-current="page"{% endif %}>{% include doc-icon.html name="table" %}Banco de dados</a>
-        <a href="{{ '/schemas.html' | relative_url }}"{% if page.url == '/schemas.html' %} aria-current="page"{% endif %}>{% include doc-icon.html name="layers" %}Schemas</a>
+        <a href="{{ '/schemas.html' | relative_url }}"{% if page.url == '/schemas.html' %} aria-current="page"{% endif %}>{% include doc-icon.html name="layers" %}Organização por áreas</a>
         <a href="{{ '/modelagem.html' | relative_url }}"{% if page.url == '/modelagem.html' %} aria-current="page"{% endif %}>{% include doc-icon.html name="diagram" %}Modelagem e relações</a>
         <a href="{{ '/consultas.html' | relative_url }}"{% if page.url == '/consultas.html' %} aria-current="page"{% endif %}>{% include doc-icon.html name="code" %}Scripts e consultas</a>
-        <p class="nav-section-label">Objetos · tech2d</p>
+        <p class="nav-section-label">Objetos do banco</p>
         {% assign tables = site.data.schema | where: 'kind', 'table' %}
         <details class="nav-object-group"{% if page.url == '/postgresql.html' %} open{% endif %}>
           <summary>{% include doc-icon.html name="table" %}Tabelas <span>{{ tables.size }}</span></summary>
@@ -45,17 +46,27 @@
         <a href="{{ '/procedures.html' | relative_url }}"{% if page.url == '/procedures.html' %} aria-current="page"{% endif %}>{% include doc-icon.html name="code" %}Procedures <span>{{ procedures.size }}</span></a>
       </nav>
     </div>
-    <footer class="sidebar-footer"><span class="read-only-badge"><span aria-hidden="true"></span>Somente leitura</span><a class="repo-link" href="https://github.com/Tech-2D/modelagem-dados">Repositório no GitHub ↗</a></footer>
+    <footer class="sidebar-footer"><span class="read-only-badge"><span aria-hidden="true"></span>Somente leitura</span><a class="repo-link" href="https://github.com/Tech-2D/database">Repositório no GitHub ↗</a></footer>
   </aside>
+  <div class="workspace-shell">
+    <div class="doc-toolbar">
+      <form class="workspace-search" action="{{ '/postgresql.html' | relative_url }}" method="get" role="search">
+        <label for="workspace-query" class="visually-hidden">Pesquisar tabelas e campos</label>
+        {% include doc-icon.html name="search" %}<input id="workspace-query" name="q" type="search" placeholder="Pesquisar tabelas, campos e recursos…" autocomplete="off"><kbd>Ctrl K</kbd>
+      </form>
+      <span class="toolbar-status">{% include doc-icon.html name="eye" %}Somente leitura</span>
+    </div>
   <div class="workspace mx-auto grid w-full min-w-0 max-w-[85rem] grid-cols-1 items-start gap-6 px-4 py-5 sm:px-8 sm:py-8 {% if page.wide %}xl:grid-cols-1{% else %}xl:grid-cols-[minmax(0,54rem)_11rem]{% endif %} xl:gap-12 xl:px-12 xl:py-14">
     <main id="conteudo" class="article min-w-0">
       <header class="page-heading">
+        <p class="page-eyebrow">TECH-2D / DOCUMENTAÇÃO</p>
         <h1>{{ page.title | escape }}</h1>
         {% if page.description %}<p>{{ page.description | escape }}</p>{% endif %}
       </header>
       {{ content }}
     </main>
     {% unless page.wide %}<nav class="on-this-page" aria-label="Nesta página" data-toc hidden><strong>Nesta página</strong><ul></ul></nav>{% endunless %}
+  </div>
   </div>
 </body>
 </html>

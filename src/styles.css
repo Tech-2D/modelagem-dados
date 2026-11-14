@@ -1,10 +1,11 @@
 @import "tailwindcss";
 @import "../docs/assets/legacy.css" layer(components);
+@import "../docs/assets/workspace.css" layer(components);
 @source "../docs";
 
 @theme {
-  --font-sans: Inter, system-ui, sans-serif;
-  --font-mono: "IBM Plex Mono", Consolas, monospace;
+  --font-sans: "Segoe UI Variable Text", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "Cascadia Code", "IBM Plex Mono", Consolas, monospace;
   --color-ink-950: #13213a;
   --color-ink-800: #192840;
   --color-accent-700: #1c4ec6;
